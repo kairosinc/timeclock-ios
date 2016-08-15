@@ -15,7 +15,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
+
+        //Initialize the Kairos SDK
+        KairosSDK.initWithAppId("fe645d12", appKey: "0072a064aec485995a50f07f7a100d43")
+        
         return true
     }
 
