@@ -15,9 +15,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        
+        guard
+            let keysURL = NSBundle.mainBundle().URLForResource("Keys", withExtension: "plist"),
+            let keys = NSDictionary(contentsOfURL: keysURL),
+            let appID = keys["AppID"] as? String,
+            let appKey = keys["AppKey"] as? String
+            else {
+                assertionFailure()
+                return false
+        }
+
 
         //Initialize the Kairos SDK
-        KairosSDK.initWithAppId("fe645d12", appKey: "0072a064aec485995a50f07f7a100d43")
+        KairosSDK.initWithAppId(appID, appKey: appKey)
         
         return true
     }

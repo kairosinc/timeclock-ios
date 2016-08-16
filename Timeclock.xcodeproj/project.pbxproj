@@ -13,6 +13,7 @@
 		206FA1FF1D61AB5F008B1F94 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 206FA1FD1D61AB5F008B1F94 /* Main.storyboard */; };
 		206FA2011D61AB5F008B1F94 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 206FA2001D61AB5F008B1F94 /* Assets.xcassets */; };
 		206FA2041D61AB5F008B1F94 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 206FA2021D61AB5F008B1F94 /* LaunchScreen.storyboard */; };
+		20F7B58D1D62FA0000FE1817 /* Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20F7B58C1D62FA0000FE1817 /* Keys.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +43,7 @@
 		206FA2001D61AB5F008B1F94 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		206FA2031D61AB5F008B1F94 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		206FA2051D61AB5F008B1F94 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		20F7B58C1D62FA0000FE1817 /* Keys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Keys.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +94,7 @@
 				206FA2021D61AB5F008B1F94 /* LaunchScreen.storyboard */,
 				206FA2051D61AB5F008B1F94 /* Info.plist */,
 				2019ED821D61AE2900912018 /* Timeclock-Bridging-Header.h */,
+				20F7B58C1D62FA0000FE1817 /* Keys.plist */,
 			);
 			path = Timeclock;
 			sourceTree = "<group>";
@@ -177,6 +180,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				20F7B58D1D62FA0000FE1817 /* Keys.plist in Resources */,
 				206FA2041D61AB5F008B1F94 /* LaunchScreen.storyboard in Resources */,
 				206FA2011D61AB5F008B1F94 /* Assets.xcassets in Resources */,
 				206FA1FF1D61AB5F008B1F94 /* Main.storyboard in Resources */,
