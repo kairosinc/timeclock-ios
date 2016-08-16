@@ -20,22 +20,22 @@
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RCn-1l-gJp" userLabel="Capture Container View">
                                 <rect key="frame" x="0.0" y="20" width="600" height="580"/>
                                 <connections>
-                                    <segue destination="Wa3-Tx-bEY" kind="embed" id="itC-10-JzO"/>
+                                    <segue destination="Wa3-Tx-bEY" kind="embed" identifier="embedCaptureViewController" id="itC-10-JzO"/>
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0GM-z0-fjl" userLabel="Idle Container View">
                                 <rect key="frame" x="0.0" y="20" width="600" height="580"/>
                                 <connections>
-                                    <segue destination="Ewi-2g-RAz" kind="embed" id="glA-OT-UPC"/>
+                                    <segue destination="Ewi-2g-RAz" kind="embed" identifier="embedIdleViewController" id="glA-OT-UPC"/>
                                 </connections>
                             </containerView>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7vW-EX-Ibj">
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7vW-EX-Ibj" userLabel="Clock Options Container View">
                                 <rect key="frame" x="0.0" y="400" width="600" height="200"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="200" id="gSS-4d-vCx"/>
                                 </constraints>
                                 <connections>
-                                    <segue destination="gDy-fM-XMW" kind="embed" id="4z4-1i-gh9"/>
+                                    <segue destination="gDy-fM-XMW" kind="embed" identifier="embedClockOptionsViewController" id="4z4-1i-gh9"/>
                                 </connections>
                             </containerView>
                         </subviews>
@@ -54,6 +54,11 @@
                             <constraint firstItem="RCn-1l-gJp" firstAttribute="top" secondItem="Kgo-hG-ccl" secondAttribute="bottom" id="zJf-KU-42l"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="captureView" destination="RCn-1l-gJp" id="GKB-VU-hC2"/>
+                        <outlet property="clockOptionsView" destination="7vW-EX-Ibj" id="cyf-gk-dM3"/>
+                        <outlet property="idleView" destination="0GM-z0-fjl" id="JdL-Ee-Ejg"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YX0-zA-Vuw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
