@@ -13,6 +13,7 @@
 		206FA1FF1D61AB5F008B1F94 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 206FA1FD1D61AB5F008B1F94 /* Main.storyboard */; };
 		206FA2011D61AB5F008B1F94 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 206FA2001D61AB5F008B1F94 /* Assets.xcassets */; };
 		206FA2041D61AB5F008B1F94 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 206FA2021D61AB5F008B1F94 /* LaunchScreen.storyboard */; };
+		208B39B01D638C38002EE431 /* TimeClockFlowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 208B39AF1D638C38002EE431 /* TimeClockFlowController.swift */; };
 		20F7B58D1D62FA0000FE1817 /* Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20F7B58C1D62FA0000FE1817 /* Keys.plist */; };
 		20F7B5951D62FD3500FE1817 /* IdleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20F7B5941D62FD3500FE1817 /* IdleViewController.swift */; };
 		20F7B5971D62FD5800FE1817 /* CaptureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20F7B5961D62FD5800FE1817 /* CaptureViewController.swift */; };
@@ -47,6 +48,7 @@
 		206FA2001D61AB5F008B1F94 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		206FA2031D61AB5F008B1F94 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		206FA2051D61AB5F008B1F94 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		208B39AF1D638C38002EE431 /* TimeClockFlowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeClockFlowController.swift; sourceTree = "<group>"; };
 		20F7B58C1D62FA0000FE1817 /* Keys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Keys.plist; sourceTree = "<group>"; };
 		20F7B5941D62FD3500FE1817 /* IdleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdleViewController.swift; sourceTree = "<group>"; };
 		20F7B5961D62FD5800FE1817 /* CaptureViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaptureViewController.swift; sourceTree = "<group>"; };
@@ -95,6 +97,7 @@
 		206FA1F81D61AB5F008B1F94 /* Timeclock */ = {
 			isa = PBXGroup;
 			children = (
+				208B39B31D638C3B002EE431 /* UIFlow */,
 				20F7B5911D62FD1F00FE1817 /* View Controllers */,
 				206FA1F91D61AB5F008B1F94 /* AppDelegate.swift */,
 				206FA1FB1D61AB5F008B1F94 /* ViewController.swift */,
@@ -106,6 +109,14 @@
 				20F7B58C1D62FA0000FE1817 /* Keys.plist */,
 			);
 			path = Timeclock;
+			sourceTree = "<group>";
+		};
+		208B39B31D638C3B002EE431 /* UIFlow */ = {
+			isa = PBXGroup;
+			children = (
+				208B39AF1D638C38002EE431 /* TimeClockFlowController.swift */,
+			);
+			name = UIFlow;
 			sourceTree = "<group>";
 		};
 		20F7B5911D62FD1F00FE1817 /* View Controllers */ = {
@@ -219,6 +230,7 @@
 				20F7B5971D62FD5800FE1817 /* CaptureViewController.swift in Sources */,
 				206FA1FA1D61AB5F008B1F94 /* AppDelegate.swift in Sources */,
 				20F7B59B1D62FEA600FE1817 /* TimeClockViewController.swift in Sources */,
+				208B39B01D638C38002EE431 /* TimeClockFlowController.swift in Sources */,
 				20F7B5951D62FD3500FE1817 /* IdleViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

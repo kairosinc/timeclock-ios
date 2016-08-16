@@ -67,14 +67,18 @@
         <!--Idle View Controller-->
         <scene sceneID="I6B-oH-DEs">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="5PF-H7-0GV" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="Ewi-2g-RAz" customClass="IdleViewController" customModule="Timeclock" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="1Ss-e4-ylC"/>
+                        <viewControllerLayoutGuide type="bottom" id="4WG-WX-fUh"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="MHg-YO-cPr">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="580"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5PF-H7-0GV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1421" y="415"/>
         </scene>
@@ -82,6 +86,10 @@
         <scene sceneID="2bv-MR-dCD">
             <objects>
                 <viewController id="Wa3-Tx-bEY" customClass="CaptureViewController" customModule="Timeclock" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="bWg-Pu-gsl"/>
+                        <viewControllerLayoutGuide type="bottom" id="z9n-kf-NTG"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="QIC-VI-MAM">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="580"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -96,10 +104,55 @@
         <scene sceneID="POZ-oW-M41">
             <objects>
                 <viewController id="gDy-fM-XMW" customClass="ClockOptionsViewController" customModule="Timeclock" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Gb7-O3-sBl"/>
+                        <viewControllerLayoutGuide type="bottom" id="Zx3-IV-Siy"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="6wY-Dy-SXZ">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="200"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="z6T-Sb-LAp">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="200"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hid-hH-yTX">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="50"/>
+                                        <state key="normal" title="Clock In"/>
+                                        <connections>
+                                            <action selector="clockOptionTouchUpInside:" destination="gDy-fM-XMW" eventType="touchUpInside" id="g8K-dT-Uu2"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y05-24-GbG">
+                                        <rect key="frame" x="0.0" y="50" width="600" height="50"/>
+                                        <state key="normal" title="Clock Out"/>
+                                        <connections>
+                                            <action selector="clockOptionTouchUpInside:" destination="gDy-fM-XMW" eventType="touchUpInside" id="4zI-em-Ukv"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ld2-7p-NrE">
+                                        <rect key="frame" x="0.0" y="100" width="600" height="50"/>
+                                        <state key="normal" title="Break Start"/>
+                                        <connections>
+                                            <action selector="clockOptionTouchUpInside:" destination="gDy-fM-XMW" eventType="touchUpInside" id="Q8U-3e-OUe"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xTX-zg-ahD">
+                                        <rect key="frame" x="0.0" y="150" width="600" height="50"/>
+                                        <state key="normal" title="Break End"/>
+                                        <connections>
+                                            <action selector="clockOptionTouchUpInside:" destination="gDy-fM-XMW" eventType="touchUpInside" id="Uuh-H1-k5H"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="z6T-Sb-LAp" firstAttribute="leading" secondItem="6wY-Dy-SXZ" secondAttribute="leading" id="2nb-jI-VLy"/>
+                            <constraint firstAttribute="trailing" secondItem="z6T-Sb-LAp" secondAttribute="trailing" id="cGF-ZJ-7XA"/>
+                            <constraint firstItem="z6T-Sb-LAp" firstAttribute="top" secondItem="Gb7-O3-sBl" secondAttribute="bottom" id="hQl-TO-BMi"/>
+                            <constraint firstItem="Zx3-IV-Siy" firstAttribute="top" secondItem="z6T-Sb-LAp" secondAttribute="bottom" id="zab-6W-jWZ"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WET-9g-DmS" userLabel="First Responder" sceneMemberID="firstResponder"/>

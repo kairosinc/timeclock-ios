@@ -8,28 +8,31 @@
 
 import UIKit
 
+enum ClockOptions: Int {
+    case In = 0
+    case Out = 1
+    case BreakStart = 2
+    case BreakEnd = 3
+}
+
+protocol ClockOptionsDelegate {
+    func clock(option: ClockOptions)
+}
+
 class ClockOptionsViewController: UIViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    //MARK: Properties
+    var delegate: ClockOptionsDelegate?
+    
+    //MARK: IBAction
+    @IBAction func clockOptionTouchUpInside(sender: AnyObject) {
+        guard let
+            tag = sender.tag,
+            selectedOption = ClockOptions(rawValue: tag)
+        else {
+            return
+        }
+        
+        delegate?.clock(selectedOption)
     }
-    */
-
 }

@@ -20,17 +20,26 @@ class TimeClockViewController: UIViewController {
     var idleViewController: IdleViewController?
     var captureViewController: CaptureViewController?
     
-    
+    var flowController = TimeClockFlowController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        guard let
+            clockOptionsViewController = clockOptionsViewController,
+            idleViewController = idleViewController,
+            captureViewController = captureViewController
+        else {
+            return
+        }
+        
+        flowController.configuration = TimeClockFlowController.Configuration(
+            clockOptionsViewController: clockOptionsViewController,
+            idleViewController: idleViewController,
+            captureViewController: captureViewController)
     }
 
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    // MARK: Navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         guard let segueIdentifier = segue.identifier else { return }
         
