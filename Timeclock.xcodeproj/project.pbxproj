@@ -7,14 +7,35 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2019ED811D61AD9400912018 /* libKairosSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2019ED7E1D61AD8200912018 /* libKairosSDK.a */; };
 		206FA1FA1D61AB5F008B1F94 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206FA1F91D61AB5F008B1F94 /* AppDelegate.swift */; };
 		206FA1FC1D61AB5F008B1F94 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206FA1FB1D61AB5F008B1F94 /* ViewController.swift */; };
 		206FA1FF1D61AB5F008B1F94 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 206FA1FD1D61AB5F008B1F94 /* Main.storyboard */; };
 		206FA2011D61AB5F008B1F94 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 206FA2001D61AB5F008B1F94 /* Assets.xcassets */; };
 		206FA2041D61AB5F008B1F94 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 206FA2021D61AB5F008B1F94 /* LaunchScreen.storyboard */; };
+		20F7B58D1D62FA0000FE1817 /* Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20F7B58C1D62FA0000FE1817 /* Keys.plist */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		2019ED7D1D61AD8200912018 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2019ED781D61AD8200912018 /* KairosSDK.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 07AA7D0E18D22DD000C24A69;
+			remoteInfo = KairosSDK;
+		};
+		2019ED7F1D61AD8200912018 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2019ED781D61AD8200912018 /* KairosSDK.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 07AA7D1E18D22DD000C24A69;
+			remoteInfo = KairosSDKTests;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		2019ED781D61AD8200912018 /* KairosSDK.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = KairosSDK.xcodeproj; path = "Carthage/Checkouts/Kairos-SDK-iOS/KairosSDKSrc/KairosSDK/KairosSDK.xcodeproj"; sourceTree = "<group>"; };
+		2019ED821D61AE2900912018 /* Timeclock-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Timeclock-Bridging-Header.h"; sourceTree = "<group>"; };
 		206FA1F61D61AB5F008B1F94 /* Timeclock.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Timeclock.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		206FA1F91D61AB5F008B1F94 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		206FA1FB1D61AB5F008B1F94 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -22,6 +43,7 @@
 		206FA2001D61AB5F008B1F94 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		206FA2031D61AB5F008B1F94 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		206FA2051D61AB5F008B1F94 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		20F7B58C1D62FA0000FE1817 /* Keys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Keys.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,17 +51,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2019ED811D61AD9400912018 /* libKairosSDK.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2019ED791D61AD8200912018 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2019ED7E1D61AD8200912018 /* libKairosSDK.a */,
+				2019ED801D61AD8200912018 /* KairosSDKTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		206FA1ED1D61AB5F008B1F94 = {
 			isa = PBXGroup;
 			children = (
 				206FA1F81D61AB5F008B1F94 /* Timeclock */,
 				206FA1F71D61AB5F008B1F94 /* Products */,
+				2019ED781D61AD8200912018 /* KairosSDK.xcodeproj */,
 			);
 			sourceTree = "<group>";
 		};
@@ -60,6 +93,8 @@
 				206FA2001D61AB5F008B1F94 /* Assets.xcassets */,
 				206FA2021D61AB5F008B1F94 /* LaunchScreen.storyboard */,
 				206FA2051D61AB5F008B1F94 /* Info.plist */,
+				2019ED821D61AE2900912018 /* Timeclock-Bridging-Header.h */,
+				20F7B58C1D62FA0000FE1817 /* Keys.plist */,
 			);
 			path = Timeclock;
 			sourceTree = "<group>";
@@ -110,6 +145,12 @@
 			mainGroup = 206FA1ED1D61AB5F008B1F94;
 			productRefGroup = 206FA1F71D61AB5F008B1F94 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 2019ED791D61AD8200912018 /* Products */;
+					ProjectRef = 2019ED781D61AD8200912018 /* KairosSDK.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				206FA1F51D61AB5F008B1F94 /* Timeclock */,
@@ -117,11 +158,29 @@
 		};
 /* End PBXProject section */
 
+/* Begin PBXReferenceProxy section */
+		2019ED7E1D61AD8200912018 /* libKairosSDK.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libKairosSDK.a;
+			remoteRef = 2019ED7D1D61AD8200912018 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		2019ED801D61AD8200912018 /* KairosSDKTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = KairosSDKTests.xctest;
+			remoteRef = 2019ED7F1D61AD8200912018 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
 /* Begin PBXResourcesBuildPhase section */
 		206FA1F41D61AB5F008B1F94 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				20F7B58D1D62FA0000FE1817 /* Keys.plist in Resources */,
 				206FA2041D61AB5F008B1F94 /* LaunchScreen.storyboard in Resources */,
 				206FA2011D61AB5F008B1F94 /* Assets.xcassets in Resources */,
 				206FA1FF1D61AB5F008B1F94 /* Main.storyboard in Resources */,
@@ -251,10 +310,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = Timeclock/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.kairos.Timeclock;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Timeclock/Timeclock-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -262,10 +324,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = Timeclock/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.kairos.Timeclock;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Timeclock/Timeclock-Bridging-Header.h";
 			};
 			name = Release;
 		};
@@ -288,6 +352,7 @@
 				206FA20A1D61AB5F008B1F94 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
