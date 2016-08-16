@@ -1,25 +1,105 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6211" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="9f7-cQ-qNF">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6204"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
-        <scene sceneID="tne-QT-ifu">
+        <!--Time Clock View Controller-->
+        <scene sceneID="bQG-Vw-XRR">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="9f7-cQ-qNF" customClass="TimeClockViewController" customModule="Timeclock" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
-                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                        <viewControllerLayoutGuide type="top" id="Kgo-hG-ccl"/>
+                        <viewControllerLayoutGuide type="bottom" id="uWq-kt-GiP"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                    <view key="view" contentMode="scaleToFill" id="9o1-hc-iPu">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <subviews>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RCn-1l-gJp" userLabel="Capture Container View">
+                                <rect key="frame" x="0.0" y="20" width="600" height="580"/>
+                                <connections>
+                                    <segue destination="Wa3-Tx-bEY" kind="embed" id="itC-10-JzO"/>
+                                </connections>
+                            </containerView>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0GM-z0-fjl" userLabel="Idle Container View">
+                                <rect key="frame" x="0.0" y="20" width="600" height="580"/>
+                                <connections>
+                                    <segue destination="Ewi-2g-RAz" kind="embed" id="glA-OT-UPC"/>
+                                </connections>
+                            </containerView>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7vW-EX-Ibj">
+                                <rect key="frame" x="0.0" y="400" width="600" height="200"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="200" id="gSS-4d-vCx"/>
+                                </constraints>
+                                <connections>
+                                    <segue destination="gDy-fM-XMW" kind="embed" id="4z4-1i-gh9"/>
+                                </connections>
+                            </containerView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="RCn-1l-gJp" firstAttribute="leading" secondItem="9o1-hc-iPu" secondAttribute="leading" id="A1c-2z-EEP"/>
+                            <constraint firstItem="uWq-kt-GiP" firstAttribute="top" secondItem="RCn-1l-gJp" secondAttribute="bottom" id="Fxo-qb-31K"/>
+                            <constraint firstAttribute="trailing" secondItem="RCn-1l-gJp" secondAttribute="trailing" id="Pgz-Lu-ubO"/>
+                            <constraint firstAttribute="trailing" secondItem="7vW-EX-Ibj" secondAttribute="trailing" id="R7L-3w-q78"/>
+                            <constraint firstItem="0GM-z0-fjl" firstAttribute="top" secondItem="Kgo-hG-ccl" secondAttribute="bottom" id="RxD-2V-ZgK"/>
+                            <constraint firstAttribute="trailing" secondItem="0GM-z0-fjl" secondAttribute="trailing" id="a5l-z2-7Me"/>
+                            <constraint firstItem="0GM-z0-fjl" firstAttribute="leading" secondItem="9o1-hc-iPu" secondAttribute="leading" id="bai-hs-NxL"/>
+                            <constraint firstItem="uWq-kt-GiP" firstAttribute="top" secondItem="0GM-z0-fjl" secondAttribute="bottom" id="bwg-lc-CbA"/>
+                            <constraint firstItem="7vW-EX-Ibj" firstAttribute="leading" secondItem="9o1-hc-iPu" secondAttribute="leading" id="t18-0d-141"/>
+                            <constraint firstItem="uWq-kt-GiP" firstAttribute="top" secondItem="7vW-EX-Ibj" secondAttribute="bottom" id="xz9-G3-hUm"/>
+                            <constraint firstItem="RCn-1l-gJp" firstAttribute="top" secondItem="Kgo-hG-ccl" secondAttribute="bottom" id="zJf-KU-42l"/>
+                        </constraints>
                     </view>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YX0-zA-Vuw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="651" y="1136"/>
+        </scene>
+        <!--Idle View Controller-->
+        <scene sceneID="I6B-oH-DEs">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5PF-H7-0GV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="Ewi-2g-RAz" customClass="IdleViewController" customModule="Timeclock" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="MHg-YO-cPr">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="580"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="1421" y="415"/>
+        </scene>
+        <!--Capture View Controller-->
+        <scene sceneID="2bv-MR-dCD">
+            <objects>
+                <viewController id="Wa3-Tx-bEY" customClass="CaptureViewController" customModule="Timeclock" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="QIC-VI-MAM">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="580"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TPa-h3-Rla" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1421" y="1159"/>
+        </scene>
+        <!--Clock Options View Controller-->
+        <scene sceneID="POZ-oW-M41">
+            <objects>
+                <viewController id="gDy-fM-XMW" customClass="ClockOptionsViewController" customModule="Timeclock" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="6wY-Dy-SXZ">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="200"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WET-9g-DmS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1421" y="1757"/>
         </scene>
     </scenes>
 </document>
