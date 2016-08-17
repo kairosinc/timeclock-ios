@@ -97,7 +97,7 @@
 		206FA1F81D61AB5F008B1F94 /* Timeclock */ = {
 			isa = PBXGroup;
 			children = (
-				208B39B31D638C3B002EE431 /* UIFlow */,
+				208B39B31D638C3B002EE431 /* Flow Controllers */,
 				20F7B5911D62FD1F00FE1817 /* View Controllers */,
 				206FA1F91D61AB5F008B1F94 /* AppDelegate.swift */,
 				206FA1FB1D61AB5F008B1F94 /* ViewController.swift */,
@@ -111,12 +111,12 @@
 			path = Timeclock;
 			sourceTree = "<group>";
 		};
-		208B39B31D638C3B002EE431 /* UIFlow */ = {
+		208B39B31D638C3B002EE431 /* Flow Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				208B39AF1D638C38002EE431 /* TimeClockFlowController.swift */,
 			);
-			name = UIFlow;
+			name = "Flow Controllers";
 			sourceTree = "<group>";
 		};
 		20F7B5911D62FD1F00FE1817 /* View Controllers */ = {

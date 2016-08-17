@@ -10,6 +10,10 @@ import Foundation
 
 struct TimeClockFlowController {
     
+    enum AppState {
+        case Idle, Capturing, ProcessingImage, DisplayingOptions
+    }
+    
     var configuration: Configuration? {
         didSet {
             guard let configuration = configuration else { return }
@@ -33,7 +37,7 @@ extension TimeClockFlowController: ClockOptionsDelegate {
 }
 
 extension TimeClockFlowController: IdleDelegate {
-    func screenTapped() {
+    func dismiss() {
         print("screen tapped")
     }
 }
@@ -41,5 +45,9 @@ extension TimeClockFlowController: IdleDelegate {
 extension TimeClockFlowController: CaptureDelegate {
     func imageCaptured(image: UIImage) {
         print("image captured")
+    }
+    
+    func timedOut() {
+        
     }
 }

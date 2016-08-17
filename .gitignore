@@ -84,3 +84,5 @@ Carthage/Build.rbenv-vars
 ####
 # rbenv
 .rbenv-vars
+
+Timeclock.xcodeproj/project.xcworkspace/xcuserdata/Tom.Hutchinson.xcuserdatad/UserInterfaceState.xcuserstate
