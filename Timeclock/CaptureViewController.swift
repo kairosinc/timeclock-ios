@@ -18,17 +18,22 @@ class CaptureViewController: UIViewController {
     //MARK: Properties
     var delegate: CaptureDelegate?
     
-    //MARK: App State
+    //MARK: Methods
+    func startCapturing() {
+        performSelector(#selector(capturedImage), withObject: nil, afterDelay: 3)
+    }
+    
+    func capturedImage() {
+        let image = UIImage()
+        delegate?.imageCaptured(image)
+    }
+}
+
+extension CaptureViewController: TimeClockViewController {
     func opacityForAppState(state: TimeClockFlowController.AppState) -> CGFloat {
         switch state {
-        case .Idle:
-            break
-        case .Capturing:
-            break
-        case .ProcessingImage:
-            break
-        case .DisplayingOptions:
-            break
+        case .Idle, .Capturing, .ProcessingImage, .DisplayingOptions:
+            return 1
         }
     }
 }

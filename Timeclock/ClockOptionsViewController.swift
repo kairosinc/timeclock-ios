@@ -36,3 +36,14 @@ class ClockOptionsViewController: UIViewController {
         delegate?.clock(selectedOption)
     }
 }
+
+extension ClockOptionsViewController: TimeClockViewController {
+    func opacityForAppState(state: TimeClockFlowController.AppState) -> CGFloat {
+        switch state {
+        case .DisplayingOptions:
+            return 1
+        default:
+            return 0
+        }
+    }
+}

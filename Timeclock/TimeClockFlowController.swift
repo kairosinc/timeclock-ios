@@ -20,6 +20,8 @@ struct TimeClockFlowController {
             configuration.clockOptionsViewController.delegate = self
             configuration.idleViewController.delegate = self
             configuration.captureViewController.delegate = self
+            
+            setUIState(.Idle)
         }
     }
     
@@ -27,24 +29,44 @@ struct TimeClockFlowController {
         let clockOptionsViewController: ClockOptionsViewController
         let idleViewController: IdleViewController
         let captureViewController: CaptureViewController
+        
+        var viewControllers: [TimeClockViewController] {
+            return [
+                clockOptionsViewController,
+                idleViewController,
+                captureViewController
+            ]
+        }
+    }
+    
+    func setUIState(state: AppState) {
+        UIView.animateWithDuration(0.3, delay: 0, options: [.CurveEaseInOut], animations: {
+            guard let configuration = self.configuration else { return }
+            for timeClockViewController in configuration.viewControllers {
+                guard let vc = timeClockViewController as? UIViewController else { break }
+                vc.view.alpha = timeClockViewController.opacityForAppState(state)
+            }
+        }, completion: nil)
     }
 }
 
 extension TimeClockFlowController: ClockOptionsDelegate {
     func clock(option: ClockOptions) {
-        print("userClock \(option)")
+        setUIState(.Idle)
     }
 }
 
 extension TimeClockFlowController: IdleDelegate {
     func dismiss() {
-        print("screen tapped")
+        setUIState(.Capturing)
+        configuration?.captureViewController.startCapturing()
     }
 }
 
 extension TimeClockFlowController: CaptureDelegate {
     func imageCaptured(image: UIImage) {
         print("image captured")
+        setUIState(.DisplayingOptions)
     }
     
     func timedOut() {

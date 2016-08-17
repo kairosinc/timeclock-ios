@@ -20,13 +20,14 @@ class IdleViewController: UIViewController {
     @IBAction func tapGestureRecognizerAction(sender: AnyObject) {
         delegate?.dismiss()
     }
-    
-    //MARK: App State
+}
+
+extension IdleViewController: TimeClockViewController {
     func opacityForAppState(state: TimeClockFlowController.AppState) -> CGFloat {
         switch state {
         case .Idle:
             return 1
-        case .Capturing, .ProcessingImage, .DisplayingOptions:
+        default:
             return 0
         }
     }

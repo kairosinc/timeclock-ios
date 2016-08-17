@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2019ED811D61AD9400912018 /* libKairosSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2019ED7E1D61AD8200912018 /* libKairosSDK.a */; };
+		205D6B9C1D64DD0D0018A858 /* TimeClockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205D6B9B1D64DD0D0018A858 /* TimeClockViewController.swift */; };
 		206FA1FA1D61AB5F008B1F94 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206FA1F91D61AB5F008B1F94 /* AppDelegate.swift */; };
 		206FA1FC1D61AB5F008B1F94 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206FA1FB1D61AB5F008B1F94 /* ViewController.swift */; };
 		206FA1FF1D61AB5F008B1F94 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 206FA1FD1D61AB5F008B1F94 /* Main.storyboard */; };
@@ -18,7 +19,7 @@
 		20F7B5951D62FD3500FE1817 /* IdleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20F7B5941D62FD3500FE1817 /* IdleViewController.swift */; };
 		20F7B5971D62FD5800FE1817 /* CaptureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20F7B5961D62FD5800FE1817 /* CaptureViewController.swift */; };
 		20F7B5991D62FD9700FE1817 /* ClockOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20F7B5981D62FD9700FE1817 /* ClockOptionsViewController.swift */; };
-		20F7B59B1D62FEA600FE1817 /* TimeClockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20F7B59A1D62FEA600FE1817 /* TimeClockViewController.swift */; };
+		20F7B59B1D62FEA600FE1817 /* TimeClockCompositeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20F7B59A1D62FEA600FE1817 /* TimeClockCompositeViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,6 +42,7 @@
 /* Begin PBXFileReference section */
 		2019ED781D61AD8200912018 /* KairosSDK.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = KairosSDK.xcodeproj; path = "Carthage/Checkouts/Kairos-SDK-iOS/KairosSDKSrc/KairosSDK/KairosSDK.xcodeproj"; sourceTree = "<group>"; };
 		2019ED821D61AE2900912018 /* Timeclock-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Timeclock-Bridging-Header.h"; sourceTree = "<group>"; };
+		205D6B9B1D64DD0D0018A858 /* TimeClockViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeClockViewController.swift; sourceTree = "<group>"; };
 		206FA1F61D61AB5F008B1F94 /* Timeclock.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Timeclock.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		206FA1F91D61AB5F008B1F94 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		206FA1FB1D61AB5F008B1F94 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -53,7 +55,7 @@
 		20F7B5941D62FD3500FE1817 /* IdleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdleViewController.swift; sourceTree = "<group>"; };
 		20F7B5961D62FD5800FE1817 /* CaptureViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaptureViewController.swift; sourceTree = "<group>"; };
 		20F7B5981D62FD9700FE1817 /* ClockOptionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClockOptionsViewController.swift; sourceTree = "<group>"; };
-		20F7B59A1D62FEA600FE1817 /* TimeClockViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeClockViewController.swift; sourceTree = "<group>"; };
+		20F7B59A1D62FEA600FE1817 /* TimeClockCompositeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeClockCompositeViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +79,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		205D6B981D64DCC30018A858 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				205D6B9B1D64DD0D0018A858 /* TimeClockViewController.swift */,
+			);
+			name = Protocols;
+			sourceTree = "<group>";
+		};
 		206FA1ED1D61AB5F008B1F94 = {
 			isa = PBXGroup;
 			children = (
@@ -97,6 +107,7 @@
 		206FA1F81D61AB5F008B1F94 /* Timeclock */ = {
 			isa = PBXGroup;
 			children = (
+				205D6B981D64DCC30018A858 /* Protocols */,
 				208B39B31D638C3B002EE431 /* Flow Controllers */,
 				20F7B5911D62FD1F00FE1817 /* View Controllers */,
 				206FA1F91D61AB5F008B1F94 /* AppDelegate.swift */,
@@ -125,7 +136,7 @@
 				20F7B5941D62FD3500FE1817 /* IdleViewController.swift */,
 				20F7B5961D62FD5800FE1817 /* CaptureViewController.swift */,
 				20F7B5981D62FD9700FE1817 /* ClockOptionsViewController.swift */,
-				20F7B59A1D62FEA600FE1817 /* TimeClockViewController.swift */,
+				20F7B59A1D62FEA600FE1817 /* TimeClockCompositeViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -227,9 +238,10 @@
 			files = (
 				20F7B5991D62FD9700FE1817 /* ClockOptionsViewController.swift in Sources */,
 				206FA1FC1D61AB5F008B1F94 /* ViewController.swift in Sources */,
+				205D6B9C1D64DD0D0018A858 /* TimeClockViewController.swift in Sources */,
 				20F7B5971D62FD5800FE1817 /* CaptureViewController.swift in Sources */,
 				206FA1FA1D61AB5F008B1F94 /* AppDelegate.swift in Sources */,
-				20F7B59B1D62FEA600FE1817 /* TimeClockViewController.swift in Sources */,
+				20F7B59B1D62FEA600FE1817 /* TimeClockCompositeViewController.swift in Sources */,
 				208B39B01D638C38002EE431 /* TimeClockFlowController.swift in Sources */,
 				20F7B5951D62FD3500FE1817 /* IdleViewController.swift in Sources */,
 			);
