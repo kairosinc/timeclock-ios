@@ -29,6 +29,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         //Initialize the Kairos SDK
         KairosSDK.initWithAppId(appID, appKey: appKey)
+        KairosSDK.setEnableFlash(true)
+        KairosSDK.setEnableShutterSound(false)
+        KairosSDK.setPreferredCameraType(UInt(KairosCameraFront))
         
         return true
     }

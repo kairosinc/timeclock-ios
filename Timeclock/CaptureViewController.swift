@@ -20,7 +20,20 @@ class CaptureViewController: UIViewController {
     
     //MARK: Methods
     func startCapturing() {
-        performSelector(#selector(capturedImage), withObject: nil, afterDelay: 3)
+//        performSelector(#selector(capturedImage), withObject: nil, afterDelay: 3)
+        
+//        KairosSDK.imageCaptureEnrollWithSubjectId("001", galleryName: "employees", success: { (response:[NSObject : AnyObject]!, image: UIImage!) in
+//            print("success enroll \(response)")
+//            }) { (response:[NSObject : AnyObject]!, image: UIImage!) in
+//                print("failed to enrol: \(response)")
+//        }
+        
+        KairosSDK.imageCaptureRecognizeWithThreshold("0.75", galleryName: "employees", success: { (response:[NSObject : AnyObject]!, image: UIImage!) in
+            print("success detect \(response)")
+            
+            }, failure: { (response:[NSObject : AnyObject]!, image: UIImage!) in
+                print("failire \(response)")
+        })
     }
     
     func capturedImage() {

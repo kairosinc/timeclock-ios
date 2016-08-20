@@ -3,6 +3,8 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
         <!--Time Clock Composite View Controller-->
@@ -76,23 +78,73 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="580"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Idle" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nf6-Le-log">
-                                <rect key="frame" x="279.5" y="274" width="42" height="33"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wqn-BN-ufi">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="497"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Kzw-iJ-GY2">
+                                        <rect key="frame" x="47" y="-22" width="507" height="180"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="00:00 PM" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.10000000000000001" translatesAutoresizingMaskIntoConstraints="NO" id="Nf6-Le-log">
+                                                <rect key="frame" x="0.0" y="0.0" width="507" height="117"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="100"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Monday, December 17" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.10000000000000001" translatesAutoresizingMaskIntoConstraints="NO" id="eY9-K7-Px0">
+                                                <rect key="frame" x="0.0" y="122" width="507" height="59"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="50"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" red="0.094117656349999995" green="0.24313727020000001" blue="0.2941176593" alpha="1" colorSpace="deviceRGB"/>
+                                <constraints>
+                                    <constraint firstItem="Kzw-iJ-GY2" firstAttribute="centerY" secondItem="Wqn-BN-ufi" secondAttribute="centerY" id="0lq-ys-CUi"/>
+                                    <constraint firstItem="Kzw-iJ-GY2" firstAttribute="centerX" secondItem="Wqn-BN-ufi" secondAttribute="centerX" id="q4p-QQ-bJv"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vt6-6G-ZXy" userLabel="Tap To Start View">
+                                <rect key="frame" x="0.0" y="497" width="600" height="83"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Touch screen to start" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.10000000000000001" translatesAutoresizingMaskIntoConstraints="NO" id="GmO-iO-fPJ">
+                                        <rect key="frame" x="8" y="8" width="584" height="67"/>
+                                        <color key="backgroundColor" red="0.070588238540000001" green="0.20392158630000001" blue="0.25098040700000002" alpha="1" colorSpace="deviceRGB"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="28"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.070588238540000001" green="0.20392158630000001" blue="0.25098040700000002" alpha="1" colorSpace="deviceRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailingMargin" secondItem="GmO-iO-fPJ" secondAttribute="trailing" id="dgi-i0-eEP"/>
+                                    <constraint firstAttribute="bottomMargin" secondItem="GmO-iO-fPJ" secondAttribute="bottom" id="fPJ-e9-bDI"/>
+                                    <constraint firstItem="GmO-iO-fPJ" firstAttribute="top" secondItem="vt6-6G-ZXy" secondAttribute="topMargin" id="jZ4-bo-xMv"/>
+                                    <constraint firstItem="GmO-iO-fPJ" firstAttribute="leading" secondItem="vt6-6G-ZXy" secondAttribute="leadingMargin" id="uAB-7v-25K"/>
+                                </constraints>
+                            </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.094117656349999995" green="0.24313727020000001" blue="0.2941176593" alpha="1" colorSpace="deviceRGB"/>
                         <gestureRecognizers/>
                         <constraints>
-                            <constraint firstItem="Nf6-Le-log" firstAttribute="centerY" secondItem="MHg-YO-cPr" secondAttribute="centerY" id="SSm-Lf-sC6"/>
-                            <constraint firstItem="Nf6-Le-log" firstAttribute="centerX" secondItem="MHg-YO-cPr" secondAttribute="centerX" id="ZC6-6E-X3r"/>
+                            <constraint firstAttribute="trailing" secondItem="vt6-6G-ZXy" secondAttribute="trailing" id="FdA-jJ-XRz"/>
+                            <constraint firstItem="Wqn-BN-ufi" firstAttribute="leading" secondItem="MHg-YO-cPr" secondAttribute="leading" id="GQw-37-jYz"/>
+                            <constraint firstItem="vt6-6G-ZXy" firstAttribute="top" secondItem="Wqn-BN-ufi" secondAttribute="bottom" id="TIC-Y6-Gd1"/>
+                            <constraint firstItem="Wqn-BN-ufi" firstAttribute="top" secondItem="1Ss-e4-ylC" secondAttribute="bottom" id="ePF-ZA-lVb"/>
+                            <constraint firstItem="vt6-6G-ZXy" firstAttribute="height" secondItem="MHg-YO-cPr" secondAttribute="height" multiplier="1:7" id="jBz-Js-XAL"/>
+                            <constraint firstItem="vt6-6G-ZXy" firstAttribute="leading" secondItem="MHg-YO-cPr" secondAttribute="leading" id="lSd-Mz-bSq"/>
+                            <constraint firstItem="4WG-WX-fUh" firstAttribute="top" secondItem="vt6-6G-ZXy" secondAttribute="bottom" id="nrd-Ik-1yf"/>
+                            <constraint firstAttribute="trailing" secondItem="Wqn-BN-ufi" secondAttribute="trailing" id="qqB-Bg-2bl"/>
                         </constraints>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="qdg-Qy-duc" appends="YES" id="pi2-ej-ndc"/>
                         </connections>
                     </view>
+                    <connections>
+                        <outlet property="dateLabel" destination="eY9-K7-Px0" id="Sd6-qi-VF7"/>
+                        <outlet property="timeLabel" destination="Nf6-Le-log" id="P8e-oT-zmo"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5PF-H7-0GV" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="qdg-Qy-duc">
