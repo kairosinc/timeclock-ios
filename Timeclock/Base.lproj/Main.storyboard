@@ -20,22 +20,19 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RCn-1l-gJp" userLabel="Capture Container View">
-                                <rect key="frame" x="0.0" y="20" width="600" height="580"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <connections>
                                     <segue destination="Wa3-Tx-bEY" kind="embed" identifier="embedCaptureViewController" id="itC-10-JzO"/>
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0GM-z0-fjl" userLabel="Idle Container View">
-                                <rect key="frame" x="0.0" y="20" width="600" height="580"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <connections>
                                     <segue destination="Ewi-2g-RAz" kind="embed" identifier="embedIdleViewController" id="glA-OT-UPC"/>
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7vW-EX-Ibj" userLabel="Clock Options Container View">
-                                <rect key="frame" x="0.0" y="400" width="600" height="200"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="200" id="gSS-4d-vCx"/>
-                                </constraints>
+                                <rect key="frame" x="0.0" y="427.5" width="600" height="172.5"/>
                                 <connections>
                                     <segue destination="gDy-fM-XMW" kind="embed" identifier="embedClockOptionsViewController" id="4z4-1i-gh9"/>
                                 </connections>
@@ -51,11 +48,13 @@
                             <constraint firstAttribute="trailing" secondItem="0GM-z0-fjl" secondAttribute="trailing" id="a5l-z2-7Me"/>
                             <constraint firstItem="0GM-z0-fjl" firstAttribute="leading" secondItem="9o1-hc-iPu" secondAttribute="leading" id="bai-hs-NxL"/>
                             <constraint firstItem="uWq-kt-GiP" firstAttribute="top" secondItem="0GM-z0-fjl" secondAttribute="bottom" id="bwg-lc-CbA"/>
+                            <constraint firstItem="7vW-EX-Ibj" firstAttribute="height" secondItem="9o1-hc-iPu" secondAttribute="height" multiplier="2:7" constant="1" id="naM-2c-KmG"/>
                             <constraint firstItem="7vW-EX-Ibj" firstAttribute="leading" secondItem="9o1-hc-iPu" secondAttribute="leading" id="t18-0d-141"/>
                             <constraint firstItem="uWq-kt-GiP" firstAttribute="top" secondItem="7vW-EX-Ibj" secondAttribute="bottom" id="xz9-G3-hUm"/>
                             <constraint firstItem="RCn-1l-gJp" firstAttribute="top" secondItem="Kgo-hG-ccl" secondAttribute="bottom" id="zJf-KU-42l"/>
                         </constraints>
                     </view>
+                    <nil key="simulatedStatusBarMetrics"/>
                     <connections>
                         <outlet property="captureView" destination="RCn-1l-gJp" id="GKB-VU-hC2"/>
                         <outlet property="clockOptionsView" destination="7vW-EX-Ibj" id="cyf-gk-dM3"/>
@@ -75,11 +74,11 @@
                         <viewControllerLayoutGuide type="bottom" id="4WG-WX-fUh"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="MHg-YO-cPr">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="580"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wqn-BN-ufi">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="497"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="514"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Kzw-iJ-GY2">
                                         <rect key="frame" x="47" y="-22" width="507" height="180"/>
@@ -106,10 +105,10 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vt6-6G-ZXy" userLabel="Tap To Start View">
-                                <rect key="frame" x="0.0" y="497" width="600" height="83"/>
+                                <rect key="frame" x="0.0" y="514" width="600" height="86"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Touch screen to start" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.10000000000000001" translatesAutoresizingMaskIntoConstraints="NO" id="GmO-iO-fPJ">
-                                        <rect key="frame" x="8" y="8" width="584" height="67"/>
+                                        <rect key="frame" x="8" y="8" width="584" height="70"/>
                                         <color key="backgroundColor" red="0.070588238540000001" green="0.20392158630000001" blue="0.25098040700000002" alpha="1" colorSpace="deviceRGB"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="28"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -164,22 +163,34 @@
                         <viewControllerLayoutGuide type="bottom" id="z9n-kf-NTG"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="QIC-VI-MAM">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="580"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Capturing" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Io-vW-NYi">
-                                <rect key="frame" x="242" y="273.5" width="116" height="33"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gKh-yx-lWA">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                <connections>
+                                    <segue destination="veT-PW-kqg" kind="embed" id="1oq-oR-hTr"/>
+                                </connections>
+                            </containerView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="N9C-3E-3tF">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="8Io-vW-NYi" firstAttribute="centerX" secondItem="QIC-VI-MAM" secondAttribute="centerX" id="5XI-2d-dec"/>
-                            <constraint firstItem="8Io-vW-NYi" firstAttribute="centerY" secondItem="QIC-VI-MAM" secondAttribute="centerY" id="WPt-sx-Q9Z"/>
+                            <constraint firstItem="N9C-3E-3tF" firstAttribute="leading" secondItem="QIC-VI-MAM" secondAttribute="leading" id="5qA-K7-eN4"/>
+                            <constraint firstItem="N9C-3E-3tF" firstAttribute="top" secondItem="bWg-Pu-gsl" secondAttribute="bottom" id="B2f-2m-Pga"/>
+                            <constraint firstAttribute="trailing" secondItem="N9C-3E-3tF" secondAttribute="trailing" id="Uhz-it-1zg"/>
+                            <constraint firstItem="gKh-yx-lWA" firstAttribute="height" secondItem="QIC-VI-MAM" secondAttribute="height" multiplier="1:14" constant="1" id="Xss-TQ-uxG"/>
+                            <constraint firstItem="gKh-yx-lWA" firstAttribute="top" secondItem="bWg-Pu-gsl" secondAttribute="bottom" id="Yvx-rW-lzK"/>
+                            <constraint firstItem="z9n-kf-NTG" firstAttribute="top" secondItem="N9C-3E-3tF" secondAttribute="bottom" id="ela-hb-RsZ"/>
+                            <constraint firstItem="gKh-yx-lWA" firstAttribute="leading" secondItem="QIC-VI-MAM" secondAttribute="leading" id="mEb-4y-ofh"/>
+                            <constraint firstAttribute="trailing" secondItem="gKh-yx-lWA" secondAttribute="trailing" id="tE3-Pr-bcm"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="capturedImageView" destination="N9C-3E-3tF" id="YhN-rV-ZA4"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TPa-h3-Rla" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -194,35 +205,35 @@
                         <viewControllerLayoutGuide type="bottom" id="Zx3-IV-Siy"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="6wY-Dy-SXZ">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="200"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="172.5"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="z6T-Sb-LAp">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="200"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="172.5"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hid-hH-yTX">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="50"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
                                         <state key="normal" title="Clock In"/>
                                         <connections>
                                             <action selector="clockOptionTouchUpInside:" destination="gDy-fM-XMW" eventType="touchUpInside" id="g8K-dT-Uu2"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y05-24-GbG">
-                                        <rect key="frame" x="0.0" y="50" width="600" height="50"/>
+                                        <rect key="frame" x="0.0" y="43" width="600" height="43.5"/>
                                         <state key="normal" title="Clock Out"/>
                                         <connections>
                                             <action selector="clockOptionTouchUpInside:" destination="gDy-fM-XMW" eventType="touchUpInside" id="4zI-em-Ukv"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ld2-7p-NrE">
-                                        <rect key="frame" x="0.0" y="100" width="600" height="50"/>
+                                        <rect key="frame" x="0.0" y="86" width="600" height="43"/>
                                         <state key="normal" title="Break Start"/>
                                         <connections>
                                             <action selector="clockOptionTouchUpInside:" destination="gDy-fM-XMW" eventType="touchUpInside" id="Q8U-3e-OUe"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xTX-zg-ahD">
-                                        <rect key="frame" x="0.0" y="150" width="600" height="50"/>
+                                        <rect key="frame" x="0.0" y="129" width="600" height="43"/>
                                         <state key="normal" title="Break End"/>
                                         <connections>
                                             <action selector="clockOptionTouchUpInside:" destination="gDy-fM-XMW" eventType="touchUpInside" id="Uuh-H1-k5H"/>
@@ -243,6 +254,42 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WET-9g-DmS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1421" y="1757"/>
+        </scene>
+        <!--Clock View Controller-->
+        <scene sceneID="Hfo-en-7S8">
+            <objects>
+                <viewController id="veT-PW-kqg" customClass="ClockViewController" customModule="Timeclock" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="eBM-P9-EZX"/>
+                        <viewControllerLayoutGuide type="bottom" id="PHi-FH-160"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="3Ca-fZ-Ved">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10:10 PM" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="67V-BC-x0g">
+                                <rect key="frame" x="20" y="0.0" width="560" height="44"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="28"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.094117656349999995" green="0.24313727020000001" blue="0.2941176593" alpha="0.80266702586206895" colorSpace="deviceRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="67V-BC-x0g" secondAttribute="trailing" id="Ae7-Uu-Mcy"/>
+                            <constraint firstItem="67V-BC-x0g" firstAttribute="leading" secondItem="3Ca-fZ-Ved" secondAttribute="leadingMargin" id="Qkj-bq-s9F"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="67V-BC-x0g" secondAttribute="bottom" id="h6N-tx-VbH"/>
+                            <constraint firstItem="67V-BC-x0g" firstAttribute="top" secondItem="3Ca-fZ-Ved" secondAttribute="topMargin" id="msj-HS-vzu"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="timeLabel" destination="67V-BC-x0g" id="F5o-8z-fZp"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="l3d-O8-ujh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2232" y="1159"/>
         </scene>
     </scenes>
 </document>

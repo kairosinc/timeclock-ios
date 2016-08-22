@@ -40,7 +40,7 @@ class IdleViewController: UIViewController {
     }
     
     //MARK: Methods
-    @objc func updateDateTimeLabels() {
+    func updateDateTimeLabels() {
         let locale = NSLocale(localeIdentifier: "en_US_POSIX")
         let date = NSDate()
         

@@ -15,6 +15,7 @@
 		2029C0D71D68CAEC00DB72AF /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2029C0D61D68CAEC00DB72AF /* CoreGraphics.framework */; };
 		2029C0D91D68CAF400DB72AF /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2029C0D81D68CAF400DB72AF /* AVFoundation.framework */; };
 		2029C0DB1D68CAFB00DB72AF /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2029C0DA1D68CAFB00DB72AF /* AudioToolbox.framework */; };
+		204640EE1D6AE31000F527A8 /* ClockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204640ED1D6AE31000F527A8 /* ClockViewController.swift */; };
 		205D6B9C1D64DD0D0018A858 /* TimeClockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205D6B9B1D64DD0D0018A858 /* TimeClockViewController.swift */; };
 		206FA1FA1D61AB5F008B1F94 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206FA1F91D61AB5F008B1F94 /* AppDelegate.swift */; };
 		206FA1FC1D61AB5F008B1F94 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206FA1FB1D61AB5F008B1F94 /* ViewController.swift */; };
@@ -56,6 +57,7 @@
 		2029C0D61D68CAEC00DB72AF /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		2029C0D81D68CAF400DB72AF /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		2029C0DA1D68CAFB00DB72AF /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		204640ED1D6AE31000F527A8 /* ClockViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClockViewController.swift; sourceTree = "<group>"; };
 		205D6B9B1D64DD0D0018A858 /* TimeClockViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeClockViewController.swift; sourceTree = "<group>"; };
 		206FA1F61D61AB5F008B1F94 /* Timeclock.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Timeclock.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		206FA1F91D61AB5F008B1F94 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -173,6 +175,7 @@
 				20F7B5961D62FD5800FE1817 /* CaptureViewController.swift */,
 				20F7B5981D62FD9700FE1817 /* ClockOptionsViewController.swift */,
 				20F7B59A1D62FEA600FE1817 /* TimeClockCompositeViewController.swift */,
+				204640ED1D6AE31000F527A8 /* ClockViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -273,6 +276,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				204640EE1D6AE31000F527A8 /* ClockViewController.swift in Sources */,
 				20F7B5991D62FD9700FE1817 /* ClockOptionsViewController.swift in Sources */,
 				206FA1FC1D61AB5F008B1F94 /* ViewController.swift in Sources */,
 				205D6B9C1D64DD0D0018A858 /* TimeClockViewController.swift in Sources */,
