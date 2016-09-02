@@ -1,1 +1,2 @@
 github "kairosinc/Kairos-SDK-iOS" "master"
+github "Moya/Moya"

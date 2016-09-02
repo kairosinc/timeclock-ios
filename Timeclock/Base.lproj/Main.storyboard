@@ -1,25 +1,299 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6211" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="9f7-cQ-qNF">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6204"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
-        <scene sceneID="tne-QT-ifu">
+        <!--Time Clock Composite View Controller-->
+        <scene sceneID="bQG-Vw-XRR">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="9f7-cQ-qNF" customClass="TimeClockCompositeViewController" customModule="Timeclock" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
-                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                        <viewControllerLayoutGuide type="top" id="Kgo-hG-ccl"/>
+                        <viewControllerLayoutGuide type="bottom" id="uWq-kt-GiP"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                    <view key="view" contentMode="scaleToFill" id="9o1-hc-iPu">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <subviews>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RCn-1l-gJp" userLabel="Capture Container View">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <connections>
+                                    <segue destination="Wa3-Tx-bEY" kind="embed" identifier="embedCaptureViewController" id="itC-10-JzO"/>
+                                </connections>
+                            </containerView>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0GM-z0-fjl" userLabel="Idle Container View">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <connections>
+                                    <segue destination="Ewi-2g-RAz" kind="embed" identifier="embedIdleViewController" id="glA-OT-UPC"/>
+                                </connections>
+                            </containerView>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7vW-EX-Ibj" userLabel="Clock Options Container View">
+                                <rect key="frame" x="0.0" y="427.5" width="600" height="172.5"/>
+                                <connections>
+                                    <segue destination="gDy-fM-XMW" kind="embed" identifier="embedClockOptionsViewController" id="4z4-1i-gh9"/>
+                                </connections>
+                            </containerView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="RCn-1l-gJp" firstAttribute="leading" secondItem="9o1-hc-iPu" secondAttribute="leading" id="A1c-2z-EEP"/>
+                            <constraint firstItem="uWq-kt-GiP" firstAttribute="top" secondItem="RCn-1l-gJp" secondAttribute="bottom" id="Fxo-qb-31K"/>
+                            <constraint firstAttribute="trailing" secondItem="RCn-1l-gJp" secondAttribute="trailing" id="Pgz-Lu-ubO"/>
+                            <constraint firstAttribute="trailing" secondItem="7vW-EX-Ibj" secondAttribute="trailing" id="R7L-3w-q78"/>
+                            <constraint firstItem="0GM-z0-fjl" firstAttribute="top" secondItem="Kgo-hG-ccl" secondAttribute="bottom" id="RxD-2V-ZgK"/>
+                            <constraint firstAttribute="trailing" secondItem="0GM-z0-fjl" secondAttribute="trailing" id="a5l-z2-7Me"/>
+                            <constraint firstItem="0GM-z0-fjl" firstAttribute="leading" secondItem="9o1-hc-iPu" secondAttribute="leading" id="bai-hs-NxL"/>
+                            <constraint firstItem="uWq-kt-GiP" firstAttribute="top" secondItem="0GM-z0-fjl" secondAttribute="bottom" id="bwg-lc-CbA"/>
+                            <constraint firstItem="7vW-EX-Ibj" firstAttribute="height" secondItem="9o1-hc-iPu" secondAttribute="height" multiplier="2:7" constant="1" id="naM-2c-KmG"/>
+                            <constraint firstItem="7vW-EX-Ibj" firstAttribute="leading" secondItem="9o1-hc-iPu" secondAttribute="leading" id="t18-0d-141"/>
+                            <constraint firstItem="uWq-kt-GiP" firstAttribute="top" secondItem="7vW-EX-Ibj" secondAttribute="bottom" id="xz9-G3-hUm"/>
+                            <constraint firstItem="RCn-1l-gJp" firstAttribute="top" secondItem="Kgo-hG-ccl" secondAttribute="bottom" id="zJf-KU-42l"/>
+                        </constraints>
+                    </view>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <connections>
+                        <outlet property="captureView" destination="RCn-1l-gJp" id="GKB-VU-hC2"/>
+                        <outlet property="clockOptionsView" destination="7vW-EX-Ibj" id="cyf-gk-dM3"/>
+                        <outlet property="idleView" destination="0GM-z0-fjl" id="JdL-Ee-Ejg"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YX0-zA-Vuw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="651" y="1136"/>
+        </scene>
+        <!--Idle View Controller-->
+        <scene sceneID="I6B-oH-DEs">
+            <objects>
+                <viewController id="Ewi-2g-RAz" customClass="IdleViewController" customModule="Timeclock" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="1Ss-e4-ylC"/>
+                        <viewControllerLayoutGuide type="bottom" id="4WG-WX-fUh"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="MHg-YO-cPr">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wqn-BN-ufi">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="514"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Kzw-iJ-GY2">
+                                        <rect key="frame" x="47" y="167" width="507" height="180"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="00:00 PM" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.10000000000000001" translatesAutoresizingMaskIntoConstraints="NO" id="Nf6-Le-log">
+                                                <rect key="frame" x="0.0" y="0.0" width="507" height="117"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="100"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Monday, December 17" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.10000000000000001" translatesAutoresizingMaskIntoConstraints="NO" id="eY9-K7-Px0">
+                                                <rect key="frame" x="0.0" y="122" width="507" height="59"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="50"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" red="0.094117656349999995" green="0.24313727020000001" blue="0.2941176593" alpha="1" colorSpace="deviceRGB"/>
+                                <constraints>
+                                    <constraint firstItem="Kzw-iJ-GY2" firstAttribute="centerY" secondItem="Wqn-BN-ufi" secondAttribute="centerY" id="0lq-ys-CUi"/>
+                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Kzw-iJ-GY2" secondAttribute="trailing" constant="10" id="0sq-Xv-76Z"/>
+                                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="Kzw-iJ-GY2" secondAttribute="bottom" constant="10" id="1U9-Y1-t7z"/>
+                                    <constraint firstItem="Kzw-iJ-GY2" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Wqn-BN-ufi" secondAttribute="leading" constant="10" id="3kF-ne-6Cf"/>
+                                    <constraint firstItem="Kzw-iJ-GY2" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Wqn-BN-ufi" secondAttribute="top" constant="10" id="amw-Mg-qqQ"/>
+                                    <constraint firstItem="Kzw-iJ-GY2" firstAttribute="centerX" secondItem="Wqn-BN-ufi" secondAttribute="centerX" id="q4p-QQ-bJv"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vt6-6G-ZXy" userLabel="Tap To Start View">
+                                <rect key="frame" x="0.0" y="514" width="600" height="86"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Touch screen to start" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.10000000000000001" translatesAutoresizingMaskIntoConstraints="NO" id="GmO-iO-fPJ">
+                                        <rect key="frame" x="8" y="8" width="584" height="70"/>
+                                        <color key="backgroundColor" red="0.070588238540000001" green="0.20392158630000001" blue="0.25098040700000002" alpha="1" colorSpace="deviceRGB"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="28"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.070588238540000001" green="0.20392158630000001" blue="0.25098040700000002" alpha="1" colorSpace="deviceRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailingMargin" secondItem="GmO-iO-fPJ" secondAttribute="trailing" id="dgi-i0-eEP"/>
+                                    <constraint firstAttribute="bottomMargin" secondItem="GmO-iO-fPJ" secondAttribute="bottom" id="fPJ-e9-bDI"/>
+                                    <constraint firstItem="GmO-iO-fPJ" firstAttribute="top" secondItem="vt6-6G-ZXy" secondAttribute="topMargin" id="jZ4-bo-xMv"/>
+                                    <constraint firstItem="GmO-iO-fPJ" firstAttribute="leading" secondItem="vt6-6G-ZXy" secondAttribute="leadingMargin" id="uAB-7v-25K"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.094117656349999995" green="0.24313727020000001" blue="0.2941176593" alpha="1" colorSpace="deviceRGB"/>
+                        <gestureRecognizers/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="vt6-6G-ZXy" secondAttribute="trailing" id="FdA-jJ-XRz"/>
+                            <constraint firstItem="Wqn-BN-ufi" firstAttribute="leading" secondItem="MHg-YO-cPr" secondAttribute="leading" id="GQw-37-jYz"/>
+                            <constraint firstItem="vt6-6G-ZXy" firstAttribute="top" secondItem="Wqn-BN-ufi" secondAttribute="bottom" id="TIC-Y6-Gd1"/>
+                            <constraint firstItem="Wqn-BN-ufi" firstAttribute="top" secondItem="1Ss-e4-ylC" secondAttribute="bottom" id="ePF-ZA-lVb"/>
+                            <constraint firstItem="vt6-6G-ZXy" firstAttribute="height" secondItem="MHg-YO-cPr" secondAttribute="height" multiplier="1:7" id="jBz-Js-XAL"/>
+                            <constraint firstItem="vt6-6G-ZXy" firstAttribute="leading" secondItem="MHg-YO-cPr" secondAttribute="leading" id="lSd-Mz-bSq"/>
+                            <constraint firstItem="4WG-WX-fUh" firstAttribute="top" secondItem="vt6-6G-ZXy" secondAttribute="bottom" id="nrd-Ik-1yf"/>
+                            <constraint firstAttribute="trailing" secondItem="Wqn-BN-ufi" secondAttribute="trailing" id="qqB-Bg-2bl"/>
+                        </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="qdg-Qy-duc" appends="YES" id="pi2-ej-ndc"/>
+                        </connections>
+                    </view>
+                    <connections>
+                        <outlet property="dateLabel" destination="eY9-K7-Px0" id="Sd6-qi-VF7"/>
+                        <outlet property="timeLabel" destination="Nf6-Le-log" id="P8e-oT-zmo"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5PF-H7-0GV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="qdg-Qy-duc">
+                    <connections>
+                        <action selector="tapGestureRecognizerAction:" destination="Ewi-2g-RAz" id="2yX-Og-tEy"/>
+                    </connections>
+                </tapGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="1421" y="413"/>
+        </scene>
+        <!--Capture View Controller-->
+        <scene sceneID="2bv-MR-dCD">
+            <objects>
+                <viewController id="Wa3-Tx-bEY" customClass="CaptureViewController" customModule="Timeclock" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="bWg-Pu-gsl"/>
+                        <viewControllerLayoutGuide type="bottom" id="z9n-kf-NTG"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="QIC-VI-MAM">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gKh-yx-lWA">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                <connections>
+                                    <segue destination="veT-PW-kqg" kind="embed" id="1oq-oR-hTr"/>
+                                </connections>
+                            </containerView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="N9C-3E-3tF">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="N9C-3E-3tF" firstAttribute="leading" secondItem="QIC-VI-MAM" secondAttribute="leading" id="5qA-K7-eN4"/>
+                            <constraint firstItem="N9C-3E-3tF" firstAttribute="top" secondItem="bWg-Pu-gsl" secondAttribute="bottom" id="B2f-2m-Pga"/>
+                            <constraint firstAttribute="trailing" secondItem="N9C-3E-3tF" secondAttribute="trailing" id="Uhz-it-1zg"/>
+                            <constraint firstItem="gKh-yx-lWA" firstAttribute="height" secondItem="QIC-VI-MAM" secondAttribute="height" multiplier="1:14" constant="1" id="Xss-TQ-uxG"/>
+                            <constraint firstItem="gKh-yx-lWA" firstAttribute="top" secondItem="bWg-Pu-gsl" secondAttribute="bottom" id="Yvx-rW-lzK"/>
+                            <constraint firstItem="z9n-kf-NTG" firstAttribute="top" secondItem="N9C-3E-3tF" secondAttribute="bottom" id="ela-hb-RsZ"/>
+                            <constraint firstItem="gKh-yx-lWA" firstAttribute="leading" secondItem="QIC-VI-MAM" secondAttribute="leading" id="mEb-4y-ofh"/>
+                            <constraint firstAttribute="trailing" secondItem="gKh-yx-lWA" secondAttribute="trailing" id="tE3-Pr-bcm"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="capturedImageView" destination="N9C-3E-3tF" id="YhN-rV-ZA4"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TPa-h3-Rla" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1421" y="1159"/>
+        </scene>
+        <!--Clock Options View Controller-->
+        <scene sceneID="POZ-oW-M41">
+            <objects>
+                <viewController id="gDy-fM-XMW" customClass="ClockOptionsViewController" customModule="Timeclock" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Gb7-O3-sBl"/>
+                        <viewControllerLayoutGuide type="bottom" id="Zx3-IV-Siy"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="6wY-Dy-SXZ">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="172.5"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="z6T-Sb-LAp">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="172.5"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hid-hH-yTX">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                        <state key="normal" title="Clock In"/>
+                                        <connections>
+                                            <action selector="clockOptionTouchUpInside:" destination="gDy-fM-XMW" eventType="touchUpInside" id="g8K-dT-Uu2"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y05-24-GbG">
+                                        <rect key="frame" x="0.0" y="43" width="600" height="43.5"/>
+                                        <state key="normal" title="Clock Out"/>
+                                        <connections>
+                                            <action selector="clockOptionTouchUpInside:" destination="gDy-fM-XMW" eventType="touchUpInside" id="4zI-em-Ukv"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ld2-7p-NrE">
+                                        <rect key="frame" x="0.0" y="86" width="600" height="43"/>
+                                        <state key="normal" title="Break Start"/>
+                                        <connections>
+                                            <action selector="clockOptionTouchUpInside:" destination="gDy-fM-XMW" eventType="touchUpInside" id="Q8U-3e-OUe"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xTX-zg-ahD">
+                                        <rect key="frame" x="0.0" y="129" width="600" height="43"/>
+                                        <state key="normal" title="Break End"/>
+                                        <connections>
+                                            <action selector="clockOptionTouchUpInside:" destination="gDy-fM-XMW" eventType="touchUpInside" id="Uuh-H1-k5H"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="z6T-Sb-LAp" firstAttribute="leading" secondItem="6wY-Dy-SXZ" secondAttribute="leading" id="2nb-jI-VLy"/>
+                            <constraint firstAttribute="trailing" secondItem="z6T-Sb-LAp" secondAttribute="trailing" id="cGF-ZJ-7XA"/>
+                            <constraint firstItem="z6T-Sb-LAp" firstAttribute="top" secondItem="Gb7-O3-sBl" secondAttribute="bottom" id="hQl-TO-BMi"/>
+                            <constraint firstItem="Zx3-IV-Siy" firstAttribute="top" secondItem="z6T-Sb-LAp" secondAttribute="bottom" id="zab-6W-jWZ"/>
+                        </constraints>
                     </view>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WET-9g-DmS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="1421" y="1757"/>
+        </scene>
+        <!--Clock View Controller-->
+        <scene sceneID="Hfo-en-7S8">
+            <objects>
+                <viewController id="veT-PW-kqg" customClass="ClockViewController" customModule="Timeclock" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="eBM-P9-EZX"/>
+                        <viewControllerLayoutGuide type="bottom" id="PHi-FH-160"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="3Ca-fZ-Ved">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10:10 PM" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="67V-BC-x0g">
+                                <rect key="frame" x="20" y="0.0" width="560" height="44"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="28"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.094117656349999995" green="0.24313727020000001" blue="0.2941176593" alpha="0.80266702586206895" colorSpace="deviceRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="67V-BC-x0g" secondAttribute="trailing" id="Ae7-Uu-Mcy"/>
+                            <constraint firstItem="67V-BC-x0g" firstAttribute="leading" secondItem="3Ca-fZ-Ved" secondAttribute="leadingMargin" id="Qkj-bq-s9F"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="67V-BC-x0g" secondAttribute="bottom" id="h6N-tx-VbH"/>
+                            <constraint firstItem="67V-BC-x0g" firstAttribute="top" secondItem="3Ca-fZ-Ved" secondAttribute="topMargin" id="msj-HS-vzu"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="timeLabel" destination="67V-BC-x0g" id="F5o-8z-fZp"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="l3d-O8-ujh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2232" y="1159"/>
         </scene>
     </scenes>
 </document>

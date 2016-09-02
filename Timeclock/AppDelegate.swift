@@ -29,6 +29,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         //Initialize the Kairos SDK
         KairosSDK.initWithAppId(appID, appKey: appKey)
+        KairosSDK.setEnableFlash(true)
+        KairosSDK.setEnableShutterSound(false)
+        KairosSDK.setPreferredCameraType(UInt(KairosCameraFront))
         
         return true
     }
@@ -54,7 +57,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-
 
 }
 
