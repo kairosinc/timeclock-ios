@@ -22,6 +22,7 @@
 		206FA1FF1D61AB5F008B1F94 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 206FA1FD1D61AB5F008B1F94 /* Main.storyboard */; };
 		206FA2011D61AB5F008B1F94 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 206FA2001D61AB5F008B1F94 /* Assets.xcassets */; };
 		206FA2041D61AB5F008B1F94 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 206FA2021D61AB5F008B1F94 /* LaunchScreen.storyboard */; };
+		208012011D7EAA0200DEE7E3 /* EmployeeIDViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 208012001D7EAA0200DEE7E3 /* EmployeeIDViewController.swift */; };
 		208B39B01D638C38002EE431 /* TimeClockFlowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 208B39AF1D638C38002EE431 /* TimeClockFlowController.swift */; };
 		20C5DF251D7D585F00E3C47B /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20C5DED41D7D583500E3C47B /* Alamofire.framework */; };
 		20C5DF261D7D585F00E3C47B /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 20C5DED41D7D583500E3C47B /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -300,6 +301,7 @@
 		206FA2001D61AB5F008B1F94 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		206FA2031D61AB5F008B1F94 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		206FA2051D61AB5F008B1F94 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		208012001D7EAA0200DEE7E3 /* EmployeeIDViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmployeeIDViewController.swift; sourceTree = "<group>"; };
 		208B39AF1D638C38002EE431 /* TimeClockFlowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeClockFlowController.swift; sourceTree = "<group>"; };
 		20C5DEC81D7D583500E3C47B /* Alamofire.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Alamofire.xcodeproj; path = Carthage/Checkouts/Alamofire/Alamofire.xcodeproj; sourceTree = "<group>"; };
 		20C5DEE31D7D583F00E3C47B /* Moya.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Moya.xcodeproj; path = Carthage/Checkouts/Moya/Moya.xcodeproj; sourceTree = "<group>"; };
@@ -477,8 +479,9 @@
 				20F7B5941D62FD3500FE1817 /* IdleViewController.swift */,
 				20F7B5961D62FD5800FE1817 /* CaptureViewController.swift */,
 				20F7B5981D62FD9700FE1817 /* ClockOptionsViewController.swift */,
-				20F7B59A1D62FEA600FE1817 /* TimeClockCompositeViewController.swift */,
 				204640ED1D6AE31000F527A8 /* ClockViewController.swift */,
+				208012001D7EAA0200DEE7E3 /* EmployeeIDViewController.swift */,
+				20F7B59A1D62FEA600FE1817 /* TimeClockCompositeViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -785,6 +788,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				204640EE1D6AE31000F527A8 /* ClockViewController.swift in Sources */,
+				208012011D7EAA0200DEE7E3 /* EmployeeIDViewController.swift in Sources */,
 				20F7B5991D62FD9700FE1817 /* ClockOptionsViewController.swift in Sources */,
 				206FA1FC1D61AB5F008B1F94 /* ViewController.swift in Sources */,
 				205D6B9C1D64DD0D0018A858 /* TimeClockViewController.swift in Sources */,

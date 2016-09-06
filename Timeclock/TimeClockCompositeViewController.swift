@@ -14,11 +14,14 @@ class TimeClockCompositeViewController: UIViewController {
     @IBOutlet weak var clockOptionsView: UIView!
     @IBOutlet weak var idleView: UIView!
     @IBOutlet weak var captureView: UIView!
+    @IBOutlet weak var employeeIDView: UIView!
+    
     
     //MARK: Properties
     var clockOptionsViewController: ClockOptionsViewController?
     var idleViewController: IdleViewController?
     var captureViewController: CaptureViewController?
+    var employeeIDViewController: EmployeeIDViewController?
     
     var flowController = TimeClockFlowController()
     
@@ -56,6 +59,11 @@ class TimeClockCompositeViewController: UIViewController {
         case "embedClockOptionsViewController":
             guard let destination = segue.destinationViewController as? ClockOptionsViewController else { break }
             clockOptionsViewController = destination
+            break
+            
+        case "employeeIDViewController":
+            guard let destination = segue.destinationViewController as? EmployeeIDViewController else { break }
+            employeeIDViewController = destination
             break
             
         default:

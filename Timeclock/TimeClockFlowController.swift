@@ -11,7 +11,7 @@ import Foundation
 struct TimeClockFlowController {
     
     enum AppState {
-        case Idle, Capturing, ProcessingImage, DisplayingOptions
+        case Idle, Capturing, ProcessingImage, DisplayingOptions, EmployeeID
     }
     
     var configuration: Configuration? {

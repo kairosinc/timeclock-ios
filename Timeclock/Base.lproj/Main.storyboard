@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="9f7-cQ-qNF">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="9f7-cQ-qNF">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -19,6 +19,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qLY-UR-wCU" userLabel="EmployeeID Container View">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <connections>
+                                    <segue destination="Kta-qC-SM1" kind="embed" id="OWo-Ta-wi5"/>
+                                </connections>
+                            </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RCn-1l-gJp" userLabel="Capture Container View">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <connections>
@@ -58,6 +64,7 @@
                     <connections>
                         <outlet property="captureView" destination="RCn-1l-gJp" id="GKB-VU-hC2"/>
                         <outlet property="clockOptionsView" destination="7vW-EX-Ibj" id="cyf-gk-dM3"/>
+                        <outlet property="employeeIDView" destination="qLY-UR-wCU" id="gxW-3e-p0J"/>
                         <outlet property="idleView" destination="0GM-z0-fjl" id="JdL-Ee-Ejg"/>
                     </connections>
                 </viewController>
@@ -209,35 +216,35 @@
                         <viewControllerLayoutGuide type="bottom" id="Zx3-IV-Siy"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="6wY-Dy-SXZ">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="172.5"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="173"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="z6T-Sb-LAp">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="172.5"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="173"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hid-hH-yTX">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
                                         <state key="normal" title="Clock In"/>
                                         <connections>
                                             <action selector="clockOptionTouchUpInside:" destination="gDy-fM-XMW" eventType="touchUpInside" id="g8K-dT-Uu2"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y05-24-GbG">
-                                        <rect key="frame" x="0.0" y="43" width="600" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="43" width="600" height="43"/>
                                         <state key="normal" title="Clock Out"/>
                                         <connections>
                                             <action selector="clockOptionTouchUpInside:" destination="gDy-fM-XMW" eventType="touchUpInside" id="4zI-em-Ukv"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ld2-7p-NrE">
-                                        <rect key="frame" x="0.0" y="86" width="600" height="43"/>
+                                        <rect key="frame" x="0.0" y="86" width="600" height="43.5"/>
                                         <state key="normal" title="Break Start"/>
                                         <connections>
                                             <action selector="clockOptionTouchUpInside:" destination="gDy-fM-XMW" eventType="touchUpInside" id="Q8U-3e-OUe"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xTX-zg-ahD">
-                                        <rect key="frame" x="0.0" y="129" width="600" height="43"/>
+                                        <rect key="frame" x="0.0" y="130" width="600" height="43"/>
                                         <state key="normal" title="Break End"/>
                                         <connections>
                                             <action selector="clockOptionTouchUpInside:" destination="gDy-fM-XMW" eventType="touchUpInside" id="Uuh-H1-k5H"/>
@@ -258,6 +265,148 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WET-9g-DmS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1421" y="1757"/>
+        </scene>
+        <!--EmployeeID View Controller-->
+        <scene sceneID="Ul8-Vf-yqe">
+            <objects>
+                <viewController storyboardIdentifier="employeeIDViewController" id="Kta-qC-SM1" customClass="EmployeeIDViewController" customModule="Timeclock" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="vrQ-2f-QlR"/>
+                        <viewControllerLayoutGuide type="bottom" id="0rk-5j-Ixb"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="lKz-92-mx4">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="jkQ-mP-tLJ">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="HSp-JD-qVW">
+                                        <rect key="frame" x="0.0" y="0.0" width="200" height="600"/>
+                                        <subviews>
+                                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xtj-UL-RcR">
+                                                <rect key="frame" x="0.0" y="0.0" width="200" height="150"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                                <state key="normal" title="1"/>
+                                                <connections>
+                                                    <action selector="numPadTouchUpInside:" destination="Kta-qC-SM1" eventType="touchUpInside" id="BGJ-fr-q9h"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Xw-VY-cgW">
+                                                <rect key="frame" x="0.0" y="150" width="200" height="150"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                                <state key="normal" title="4"/>
+                                                <connections>
+                                                    <action selector="numPadTouchUpInside:" destination="Kta-qC-SM1" eventType="touchUpInside" id="VLY-Ni-WFi"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" tag="7" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UbC-e7-YdB">
+                                                <rect key="frame" x="0.0" y="300" width="200" height="150"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                                <state key="normal" title="7"/>
+                                                <connections>
+                                                    <action selector="numPadTouchUpInside:" destination="Kta-qC-SM1" eventType="touchUpInside" id="vDg-PS-Bts"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="avc-eI-IXi" userLabel="Spacer">
+                                                <rect key="frame" x="0.0" y="450" width="200" height="150"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                                <state key="normal" title="Clear"/>
+                                                <connections>
+                                                    <action selector="clearTouchUpInside:" destination="Kta-qC-SM1" eventType="touchUpInside" id="oAG-hn-Xzj"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="trA-jL-jtj">
+                                        <rect key="frame" x="200" y="0.0" width="200" height="600"/>
+                                        <subviews>
+                                            <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gbh-F9-Ptp">
+                                                <rect key="frame" x="0.0" y="0.0" width="200" height="150"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                                <state key="normal" title="2"/>
+                                                <connections>
+                                                    <action selector="numPadTouchUpInside:" destination="Kta-qC-SM1" eventType="touchDragInside" id="IRa-1X-RzK"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8q3-Ha-Pua">
+                                                <rect key="frame" x="0.0" y="150" width="200" height="150"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                                <state key="normal" title="5"/>
+                                                <connections>
+                                                    <action selector="numPadTouchUpInside:" destination="Kta-qC-SM1" eventType="touchUpInside" id="CMi-ZW-I9w"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" tag="8" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YBj-E7-pKK">
+                                                <rect key="frame" x="0.0" y="300" width="200" height="150"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                                <state key="normal" title="8"/>
+                                                <connections>
+                                                    <action selector="numPadTouchUpInside:" destination="Kta-qC-SM1" eventType="touchUpInside" id="4FX-Er-wOj"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="81w-Zc-nik">
+                                                <rect key="frame" x="0.0" y="450" width="200" height="150"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                                <state key="normal" title="0"/>
+                                                <connections>
+                                                    <action selector="numPadTouchUpInside:" destination="Kta-qC-SM1" eventType="touchUpInside" id="KAZ-My-pXr"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="s85-t2-oZm">
+                                        <rect key="frame" x="400" y="0.0" width="200" height="600"/>
+                                        <subviews>
+                                            <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aNA-sl-ESV">
+                                                <rect key="frame" x="0.0" y="0.0" width="200" height="150"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                                <state key="normal" title="3"/>
+                                                <connections>
+                                                    <action selector="numPadTouchUpInside:" destination="Kta-qC-SM1" eventType="touchUpInside" id="hnQ-Ct-ux6"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AX7-EJ-7As">
+                                                <rect key="frame" x="0.0" y="150" width="200" height="150"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                                <state key="normal" title="6"/>
+                                                <connections>
+                                                    <action selector="numPadTouchUpInside:" destination="Kta-qC-SM1" eventType="touchUpInside" id="7nc-YQ-lUT"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" tag="9" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K6t-8L-Mb4">
+                                                <rect key="frame" x="0.0" y="300" width="200" height="150"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                                <state key="normal" title="9"/>
+                                                <connections>
+                                                    <action selector="numPadTouchUpInside:" destination="Kta-qC-SM1" eventType="touchUpInside" id="B55-T1-bNm"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7lr-1K-Wof" userLabel="Spacer">
+                                                <rect key="frame" x="0.0" y="450" width="200" height="150"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                                <state key="normal" title="Done"/>
+                                                <connections>
+                                                    <action selector="doneTouchUpInside:" destination="Kta-qC-SM1" eventType="touchUpInside" id="JGJ-bM-2sP"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="0rk-5j-Ixb" firstAttribute="top" secondItem="jkQ-mP-tLJ" secondAttribute="bottom" id="2cc-ya-f82"/>
+                            <constraint firstAttribute="trailing" secondItem="jkQ-mP-tLJ" secondAttribute="trailing" id="3p5-Wd-m0G"/>
+                            <constraint firstItem="jkQ-mP-tLJ" firstAttribute="leading" secondItem="lKz-92-mx4" secondAttribute="leading" id="DQs-Hy-wy8"/>
+                            <constraint firstItem="jkQ-mP-tLJ" firstAttribute="top" secondItem="vrQ-2f-QlR" secondAttribute="bottom" id="N5Z-wN-Toh"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CJv-fn-ecF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="626" y="2240"/>
         </scene>
         <!--Clock View Controller-->
         <scene sceneID="Hfo-en-7S8">
