@@ -65,7 +65,7 @@ class TimeClockCompositeViewController: UIViewController {
             clockOptionsViewController = destination
             break
             
-        case "employeeIDViewController":
+        case "embedEmployeeIDViewController":
             guard let destination = segue.destinationViewController as? EmployeeIDViewController else { break }
             employeeIDViewController = destination
             break
