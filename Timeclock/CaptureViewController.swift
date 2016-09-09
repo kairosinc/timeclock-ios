@@ -60,7 +60,7 @@ class CaptureViewController: UIViewController {
 extension CaptureViewController: TimeClockViewController {
     func opacityForAppState(state: TimeClockFlowController.AppState) -> CGFloat {
         switch state {
-        case .Idle, .Capturing, .ProcessingImage, .DisplayingOptions:
+        case .Idle, .Capturing, .ProcessingImage, .DisplayingOptions, .EmployeeID:
             return 1
         }
     }

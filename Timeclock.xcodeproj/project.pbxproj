@@ -523,6 +523,7 @@
 					206FA1F51D61AB5F008B1F94 = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = M7MT8VBSGG;
+						LastSwiftMigration = 0800;
 					};
 				};
 			};
@@ -940,6 +941,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Timeclock/Timeclock-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 2.3;
 			};
 			name = Debug;
 		};
@@ -955,6 +957,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.tomhut.dev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Timeclock/Timeclock-Bridging-Header.h";
+				SWIFT_VERSION = 2.3;
 			};
 			name = Release;
 		};

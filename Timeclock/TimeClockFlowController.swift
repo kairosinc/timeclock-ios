@@ -29,12 +29,14 @@ struct TimeClockFlowController {
         let clockOptionsViewController: ClockOptionsViewController
         let idleViewController: IdleViewController
         let captureViewController: CaptureViewController
+        let employeeIDViewController: EmployeeIDViewController
         
         var viewControllers: [TimeClockViewController] {
             return [
                 clockOptionsViewController,
                 idleViewController,
-                captureViewController
+                captureViewController,
+                employeeIDViewController
             ]
         }
     }
@@ -58,8 +60,9 @@ extension TimeClockFlowController: ClockOptionsDelegate {
 
 extension TimeClockFlowController: IdleDelegate {
     func dismiss() {
-        setUIState(.Capturing)
-        configuration?.captureViewController.startCapturing()
+        setUIState(.EmployeeID)
+//        setUIState(.Capturing)
+//        configuration?.captureViewController.startCapturing()
     }
 }
 

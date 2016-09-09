@@ -31,7 +31,8 @@ class TimeClockCompositeViewController: UIViewController {
         guard let
             clockOptionsViewController = clockOptionsViewController,
             idleViewController = idleViewController,
-            captureViewController = captureViewController
+            captureViewController = captureViewController,
+            employeeIDViewController = employeeIDViewController
         else {
             return
         }
@@ -39,7 +40,10 @@ class TimeClockCompositeViewController: UIViewController {
         flowController.configuration = TimeClockFlowController.Configuration(
             clockOptionsViewController: clockOptionsViewController,
             idleViewController: idleViewController,
-            captureViewController: captureViewController)
+            captureViewController: captureViewController,
+            employeeIDViewController: employeeIDViewController)
+        
+        flowController.setUIState(.Idle)
     }
 
     //MARK: Navigation

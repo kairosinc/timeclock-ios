@@ -64,8 +64,8 @@ public struct WFMAPI {
     private static let accessToken = "tbc"
     
     private static let endpointClosure = { (target: WFMService) -> Endpoint<WFMService> in
-        let url = target.baseURL.URLByAppendingPathComponent(target.path).absoluteString
-        let endpoint: Endpoint<WFMService> = Endpoint<WFMService>(URL: url,
+        let url = target.baseURL.URLByAppendingPathComponent(target.path)!.absoluteString
+        let endpoint: Endpoint<WFMService> = Endpoint<WFMService>(URL: url!,
                                                                       sampleResponseClosure: {
                                                                         .NetworkResponse(200, target.sampleData)
                                                                         },

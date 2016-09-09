@@ -9,7 +9,13 @@
 import UIKit
 
 class EmployeeIDViewController: UIViewController {
-
+    
+    //MARK: IBOutlet
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var subTitleLabel: UILabel!
+    @IBOutlet weak var employeeIDLabel: UILabel!
+    
+    
     //MARK: IBAction
     @IBAction func numPadTouchUpInside(sender: AnyObject) {
         guard let tag = sender.tag else { return }
@@ -24,6 +30,24 @@ class EmployeeIDViewController: UIViewController {
     
     //MARK: Methods
     func numberEntered(number: Int) {
+        let existingText: String
+        if let existingUnwrappedValue = employeeIDLabel.text {
+            existingText = existingUnwrappedValue
+        } else {
+            existingText = ""
+        }
         
+        employeeIDLabel.text = existingText + String(numberEntered)
+    }
+}
+
+extension EmployeeIDViewController: TimeClockViewController {
+    func opacityForAppState(state: TimeClockFlowController.AppState) -> CGFloat {
+        switch state {
+        case .EmployeeID:
+            return 1
+        default:
+            return 0
+        }
     }
 }
