@@ -17,7 +17,7 @@
                         <viewControllerLayoutGuide type="bottom" id="uWq-kt-GiP"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="9o1-hc-iPu">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RCn-1l-gJp" userLabel="Capture Container View">
@@ -82,13 +82,13 @@
                         <viewControllerLayoutGuide type="bottom" id="4WG-WX-fUh"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="MHg-YO-cPr">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wqn-BN-ufi">
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Kzw-iJ-GY2">
-                                        <frame key="frameInset" minX="47" minY="167" width="355" height="180"/>
+                                        <frame key="frameInset" minX="47" minY="167" width="507" height="180"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00 PM" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.10000000000000001" translatesAutoresizingMaskIntoConstraints="NO" id="Nf6-Le-log">
                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="100"/>
@@ -170,7 +170,7 @@
                         <viewControllerLayoutGuide type="bottom" id="z9n-kf-NTG"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="QIC-VI-MAM">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gKh-yx-lWA">
@@ -209,7 +209,7 @@
                         <viewControllerLayoutGuide type="bottom" id="Zx3-IV-Siy"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="6wY-Dy-SXZ">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="293.5"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="191.5"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="z6T-Sb-LAp">
@@ -263,7 +263,7 @@
                         <viewControllerLayoutGuide type="bottom" id="0rk-5j-Ixb"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="lKz-92-mx4">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="3iP-Sv-LSt" userLabel="Top Message Stack View">
@@ -324,6 +324,9 @@
                                             <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gbh-F9-Ptp">
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                                 <state key="normal" title="2"/>
+                                                <connections>
+                                                    <action selector="numPadTouchUpInside:" destination="Kta-qC-SM1" eventType="touchUpInside" id="5NJ-TA-vu4"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8q3-Ha-Pua">
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
@@ -418,7 +421,7 @@
                         <viewControllerLayoutGuide type="bottom" id="PHi-FH-160"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="3Ca-fZ-Ved">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="74"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="48.5"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10:10 PM" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="67V-BC-x0g">
