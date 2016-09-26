@@ -42,13 +42,18 @@ struct TimeClockFlowController {
     }
     
     func setUIState(state: AppState) {
+        guard let configuration = self.configuration else { return }
         UIView.animateWithDuration(0.3, delay: 0, options: [.CurveEaseInOut], animations: {
-            guard let configuration = self.configuration else { return }
             for timeClockViewController in configuration.viewControllers {
                 guard let vc = timeClockViewController as? UIViewController else { break }
                 vc.view.alpha = timeClockViewController.opacityForAppState(state)
             }
-        }, completion: nil)
+        }, completion: { (finished: Bool) in
+            for timeClockViewController in configuration.viewControllers {
+                guard let vc = timeClockViewController as? UIViewController else { break }
+                timeClockViewController.containerView?.hidden = (vc.view.alpha == 0)
+            }
+        })
     }
 }
 

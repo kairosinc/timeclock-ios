@@ -54,20 +54,24 @@ class TimeClockCompositeViewController: UIViewController {
         case "embedIdleViewController":
             guard let destination = segue.destinationViewController as? IdleViewController else { break }
             idleViewController = destination
+            idleViewController?.containerView = idleView
             break
         case "embedCaptureViewController":
             guard let destination = segue.destinationViewController as? CaptureViewController else { break }
             captureViewController = destination
+            captureViewController?.containerView = captureView
             break
             
         case "embedClockOptionsViewController":
             guard let destination = segue.destinationViewController as? ClockOptionsViewController else { break }
             clockOptionsViewController = destination
+            clockOptionsViewController?.containerView = clockOptionsView
             break
             
         case "embedEmployeeIDViewController":
             guard let destination = segue.destinationViewController as? EmployeeIDViewController else { break }
             employeeIDViewController = destination
+            employeeIDViewController?.containerView = employeeIDView
             break
             
         default:

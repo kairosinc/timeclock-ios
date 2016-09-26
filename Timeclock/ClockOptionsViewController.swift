@@ -23,6 +23,7 @@ class ClockOptionsViewController: UIViewController {
     
     //MARK: Properties
     var delegate: ClockOptionsDelegate?
+    var containerView: UIView?
     
     //MARK: IBAction
     @IBAction func clockOptionTouchUpInside(sender: AnyObject) {

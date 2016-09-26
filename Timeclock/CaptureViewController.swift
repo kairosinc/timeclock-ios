@@ -20,6 +20,7 @@ class CaptureViewController: UIViewController {
     
     //MARK: Properties
     var delegate: CaptureDelegate?
+    var containerView: UIView?
     
     //MARK: Methods
     func startCapturing() {

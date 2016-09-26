@@ -28,6 +28,9 @@ class EmployeeIDViewController: UIViewController {
     @IBAction func doneTouchUpInside(sender: AnyObject) {
     }
     
+    //MARK: Properties
+    var containerView: UIView?
+    
     //MARK: Methods
     func numberEntered(number: Int) {
         let existingText: String
@@ -37,7 +40,7 @@ class EmployeeIDViewController: UIViewController {
             existingText = ""
         }
         
-        employeeIDLabel.text = existingText + String(numberEntered)
+        employeeIDLabel.text = existingText + String(number)
     }
 }
 

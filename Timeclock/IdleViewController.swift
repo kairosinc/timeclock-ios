@@ -17,6 +17,7 @@ class IdleViewController: UIViewController {
     //MARK: Properties
     var delegate: IdleDelegate?
     var dateTimeLabelTimer: NSTimer?
+    var containerView: UIView?
     
     //MARK: IBOutlet
     @IBOutlet weak var dateLabel: UILabel!
