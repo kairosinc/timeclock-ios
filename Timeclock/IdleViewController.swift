@@ -19,6 +19,13 @@ class IdleViewController: UIViewController {
     var dateTimeLabelTimer: NSTimer?
     var containerView: UIView?
     
+    var appState: TimeClockFlowController.AppState? {
+        didSet {
+            guard let appState = appState else { return }
+            setOpacityForAppState(appState)
+        }
+    }
+    
     //MARK: IBOutlet
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!

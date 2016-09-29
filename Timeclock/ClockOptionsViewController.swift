@@ -25,6 +25,13 @@ class ClockOptionsViewController: UIViewController {
     var delegate: ClockOptionsDelegate?
     var containerView: UIView?
     
+    var appState: TimeClockFlowController.AppState? {
+        didSet {
+            guard let appState = appState else { return }
+            setOpacityForAppState(appState)
+        }
+    }
+    
     //MARK: IBAction
     @IBAction func clockOptionTouchUpInside(sender: AnyObject) {
         guard let

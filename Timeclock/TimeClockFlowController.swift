@@ -11,7 +11,7 @@ import Foundation
 struct TimeClockFlowController {
     
     enum AppState {
-        case Idle, Capturing, ProcessingImage, DisplayingOptions, EmployeeID
+        case Idle, Capturing, ProcessingImage, DisplayingOptions, EmployeeIDEnrolment, EmployeeIDVerification
     }
     
     var configuration: Configuration? {
@@ -42,18 +42,13 @@ struct TimeClockFlowController {
     }
     
     func setUIState(state: AppState) {
+        
         guard let configuration = self.configuration else { return }
-        UIView.animateWithDuration(0.3, delay: 0, options: [.CurveEaseInOut], animations: {
-            for timeClockViewController in configuration.viewControllers {
-                guard let vc = timeClockViewController as? UIViewController else { break }
-                vc.view.alpha = timeClockViewController.opacityForAppState(state)
-            }
-        }, completion: { (finished: Bool) in
-            for timeClockViewController in configuration.viewControllers {
-                guard let vc = timeClockViewController as? UIViewController else { break }
-                timeClockViewController.containerView?.hidden = (vc.view.alpha == 0)
-            }
-        })
+
+        for timeClockViewController in configuration.viewControllers {
+            var vc = timeClockViewController
+            vc.appState = state
+        }
     }
 }
 
@@ -65,7 +60,7 @@ extension TimeClockFlowController: ClockOptionsDelegate {
 
 extension TimeClockFlowController: IdleDelegate {
     func dismiss() {
-        setUIState(.EmployeeID)
+        setUIState(.EmployeeIDVerification)
 //        setUIState(.Capturing)
 //        configuration?.captureViewController.startCapturing()
     }

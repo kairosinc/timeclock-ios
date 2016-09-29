@@ -15,8 +15,10 @@
 		2029C0D71D68CAEC00DB72AF /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2029C0D61D68CAEC00DB72AF /* CoreGraphics.framework */; };
 		2029C0D91D68CAF400DB72AF /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2029C0D81D68CAF400DB72AF /* AVFoundation.framework */; };
 		2029C0DB1D68CAFB00DB72AF /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2029C0DA1D68CAFB00DB72AF /* AudioToolbox.framework */; };
+		2033C3101D9BC0A600253F59 /* UIColor+Kairos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2033C30F1D9BC0A600253F59 /* UIColor+Kairos.swift */; };
 		204640EE1D6AE31000F527A8 /* ClockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204640ED1D6AE31000F527A8 /* ClockViewController.swift */; };
 		205D6B9C1D64DD0D0018A858 /* TimeClockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205D6B9B1D64DD0D0018A858 /* TimeClockViewController.swift */; };
+		206D178E1D9BB7CD00DD7499 /* EmployeeID.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 206D178C1D9BB7CD00DD7499 /* EmployeeID.storyboard */; };
 		206FA1FA1D61AB5F008B1F94 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206FA1F91D61AB5F008B1F94 /* AppDelegate.swift */; };
 		206FA1FC1D61AB5F008B1F94 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206FA1FB1D61AB5F008B1F94 /* ViewController.swift */; };
 		206FA1FF1D61AB5F008B1F94 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 206FA1FD1D61AB5F008B1F94 /* Main.storyboard */; };
@@ -292,8 +294,10 @@
 		2029C0D61D68CAEC00DB72AF /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		2029C0D81D68CAF400DB72AF /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		2029C0DA1D68CAFB00DB72AF /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		2033C30F1D9BC0A600253F59 /* UIColor+Kairos.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Kairos.swift"; sourceTree = "<group>"; };
 		204640ED1D6AE31000F527A8 /* ClockViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClockViewController.swift; sourceTree = "<group>"; };
 		205D6B9B1D64DD0D0018A858 /* TimeClockViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeClockViewController.swift; sourceTree = "<group>"; };
+		206D178D1D9BB7CD00DD7499 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/EmployeeID.storyboard; sourceTree = "<group>"; };
 		206FA1F61D61AB5F008B1F94 /* Timeclock.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Timeclock.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		206FA1F91D61AB5F008B1F94 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		206FA1FB1D61AB5F008B1F94 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -360,12 +364,29 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		2033C2F31D9BC08E00253F59 /* Style */ = {
+			isa = PBXGroup;
+			children = (
+				2033C30F1D9BC0A600253F59 /* UIColor+Kairos.swift */,
+			);
+			name = Style;
+			sourceTree = "<group>";
+		};
 		205D6B981D64DCC30018A858 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
 				205D6B9B1D64DD0D0018A858 /* TimeClockViewController.swift */,
 			);
 			name = Protocols;
+			sourceTree = "<group>";
+		};
+		206D17AA1D9BB7D200DD7499 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				206FA1FD1D61AB5F008B1F94 /* Main.storyboard */,
+				206D178C1D9BB7CD00DD7499 /* EmployeeID.storyboard */,
+			);
+			name = Storyboards;
 			sourceTree = "<group>";
 		};
 		206FA1ED1D61AB5F008B1F94 = {
@@ -395,10 +416,10 @@
 				2029C0DC1D68CB0100DB72AF /* Frameworks */,
 				205D6B981D64DCC30018A858 /* Protocols */,
 				208B39B31D638C3B002EE431 /* Flow Controllers */,
+				206D17AA1D9BB7D200DD7499 /* Storyboards */,
+				2033C2F31D9BC08E00253F59 /* Style */,
 				20F7B5911D62FD1F00FE1817 /* View Controllers */,
 				206FA1F91D61AB5F008B1F94 /* AppDelegate.swift */,
-				206FA1FB1D61AB5F008B1F94 /* ViewController.swift */,
-				206FA1FD1D61AB5F008B1F94 /* Main.storyboard */,
 				206FA2001D61AB5F008B1F94 /* Assets.xcassets */,
 				206FA2021D61AB5F008B1F94 /* LaunchScreen.storyboard */,
 				206FA2051D61AB5F008B1F94 /* Info.plist */,
@@ -482,6 +503,7 @@
 				204640ED1D6AE31000F527A8 /* ClockViewController.swift */,
 				208012001D7EAA0200DEE7E3 /* EmployeeIDViewController.swift */,
 				20F7B59A1D62FEA600FE1817 /* TimeClockCompositeViewController.swift */,
+				206FA1FB1D61AB5F008B1F94 /* ViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -777,6 +799,7 @@
 				20F7B58D1D62FA0000FE1817 /* Keys.plist in Resources */,
 				206FA2041D61AB5F008B1F94 /* LaunchScreen.storyboard in Resources */,
 				206FA2011D61AB5F008B1F94 /* Assets.xcassets in Resources */,
+				206D178E1D9BB7CD00DD7499 /* EmployeeID.storyboard in Resources */,
 				206FA1FF1D61AB5F008B1F94 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -788,6 +811,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2033C3101D9BC0A600253F59 /* UIColor+Kairos.swift in Sources */,
 				204640EE1D6AE31000F527A8 /* ClockViewController.swift in Sources */,
 				208012011D7EAA0200DEE7E3 /* EmployeeIDViewController.swift in Sources */,
 				20F7B5991D62FD9700FE1817 /* ClockOptionsViewController.swift in Sources */,
@@ -824,6 +848,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		206D178C1D9BB7CD00DD7499 /* EmployeeID.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				206D178D1D9BB7CD00DD7499 /* Base */,
+			);
+			name = EmployeeID.storyboard;
+			sourceTree = "<group>";
+		};
 		206FA1FD1D61AB5F008B1F94 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

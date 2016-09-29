@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16A319" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--EmployeeID View Controller-->
+        <scene sceneID="Ul8-Vf-yqe">
+            <objects>
+                <viewController storyboardIdentifier="employeeIDViewController" id="Kta-qC-SM1" customClass="EmployeeIDViewController" customModule="Timeclock" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="vrQ-2f-QlR"/>
+                        <viewControllerLayoutGuide type="bottom" id="0rk-5j-Ixb"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="lKz-92-mx4">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fRf-Kc-LBe" userLabel="Top Message Background View">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="3iP-Sv-LSt" userLabel="Top Message Stack View">
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fLP-UO-07V" userLabel="Error Label">
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w7o-Cg-rQf" userLabel="Title Label">
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LeW-d6-unS" userLabel="EmployeeID Label">
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="jkQ-mP-tLJ">
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="HSp-JD-qVW">
+                                        <subviews>
+                                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xtj-UL-RcR">
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                                <state key="normal" title="1"/>
+                                                <connections>
+                                                    <action selector="numPadTouchUpInside:" destination="Kta-qC-SM1" eventType="touchUpInside" id="BGJ-fr-q9h"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Xw-VY-cgW">
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                                <state key="normal" title="4"/>
+                                                <connections>
+                                                    <action selector="numPadTouchUpInside:" destination="Kta-qC-SM1" eventType="touchUpInside" id="VLY-Ni-WFi"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" tag="7" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UbC-e7-YdB">
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                                <state key="normal" title="7"/>
+                                                <connections>
+                                                    <action selector="numPadTouchUpInside:" destination="Kta-qC-SM1" eventType="touchUpInside" id="vDg-PS-Bts"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" tag="-1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="avc-eI-IXi">
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                                <state key="normal" title="Cancel"/>
+                                                <connections>
+                                                    <action selector="cancelTouchUpInside:" destination="Kta-qC-SM1" eventType="touchUpInside" id="quN-ae-lek"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="trA-jL-jtj">
+                                        <subviews>
+                                            <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gbh-F9-Ptp">
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                                <state key="normal" title="2"/>
+                                                <connections>
+                                                    <action selector="numPadTouchUpInside:" destination="Kta-qC-SM1" eventType="touchUpInside" id="5NJ-TA-vu4"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8q3-Ha-Pua">
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                                <state key="normal" title="5"/>
+                                                <connections>
+                                                    <action selector="numPadTouchUpInside:" destination="Kta-qC-SM1" eventType="touchUpInside" id="CMi-ZW-I9w"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" tag="8" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YBj-E7-pKK">
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                                <state key="normal" title="8"/>
+                                                <connections>
+                                                    <action selector="numPadTouchUpInside:" destination="Kta-qC-SM1" eventType="touchUpInside" id="4FX-Er-wOj"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="81w-Zc-nik">
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                                <state key="normal" title="0"/>
+                                                <connections>
+                                                    <action selector="numPadTouchUpInside:" destination="Kta-qC-SM1" eventType="touchUpInside" id="KAZ-My-pXr"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="s85-t2-oZm">
+                                        <subviews>
+                                            <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aNA-sl-ESV">
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                                <state key="normal" title="3"/>
+                                                <connections>
+                                                    <action selector="numPadTouchUpInside:" destination="Kta-qC-SM1" eventType="touchUpInside" id="hnQ-Ct-ux6"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AX7-EJ-7As">
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                                <state key="normal" title="6"/>
+                                                <connections>
+                                                    <action selector="numPadTouchUpInside:" destination="Kta-qC-SM1" eventType="touchUpInside" id="7nc-YQ-lUT"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" tag="9" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K6t-8L-Mb4">
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                                <state key="normal" title="9"/>
+                                                <connections>
+                                                    <action selector="numPadTouchUpInside:" destination="Kta-qC-SM1" eventType="touchUpInside" id="B55-T1-bNm"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" tag="-1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7lr-1K-Wof" userLabel="Backspace">
+                                                <gestureRecognizers/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                                <state key="normal" title="&lt;"/>
+                                                <connections>
+                                                    <action selector="backspaceTouchUpInside:" destination="Kta-qC-SM1" eventType="touchUpInside" id="md9-qo-ieJ"/>
+                                                    <outletCollection property="gestureRecognizers" destination="rMf-tL-Jwf" appends="YES" id="0O8-mx-dZV"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rw1-Rd-dYK">
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                <state key="normal" title="Confirm"/>
+                                <connections>
+                                    <action selector="confirmTouchUpInside:" destination="Kta-qC-SM1" eventType="touchUpInside" id="yTp-o6-7M9"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="jkQ-mP-tLJ" secondAttribute="trailing" id="3p5-Wd-m0G"/>
+                            <constraint firstItem="LeW-d6-unS" firstAttribute="top" secondItem="3iP-Sv-LSt" secondAttribute="bottom" id="7dG-aV-ztY"/>
+                            <constraint firstItem="jkQ-mP-tLJ" firstAttribute="leading" secondItem="lKz-92-mx4" secondAttribute="leading" id="DQs-Hy-wy8"/>
+                            <constraint firstItem="fRf-Kc-LBe" firstAttribute="centerX" secondItem="3iP-Sv-LSt" secondAttribute="centerX" id="ETK-sK-lb7"/>
+                            <constraint firstItem="rw1-Rd-dYK" firstAttribute="height" secondItem="lKz-92-mx4" secondAttribute="height" multiplier="2:17" constant="1" id="FEc-ZN-rrJ"/>
+                            <constraint firstItem="rw1-Rd-dYK" firstAttribute="leading" secondItem="lKz-92-mx4" secondAttribute="leading" id="FQY-o7-0EH"/>
+                            <constraint firstItem="LeW-d6-unS" firstAttribute="height" secondItem="lKz-92-mx4" secondAttribute="height" multiplier="2:17" id="Fvy-Ql-T1g"/>
+                            <constraint firstItem="0rk-5j-Ixb" firstAttribute="top" secondItem="rw1-Rd-dYK" secondAttribute="bottom" id="GNW-pb-of0"/>
+                            <constraint firstAttribute="trailing" secondItem="rw1-Rd-dYK" secondAttribute="trailing" id="Mb6-7m-6YQ"/>
+                            <constraint firstItem="3iP-Sv-LSt" firstAttribute="height" secondItem="lKz-92-mx4" secondAttribute="height" multiplier="3:17" id="P98-hS-tBP"/>
+                            <constraint firstItem="fRf-Kc-LBe" firstAttribute="width" secondItem="3iP-Sv-LSt" secondAttribute="width" id="Q1Q-a6-akB"/>
+                            <constraint firstItem="jkQ-mP-tLJ" firstAttribute="bottom" secondItem="rw1-Rd-dYK" secondAttribute="top" id="Vow-YB-f8m"/>
+                            <constraint firstItem="LeW-d6-unS" firstAttribute="leading" secondItem="lKz-92-mx4" secondAttribute="leading" id="aIL-4n-JOi"/>
+                            <constraint firstItem="3iP-Sv-LSt" firstAttribute="top" secondItem="vrQ-2f-QlR" secondAttribute="bottom" id="b3J-32-xuy"/>
+                            <constraint firstAttribute="trailing" secondItem="3iP-Sv-LSt" secondAttribute="trailing" id="bHd-cc-n1r"/>
+                            <constraint firstItem="jkQ-mP-tLJ" firstAttribute="top" secondItem="LeW-d6-unS" secondAttribute="bottom" id="baG-1z-Itq"/>
+                            <constraint firstItem="fRf-Kc-LBe" firstAttribute="centerY" secondItem="3iP-Sv-LSt" secondAttribute="centerY" id="dKP-3v-60N"/>
+                            <constraint firstItem="3iP-Sv-LSt" firstAttribute="leading" secondItem="lKz-92-mx4" secondAttribute="leading" id="jVD-l6-Wc0"/>
+                            <constraint firstItem="fRf-Kc-LBe" firstAttribute="height" secondItem="3iP-Sv-LSt" secondAttribute="height" id="mEZ-Eo-B9X"/>
+                            <constraint firstAttribute="trailing" secondItem="LeW-d6-unS" secondAttribute="trailing" id="x5f-Ow-CEU"/>
+                        </constraints>
+                    </view>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <fixedSimulatedSizeMetrics key="simulatedDestinationMetrics">
+                        <size key="portraitSize" width="375" height="667"/>
+                        <size key="landscapeSize" width="667" height="375"/>
+                    </fixedSimulatedSizeMetrics>
+                    <connections>
+                        <outlet property="cancelButton" destination="avc-eI-IXi" id="BWu-Op-9pq"/>
+                        <outlet property="confirmButton" destination="rw1-Rd-dYK" id="D0k-2e-gDi"/>
+                        <outlet property="employeeIDLabel" destination="LeW-d6-unS" id="HPs-pv-HjN"/>
+                        <outlet property="errorLabel" destination="fLP-UO-07V" id="RvZ-ap-Hhg"/>
+                        <outlet property="titleLabel" destination="w7o-Cg-rQf" id="xtu-DT-zAW"/>
+                        <outlet property="topMessageBackgroundView" destination="fRf-Kc-LBe" id="esN-40-bAj"/>
+                        <outletCollection property="numPadButtons" destination="xtj-UL-RcR" collectionClass="NSMutableArray" id="FUj-e0-y7Y"/>
+                        <outletCollection property="numPadButtons" destination="7Xw-VY-cgW" collectionClass="NSMutableArray" id="P3H-pe-jsL"/>
+                        <outletCollection property="numPadButtons" destination="UbC-e7-YdB" collectionClass="NSMutableArray" id="Drl-MI-Fld"/>
+                        <outletCollection property="numPadButtons" destination="avc-eI-IXi" collectionClass="NSMutableArray" id="J5m-l8-SHG"/>
+                        <outletCollection property="numPadButtons" destination="gbh-F9-Ptp" collectionClass="NSMutableArray" id="sda-ZE-JF9"/>
+                        <outletCollection property="numPadButtons" destination="8q3-Ha-Pua" collectionClass="NSMutableArray" id="qZV-8r-Sb1"/>
+                        <outletCollection property="numPadButtons" destination="YBj-E7-pKK" collectionClass="NSMutableArray" id="auq-sS-q3f"/>
+                        <outletCollection property="numPadButtons" destination="81w-Zc-nik" collectionClass="NSMutableArray" id="4Fi-nU-bEZ"/>
+                        <outletCollection property="numPadButtons" destination="aNA-sl-ESV" collectionClass="NSMutableArray" id="4Kv-kH-Otd"/>
+                        <outletCollection property="numPadButtons" destination="AX7-EJ-7As" collectionClass="NSMutableArray" id="Ie2-aU-Smv"/>
+                        <outletCollection property="numPadButtons" destination="K6t-8L-Mb4" collectionClass="NSMutableArray" id="gpF-dD-dXm"/>
+                        <outletCollection property="numPadButtons" destination="7lr-1K-Wof" collectionClass="NSMutableArray" id="k67-Sc-Tui"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CJv-fn-ecF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="rMf-tL-Jwf">
+                    <connections>
+                        <action selector="backspaceLongPress:" destination="Kta-qC-SM1" id="jMm-VJ-Zqw"/>
+                    </connections>
+                </pongPressGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="626" y="2240"/>
+        </scene>
+    </scenes>
+</document>

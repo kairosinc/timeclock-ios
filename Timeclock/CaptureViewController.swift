@@ -22,6 +22,13 @@ class CaptureViewController: UIViewController {
     var delegate: CaptureDelegate?
     var containerView: UIView?
     
+    var appState: TimeClockFlowController.AppState? {
+        didSet {
+            guard let appState = appState else { return }
+            setOpacityForAppState(appState)
+        }
+    }
+    
     //MARK: Methods
     func startCapturing() {
         

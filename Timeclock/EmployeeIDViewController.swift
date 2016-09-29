@@ -10,28 +10,117 @@ import UIKit
 
 class EmployeeIDViewController: UIViewController {
     
-    //MARK: IBOutlet
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var subTitleLabel: UILabel!
-    @IBOutlet weak var employeeIDLabel: UILabel!
+    //MARK: Properties
+    var containerView: UIView?
     
+    var appState: TimeClockFlowController.AppState? {
+        didSet {
+            guard let appState = appState else { return }
+            configureForAppState(appState)
+            setOpacityForAppState(appState)
+        }
+    }
+    
+    let primaryFont: UIFont = {
+        return UIFont.boldSystemFontOfSize(44)
+    }()
+    
+    let secondaryFont: UIFont = {
+        return UIFont.boldSystemFontOfSize(30)
+    }()
+    
+    //MARK: IBOutlet
+    @IBOutlet weak var errorLabel: UILabel! {
+        didSet {
+            errorLabel.textColor = UIColor.whiteColor()
+            errorLabel.font = secondaryFont
+        }
+    }
+    
+    @IBOutlet weak var titleLabel: UILabel! {
+        didSet {
+            titleLabel.textColor = UIColor.whiteColor()
+            titleLabel.font = primaryFont
+        }
+    }
+    
+    @IBOutlet weak var employeeIDLabel: UILabel! {
+        didSet {
+            employeeIDLabel.backgroundColor = UIColor.whiteColor()
+            employeeIDLabel.textColor = UIColor.kairosDarkGrey()
+            employeeIDLabel.font = primaryFont
+        }
+    }
+    
+    @IBOutlet weak var confirmButton: UIButton! {
+        didSet {
+            confirmButton.backgroundColor = UIColor.kairosGreen()
+            confirmButton.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+            confirmButton.titleLabel?.font = primaryFont
+        }
+    }
+    
+    @IBOutlet weak var topMessageBackgroundView: UIView! {
+        didSet {
+            topMessageBackgroundView.backgroundColor = UIColor.kairosGrey()
+        }
+    }
+    
+    @IBOutlet var numPadButtons: [UIButton]! {
+        didSet {
+            for button in numPadButtons {
+                button.backgroundColor = UIColor.kairosGrey()
+                button.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+                
+                if button.tag >= 0 {
+                    button.titleLabel?.font = primaryFont
+                } else {
+                    button.titleLabel?.font = secondaryFont
+                }
+            }
+        }
+    }
+    
+    @IBAction func backspaceLongPress(sender: AnyObject) {
+        employeeIDLabel.text = ""
+        dismissError()
+    }
+    
+    
+    @IBOutlet weak var cancelButton: UIButton!
     
     //MARK: IBAction
     @IBAction func numPadTouchUpInside(sender: AnyObject) {
         guard let tag = sender.tag else { return }
         numberEntered(tag)
+        dismissError()
     }
     
-    @IBAction func clearTouchUpInside(sender: AnyObject) {
+    @IBAction func backspaceTouchUpInside(sender: AnyObject) {
+        removeLastCharacter()
+        dismissError()
     }
     
-    @IBAction func doneTouchUpInside(sender: AnyObject) {
+    @IBAction func confirmTouchUpInside(sender: AnyObject) {
+        showError("Employee ID Not Found")
     }
     
-    //MARK: Properties
-    var containerView: UIView?
+    @IBAction func cancelTouchUpInside(sender: AnyObject) {
+    }
+    
+    //MARK: UIViewController
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = UIColor.kairosDarkGrey()
+    }
     
     //MARK: Methods
+    func configureForAppState(appState: TimeClockFlowController.AppState) {
+        titleLabel.text = "Enter Employee ID"
+        employeeIDLabel.text = ""
+        errorLabel.hidden = true
+    }
+    
     func numberEntered(number: Int) {
         let existingText: String
         if let existingUnwrappedValue = employeeIDLabel.text {
@@ -42,12 +131,36 @@ class EmployeeIDViewController: UIViewController {
         
         employeeIDLabel.text = existingText + String(number)
     }
+    
+    func removeLastCharacter() {
+        guard let currentValue = employeeIDLabel.text else { return }
+        let newValue = currentValue.characters.dropLast()
+        employeeIDLabel.text = String(newValue)
+    }
+    
+    func showError(message: String) {
+        errorLabel.text = message
+        
+        UIView.animateWithDuration(0.3) {
+            self.topMessageBackgroundView.backgroundColor = UIColor.kairosRed()
+            self.errorLabel.hidden = false
+        }
+    }
+    
+    func dismissError() {
+        guard !errorLabel.hidden else { return }
+        
+        UIView.animateWithDuration(0.3) {
+            self.topMessageBackgroundView.backgroundColor = UIColor.kairosGrey()
+            self.errorLabel.hidden = true
+        }
+    }
 }
 
 extension EmployeeIDViewController: TimeClockViewController {
     func opacityForAppState(state: TimeClockFlowController.AppState) -> CGFloat {
         switch state {
-        case .EmployeeID:
+        case .EmployeeIDVerification, .EmployeeIDEnrolment:
             return 1
         default:
             return 0
