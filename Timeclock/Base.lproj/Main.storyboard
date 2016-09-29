@@ -103,7 +103,7 @@
                                         </subviews>
                                     </stackView>
                                 </subviews>
-                                <color key="backgroundColor" red="0.077720686793327332" green="0.18548858165740967" blue="0.22863849997520447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="Kzw-iJ-GY2" firstAttribute="centerY" secondItem="Wqn-BN-ufi" secondAttribute="centerY" id="0lq-ys-CUi"/>
                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Kzw-iJ-GY2" secondAttribute="trailing" constant="10" id="0sq-Xv-76Z"/>
@@ -116,7 +116,6 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vt6-6G-ZXy" userLabel="Tap To Start View">
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Touch screen to start" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.10000000000000001" translatesAutoresizingMaskIntoConstraints="NO" id="GmO-iO-fPJ">
-                                        <color key="backgroundColor" red="0.062106110155582428" green="0.15362100303173065" blue="0.19176439940929413" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="28"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -149,6 +148,7 @@
                     </view>
                     <connections>
                         <outlet property="dateLabel" destination="eY9-K7-Px0" id="Sd6-qi-VF7"/>
+                        <outlet property="tapToStartView" destination="vt6-6G-ZXy" id="qW5-9p-FDE"/>
                         <outlet property="timeLabel" destination="Nf6-Le-log" id="P8e-oT-zmo"/>
                     </connections>
                 </viewController>
@@ -209,7 +209,7 @@
                         <viewControllerLayoutGuide type="bottom" id="Zx3-IV-Siy"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="6wY-Dy-SXZ">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="192"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="191.5"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="z6T-Sb-LAp">
