@@ -35,6 +35,11 @@
                                     <segue destination="bst-la-XZA" kind="embed" identifier="embedEmployeeIDViewController" id="OWo-Ta-wi5"/>
                                 </connections>
                             </containerView>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p1m-0T-7I3" userLabel="Clock View">
+                                <connections>
+                                    <segue destination="veT-PW-kqg" kind="embed" id="mhR-fA-Ze3"/>
+                                </connections>
+                            </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0GM-z0-fjl" userLabel="Idle Container View">
                                 <connections>
                                     <segue destination="Ewi-2g-RAz" kind="embed" identifier="embedIdleViewController" id="glA-OT-UPC"/>
@@ -46,9 +51,12 @@
                             <constraint firstItem="RCn-1l-gJp" firstAttribute="leading" secondItem="9o1-hc-iPu" secondAttribute="leading" id="A1c-2z-EEP"/>
                             <constraint firstItem="qLY-UR-wCU" firstAttribute="height" secondItem="9o1-hc-iPu" secondAttribute="height" multiplier="17:18" id="F2i-1m-nzp"/>
                             <constraint firstItem="uWq-kt-GiP" firstAttribute="top" secondItem="RCn-1l-gJp" secondAttribute="bottom" id="Fxo-qb-31K"/>
+                            <constraint firstItem="p1m-0T-7I3" firstAttribute="height" secondItem="9o1-hc-iPu" secondAttribute="height" multiplier="1:18" id="LPD-hs-7ot"/>
+                            <constraint firstItem="p1m-0T-7I3" firstAttribute="top" secondItem="Kgo-hG-ccl" secondAttribute="bottom" id="NKv-sI-XBW"/>
                             <constraint firstAttribute="trailing" secondItem="qLY-UR-wCU" secondAttribute="trailing" id="OKm-t9-0JT"/>
                             <constraint firstAttribute="trailing" secondItem="RCn-1l-gJp" secondAttribute="trailing" id="Pgz-Lu-ubO"/>
                             <constraint firstAttribute="trailing" secondItem="7vW-EX-Ibj" secondAttribute="trailing" id="R7L-3w-q78"/>
+                            <constraint firstAttribute="trailing" secondItem="p1m-0T-7I3" secondAttribute="trailing" id="RPE-bc-uVM"/>
                             <constraint firstItem="0GM-z0-fjl" firstAttribute="top" secondItem="Kgo-hG-ccl" secondAttribute="bottom" id="RxD-2V-ZgK"/>
                             <constraint firstAttribute="trailing" secondItem="0GM-z0-fjl" secondAttribute="trailing" id="a5l-z2-7Me"/>
                             <constraint firstItem="0GM-z0-fjl" firstAttribute="leading" secondItem="9o1-hc-iPu" secondAttribute="leading" id="bai-hs-NxL"/>
@@ -56,6 +64,7 @@
                             <constraint firstItem="7vW-EX-Ibj" firstAttribute="height" secondItem="9o1-hc-iPu" secondAttribute="height" multiplier="2:7" constant="1" id="naM-2c-KmG"/>
                             <constraint firstItem="uWq-kt-GiP" firstAttribute="top" secondItem="qLY-UR-wCU" secondAttribute="bottom" id="rJ3-lS-ibq"/>
                             <constraint firstItem="7vW-EX-Ibj" firstAttribute="leading" secondItem="9o1-hc-iPu" secondAttribute="leading" id="t18-0d-141"/>
+                            <constraint firstItem="p1m-0T-7I3" firstAttribute="leading" secondItem="9o1-hc-iPu" secondAttribute="leading" id="w0z-q1-f5Z"/>
                             <constraint firstItem="uWq-kt-GiP" firstAttribute="top" secondItem="7vW-EX-Ibj" secondAttribute="bottom" id="xz9-G3-hUm"/>
                             <constraint firstItem="qLY-UR-wCU" firstAttribute="leading" secondItem="9o1-hc-iPu" secondAttribute="leading" id="yDa-VD-qCe"/>
                             <constraint firstItem="RCn-1l-gJp" firstAttribute="top" secondItem="Kgo-hG-ccl" secondAttribute="bottom" id="zJf-KU-42l"/>
@@ -173,11 +182,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gKh-yx-lWA">
-                                <connections>
-                                    <segue destination="veT-PW-kqg" kind="embed" id="1oq-oR-hTr"/>
-                                </connections>
-                            </containerView>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gKh-yx-lWA"/>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="N9C-3E-3tF"/>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -198,7 +203,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TPa-h3-Rla" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1421" y="1159"/>
+            <point key="canvasLocation" x="1462" y="1136"/>
         </scene>
         <!--Clock Options View Controller-->
         <scene sceneID="POZ-oW-M41">
@@ -209,7 +214,7 @@
                         <viewControllerLayoutGuide type="bottom" id="Zx3-IV-Siy"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="6wY-Dy-SXZ">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="191.5"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="191"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="z6T-Sb-LAp">
@@ -263,7 +268,7 @@
                         <viewControllerLayoutGuide type="bottom" id="PHi-FH-160"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="3Ca-fZ-Ved">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="48.5"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="37"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10:10 PM" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="67V-BC-x0g">
@@ -287,7 +292,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="l3d-O8-ujh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2896" y="1158"/>
+            <point key="canvasLocation" x="650" y="453"/>
         </scene>
         <!--employeeIDViewController-->
         <scene sceneID="Ykd-cD-MKC">
