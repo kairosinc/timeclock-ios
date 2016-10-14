@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16A319" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="gDy-fM-XMW">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Clock Options View Controller-->
+        <scene sceneID="POZ-oW-M41">
+            <objects>
+                <viewController id="gDy-fM-XMW" customClass="ClockOptionsViewController" customModule="Timeclock" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Gb7-O3-sBl"/>
+                        <viewControllerLayoutGuide type="bottom" id="Zx3-IV-Siy"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="6wY-Dy-SXZ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="631"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="z6T-Sb-LAp" userLabel="Punch Stack View">
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hid-hH-yTX">
+                                        <state key="normal" title="Clock In"/>
+                                        <connections>
+                                            <action selector="clockOptionTouchUpInside:" destination="gDy-fM-XMW" eventType="touchUpInside" id="g8K-dT-Uu2"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y05-24-GbG">
+                                        <state key="normal" title="Clock Out"/>
+                                        <connections>
+                                            <action selector="clockOptionTouchUpInside:" destination="gDy-fM-XMW" eventType="touchUpInside" id="4zI-em-Ukv"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ld2-7p-NrE">
+                                        <state key="normal" title="Break Start"/>
+                                        <connections>
+                                            <action selector="clockOptionTouchUpInside:" destination="gDy-fM-XMW" eventType="touchUpInside" id="Q8U-3e-OUe"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xTX-zg-ahD">
+                                        <state key="normal" title="Break End"/>
+                                        <connections>
+                                            <action selector="clockOptionTouchUpInside:" destination="gDy-fM-XMW" eventType="touchUpInside" id="Uuh-H1-k5H"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="j82-C9-0sV" userLabel="Top Message Stack View">
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b8R-2U-RFG" userLabel="Error Label">
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kv0-pR-kxr" userLabel="Title Label">
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3iw-Jn-dvH" userLabel="Top Message Background View">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="3iw-Jn-dvH" firstAttribute="height" secondItem="j82-C9-0sV" secondAttribute="height" id="Ioh-pv-9eD"/>
+                            <constraint firstItem="z6T-Sb-LAp" firstAttribute="leading" secondItem="6wY-Dy-SXZ" secondAttribute="leading" id="LLq-4M-Nmn"/>
+                            <constraint firstItem="3iw-Jn-dvH" firstAttribute="centerY" secondItem="j82-C9-0sV" secondAttribute="centerY" id="Laa-Dd-wsV"/>
+                            <constraint firstAttribute="trailing" secondItem="z6T-Sb-LAp" secondAttribute="trailing" id="TDx-hJ-B3g"/>
+                            <constraint firstAttribute="trailing" secondItem="j82-C9-0sV" secondAttribute="trailing" id="b04-xl-HyU"/>
+                            <constraint firstItem="j82-C9-0sV" firstAttribute="top" secondItem="Gb7-O3-sBl" secondAttribute="bottom" id="fSJ-Tf-Aib"/>
+                            <constraint firstItem="3iw-Jn-dvH" firstAttribute="centerX" secondItem="j82-C9-0sV" secondAttribute="centerX" id="n9E-wJ-rgL"/>
+                            <constraint firstItem="j82-C9-0sV" firstAttribute="height" secondItem="6wY-Dy-SXZ" secondAttribute="height" multiplier="3:17" id="oXY-ty-fTM"/>
+                            <constraint firstItem="j82-C9-0sV" firstAttribute="leading" secondItem="6wY-Dy-SXZ" secondAttribute="leading" id="pnm-D7-Bv0"/>
+                            <constraint firstItem="3iw-Jn-dvH" firstAttribute="width" secondItem="j82-C9-0sV" secondAttribute="width" id="uHt-fn-ttm"/>
+                            <constraint firstItem="Zx3-IV-Siy" firstAttribute="top" secondItem="z6T-Sb-LAp" secondAttribute="bottom" id="zab-6W-jWZ"/>
+                        </constraints>
+                    </view>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <fixedSimulatedSizeMetrics key="simulatedDestinationMetrics">
+                        <size key="portraitSize" width="375" height="631"/>
+                        <size key="landscapeSize" width="631" height="375"/>
+                    </fixedSimulatedSizeMetrics>
+                    <connections>
+                        <outlet property="topMessageBackgroundView" destination="3iw-Jn-dvH" id="91H-af-UjK"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WET-9g-DmS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1519" y="1892"/>
+        </scene>
+    </scenes>
+</document>

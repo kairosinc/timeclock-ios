@@ -32,6 +32,13 @@ class ClockOptionsViewController: UIViewController {
         }
     }
     
+    //MARK: IBOutlet
+    @IBOutlet weak var topMessageBackgroundView: UIView! {
+        didSet {
+            topMessageBackgroundView.backgroundColor = UIColor.kairosGreen()
+        }
+    }
+    
     //MARK: IBAction
     @IBAction func clockOptionTouchUpInside(sender: AnyObject) {
         guard let
@@ -42,6 +49,11 @@ class ClockOptionsViewController: UIViewController {
         }
         
         delegate?.clock(selectedOption)
+    }
+    
+    //MARK: UIViewController
+    override func viewDidLoad() {
+        view.backgroundColor = UIColor.kairosGrey()
     }
 }
 

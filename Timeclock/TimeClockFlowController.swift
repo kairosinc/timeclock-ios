@@ -20,6 +20,7 @@ struct TimeClockFlowController {
             configuration.clockOptionsViewController.delegate = self
             configuration.idleViewController.delegate = self
             configuration.captureViewController.delegate = self
+            configuration.employeeIDViewController.delegate = self
             
             setUIState(.Idle)
         }
@@ -74,5 +75,11 @@ extension TimeClockFlowController: CaptureDelegate {
     
     func timedOut() {
         
+    }
+}
+
+extension TimeClockFlowController: EmployeeIDDelegate {
+    func idEntered(employeeID: String) {
+        setUIState(.DisplayingOptions)
     }
 }

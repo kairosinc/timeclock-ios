@@ -25,6 +25,7 @@
 		206FA2011D61AB5F008B1F94 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 206FA2001D61AB5F008B1F94 /* Assets.xcassets */; };
 		206FA2041D61AB5F008B1F94 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 206FA2021D61AB5F008B1F94 /* LaunchScreen.storyboard */; };
 		208012011D7EAA0200DEE7E3 /* EmployeeIDViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 208012001D7EAA0200DEE7E3 /* EmployeeIDViewController.swift */; };
+		2088538F1DB0C51F00866807 /* ClockOptions.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2088538D1DB0C51F00866807 /* ClockOptions.storyboard */; };
 		208B39B01D638C38002EE431 /* TimeClockFlowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 208B39AF1D638C38002EE431 /* TimeClockFlowController.swift */; };
 		20C5DF251D7D585F00E3C47B /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20C5DED41D7D583500E3C47B /* Alamofire.framework */; };
 		20C5DF261D7D585F00E3C47B /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 20C5DED41D7D583500E3C47B /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -306,6 +307,7 @@
 		206FA2031D61AB5F008B1F94 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		206FA2051D61AB5F008B1F94 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		208012001D7EAA0200DEE7E3 /* EmployeeIDViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmployeeIDViewController.swift; sourceTree = "<group>"; };
+		2088538E1DB0C51F00866807 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/ClockOptions.storyboard; sourceTree = "<group>"; };
 		208B39AF1D638C38002EE431 /* TimeClockFlowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeClockFlowController.swift; sourceTree = "<group>"; };
 		20C5DEC81D7D583500E3C47B /* Alamofire.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Alamofire.xcodeproj; path = Carthage/Checkouts/Alamofire/Alamofire.xcodeproj; sourceTree = "<group>"; };
 		20C5DEE31D7D583F00E3C47B /* Moya.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Moya.xcodeproj; path = Carthage/Checkouts/Moya/Moya.xcodeproj; sourceTree = "<group>"; };
@@ -384,6 +386,7 @@
 			isa = PBXGroup;
 			children = (
 				206FA1FD1D61AB5F008B1F94 /* Main.storyboard */,
+				2088538D1DB0C51F00866807 /* ClockOptions.storyboard */,
 				206D178C1D9BB7CD00DD7499 /* EmployeeID.storyboard */,
 			);
 			name = Storyboards;
@@ -800,6 +803,7 @@
 				206FA2041D61AB5F008B1F94 /* LaunchScreen.storyboard in Resources */,
 				206FA2011D61AB5F008B1F94 /* Assets.xcassets in Resources */,
 				206D178E1D9BB7CD00DD7499 /* EmployeeID.storyboard in Resources */,
+				2088538F1DB0C51F00866807 /* ClockOptions.storyboard in Resources */,
 				206FA1FF1D61AB5F008B1F94 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -870,6 +874,14 @@
 				206FA2031D61AB5F008B1F94 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		2088538D1DB0C51F00866807 /* ClockOptions.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2088538E1DB0C51F00866807 /* Base */,
+			);
+			name = ClockOptions.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

@@ -8,9 +8,14 @@
 
 import UIKit
 
+protocol EmployeeIDDelegate {
+    func idEntered(employeeID: String)
+}
+
 class EmployeeIDViewController: UIViewController {
     
     //MARK: Properties
+    var delegate: EmployeeIDDelegate?
     var containerView: UIView?
     
     var appState: TimeClockFlowController.AppState? {
@@ -102,7 +107,11 @@ class EmployeeIDViewController: UIViewController {
     }
     
     @IBAction func confirmTouchUpInside(sender: AnyObject) {
-        showError("Employee ID Not Found")
+        if let employeeID = employeeIDLabel.text where (employeeID == "1001") {
+            delegate?.idEntered(employeeID)
+        } else {
+            showError("Employee ID Not Found")
+        }
     }
     
     @IBAction func cancelTouchUpInside(sender: AnyObject) {

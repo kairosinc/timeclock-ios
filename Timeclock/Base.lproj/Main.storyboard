@@ -27,7 +27,7 @@
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7vW-EX-Ibj" userLabel="Clock Options Container View">
                                 <connections>
-                                    <segue destination="gDy-fM-XMW" kind="embed" identifier="embedClockOptionsViewController" id="4z4-1i-gh9"/>
+                                    <segue destination="FyJ-Gc-O0F" kind="embed" identifier="embedClockOptionsViewController" id="4z4-1i-gh9"/>
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qLY-UR-wCU" userLabel="EmployeeID Container View">
@@ -61,7 +61,7 @@
                             <constraint firstAttribute="trailing" secondItem="0GM-z0-fjl" secondAttribute="trailing" id="a5l-z2-7Me"/>
                             <constraint firstItem="0GM-z0-fjl" firstAttribute="leading" secondItem="9o1-hc-iPu" secondAttribute="leading" id="bai-hs-NxL"/>
                             <constraint firstItem="uWq-kt-GiP" firstAttribute="top" secondItem="0GM-z0-fjl" secondAttribute="bottom" id="bwg-lc-CbA"/>
-                            <constraint firstItem="7vW-EX-Ibj" firstAttribute="height" secondItem="9o1-hc-iPu" secondAttribute="height" multiplier="2:7" constant="1" id="naM-2c-KmG"/>
+                            <constraint firstItem="7vW-EX-Ibj" firstAttribute="height" secondItem="9o1-hc-iPu" secondAttribute="height" multiplier="17:18" constant="1" id="naM-2c-KmG"/>
                             <constraint firstItem="uWq-kt-GiP" firstAttribute="top" secondItem="qLY-UR-wCU" secondAttribute="bottom" id="rJ3-lS-ibq"/>
                             <constraint firstItem="7vW-EX-Ibj" firstAttribute="leading" secondItem="9o1-hc-iPu" secondAttribute="leading" id="t18-0d-141"/>
                             <constraint firstItem="p1m-0T-7I3" firstAttribute="leading" secondItem="9o1-hc-iPu" secondAttribute="leading" id="w0z-q1-f5Z"/>
@@ -96,16 +96,15 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wqn-BN-ufi">
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Kzw-iJ-GY2">
-                                        <frame key="frameInset" minX="47" minY="167" width="355" height="180"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Kzw-iJ-GY2">
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00 PM" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.10000000000000001" translatesAutoresizingMaskIntoConstraints="NO" id="Nf6-Le-log">
-                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="100"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="100"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Monday, December 17" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.10000000000000001" translatesAutoresizingMaskIntoConstraints="NO" id="eY9-K7-Px0">
-                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="50"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="50"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
@@ -205,60 +204,6 @@
             </objects>
             <point key="canvasLocation" x="1462" y="1136"/>
         </scene>
-        <!--Clock Options View Controller-->
-        <scene sceneID="POZ-oW-M41">
-            <objects>
-                <viewController id="gDy-fM-XMW" customClass="ClockOptionsViewController" customModule="Timeclock" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Gb7-O3-sBl"/>
-                        <viewControllerLayoutGuide type="bottom" id="Zx3-IV-Siy"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="6wY-Dy-SXZ">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="191"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="z6T-Sb-LAp">
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hid-hH-yTX">
-                                        <state key="normal" title="Clock In"/>
-                                        <connections>
-                                            <action selector="clockOptionTouchUpInside:" destination="gDy-fM-XMW" eventType="touchUpInside" id="g8K-dT-Uu2"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y05-24-GbG">
-                                        <state key="normal" title="Clock Out"/>
-                                        <connections>
-                                            <action selector="clockOptionTouchUpInside:" destination="gDy-fM-XMW" eventType="touchUpInside" id="4zI-em-Ukv"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ld2-7p-NrE">
-                                        <state key="normal" title="Break Start"/>
-                                        <connections>
-                                            <action selector="clockOptionTouchUpInside:" destination="gDy-fM-XMW" eventType="touchUpInside" id="Q8U-3e-OUe"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xTX-zg-ahD">
-                                        <state key="normal" title="Break End"/>
-                                        <connections>
-                                            <action selector="clockOptionTouchUpInside:" destination="gDy-fM-XMW" eventType="touchUpInside" id="Uuh-H1-k5H"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                            </stackView>
-                        </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstItem="z6T-Sb-LAp" firstAttribute="leading" secondItem="6wY-Dy-SXZ" secondAttribute="leading" id="2nb-jI-VLy"/>
-                            <constraint firstAttribute="trailing" secondItem="z6T-Sb-LAp" secondAttribute="trailing" id="cGF-ZJ-7XA"/>
-                            <constraint firstItem="z6T-Sb-LAp" firstAttribute="top" secondItem="Gb7-O3-sBl" secondAttribute="bottom" id="hQl-TO-BMi"/>
-                            <constraint firstItem="Zx3-IV-Siy" firstAttribute="top" secondItem="z6T-Sb-LAp" secondAttribute="bottom" id="zab-6W-jWZ"/>
-                        </constraints>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="WET-9g-DmS" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1421" y="1757"/>
-        </scene>
         <!--Clock View Controller-->
         <scene sceneID="Hfo-en-7S8">
             <objects>
@@ -273,7 +218,7 @@
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10:10 PM" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="67V-BC-x0g">
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="28"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="28"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -301,6 +246,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8mU-GB-iGP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="612" y="1737"/>
+        </scene>
+        <!--ClockOptions-->
+        <scene sceneID="AK4-5C-Bb9">
+            <objects>
+                <viewControllerPlaceholder storyboardName="ClockOptions" id="FyJ-Gc-O0F" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UmB-Ol-R16" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1519" y="1892"/>
         </scene>
     </scenes>
 </document>
