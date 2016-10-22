@@ -61,7 +61,8 @@ extension TimeClockFlowController: ClockOptionsDelegate {
 
 extension TimeClockFlowController: IdleDelegate {
     func dismiss() {
-        setUIState(.EmployeeIDVerification)
+        setUIState(.DisplayingOptions)
+//        setUIState(.EmployeeIDVerification)
 //        setUIState(.Capturing)
 //        configuration?.captureViewController.startCapturing()
     }

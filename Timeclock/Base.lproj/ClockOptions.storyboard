@@ -63,6 +63,9 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstItem="b8R-2U-RFG" firstAttribute="height" secondItem="j82-C9-0sV" secondAttribute="height" multiplier="2:5" id="oVd-Ef-cIs"/>
+                                </constraints>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -86,7 +89,13 @@
                         <size key="landscapeSize" width="631" height="375"/>
                     </fixedSimulatedSizeMetrics>
                     <connections>
+                        <outlet property="greetingLabel" destination="b8R-2U-RFG" id="gUF-IZ-z4b"/>
+                        <outlet property="nameLabel" destination="Kv0-pR-kxr" id="Cw8-rt-EDf"/>
                         <outlet property="topMessageBackgroundView" destination="3iw-Jn-dvH" id="91H-af-UjK"/>
+                        <outletCollection property="clockOptionButtons" destination="Hid-hH-yTX" collectionClass="NSMutableArray" id="K8i-0g-29E"/>
+                        <outletCollection property="clockOptionButtons" destination="y05-24-GbG" collectionClass="NSMutableArray" id="d8l-Qz-BRR"/>
+                        <outletCollection property="clockOptionButtons" destination="ld2-7p-NrE" collectionClass="NSMutableArray" id="KBM-Vz-2bZ"/>
+                        <outletCollection property="clockOptionButtons" destination="xTX-zg-ahD" collectionClass="NSMutableArray" id="eTY-mL-FoQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WET-9g-DmS" userLabel="First Responder" sceneMemberID="firstResponder"/>

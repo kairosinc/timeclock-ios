@@ -35,6 +35,7 @@
 		20C5DF2F1D7D586800E3C47B /* Result.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 20C5DF1A1D7D584C00E3C47B /* Result.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		20C5DF341D7D58B600E3C47B /* WFMService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C5DF331D7D58B600E3C47B /* WFMService.swift */; };
 		20C5DF361D7D591500E3C47B /* WFMAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C5DF351D7D591500E3C47B /* WFMAPI.swift */; };
+		20E20BB51DB9367C0017CBA6 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 20E20BB31DB9367C0017CBA6 /* Model.xcdatamodeld */; };
 		20F7B58D1D62FA0000FE1817 /* Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20F7B58C1D62FA0000FE1817 /* Keys.plist */; };
 		20F7B5951D62FD3500FE1817 /* IdleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20F7B5941D62FD3500FE1817 /* IdleViewController.swift */; };
 		20F7B5971D62FD5800FE1817 /* CaptureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20F7B5961D62FD5800FE1817 /* CaptureViewController.swift */; };
@@ -314,6 +315,7 @@
 		20C5DF0A1D7D584B00E3C47B /* Result.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Result.xcodeproj; path = Carthage/Checkouts/Result/Result.xcodeproj; sourceTree = "<group>"; };
 		20C5DF331D7D58B600E3C47B /* WFMService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WFMService.swift; sourceTree = "<group>"; };
 		20C5DF351D7D591500E3C47B /* WFMAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WFMAPI.swift; sourceTree = "<group>"; };
+		20E20BB41DB9367C0017CBA6 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		20F7B58C1D62FA0000FE1817 /* Keys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Keys.plist; sourceTree = "<group>"; };
 		20F7B5941D62FD3500FE1817 /* IdleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdleViewController.swift; sourceTree = "<group>"; };
 		20F7B5961D62FD5800FE1817 /* CaptureViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaptureViewController.swift; sourceTree = "<group>"; };
@@ -417,6 +419,7 @@
 			children = (
 				20C5DF321D7D589B00E3C47B /* API */,
 				2029C0DC1D68CB0100DB72AF /* Frameworks */,
+				20E20B761DB936150017CBA6 /* Model */,
 				205D6B981D64DCC30018A858 /* Protocols */,
 				208B39B31D638C3B002EE431 /* Flow Controllers */,
 				206D17AA1D9BB7D200DD7499 /* Storyboards */,
@@ -495,6 +498,14 @@
 				20C5DF331D7D58B600E3C47B /* WFMService.swift */,
 			);
 			name = API;
+			sourceTree = "<group>";
+		};
+		20E20B761DB936150017CBA6 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				20E20BB31DB9367C0017CBA6 /* Model.xcdatamodeld */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 		20F7B5911D62FD1F00FE1817 /* View Controllers */ = {
@@ -818,6 +829,7 @@
 				2033C3101D9BC0A600253F59 /* UIColor+Kairos.swift in Sources */,
 				204640EE1D6AE31000F527A8 /* ClockViewController.swift in Sources */,
 				208012011D7EAA0200DEE7E3 /* EmployeeIDViewController.swift in Sources */,
+				20E20BB51DB9367C0017CBA6 /* Model.xcdatamodeld in Sources */,
 				20F7B5991D62FD9700FE1817 /* ClockOptionsViewController.swift in Sources */,
 				206FA1FC1D61AB5F008B1F94 /* ViewController.swift in Sources */,
 				205D6B9C1D64DD0D0018A858 /* TimeClockViewController.swift in Sources */,
@@ -1027,6 +1039,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		20E20BB31DB9367C0017CBA6 /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				20E20BB41DB9367C0017CBA6 /* Model.xcdatamodel */,
+			);
+			currentVersion = 20E20BB41DB9367C0017CBA6 /* Model.xcdatamodel */;
+			path = Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 206FA1EE1D61AB5F008B1F94 /* Project object */;
 }
