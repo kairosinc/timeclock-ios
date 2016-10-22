@@ -20,6 +20,8 @@ class ClockViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        view.backgroundColor = UIColor.kairosDarkGrey()
+        
         timeLabelTimer = NSTimer.scheduledTimerWithTimeInterval(0.1,
                                                                 target: self,
                                                                 selector: #selector(updateTimeLabel),

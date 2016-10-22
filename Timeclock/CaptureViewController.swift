@@ -20,6 +20,14 @@ class CaptureViewController: UIViewController {
     
     //MARK: Properties
     var delegate: CaptureDelegate?
+    var containerView: UIView?
+    
+    var appState: TimeClockFlowController.AppState? {
+        didSet {
+            guard let appState = appState else { return }
+            setOpacityForAppState(appState)
+        }
+    }
     
     //MARK: Methods
     func startCapturing() {
@@ -62,6 +70,8 @@ extension CaptureViewController: TimeClockViewController {
         switch state {
         case .Idle, .Capturing, .ProcessingImage, .DisplayingOptions:
             return 1
+        default:
+            return 0
         }
     }
 }

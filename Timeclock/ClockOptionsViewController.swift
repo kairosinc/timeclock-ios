@@ -23,6 +23,55 @@ class ClockOptionsViewController: UIViewController {
     
     //MARK: Properties
     var delegate: ClockOptionsDelegate?
+    var containerView: UIView?
+    
+    var appState: TimeClockFlowController.AppState? {
+        didSet {
+            guard let appState = appState else { return }
+            setOpacityForAppState(appState)
+        }
+    }
+    
+    let primaryFont: UIFont = {
+        return UIFont.boldSystemFontOfSize(70)
+    }()
+    
+    let secondaryFont: UIFont = {
+        return UIFont.boldSystemFontOfSize(40)
+    }()
+    
+    //MARK: IBOutlet
+    @IBOutlet weak var topMessageBackgroundView: UIView! {
+        didSet {
+            topMessageBackgroundView.backgroundColor = UIColor.kairosGreen()
+        }
+    }
+    
+    @IBOutlet weak var greetingLabel: UILabel! {
+        didSet {
+            greetingLabel.font = secondaryFont
+            greetingLabel.textColor = UIColor.whiteColor()
+            greetingLabel.text = "Good Evening"
+        }
+    }
+    @IBOutlet weak var nameLabel: UILabel! {
+        didSet {
+            nameLabel.font = primaryFont
+            nameLabel.textColor = UIColor.whiteColor()
+            nameLabel.text = "Tom"
+        }
+    }
+    
+    @IBOutlet var clockOptionButtons: [UIButton]! {
+        didSet {
+            for button in clockOptionButtons {
+                button.titleLabel?.font = secondaryFont
+                button.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+            }
+        }
+    }
+    
+    
     
     //MARK: IBAction
     @IBAction func clockOptionTouchUpInside(sender: AnyObject) {
@@ -34,6 +83,11 @@ class ClockOptionsViewController: UIViewController {
         }
         
         delegate?.clock(selectedOption)
+    }
+    
+    //MARK: UIViewController
+    override func viewDidLoad() {
+        view.backgroundColor = UIColor.kairosGrey()
     }
 }
 

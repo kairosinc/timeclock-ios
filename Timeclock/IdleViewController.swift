@@ -17,10 +17,23 @@ class IdleViewController: UIViewController {
     //MARK: Properties
     var delegate: IdleDelegate?
     var dateTimeLabelTimer: NSTimer?
+    var containerView: UIView?
+    
+    var appState: TimeClockFlowController.AppState? {
+        didSet {
+            guard let appState = appState else { return }
+            setOpacityForAppState(appState)
+        }
+    }
     
     //MARK: IBOutlet
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet weak var tapToStartView: UIView! {
+        didSet {
+            tapToStartView.backgroundColor = UIColor.kairosDarkGrey()
+        }
+    }
     
     //MARK: IBAction
     @IBAction func tapGestureRecognizerAction(sender: AnyObject) {
@@ -30,6 +43,7 @@ class IdleViewController: UIViewController {
     //MARK: UIViewController
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = UIColor.kairosGrey()
         
         dateTimeLabelTimer = NSTimer.scheduledTimerWithTimeInterval(0.1,
                                                                     target: self,

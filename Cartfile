@@ -1,2 +1,2 @@
 github "kairosinc/Kairos-SDK-iOS" "master"
-github "Moya/Moya"
+github "Moya/Moya" ~> 7.0.3

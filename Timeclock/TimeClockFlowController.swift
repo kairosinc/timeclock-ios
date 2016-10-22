@@ -11,7 +11,7 @@ import Foundation
 struct TimeClockFlowController {
     
     enum AppState {
-        case Idle, Capturing, ProcessingImage, DisplayingOptions
+        case Idle, Capturing, ProcessingImage, DisplayingOptions, EmployeeIDEnrolment, EmployeeIDVerification
     }
     
     var configuration: Configuration? {
@@ -20,6 +20,7 @@ struct TimeClockFlowController {
             configuration.clockOptionsViewController.delegate = self
             configuration.idleViewController.delegate = self
             configuration.captureViewController.delegate = self
+            configuration.employeeIDViewController.delegate = self
             
             setUIState(.Idle)
         }
@@ -29,24 +30,26 @@ struct TimeClockFlowController {
         let clockOptionsViewController: ClockOptionsViewController
         let idleViewController: IdleViewController
         let captureViewController: CaptureViewController
+        let employeeIDViewController: EmployeeIDViewController
         
         var viewControllers: [TimeClockViewController] {
             return [
                 clockOptionsViewController,
                 idleViewController,
-                captureViewController
+                captureViewController,
+                employeeIDViewController
             ]
         }
     }
     
     func setUIState(state: AppState) {
-        UIView.animateWithDuration(0.3, delay: 0, options: [.CurveEaseInOut], animations: {
-            guard let configuration = self.configuration else { return }
-            for timeClockViewController in configuration.viewControllers {
-                guard let vc = timeClockViewController as? UIViewController else { break }
-                vc.view.alpha = timeClockViewController.opacityForAppState(state)
-            }
-        }, completion: nil)
+        
+        guard let configuration = self.configuration else { return }
+
+        for timeClockViewController in configuration.viewControllers {
+            var vc = timeClockViewController
+            vc.appState = state
+        }
     }
 }
 
@@ -58,8 +61,10 @@ extension TimeClockFlowController: ClockOptionsDelegate {
 
 extension TimeClockFlowController: IdleDelegate {
     func dismiss() {
-        setUIState(.Capturing)
-        configuration?.captureViewController.startCapturing()
+        setUIState(.DisplayingOptions)
+//        setUIState(.EmployeeIDVerification)
+//        setUIState(.Capturing)
+//        configuration?.captureViewController.startCapturing()
     }
 }
 
@@ -71,5 +76,11 @@ extension TimeClockFlowController: CaptureDelegate {
     
     func timedOut() {
         
+    }
+}
+
+extension TimeClockFlowController: EmployeeIDDelegate {
+    func idEntered(employeeID: String) {
+        setUIState(.DisplayingOptions)
     }
 }

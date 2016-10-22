@@ -204,13 +204,22 @@ class ServerTrustPolicyTestCase: BaseTestCase {
 
     func trustIsValid(trust: SecTrust) -> Bool {
         var isValid = false
-
+    #if swift (>=2.3)
+        var result = SecTrustResultType(rawValue: SecTrustResultType.Invalid.rawValue)
+        let status = SecTrustEvaluate(trust, &result!)
+    #else
         var result = SecTrustResultType(kSecTrustResultInvalid)
         let status = SecTrustEvaluate(trust, &result)
+    #endif
 
         if status == errSecSuccess {
+        #if swift (>=2.3)
+            let unspecified = SecTrustResultType(rawValue: SecTrustResultType.Unspecified.rawValue)
+            let proceed = SecTrustResultType(rawValue: SecTrustResultType.Proceed.rawValue)
+        #else
             let unspecified = SecTrustResultType(kSecTrustResultUnspecified)
             let proceed = SecTrustResultType(kSecTrustResultProceed)
+        #endif
 
             isValid = result == unspecified || result == proceed
         }
@@ -333,6 +342,7 @@ class ServerTrustPolicyExplorationSSLPolicyValidationTestCase: ServerTrustPolicy
         setRootCertificateAsLoneAnchorCertificateForTrust(trust)
 
         // When
+
         let policies = [SecPolicyCreateSSL(true, "test.alamofire.org")]
         SecTrustSetPolicies(trust, policies)
 
