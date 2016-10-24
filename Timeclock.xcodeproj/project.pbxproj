@@ -27,6 +27,19 @@
 		208012011D7EAA0200DEE7E3 /* EmployeeIDViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 208012001D7EAA0200DEE7E3 /* EmployeeIDViewController.swift */; };
 		2088538F1DB0C51F00866807 /* ClockOptions.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2088538D1DB0C51F00866807 /* ClockOptions.storyboard */; };
 		208B39B01D638C38002EE431 /* TimeClockFlowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 208B39AF1D638C38002EE431 /* TimeClockFlowController.swift */; };
+		20A31A781DBB9A8F004C81AC /* CoreDataImporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A31A721DBB9A8F004C81AC /* CoreDataImporter.swift */; };
+		20A31A791DBB9A8F004C81AC /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A31A731DBB9A8F004C81AC /* CoreDataStack.swift */; };
+		20A31A7A1DBB9A8F004C81AC /* CoreDataStack+InsertObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A31A741DBB9A8F004C81AC /* CoreDataStack+InsertObject.swift */; };
+		20A31A7B1DBB9A8F004C81AC /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A31A751DBB9A8F004C81AC /* DataController.swift */; };
+		20A31A7D1DBB9A8F004C81AC /* ManagedObjectType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A31A771DBB9A8F004C81AC /* ManagedObjectType.swift */; };
+		20A31A9B1DBB9F3A004C81AC /* Employee+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A31A991DBB9F3A004C81AC /* Employee+CoreDataClass.swift */; };
+		20A31A9C1DBB9F3A004C81AC /* Employee+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A31A9A1DBB9F3A004C81AC /* Employee+CoreDataProperties.swift */; };
+		20A31AA41DBDF00B004C81AC /* TimeclockTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A31AA31DBDF00B004C81AC /* TimeclockTests.swift */; };
+		20A31AAE1DBDF032004C81AC /* CoreDataImporterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A31AAB1DBDF032004C81AC /* CoreDataImporterTests.swift */; };
+		20A31AAF1DBDF032004C81AC /* CoreDataStackTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A31AAC1DBDF032004C81AC /* CoreDataStackTests.swift */; };
+		20A31AB61DBDF1CA004C81AC /* Test.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 20A31AB21DBDF1CA004C81AC /* Test.xcdatamodeld */; };
+		20A31AB71DBDF1CA004C81AC /* TestEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A31AB41DBDF1CA004C81AC /* TestEntity.swift */; };
+		20A31AB81DBDF1CA004C81AC /* TestEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A31AB51DBDF1CA004C81AC /* TestEntity+CoreDataProperties.swift */; };
 		20C5DF251D7D585F00E3C47B /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20C5DED41D7D583500E3C47B /* Alamofire.framework */; };
 		20C5DF261D7D585F00E3C47B /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 20C5DED41D7D583500E3C47B /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		20C5DF2A1D7D586300E3C47B /* Moya.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20C5DEF31D7D583F00E3C47B /* Moya.framework */; };
@@ -57,6 +70,13 @@
 			proxyType = 2;
 			remoteGlobalIDString = 07AA7D1E18D22DD000C24A69;
 			remoteInfo = KairosSDKTests;
+		};
+		20A31AA61DBDF00B004C81AC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 206FA1EE1D61AB5F008B1F94 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 206FA1F51D61AB5F008B1F94;
+			remoteInfo = Timeclock;
 		};
 		20C5DED31D7D583500E3C47B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -310,6 +330,21 @@
 		208012001D7EAA0200DEE7E3 /* EmployeeIDViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmployeeIDViewController.swift; sourceTree = "<group>"; };
 		2088538E1DB0C51F00866807 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/ClockOptions.storyboard; sourceTree = "<group>"; };
 		208B39AF1D638C38002EE431 /* TimeClockFlowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeClockFlowController.swift; sourceTree = "<group>"; };
+		20A31A721DBB9A8F004C81AC /* CoreDataImporter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataImporter.swift; sourceTree = "<group>"; };
+		20A31A731DBB9A8F004C81AC /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		20A31A741DBB9A8F004C81AC /* CoreDataStack+InsertObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CoreDataStack+InsertObject.swift"; sourceTree = "<group>"; };
+		20A31A751DBB9A8F004C81AC /* DataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
+		20A31A771DBB9A8F004C81AC /* ManagedObjectType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagedObjectType.swift; sourceTree = "<group>"; };
+		20A31A991DBB9F3A004C81AC /* Employee+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Employee+CoreDataClass.swift"; path = "../Employee+CoreDataClass.swift"; sourceTree = "<group>"; };
+		20A31A9A1DBB9F3A004C81AC /* Employee+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Employee+CoreDataProperties.swift"; path = "../Employee+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		20A31AA11DBDF00A004C81AC /* TimeclockTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TimeclockTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		20A31AA31DBDF00B004C81AC /* TimeclockTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeclockTests.swift; sourceTree = "<group>"; };
+		20A31AA51DBDF00B004C81AC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		20A31AAB1DBDF032004C81AC /* CoreDataImporterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataImporterTests.swift; sourceTree = "<group>"; };
+		20A31AAC1DBDF032004C81AC /* CoreDataStackTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStackTests.swift; sourceTree = "<group>"; };
+		20A31AB31DBDF1CA004C81AC /* Test.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Test.xcdatamodel; sourceTree = "<group>"; };
+		20A31AB41DBDF1CA004C81AC /* TestEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestEntity.swift; sourceTree = "<group>"; };
+		20A31AB51DBDF1CA004C81AC /* TestEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TestEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		20C5DEC81D7D583500E3C47B /* Alamofire.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Alamofire.xcodeproj; path = Carthage/Checkouts/Alamofire/Alamofire.xcodeproj; sourceTree = "<group>"; };
 		20C5DEE31D7D583F00E3C47B /* Moya.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Moya.xcodeproj; path = Carthage/Checkouts/Moya/Moya.xcodeproj; sourceTree = "<group>"; };
 		20C5DF0A1D7D584B00E3C47B /* Result.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Result.xcodeproj; path = Carthage/Checkouts/Result/Result.xcodeproj; sourceTree = "<group>"; };
@@ -339,6 +374,13 @@
 				2029C0D11D68CADD00DB72AF /* Foundation.framework in Frameworks */,
 				2029C0CF1D68CAD700DB72AF /* UIKit.framework in Frameworks */,
 				2019ED811D61AD9400912018 /* libKairosSDK.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		20A31A9E1DBDF00A004C81AC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -398,6 +440,7 @@
 			isa = PBXGroup;
 			children = (
 				206FA1F81D61AB5F008B1F94 /* Timeclock */,
+				20A31AA21DBDF00B004C81AC /* TimeclockTests */,
 				206FA1F71D61AB5F008B1F94 /* Products */,
 				20C5DEC81D7D583500E3C47B /* Alamofire.xcodeproj */,
 				2019ED781D61AD8200912018 /* KairosSDK.xcodeproj */,
@@ -410,6 +453,7 @@
 			isa = PBXGroup;
 			children = (
 				206FA1F61D61AB5F008B1F94 /* Timeclock.app */,
+				20A31AA11DBDF00A004C81AC /* TimeclockTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -441,6 +485,28 @@
 				208B39AF1D638C38002EE431 /* TimeClockFlowController.swift */,
 			);
 			name = "Flow Controllers";
+			sourceTree = "<group>";
+		};
+		20A31AA21DBDF00B004C81AC /* TimeclockTests */ = {
+			isa = PBXGroup;
+			children = (
+				20A31AB11DBDF1C0004C81AC /* Model */,
+				20A31AAB1DBDF032004C81AC /* CoreDataImporterTests.swift */,
+				20A31AAC1DBDF032004C81AC /* CoreDataStackTests.swift */,
+				20A31AA31DBDF00B004C81AC /* TimeclockTests.swift */,
+				20A31AA51DBDF00B004C81AC /* Info.plist */,
+			);
+			path = TimeclockTests;
+			sourceTree = "<group>";
+		};
+		20A31AB11DBDF1C0004C81AC /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				20A31AB21DBDF1CA004C81AC /* Test.xcdatamodeld */,
+				20A31AB41DBDF1CA004C81AC /* TestEntity.swift */,
+				20A31AB51DBDF1CA004C81AC /* TestEntity+CoreDataProperties.swift */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 		20C5DEC91D7D583500E3C47B /* Products */ = {
@@ -503,6 +569,13 @@
 		20E20B761DB936150017CBA6 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				20A31A991DBB9F3A004C81AC /* Employee+CoreDataClass.swift */,
+				20A31A9A1DBB9F3A004C81AC /* Employee+CoreDataProperties.swift */,
+				20A31A721DBB9A8F004C81AC /* CoreDataImporter.swift */,
+				20A31A731DBB9A8F004C81AC /* CoreDataStack.swift */,
+				20A31A741DBB9A8F004C81AC /* CoreDataStack+InsertObject.swift */,
+				20A31A751DBB9A8F004C81AC /* DataController.swift */,
+				20A31A771DBB9A8F004C81AC /* ManagedObjectType.swift */,
 				20E20BB31DB9367C0017CBA6 /* Model.xcdatamodeld */,
 			);
 			name = Model;
@@ -546,13 +619,31 @@
 			productReference = 206FA1F61D61AB5F008B1F94 /* Timeclock.app */;
 			productType = "com.apple.product-type.application";
 		};
+		20A31AA01DBDF00A004C81AC /* TimeclockTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 20A31AA81DBDF00B004C81AC /* Build configuration list for PBXNativeTarget "TimeclockTests" */;
+			buildPhases = (
+				20A31A9D1DBDF00A004C81AC /* Sources */,
+				20A31A9E1DBDF00A004C81AC /* Frameworks */,
+				20A31A9F1DBDF00A004C81AC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				20A31AA71DBDF00B004C81AC /* PBXTargetDependency */,
+			);
+			name = TimeclockTests;
+			productName = TimeclockTests;
+			productReference = 20A31AA11DBDF00A004C81AC /* TimeclockTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		206FA1EE1D61AB5F008B1F94 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0730;
+				LastSwiftUpdateCheck = 0800;
 				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = Kairos;
 				TargetAttributes = {
@@ -560,6 +651,12 @@
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = M7MT8VBSGG;
 						LastSwiftMigration = 0800;
+					};
+					20A31AA01DBDF00A004C81AC = {
+						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = FRVVJ46CY6;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 206FA1F51D61AB5F008B1F94;
 					};
 				};
 			};
@@ -595,6 +692,7 @@
 			projectRoot = "";
 			targets = (
 				206FA1F51D61AB5F008B1F94 /* Timeclock */,
+				20A31AA01DBDF00A004C81AC /* TimeclockTests */,
 			);
 		};
 /* End PBXProject section */
@@ -819,6 +917,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		20A31A9F1DBDF00A004C81AC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -826,26 +931,51 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				20A31A7A1DBB9A8F004C81AC /* CoreDataStack+InsertObject.swift in Sources */,
 				2033C3101D9BC0A600253F59 /* UIColor+Kairos.swift in Sources */,
 				204640EE1D6AE31000F527A8 /* ClockViewController.swift in Sources */,
+				20A31A9B1DBB9F3A004C81AC /* Employee+CoreDataClass.swift in Sources */,
 				208012011D7EAA0200DEE7E3 /* EmployeeIDViewController.swift in Sources */,
 				20E20BB51DB9367C0017CBA6 /* Model.xcdatamodeld in Sources */,
 				20F7B5991D62FD9700FE1817 /* ClockOptionsViewController.swift in Sources */,
 				206FA1FC1D61AB5F008B1F94 /* ViewController.swift in Sources */,
 				205D6B9C1D64DD0D0018A858 /* TimeClockViewController.swift in Sources */,
+				20A31A791DBB9A8F004C81AC /* CoreDataStack.swift in Sources */,
 				20F7B5971D62FD5800FE1817 /* CaptureViewController.swift in Sources */,
 				206FA1FA1D61AB5F008B1F94 /* AppDelegate.swift in Sources */,
 				20C5DF361D7D591500E3C47B /* WFMAPI.swift in Sources */,
+				20A31A9C1DBB9F3A004C81AC /* Employee+CoreDataProperties.swift in Sources */,
 				20F7B59B1D62FEA600FE1817 /* TimeClockCompositeViewController.swift in Sources */,
+				20A31A7B1DBB9A8F004C81AC /* DataController.swift in Sources */,
 				208B39B01D638C38002EE431 /* TimeClockFlowController.swift in Sources */,
+				20A31A7D1DBB9A8F004C81AC /* ManagedObjectType.swift in Sources */,
+				20A31A781DBB9A8F004C81AC /* CoreDataImporter.swift in Sources */,
 				20C5DF341D7D58B600E3C47B /* WFMService.swift in Sources */,
 				20F7B5951D62FD3500FE1817 /* IdleViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		20A31A9D1DBDF00A004C81AC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				20A31AB71DBDF1CA004C81AC /* TestEntity.swift in Sources */,
+				20A31AAE1DBDF032004C81AC /* CoreDataImporterTests.swift in Sources */,
+				20A31AB61DBDF1CA004C81AC /* Test.xcdatamodeld in Sources */,
+				20A31AAF1DBDF032004C81AC /* CoreDataStackTests.swift in Sources */,
+				20A31AB81DBDF1CA004C81AC /* TestEntity+CoreDataProperties.swift in Sources */,
+				20A31AA41DBDF00B004C81AC /* TimeclockTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		20A31AA71DBDF00B004C81AC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 206FA1F51D61AB5F008B1F94 /* Timeclock */;
+			targetProxy = 20A31AA61DBDF00B004C81AC /* PBXContainerItemProxy */;
+		};
 		20C5DF281D7D585F00E3C47B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "Alamofire iOS";
@@ -1017,6 +1147,42 @@
 			};
 			name = Release;
 		};
+		20A31AA91DBDF00B004C81AC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				DEVELOPMENT_TEAM = FRVVJ46CY6;
+				INFOPLIST_FILE = TimeclockTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.kairos.TimeclockTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 2.3;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Timeclock.app/Timeclock";
+			};
+			name = Debug;
+		};
+		20A31AAA1DBDF00B004C81AC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				DEVELOPMENT_TEAM = FRVVJ46CY6;
+				INFOPLIST_FILE = TimeclockTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.kairos.TimeclockTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 2.3;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Timeclock.app/Timeclock";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1038,9 +1204,27 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		20A31AA81DBDF00B004C81AC /* Build configuration list for PBXNativeTarget "TimeclockTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				20A31AA91DBDF00B004C81AC /* Debug */,
+				20A31AAA1DBDF00B004C81AC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
+		20A31AB21DBDF1CA004C81AC /* Test.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				20A31AB31DBDF1CA004C81AC /* Test.xcdatamodel */,
+			);
+			currentVersion = 20A31AB31DBDF1CA004C81AC /* Test.xcdatamodel */;
+			path = Test.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
 		20E20BB31DB9367C0017CBA6 /* Model.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
