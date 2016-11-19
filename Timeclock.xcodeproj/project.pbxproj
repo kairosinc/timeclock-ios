@@ -40,6 +40,8 @@
 		20A31AB61DBDF1CA004C81AC /* Test.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 20A31AB21DBDF1CA004C81AC /* Test.xcdatamodeld */; };
 		20A31AB71DBDF1CA004C81AC /* TestEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A31AB41DBDF1CA004C81AC /* TestEntity.swift */; };
 		20A31AB81DBDF1CA004C81AC /* TestEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A31AB51DBDF1CA004C81AC /* TestEntity+CoreDataProperties.swift */; };
+		20A79DA31DDC84DD00FE5DBE /* Punch+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A79DA11DDC84DD00FE5DBE /* Punch+CoreDataClass.swift */; };
+		20A79DA41DDC84DD00FE5DBE /* Punch+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A79DA21DDC84DD00FE5DBE /* Punch+CoreDataProperties.swift */; };
 		20C5DF251D7D585F00E3C47B /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20C5DED41D7D583500E3C47B /* Alamofire.framework */; };
 		20C5DF261D7D585F00E3C47B /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 20C5DED41D7D583500E3C47B /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		20C5DF2A1D7D586300E3C47B /* Moya.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20C5DEF31D7D583F00E3C47B /* Moya.framework */; };
@@ -345,6 +347,8 @@
 		20A31AB31DBDF1CA004C81AC /* Test.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Test.xcdatamodel; sourceTree = "<group>"; };
 		20A31AB41DBDF1CA004C81AC /* TestEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestEntity.swift; sourceTree = "<group>"; };
 		20A31AB51DBDF1CA004C81AC /* TestEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TestEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		20A79DA11DDC84DD00FE5DBE /* Punch+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Punch+CoreDataClass.swift"; path = "../Punch+CoreDataClass.swift"; sourceTree = "<group>"; };
+		20A79DA21DDC84DD00FE5DBE /* Punch+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Punch+CoreDataProperties.swift"; path = "../Punch+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		20C5DEC81D7D583500E3C47B /* Alamofire.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Alamofire.xcodeproj; path = Carthage/Checkouts/Alamofire/Alamofire.xcodeproj; sourceTree = "<group>"; };
 		20C5DEE31D7D583F00E3C47B /* Moya.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Moya.xcodeproj; path = Carthage/Checkouts/Moya/Moya.xcodeproj; sourceTree = "<group>"; };
 		20C5DF0A1D7D584B00E3C47B /* Result.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Result.xcodeproj; path = Carthage/Checkouts/Result/Result.xcodeproj; sourceTree = "<group>"; };
@@ -509,6 +513,24 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
+		20A79DC01DDC84EB00FE5DBE /* Punch */ = {
+			isa = PBXGroup;
+			children = (
+				20A79DA11DDC84DD00FE5DBE /* Punch+CoreDataClass.swift */,
+				20A79DA21DDC84DD00FE5DBE /* Punch+CoreDataProperties.swift */,
+			);
+			name = Punch;
+			sourceTree = "<group>";
+		};
+		20A79DC11DDC84F100FE5DBE /* Employee */ = {
+			isa = PBXGroup;
+			children = (
+				20A31A991DBB9F3A004C81AC /* Employee+CoreDataClass.swift */,
+				20A31A9A1DBB9F3A004C81AC /* Employee+CoreDataProperties.swift */,
+			);
+			name = Employee;
+			sourceTree = "<group>";
+		};
 		20C5DEC91D7D583500E3C47B /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -569,8 +591,8 @@
 		20E20B761DB936150017CBA6 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				20A31A991DBB9F3A004C81AC /* Employee+CoreDataClass.swift */,
-				20A31A9A1DBB9F3A004C81AC /* Employee+CoreDataProperties.swift */,
+				20A79DC11DDC84F100FE5DBE /* Employee */,
+				20A79DC01DDC84EB00FE5DBE /* Punch */,
 				20A31A721DBB9A8F004C81AC /* CoreDataImporter.swift */,
 				20A31A731DBB9A8F004C81AC /* CoreDataStack.swift */,
 				20A31A741DBB9A8F004C81AC /* CoreDataStack+InsertObject.swift */,
@@ -937,11 +959,13 @@
 				20A31A9B1DBB9F3A004C81AC /* Employee+CoreDataClass.swift in Sources */,
 				208012011D7EAA0200DEE7E3 /* EmployeeIDViewController.swift in Sources */,
 				20E20BB51DB9367C0017CBA6 /* Model.xcdatamodeld in Sources */,
+				20A79DA31DDC84DD00FE5DBE /* Punch+CoreDataClass.swift in Sources */,
 				20F7B5991D62FD9700FE1817 /* ClockOptionsViewController.swift in Sources */,
 				206FA1FC1D61AB5F008B1F94 /* ViewController.swift in Sources */,
 				205D6B9C1D64DD0D0018A858 /* TimeClockViewController.swift in Sources */,
 				20A31A791DBB9A8F004C81AC /* CoreDataStack.swift in Sources */,
 				20F7B5971D62FD5800FE1817 /* CaptureViewController.swift in Sources */,
+				20A79DA41DDC84DD00FE5DBE /* Punch+CoreDataProperties.swift in Sources */,
 				206FA1FA1D61AB5F008B1F94 /* AppDelegate.swift in Sources */,
 				20C5DF361D7D591500E3C47B /* WFMAPI.swift in Sources */,
 				20A31A9C1DBB9F3A004C81AC /* Employee+CoreDataProperties.swift in Sources */,
@@ -1211,6 +1235,7 @@
 				20A31AAA1DBDF00B004C81AC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16A319" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="gDy-fM-XMW">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="gDy-fM-XMW">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -20,44 +23,63 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3iw-Jn-dvH" userLabel="Top Message Background View">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="111.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="z6T-Sb-LAp" userLabel="Punch Stack View">
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="z6T-Sb-LAp" userLabel="Punch Stack View">
+                                <rect key="frame" x="0.0" y="481.5" width="375" height="149.5"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hid-hH-yTX">
-                                        <state key="normal" title="Clock In"/>
-                                        <connections>
-                                            <action selector="clockOptionTouchUpInside:" destination="gDy-fM-XMW" eventType="touchUpInside" id="g8K-dT-Uu2"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y05-24-GbG">
-                                        <state key="normal" title="Clock Out"/>
-                                        <connections>
-                                            <action selector="clockOptionTouchUpInside:" destination="gDy-fM-XMW" eventType="touchUpInside" id="4zI-em-Ukv"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ld2-7p-NrE">
-                                        <state key="normal" title="Break Start"/>
-                                        <connections>
-                                            <action selector="clockOptionTouchUpInside:" destination="gDy-fM-XMW" eventType="touchUpInside" id="Q8U-3e-OUe"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xTX-zg-ahD">
-                                        <state key="normal" title="Break End"/>
-                                        <connections>
-                                            <action selector="clockOptionTouchUpInside:" destination="gDy-fM-XMW" eventType="touchUpInside" id="Uuh-H1-k5H"/>
-                                        </connections>
-                                    </button>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="fje-Av-Zq1">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="74.5"/>
+                                        <subviews>
+                                            <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ld2-7p-NrE">
+                                                <rect key="frame" x="0.0" y="0.0" width="187" height="74.5"/>
+                                                <state key="normal" title="BREAK START"/>
+                                                <connections>
+                                                    <action selector="clockOptionTouchUpInside:" destination="gDy-fM-XMW" eventType="touchUpInside" id="Q8U-3e-OUe"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hid-hH-yTX">
+                                                <rect key="frame" x="188" y="0.0" width="187" height="74.5"/>
+                                                <state key="normal" title="CLOCK IN"/>
+                                                <connections>
+                                                    <action selector="clockOptionTouchUpInside:" destination="gDy-fM-XMW" eventType="touchUpInside" id="g8K-dT-Uu2"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="OwT-GR-bIw">
+                                        <rect key="frame" x="0.0" y="75.5" width="375" height="74"/>
+                                        <subviews>
+                                            <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xTX-zg-ahD">
+                                                <rect key="frame" x="0.0" y="0.5" width="187" height="74"/>
+                                                <state key="normal" title="BREAK END"/>
+                                                <connections>
+                                                    <action selector="clockOptionTouchUpInside:" destination="gDy-fM-XMW" eventType="touchUpInside" id="Uuh-H1-k5H"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y05-24-GbG">
+                                                <rect key="frame" x="188" y="0.5" width="187" height="74"/>
+                                                <state key="normal" title="CLOCK OUT"/>
+                                                <connections>
+                                                    <action selector="clockOptionTouchUpInside:" destination="gDy-fM-XMW" eventType="touchUpInside" id="4zI-em-Ukv"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="j82-C9-0sV" userLabel="Top Message Stack View">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="111.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b8R-2U-RFG" userLabel="Error Label">
+                                        <rect key="frame" x="8" y="8" width="359" height="44.5"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kv0-pR-kxr" userLabel="Title Label">
+                                        <rect key="frame" x="8" y="52.5" width="359" height="39"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -66,16 +88,26 @@
                                 <constraints>
                                     <constraint firstItem="b8R-2U-RFG" firstAttribute="height" secondItem="j82-C9-0sV" secondAttribute="height" multiplier="2:5" id="oVd-Ef-cIs"/>
                                 </constraints>
+                                <edgeInsets key="layoutMargins" top="8" left="8" bottom="20" right="8"/>
                             </stackView>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nzN-7f-WgE">
+                                <rect key="frame" x="0.0" y="112.5" width="375" height="368"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </webView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="z6T-Sb-LAp" firstAttribute="top" secondItem="nzN-7f-WgE" secondAttribute="bottom" constant="1" id="FcZ-hI-f45"/>
                             <constraint firstItem="3iw-Jn-dvH" firstAttribute="height" secondItem="j82-C9-0sV" secondAttribute="height" id="Ioh-pv-9eD"/>
                             <constraint firstItem="z6T-Sb-LAp" firstAttribute="leading" secondItem="6wY-Dy-SXZ" secondAttribute="leading" id="LLq-4M-Nmn"/>
                             <constraint firstItem="3iw-Jn-dvH" firstAttribute="centerY" secondItem="j82-C9-0sV" secondAttribute="centerY" id="Laa-Dd-wsV"/>
+                            <constraint firstItem="z6T-Sb-LAp" firstAttribute="height" secondItem="6wY-Dy-SXZ" secondAttribute="height" multiplier="4:17" constant="1" id="Mkh-tT-frr"/>
                             <constraint firstAttribute="trailing" secondItem="z6T-Sb-LAp" secondAttribute="trailing" id="TDx-hJ-B3g"/>
                             <constraint firstAttribute="trailing" secondItem="j82-C9-0sV" secondAttribute="trailing" id="b04-xl-HyU"/>
+                            <constraint firstItem="nzN-7f-WgE" firstAttribute="top" secondItem="j82-C9-0sV" secondAttribute="bottom" constant="1" id="d5A-4z-w7y"/>
                             <constraint firstItem="j82-C9-0sV" firstAttribute="top" secondItem="Gb7-O3-sBl" secondAttribute="bottom" id="fSJ-Tf-Aib"/>
+                            <constraint firstAttribute="trailing" secondItem="nzN-7f-WgE" secondAttribute="trailing" id="goz-v4-M7K"/>
+                            <constraint firstItem="nzN-7f-WgE" firstAttribute="leading" secondItem="6wY-Dy-SXZ" secondAttribute="leading" id="hLW-D2-Eni"/>
                             <constraint firstItem="3iw-Jn-dvH" firstAttribute="centerX" secondItem="j82-C9-0sV" secondAttribute="centerX" id="n9E-wJ-rgL"/>
                             <constraint firstItem="j82-C9-0sV" firstAttribute="height" secondItem="6wY-Dy-SXZ" secondAttribute="height" multiplier="3:17" id="oXY-ty-fTM"/>
                             <constraint firstItem="j82-C9-0sV" firstAttribute="leading" secondItem="6wY-Dy-SXZ" secondAttribute="leading" id="pnm-D7-Bv0"/>
@@ -89,13 +121,18 @@
                         <size key="landscapeSize" width="631" height="375"/>
                     </fixedSimulatedSizeMetrics>
                     <connections>
+                        <outlet property="breakEndButton" destination="xTX-zg-ahD" id="rJG-R6-16z"/>
+                        <outlet property="breakStartButton" destination="ld2-7p-NrE" id="NnW-1q-03S"/>
                         <outlet property="greetingLabel" destination="b8R-2U-RFG" id="gUF-IZ-z4b"/>
+                        <outlet property="inButton" destination="Hid-hH-yTX" id="eJP-VN-fSN"/>
                         <outlet property="nameLabel" destination="Kv0-pR-kxr" id="Cw8-rt-EDf"/>
+                        <outlet property="outButton" destination="y05-24-GbG" id="5Ve-dX-lv9"/>
                         <outlet property="topMessageBackgroundView" destination="3iw-Jn-dvH" id="91H-af-UjK"/>
-                        <outletCollection property="clockOptionButtons" destination="Hid-hH-yTX" collectionClass="NSMutableArray" id="K8i-0g-29E"/>
-                        <outletCollection property="clockOptionButtons" destination="y05-24-GbG" collectionClass="NSMutableArray" id="d8l-Qz-BRR"/>
-                        <outletCollection property="clockOptionButtons" destination="ld2-7p-NrE" collectionClass="NSMutableArray" id="KBM-Vz-2bZ"/>
+                        <outlet property="webView" destination="nzN-7f-WgE" id="Mjq-7J-b3g"/>
                         <outletCollection property="clockOptionButtons" destination="xTX-zg-ahD" collectionClass="NSMutableArray" id="eTY-mL-FoQ"/>
+                        <outletCollection property="clockOptionButtons" destination="ld2-7p-NrE" collectionClass="NSMutableArray" id="KBM-Vz-2bZ"/>
+                        <outletCollection property="clockOptionButtons" destination="y05-24-GbG" collectionClass="NSMutableArray" id="d8l-Qz-BRR"/>
+                        <outletCollection property="clockOptionButtons" destination="Hid-hH-yTX" collectionClass="NSMutableArray" id="K8i-0g-29E"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WET-9g-DmS" userLabel="First Responder" sceneMemberID="firstResponder"/>

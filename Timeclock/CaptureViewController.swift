@@ -9,7 +9,7 @@
 import UIKit
 
 protocol CaptureDelegate {
-    func imageCaptured(image: UIImage)
+    func imageCaptured(image: UIImage, employeeID: String?)
     func timedOut()
 }
 
@@ -36,9 +36,12 @@ class CaptureViewController: UIViewController {
                                                      galleryName: "employees",
                                                      success: { (response:[NSObject : AnyObject]!, image: UIImage!) in
             print("success detect \(response)")
+                                                        
+            self.capturedImage(image, employeeID: "10024")
             
             }, failure: { (response:[NSObject : AnyObject]!, image: UIImage!) in
                 print("failire \(response)")
+                self.capturedImage(image, employeeID: "10024")
         })
         
         //1 Capture image and call recognize
@@ -59,9 +62,9 @@ class CaptureViewController: UIViewController {
         
     }
     
-    func capturedImage() {
+    func capturedImage(image: UIImage, employeeID: String?) {
         let image = UIImage()
-        delegate?.imageCaptured(image)
+        delegate?.imageCaptured(image, employeeID: employeeID)
     }
 }
 

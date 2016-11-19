@@ -1,11 +1,26 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11232" systemVersion="16A319" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11542" systemVersion="16B2657" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Employee" representedClassName=".Employee" syncable="YES">
-        <attribute name="employeeID" attributeType="String" syncable="YES"/>
+        <attribute name="badgeNumber" attributeType="String" syncable="YES"/>
         <attribute name="firstName" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="lastName" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="Punch" representedClassName=".Punch" syncable="YES">
+        <attribute name="badgeNumber" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="badgeNumberValid" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="clockOffset" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="direction" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="facerecImageData" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="facerecImageType" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="facerecTransactionID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="online" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="timestampLocal" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="timestampUTC" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="timezoneDST" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="timezoneName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="timezoneOffset" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Employee" positionX="-63" positionY="-18" width="128" height="90"/>
+        <element name="Employee" positionX="-63" positionY="-18" width="128" height="75"/>
+        <element name="Punch" positionX="-63" positionY="0" width="128" height="240"/>
     </elements>
 </model>

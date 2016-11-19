@@ -28,6 +28,8 @@ class TimeClockCompositeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        view.backgroundColor = UIColor.kairosDarkGrey()
+        
         guard let
             clockOptionsViewController = clockOptionsViewController,
             idleViewController = idleViewController,
@@ -49,6 +51,8 @@ class TimeClockCompositeViewController: UIViewController {
     //MARK: Navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         guard let segueIdentifier = segue.identifier else { return }
+        
+        segue.destinationViewController.view.backgroundColor = UIColor.kairosGrey()
         
         switch segueIdentifier {
         case "embedIdleViewController":

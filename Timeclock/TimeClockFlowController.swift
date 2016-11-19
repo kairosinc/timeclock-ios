@@ -11,7 +11,12 @@ import Foundation
 struct TimeClockFlowController {
     
     enum AppState {
-        case Idle, Capturing, ProcessingImage, DisplayingOptions, EmployeeIDEnrolment, EmployeeIDVerification
+        case Idle
+        case Capturing
+        case ProcessingImage
+        case DisplayingOptions
+        case EmployeeIDEnrolment(image: UIImage)
+        case EmployeeIDVerification(employeeID: String)
     }
     
     var configuration: Configuration? {
@@ -61,17 +66,21 @@ extension TimeClockFlowController: ClockOptionsDelegate {
 
 extension TimeClockFlowController: IdleDelegate {
     func dismiss() {
-        setUIState(.DisplayingOptions)
-//        setUIState(.EmployeeIDVerification)
-//        setUIState(.Capturing)
-//        configuration?.captureViewController.startCapturing()
+//        setUIState(.DisplayingOptions)
+//        setUIState(.EmployeeIDVerification(employeeID: "10024"))
+        setUIState(.Capturing)
+        configuration?.captureViewController.startCapturing()
     }
 }
 
 extension TimeClockFlowController: CaptureDelegate {
-    func imageCaptured(image: UIImage) {
+    func imageCaptured(image: UIImage, employeeID: String?) {
         print("image captured")
-        setUIState(.DisplayingOptions)
+        if let employeeID = employeeID {
+            setUIState(.EmployeeIDVerification(employeeID: employeeID))
+        } else {
+            setUIState(.EmployeeIDEnrolment(image: image))
+        }
     }
     
     func timedOut() {

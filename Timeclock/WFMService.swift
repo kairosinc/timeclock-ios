@@ -11,9 +11,23 @@ import Moya
 
 public enum WFMService {
     case Login(email: String, password: String)
+    case Employees()
 }
 
 extension WFMService: TargetType {
+    
+    private static func standardParameters() -> JSONType {
+        return [
+            "device_id": "68753A44­4D6F­1226­9C60­0050E4C00067",
+            "device_model": "iPad3,1",
+            "ios_version": "6.1.3",
+            "app_version": "4.0",
+            "app_build": "107",
+            "latitude": 51.50341761532306,
+            "longitude": 0.12040704488754272,
+            "location_accuracy": 12.5663706143592
+        ]
+    }
     
     public var baseURL: NSURL { return NSURL(string: "https://kairos.com/api")! }
     
@@ -21,6 +35,8 @@ extension WFMService: TargetType {
         switch self {
         case .Login(_, _):
             return "/users/sessions/"
+        case .Employees():
+            return "/employees/download"
         }
     }
     
@@ -28,6 +44,8 @@ extension WFMService: TargetType {
         switch self {
         case .Login:
             return .POST
+        case .Employees:
+            return .GET
         }
     }
     
@@ -38,6 +56,8 @@ extension WFMService: TargetType {
                 "email": email,
                 "password": password
             ]
+        case .Employees():
+            return WFMService.standardParameters()
         }
     }
     
@@ -45,6 +65,9 @@ extension WFMService: TargetType {
         switch self {
         case .Login(_ , _):
             return stubbedResponse("LoginResponse")
+            
+        case .Employees():
+            return stubbedResponse("employeesResponse")
         }
     }
     
