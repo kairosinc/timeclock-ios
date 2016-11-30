@@ -54,11 +54,13 @@ class CaptureViewController: UIViewController {
         //4 Create new clock punch with selected option and ID
 //        performSelector(#selector(capturedImage), withObject: nil, afterDelay: 3)
         
-//        KairosSDK.imageCaptureEnrollWithSubjectId("001", galleryName: "employees", success: { (response:[NSObject : AnyObject]!, image: UIImage!) in
-//            print("success enroll \(response)")
-//            }) { (response:[NSObject : AnyObject]!, image: UIImage!) in
-//                print("failed to enrol: \(response)")
-//        }
+        /*
+        KairosSDK.imageCaptureEnrollWithSubjectId("10024", galleryName: "employees", success: { (response:[NSObject : AnyObject]!, image: UIImage!) in
+            print("success enroll \(response)")
+            }) { (response:[NSObject : AnyObject]!, image: UIImage!) in
+                print("failed to enrol: \(response)")
+        }
+ */
         
     }
     

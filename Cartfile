@@ -1,2 +1,3 @@
 github "kairosinc/Kairos-SDK-iOS" "master"
 github "Moya/Moya" ~> 7.0.3
+github "trivago/Heimdallr.swift" ~> 3.2

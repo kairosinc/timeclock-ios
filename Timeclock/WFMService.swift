@@ -17,35 +17,42 @@ public enum WFMService {
 extension WFMService: TargetType {
     
     private static func standardParameters() -> JSONType {
+        let deviceID = UIDevice.currentDevice().identifierForVendor?.UUIDString
+        let deviceModel = UIDevice.currentDevice().model
+        let iosVersion = UIDevice.currentDevice().systemVersion
+        let appVersion = NSBundle.mainBundle().infoDictionary?["CFBundleShortVersionString"] as? String
+        let buildNumber = NSBundle.mainBundle().infoDictionary?["CFBundleVersion"] as? String
+        let latitude = LocationMonitor.sharedMonitor.locationManager.location?.coordinate.latitude
+        let longitude = LocationMonitor.sharedMonitor.locationManager.location?.coordinate.longitude
+        let locationAccuracy = LocationMonitor.sharedMonitor.locationManager.location?.horizontalAccuracy
+        
         return [
-            "device_id": "68753A44­4D6F­1226­9C60­0050E4C00067",
-            "device_model": "iPad3,1",
-            "ios_version": "6.1.3",
-            "app_version": "4.0",
-            "app_build": "107",
-            "latitude": 51.50341761532306,
-            "longitude": 0.12040704488754272,
-            "location_accuracy": 12.5663706143592
+            "device_id": deviceID ?? "",
+            "device_model": deviceModel,
+            "ios_version": iosVersion,
+            "app_version": appVersion ?? "",
+            "app_build": buildNumber ?? "",
+            "latitude": latitude ?? "",
+            "longitude": longitude ?? "",
+            "location_accuracy": locationAccuracy ?? ""
         ]
     }
     
-    public var baseURL: NSURL { return NSURL(string: "https://kairos.com/api")! }
+    public var baseURL: NSURL { return NSURL(string: "http://planneddev.timeclockdynamics.com:9100")! }
     
     public var path: String {
         switch self {
         case .Login(_, _):
             return "/users/sessions/"
         case .Employees():
-            return "/employees/download"
+            return "/EmployeeDownload/v1.0/Employees/download"
         }
     }
     
     public var method: Moya.Method {
         switch self {
-        case .Login:
+        case .Login, .Employees:
             return .POST
-        case .Employees:
-            return .GET
         }
     }
     

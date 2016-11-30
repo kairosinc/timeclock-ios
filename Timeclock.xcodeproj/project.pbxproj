@@ -18,6 +18,8 @@
 		2033C3101D9BC0A600253F59 /* UIColor+Kairos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2033C30F1D9BC0A600253F59 /* UIColor+Kairos.swift */; };
 		204640EE1D6AE31000F527A8 /* ClockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204640ED1D6AE31000F527A8 /* ClockViewController.swift */; };
 		205D6B9C1D64DD0D0018A858 /* TimeClockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205D6B9B1D64DD0D0018A858 /* TimeClockViewController.swift */; };
+		206674331DE0AE62008789E8 /* LocationMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206674321DE0AE62008789E8 /* LocationMonitor.swift */; };
+		2066745E1DE0B9A4008789E8 /* WFMAPIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2066745D1DE0B9A4008789E8 /* WFMAPIError.swift */; };
 		206D178E1D9BB7CD00DD7499 /* EmployeeID.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 206D178C1D9BB7CD00DD7499 /* EmployeeID.storyboard */; };
 		206FA1FA1D61AB5F008B1F94 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206FA1F91D61AB5F008B1F94 /* AppDelegate.swift */; };
 		206FA1FC1D61AB5F008B1F94 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206FA1FB1D61AB5F008B1F94 /* ViewController.swift */; };
@@ -42,6 +44,7 @@
 		20A31AB81DBDF1CA004C81AC /* TestEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A31AB51DBDF1CA004C81AC /* TestEntity+CoreDataProperties.swift */; };
 		20A79DA31DDC84DD00FE5DBE /* Punch+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A79DA11DDC84DD00FE5DBE /* Punch+CoreDataClass.swift */; };
 		20A79DA41DDC84DD00FE5DBE /* Punch+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A79DA21DDC84DD00FE5DBE /* Punch+CoreDataProperties.swift */; };
+		20A86F0C1DEECF6B00A58D66 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20A86F0B1DEECF6B00A58D66 /* CoreData.framework */; };
 		20C5DF251D7D585F00E3C47B /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20C5DED41D7D583500E3C47B /* Alamofire.framework */; };
 		20C5DF261D7D585F00E3C47B /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 20C5DED41D7D583500E3C47B /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		20C5DF2A1D7D586300E3C47B /* Moya.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20C5DEF31D7D583F00E3C47B /* Moya.framework */; };
@@ -50,6 +53,11 @@
 		20C5DF2F1D7D586800E3C47B /* Result.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 20C5DF1A1D7D584C00E3C47B /* Result.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		20C5DF341D7D58B600E3C47B /* WFMService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C5DF331D7D58B600E3C47B /* WFMService.swift */; };
 		20C5DF361D7D591500E3C47B /* WFMAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C5DF351D7D591500E3C47B /* WFMAPI.swift */; };
+		20C8C5A31DE4880C00CE4B0A /* Heimdallr.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20C8C5841DE487AB00CE4B0A /* Heimdallr.framework */; };
+		20C8C5A41DE4880C00CE4B0A /* Heimdallr.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 20C8C5841DE487AB00CE4B0A /* Heimdallr.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		20C8C5A81DE48B1600CE4B0A /* HeimdallResourceRequestAuthenticatorForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C8C5A71DE48B1600CE4B0A /* HeimdallResourceRequestAuthenticatorForm.swift */; };
+		20C8C5AA1DE48B4A00CE4B0A /* WFMOAuthHTTPClientNSURLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C8C5A91DE48B4A00CE4B0A /* WFMOAuthHTTPClientNSURLSession.swift */; };
+		20DC07191DEDAAD000100726 /* WFMOAuthAccessTokenParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20DC07181DEDAAD000100726 /* WFMOAuthAccessTokenParser.swift */; };
 		20E20BB51DB9367C0017CBA6 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 20E20BB31DB9367C0017CBA6 /* Model.xcdatamodeld */; };
 		20F7B58D1D62FA0000FE1817 /* Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20F7B58C1D62FA0000FE1817 /* Keys.plist */; };
 		20F7B5951D62FD3500FE1817 /* IdleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20F7B5941D62FD3500FE1817 /* IdleViewController.swift */; };
@@ -290,6 +298,69 @@
 			remoteGlobalIDString = D454807C1A957361009D7229;
 			remoteInfo = "Result-iOS";
 		};
+		20C8C57F1DE487AB00CE4B0A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 20C8C56D1DE487AB00CE4B0A /* Heimdallr.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = DC582F431BE1319F0017BE06;
+			remoteInfo = "Heimdallr-macOS";
+		};
+		20C8C5811DE487AB00CE4B0A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 20C8C56D1DE487AB00CE4B0A /* Heimdallr.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = DC582F4C1BE1319F0017BE06;
+			remoteInfo = "Heimdallr-macOSTests";
+		};
+		20C8C5831DE487AB00CE4B0A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 20C8C56D1DE487AB00CE4B0A /* Heimdallr.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = DC545DC21A89F0F10051A575;
+			remoteInfo = "Heimdallr-iOS";
+		};
+		20C8C5851DE487AB00CE4B0A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 20C8C56D1DE487AB00CE4B0A /* Heimdallr.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = DC545DCD1A89F0F10051A575;
+			remoteInfo = "Heimdallr-iOSTests";
+		};
+		20C8C5871DE487AB00CE4B0A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 20C8C56D1DE487AB00CE4B0A /* Heimdallr.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = DC582FF51BE148610017BE06;
+			remoteInfo = "ReactiveHeimdallr-macOS";
+		};
+		20C8C5891DE487AB00CE4B0A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 20C8C56D1DE487AB00CE4B0A /* Heimdallr.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = DC582FFE1BE148610017BE06;
+			remoteInfo = "ReactiveHeimdallr-macOSTests";
+		};
+		20C8C58B1DE487AB00CE4B0A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 20C8C56D1DE487AB00CE4B0A /* Heimdallr.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = DC582FC01BE13EB20017BE06;
+			remoteInfo = "ReactiveHeimdallr-iOS";
+		};
+		20C8C58D1DE487AB00CE4B0A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 20C8C56D1DE487AB00CE4B0A /* Heimdallr.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = DC582FC91BE13EB30017BE06;
+			remoteInfo = "ReactiveHeimdallr-iOSTests";
+		};
+		20C8C5A51DE4880C00CE4B0A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 20C8C56D1DE487AB00CE4B0A /* Heimdallr.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = DC545DC11A89F0F10051A575;
+			remoteInfo = "Heimdallr-iOS";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -300,6 +371,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				20C5DF2F1D7D586800E3C47B /* Result.framework in Embed Frameworks */,
+				20C8C5A41DE4880C00CE4B0A /* Heimdallr.framework in Embed Frameworks */,
 				20C5DF2B1D7D586300E3C47B /* Moya.framework in Embed Frameworks */,
 				20C5DF261D7D585F00E3C47B /* Alamofire.framework in Embed Frameworks */,
 			);
@@ -311,6 +383,7 @@
 /* Begin PBXFileReference section */
 		2019ED781D61AD8200912018 /* KairosSDK.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = KairosSDK.xcodeproj; path = "Carthage/Checkouts/Kairos-SDK-iOS/KairosSDKSrc/KairosSDK/KairosSDK.xcodeproj"; sourceTree = "<group>"; };
 		2019ED821D61AE2900912018 /* Timeclock-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Timeclock-Bridging-Header.h"; sourceTree = "<group>"; };
+		202686A61DEDEDFE00881B1B /* Timeclock.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Timeclock.entitlements; sourceTree = "<group>"; };
 		2029C0CE1D68CAD700DB72AF /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		2029C0D01D68CADD00DB72AF /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		2029C0D21D68CAE200DB72AF /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
@@ -321,6 +394,8 @@
 		2033C30F1D9BC0A600253F59 /* UIColor+Kairos.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Kairos.swift"; sourceTree = "<group>"; };
 		204640ED1D6AE31000F527A8 /* ClockViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClockViewController.swift; sourceTree = "<group>"; };
 		205D6B9B1D64DD0D0018A858 /* TimeClockViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeClockViewController.swift; sourceTree = "<group>"; };
+		206674321DE0AE62008789E8 /* LocationMonitor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationMonitor.swift; sourceTree = "<group>"; };
+		2066745D1DE0B9A4008789E8 /* WFMAPIError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WFMAPIError.swift; sourceTree = "<group>"; };
 		206D178D1D9BB7CD00DD7499 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/EmployeeID.storyboard; sourceTree = "<group>"; };
 		206FA1F61D61AB5F008B1F94 /* Timeclock.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Timeclock.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		206FA1F91D61AB5F008B1F94 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -349,11 +424,16 @@
 		20A31AB51DBDF1CA004C81AC /* TestEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TestEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		20A79DA11DDC84DD00FE5DBE /* Punch+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Punch+CoreDataClass.swift"; path = "../Punch+CoreDataClass.swift"; sourceTree = "<group>"; };
 		20A79DA21DDC84DD00FE5DBE /* Punch+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Punch+CoreDataProperties.swift"; path = "../Punch+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		20A86F0B1DEECF6B00A58D66 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		20C5DEC81D7D583500E3C47B /* Alamofire.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Alamofire.xcodeproj; path = Carthage/Checkouts/Alamofire/Alamofire.xcodeproj; sourceTree = "<group>"; };
 		20C5DEE31D7D583F00E3C47B /* Moya.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Moya.xcodeproj; path = Carthage/Checkouts/Moya/Moya.xcodeproj; sourceTree = "<group>"; };
 		20C5DF0A1D7D584B00E3C47B /* Result.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Result.xcodeproj; path = Carthage/Checkouts/Result/Result.xcodeproj; sourceTree = "<group>"; };
 		20C5DF331D7D58B600E3C47B /* WFMService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WFMService.swift; sourceTree = "<group>"; };
 		20C5DF351D7D591500E3C47B /* WFMAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WFMAPI.swift; sourceTree = "<group>"; };
+		20C8C56D1DE487AB00CE4B0A /* Heimdallr.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Heimdallr.xcodeproj; path = Carthage/Checkouts/Heimdallr.swift/Heimdallr.xcodeproj; sourceTree = "<group>"; };
+		20C8C5A71DE48B1600CE4B0A /* HeimdallResourceRequestAuthenticatorForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeimdallResourceRequestAuthenticatorForm.swift; sourceTree = "<group>"; };
+		20C8C5A91DE48B4A00CE4B0A /* WFMOAuthHTTPClientNSURLSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WFMOAuthHTTPClientNSURLSession.swift; sourceTree = "<group>"; };
+		20DC07181DEDAAD000100726 /* WFMOAuthAccessTokenParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WFMOAuthAccessTokenParser.swift; sourceTree = "<group>"; };
 		20E20BB41DB9367C0017CBA6 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		20F7B58C1D62FA0000FE1817 /* Keys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Keys.plist; sourceTree = "<group>"; };
 		20F7B5941D62FD3500FE1817 /* IdleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdleViewController.swift; sourceTree = "<group>"; };
@@ -367,7 +447,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				20A86F0C1DEECF6B00A58D66 /* CoreData.framework in Frameworks */,
 				2029C0DB1D68CAFB00DB72AF /* AudioToolbox.framework in Frameworks */,
+				20C8C5A31DE4880C00CE4B0A /* Heimdallr.framework in Frameworks */,
 				20C5DF2E1D7D586800E3C47B /* Result.framework in Frameworks */,
 				20C5DF251D7D585F00E3C47B /* Alamofire.framework in Frameworks */,
 				2029C0D91D68CAF400DB72AF /* AVFoundation.framework in Frameworks */,
@@ -447,9 +529,11 @@
 				20A31AA21DBDF00B004C81AC /* TimeclockTests */,
 				206FA1F71D61AB5F008B1F94 /* Products */,
 				20C5DEC81D7D583500E3C47B /* Alamofire.xcodeproj */,
+				20C8C56D1DE487AB00CE4B0A /* Heimdallr.xcodeproj */,
 				2019ED781D61AD8200912018 /* KairosSDK.xcodeproj */,
 				20C5DEE31D7D583F00E3C47B /* Moya.xcodeproj */,
 				20C5DF0A1D7D584B00E3C47B /* Result.xcodeproj */,
+				20A86F0A1DEECF6B00A58D66 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -465,6 +549,8 @@
 		206FA1F81D61AB5F008B1F94 /* Timeclock */ = {
 			isa = PBXGroup;
 			children = (
+				202686A61DEDEDFE00881B1B /* Timeclock.entitlements */,
+				206674321DE0AE62008789E8 /* LocationMonitor.swift */,
 				20C5DF321D7D589B00E3C47B /* API */,
 				2029C0DC1D68CB0100DB72AF /* Frameworks */,
 				20E20B761DB936150017CBA6 /* Model */,
@@ -531,6 +617,14 @@
 			name = Employee;
 			sourceTree = "<group>";
 		};
+		20A86F0A1DEECF6B00A58D66 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				20A86F0B1DEECF6B00A58D66 /* CoreData.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		20C5DEC91D7D583500E3C47B /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -582,10 +676,29 @@
 		20C5DF321D7D589B00E3C47B /* API */ = {
 			isa = PBXGroup;
 			children = (
+				2066745D1DE0B9A4008789E8 /* WFMAPIError.swift */,
 				20C5DF351D7D591500E3C47B /* WFMAPI.swift */,
 				20C5DF331D7D58B600E3C47B /* WFMService.swift */,
+				20C8C5A71DE48B1600CE4B0A /* HeimdallResourceRequestAuthenticatorForm.swift */,
+				20C8C5A91DE48B4A00CE4B0A /* WFMOAuthHTTPClientNSURLSession.swift */,
+				20DC07181DEDAAD000100726 /* WFMOAuthAccessTokenParser.swift */,
 			);
 			name = API;
+			sourceTree = "<group>";
+		};
+		20C8C56E1DE487AB00CE4B0A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				20C8C5801DE487AB00CE4B0A /* Heimdallr.framework */,
+				20C8C5821DE487AB00CE4B0A /* HeimdallrTests.xctest */,
+				20C8C5841DE487AB00CE4B0A /* Heimdallr.framework */,
+				20C8C5861DE487AB00CE4B0A /* HeimdallrTests.xctest */,
+				20C8C5881DE487AB00CE4B0A /* ReactiveHeimdallr.framework */,
+				20C8C58A1DE487AB00CE4B0A /* ReactiveHeimdallrTests.xctest */,
+				20C8C58C1DE487AB00CE4B0A /* ReactiveHeimdallr.framework */,
+				20C8C58E1DE487AB00CE4B0A /* ReactiveHeimdallrTests.xctest */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		20E20B761DB936150017CBA6 /* Model */ = {
@@ -635,6 +748,7 @@
 				20C5DF281D7D585F00E3C47B /* PBXTargetDependency */,
 				20C5DF2D1D7D586300E3C47B /* PBXTargetDependency */,
 				20C5DF311D7D586900E3C47B /* PBXTargetDependency */,
+				20C8C5A61DE4880C00CE4B0A /* PBXTargetDependency */,
 			);
 			name = Timeclock;
 			productName = Timeclock;
@@ -673,6 +787,14 @@
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = M7MT8VBSGG;
 						LastSwiftMigration = 0800;
+						SystemCapabilities = {
+							com.apple.DataProtection = {
+								enabled = 0;
+							};
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+						};
 					};
 					20A31AA01DBDF00A004C81AC = {
 						CreatedOnToolsVersion = 8.0;
@@ -697,6 +819,10 @@
 				{
 					ProductGroup = 20C5DEC91D7D583500E3C47B /* Products */;
 					ProjectRef = 20C5DEC81D7D583500E3C47B /* Alamofire.xcodeproj */;
+				},
+				{
+					ProductGroup = 20C8C56E1DE487AB00CE4B0A /* Products */;
+					ProjectRef = 20C8C56D1DE487AB00CE4B0A /* Heimdallr.xcodeproj */;
 				},
 				{
 					ProductGroup = 2019ED791D61AD8200912018 /* Products */;
@@ -923,6 +1049,62 @@
 			remoteRef = 20C5DF231D7D584C00E3C47B /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		20C8C5801DE487AB00CE4B0A /* Heimdallr.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Heimdallr.framework;
+			remoteRef = 20C8C57F1DE487AB00CE4B0A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		20C8C5821DE487AB00CE4B0A /* HeimdallrTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = HeimdallrTests.xctest;
+			remoteRef = 20C8C5811DE487AB00CE4B0A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		20C8C5841DE487AB00CE4B0A /* Heimdallr.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Heimdallr.framework;
+			remoteRef = 20C8C5831DE487AB00CE4B0A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		20C8C5861DE487AB00CE4B0A /* HeimdallrTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = HeimdallrTests.xctest;
+			remoteRef = 20C8C5851DE487AB00CE4B0A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		20C8C5881DE487AB00CE4B0A /* ReactiveHeimdallr.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = ReactiveHeimdallr.framework;
+			remoteRef = 20C8C5871DE487AB00CE4B0A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		20C8C58A1DE487AB00CE4B0A /* ReactiveHeimdallrTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = ReactiveHeimdallrTests.xctest;
+			remoteRef = 20C8C5891DE487AB00CE4B0A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		20C8C58C1DE487AB00CE4B0A /* ReactiveHeimdallr.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = ReactiveHeimdallr.framework;
+			remoteRef = 20C8C58B1DE487AB00CE4B0A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		20C8C58E1DE487AB00CE4B0A /* ReactiveHeimdallrTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = ReactiveHeimdallrTests.xctest;
+			remoteRef = 20C8C58D1DE487AB00CE4B0A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -953,12 +1135,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				20DC07191DEDAAD000100726 /* WFMOAuthAccessTokenParser.swift in Sources */,
 				20A31A7A1DBB9A8F004C81AC /* CoreDataStack+InsertObject.swift in Sources */,
 				2033C3101D9BC0A600253F59 /* UIColor+Kairos.swift in Sources */,
 				204640EE1D6AE31000F527A8 /* ClockViewController.swift in Sources */,
 				20A31A9B1DBB9F3A004C81AC /* Employee+CoreDataClass.swift in Sources */,
 				208012011D7EAA0200DEE7E3 /* EmployeeIDViewController.swift in Sources */,
+				20C8C5AA1DE48B4A00CE4B0A /* WFMOAuthHTTPClientNSURLSession.swift in Sources */,
+				20C8C5A81DE48B1600CE4B0A /* HeimdallResourceRequestAuthenticatorForm.swift in Sources */,
 				20E20BB51DB9367C0017CBA6 /* Model.xcdatamodeld in Sources */,
+				2066745E1DE0B9A4008789E8 /* WFMAPIError.swift in Sources */,
 				20A79DA31DDC84DD00FE5DBE /* Punch+CoreDataClass.swift in Sources */,
 				20F7B5991D62FD9700FE1817 /* ClockOptionsViewController.swift in Sources */,
 				206FA1FC1D61AB5F008B1F94 /* ViewController.swift in Sources */,
@@ -970,6 +1156,7 @@
 				20C5DF361D7D591500E3C47B /* WFMAPI.swift in Sources */,
 				20A31A9C1DBB9F3A004C81AC /* Employee+CoreDataProperties.swift in Sources */,
 				20F7B59B1D62FEA600FE1817 /* TimeClockCompositeViewController.swift in Sources */,
+				206674331DE0AE62008789E8 /* LocationMonitor.swift in Sources */,
 				20A31A7B1DBB9A8F004C81AC /* DataController.swift in Sources */,
 				208B39B01D638C38002EE431 /* TimeClockFlowController.swift in Sources */,
 				20A31A7D1DBB9A8F004C81AC /* ManagedObjectType.swift in Sources */,
@@ -1014,6 +1201,11 @@
 			isa = PBXTargetDependency;
 			name = "Result-iOS";
 			targetProxy = 20C5DF301D7D586900E3C47B /* PBXContainerItemProxy */;
+		};
+		20C8C5A61DE4880C00CE4B0A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Heimdallr-iOS";
+			targetProxy = 20C8C5A51DE4880C00CE4B0A /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1095,6 +1287,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 2.3;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -1133,6 +1326,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_VERSION = 2.3;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1141,8 +1335,10 @@
 		206FA2091D61AB5F008B1F94 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Timeclock/Timeclock.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = Timeclock/Info.plist;
@@ -1158,8 +1354,10 @@
 		206FA20A1D61AB5F008B1F94 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Timeclock/Timeclock.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = Timeclock/Info.plist;

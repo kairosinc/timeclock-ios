@@ -33,6 +33,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         KairosSDK.setEnableShutterSound(false)
         KairosSDK.setPreferredCameraType(UInt(KairosCameraFront))
         
+        WFMAPI.employees() { (employees, error) in
+            print("///////")
+            print(employees)
+            print(error)
+        }
+        
         return true
     }
 

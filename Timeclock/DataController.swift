@@ -16,6 +16,8 @@ public typealias CloudKitCompletion = (records: [CKRecord]?, error: NSError?) ->
 
 public struct DataController {
     
+    static let sharedController = DataController()
+    
     public enum ContextType: Int {
         case Main = 0, Importer
     }
@@ -118,6 +120,16 @@ public struct DataController {
         }
     }
     
+    private func persistObjectsInContext(context: NSManagedObjectContext) -> ErrorType? {
+        do {
+            try context.save()
+        } catch {
+            return (error)
+        }
+        
+        return (nil)
+    }
+    
     private func persistObjectSynchronously<A: NSManagedObject where A: ManagedObjectType>(managedObject: A) -> ErrorType? {
         guard let context = managedObject.managedObjectContext else { return (nil) }
         do {
@@ -129,21 +141,24 @@ public struct DataController {
         return (nil)
     }
     
-    //MARK: User
-    public func persistEmployee(jsonDictionary: JSONType, completion: PersistObjectCompletion) {
+    //MARK: Employee
+    public func persistEmployees(jsonArray: [JSONType], completion: PersistObjectCompletion) {
         let context = importer.importContext
         
         //Delete existing User records
         let fetchRequest = NSFetchRequest(entityName: Employee.EntityName)
         let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
         _ = try? context.executeRequest(deleteRequest)
-        
+//
         //Create & persist new Employee object
-        let employee = Employee.fromJSON(jsonDictionary, inContext: context)
-        
-        persistObject(employee) { (error) in
-            self.objectFromMainContext(employee.objectID, completion: completion)
+        for employeeDictionary in jsonArray {
+//        let employeeDictionary = jsonArray.first!
+            let employee = Employee.fromJSON(employeeDictionary, inContext: context)
+//            completion(managedObject: nil, error: nil)
         }
+        
+        persistObjectsInContext(context)
+
     }
 
 }
