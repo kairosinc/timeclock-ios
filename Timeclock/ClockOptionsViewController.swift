@@ -25,10 +25,29 @@ class ClockOptionsViewController: UIViewController {
     var employee: Employee? {
         didSet {
             guard let employee = employee else { return }
-            greetingLabel.text = "Hello"
+            greetingLabel.text = greetingForTimeOfDay()
             nameLabel.text = employee.firstName
         }
     }
+    
+    func greetingForTimeOfDay() -> String {
+        let date = NSDate()
+        
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "HH"
+        let hourString = dateFormatter.stringFromDate(date)
+        guard let hourInt = Int(hourString) else { return "Hello" }
+        
+        if hourInt < 12 {
+            return "Good Morning"
+        } else if hourInt >= 12 && hourInt < 18 {
+            return "Good Afternoon"
+        } else {
+            return "Good Evening"
+        }
+        
+    }
+    
     var delegate: ClockOptionsDelegate?
     var containerView: UIView?
     
