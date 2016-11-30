@@ -22,6 +22,13 @@ protocol ClockOptionsDelegate {
 class ClockOptionsViewController: UIViewController {
     
     //MARK: Properties
+    var employee: Employee? {
+        didSet {
+            guard let employee = employee else { return }
+            greetingLabel.text = "Hello"
+            nameLabel.text = employee.firstName
+        }
+    }
     var delegate: ClockOptionsDelegate?
     var containerView: UIView?
     
@@ -105,7 +112,7 @@ class ClockOptionsViewController: UIViewController {
     
     @IBOutlet weak var webView: UIWebView! {
         didSet {
-            guard let url = NSURL(string: "https://www.kairos.com") else { return }
+            guard let url = NSURL(string: "http://planneddev.timeclockdynamics.com/hrnow/") else { return }
             let request = NSURLRequest(URL: url)
             webView.loadRequest(request)
         }

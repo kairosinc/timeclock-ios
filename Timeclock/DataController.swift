@@ -12,7 +12,6 @@ import Foundation
 typealias DataControllerConfiguration = (modelURL: NSURL, stack: CoreDataStack)
 public typealias PersistObjectCompletion = (managedObject: NSManagedObject?, error: ErrorType?) -> Void
 public typealias PersistObjectTuple = (managedObject: NSManagedObject?, error: ErrorType?)
-public typealias CloudKitCompletion = (records: [CKRecord]?, error: NSError?) -> Void
 
 public struct DataController {
     
@@ -149,16 +148,33 @@ public struct DataController {
         let fetchRequest = NSFetchRequest(entityName: Employee.EntityName)
         let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
         _ = try? context.executeRequest(deleteRequest)
-//
+        
         //Create & persist new Employee object
         for employeeDictionary in jsonArray {
-//        let employeeDictionary = jsonArray.first!
             let employee = Employee.fromJSON(employeeDictionary, inContext: context)
-//            completion(managedObject: nil, error: nil)
         }
         
         persistObjectsInContext(context)
-
+        completion(managedObject: nil, error: nil)
+    }
+    
+    public func fetchEmployee(
+        employeeID: String,
+        contextType: ContextType = .Main,
+        completion: PersistObjectCompletion) {
+        
+        let context = contextFrom(contextType)
+        
+        let fetch = NSFetchRequest(entityName: Employee.EntityName)
+        fetch.predicate = NSPredicate(format: "badgeNumber == %@", employeeID)
+        let results = try? context.executeFetchRequest(fetch)
+        if let results = results, let employee = results.first as? Employee {
+            completion(managedObject: employee, error: nil)
+            return
+        } else {
+            completion(managedObject: nil, error: nil)
+            return
+        }
     }
 
 }

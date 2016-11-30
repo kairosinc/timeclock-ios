@@ -952,7 +952,8 @@
                                       }
                                       
                                   } failure:^(KR_AFHTTPRequestOperation *operation, NSError *error) {
-                                      failure(@{@"error" : error.localizedRecoverySuggestion});
+                                      failure(@{@"error":@"an unknown error occured"});
+//                                      failure(@{@"error" : error.localizedRecoverySuggestion});
                                   }];
     
     [client enqueueHTTPRequestOperation:requestOperation];

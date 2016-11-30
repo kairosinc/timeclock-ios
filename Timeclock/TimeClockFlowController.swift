@@ -14,7 +14,7 @@ struct TimeClockFlowController {
         case Idle
         case Capturing
         case ProcessingImage
-        case DisplayingOptions
+        case DisplayingOptions(employee: Employee)
         case EmployeeIDEnrolment(image: UIImage)
         case EmployeeIDVerification(employeeID: String)
     }
@@ -89,7 +89,8 @@ extension TimeClockFlowController: CaptureDelegate {
 }
 
 extension TimeClockFlowController: EmployeeIDDelegate {
-    func idEntered(employeeID: String) {
-        setUIState(.DisplayingOptions)
+    func idEntered(employee: Employee) {
+        self.configuration?.clockOptionsViewController.employee = employee
+        setUIState(.DisplayingOptions(employee: employee))
     }
 }

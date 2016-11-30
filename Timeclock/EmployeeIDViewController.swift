@@ -9,7 +9,7 @@
 import UIKit
 
 protocol EmployeeIDDelegate {
-    func idEntered(employeeID: String)
+    func idEntered(employee: Employee)
 }
 
 class EmployeeIDViewController: UIViewController {
@@ -107,11 +107,14 @@ class EmployeeIDViewController: UIViewController {
     }
     
     @IBAction func confirmTouchUpInside(sender: AnyObject) {
-        if let employeeID = employeeIDLabel.text where (employeeID == "1001") {
-            delegate?.idEntered(employeeID)
-        } else {
-            showError("Employee ID Not Found")
-        }
+        guard let employeeID = employeeIDLabel.text else { return }
+        DataController.sharedController?.fetchEmployee(employeeID, completion: { (managedObject, error) in
+            if let employee = managedObject as? Employee {
+                self.delegate?.idEntered(employee)
+            } else {
+                self.showError("Badge Number Not Found")
+            }
+        })
     }
     
     @IBAction func cancelTouchUpInside(sender: AnyObject) {
@@ -125,7 +128,7 @@ class EmployeeIDViewController: UIViewController {
     
     //MARK: Methods
     func configureForAppState(appState: TimeClockFlowController.AppState) {
-        titleLabel.text = "Enter Employee ID"
+        titleLabel.text = "Enter Badge Number"
         employeeIDLabel.text = ""
         errorLabel.hidden = true
     }

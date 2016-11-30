@@ -82,5 +82,13 @@ class TimeClockCompositeViewController: UIViewController {
             break
         }
     }
+    
+    override func shouldAutorotate() -> Bool {
+        return false
+    }
+    
+    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+        return .Portrait
+    }
 
 }
