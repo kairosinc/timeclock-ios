@@ -17,6 +17,8 @@
 		2029C0DB1D68CAFB00DB72AF /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2029C0DA1D68CAFB00DB72AF /* AudioToolbox.framework */; };
 		2033C3101D9BC0A600253F59 /* UIColor+Kairos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2033C30F1D9BC0A600253F59 /* UIColor+Kairos.swift */; };
 		204640EE1D6AE31000F527A8 /* ClockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204640ED1D6AE31000F527A8 /* ClockViewController.swift */; };
+		204C90A71DEEEF3500930678 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 204C90A51DEEEF3500930678 /* Fabric.framework */; };
+		204C90A81DEEEF3500930678 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 204C90A61DEEEF3500930678 /* Crashlytics.framework */; };
 		205D6B9C1D64DD0D0018A858 /* TimeClockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205D6B9B1D64DD0D0018A858 /* TimeClockViewController.swift */; };
 		206674331DE0AE62008789E8 /* LocationMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206674321DE0AE62008789E8 /* LocationMonitor.swift */; };
 		2066745E1DE0B9A4008789E8 /* WFMAPIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2066745D1DE0B9A4008789E8 /* WFMAPIError.swift */; };
@@ -393,6 +395,8 @@
 		2029C0DA1D68CAFB00DB72AF /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		2033C30F1D9BC0A600253F59 /* UIColor+Kairos.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Kairos.swift"; sourceTree = "<group>"; };
 		204640ED1D6AE31000F527A8 /* ClockViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClockViewController.swift; sourceTree = "<group>"; };
+		204C90A51DEEEF3500930678 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
+		204C90A61DEEEF3500930678 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		205D6B9B1D64DD0D0018A858 /* TimeClockViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeClockViewController.swift; sourceTree = "<group>"; };
 		206674321DE0AE62008789E8 /* LocationMonitor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationMonitor.swift; sourceTree = "<group>"; };
 		2066745D1DE0B9A4008789E8 /* WFMAPIError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WFMAPIError.swift; sourceTree = "<group>"; };
@@ -448,12 +452,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				20A86F0C1DEECF6B00A58D66 /* CoreData.framework in Frameworks */,
+				204C90A81DEEEF3500930678 /* Crashlytics.framework in Frameworks */,
 				2029C0DB1D68CAFB00DB72AF /* AudioToolbox.framework in Frameworks */,
 				20C8C5A31DE4880C00CE4B0A /* Heimdallr.framework in Frameworks */,
 				20C5DF2E1D7D586800E3C47B /* Result.framework in Frameworks */,
 				20C5DF251D7D585F00E3C47B /* Alamofire.framework in Frameworks */,
 				2029C0D91D68CAF400DB72AF /* AVFoundation.framework in Frameworks */,
 				2029C0D71D68CAEC00DB72AF /* CoreGraphics.framework in Frameworks */,
+				204C90A71DEEEF3500930678 /* Fabric.framework in Frameworks */,
 				2029C0D51D68CAE800DB72AF /* CoreMedia.framework in Frameworks */,
 				2029C0D31D68CAE200DB72AF /* CoreImage.framework in Frameworks */,
 				20C5DF2A1D7D586300E3C47B /* Moya.framework in Frameworks */,
@@ -533,6 +539,8 @@
 				2019ED781D61AD8200912018 /* KairosSDK.xcodeproj */,
 				20C5DEE31D7D583F00E3C47B /* Moya.xcodeproj */,
 				20C5DF0A1D7D584B00E3C47B /* Result.xcodeproj */,
+				204C90A51DEEEF3500930678 /* Fabric.framework */,
+				204C90A61DEEEF3500930678 /* Crashlytics.framework */,
 				20A86F0A1DEECF6B00A58D66 /* Frameworks */,
 			);
 			sourceTree = "<group>";
@@ -741,6 +749,7 @@
 				206FA1F31D61AB5F008B1F94 /* Frameworks */,
 				206FA1F41D61AB5F008B1F94 /* Resources */,
 				20C5DF291D7D585F00E3C47B /* Embed Frameworks */,
+				204C90821DEEEE9800930678 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -785,8 +794,9 @@
 				TargetAttributes = {
 					206FA1F51D61AB5F008B1F94 = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = M7MT8VBSGG;
+						DevelopmentTeam = FRVVJ46CY6;
 						LastSwiftMigration = 0800;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.DataProtection = {
 								enabled = 0;
@@ -1130,6 +1140,22 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		204C90821DEEEE9800930678 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Fabric.framework/run ff5d01abe12285227f838bccf0c1cf896a6fcdd9 97c874d64d5d20583e7d622daa9c0d05168b29ee955ce744dabd4ef1a5f82533";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		206FA1F21D61AB5F008B1F94 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -1340,11 +1366,19 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Timeclock/Timeclock.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				DEVELOPMENT_TEAM = FRVVJ46CY6;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = Timeclock/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.tomhut.dev;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kairos.kairostimeclock;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "22cdb0b1-7071-4f2a-b220-c7a844b204e8";
+				PROVISIONING_PROFILE_SPECIFIER = "XC Ad Hoc: *";
 				SWIFT_OBJC_BRIDGING_HEADER = "Timeclock/Timeclock-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 2.3;
@@ -1359,11 +1393,19 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Timeclock/Timeclock.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				DEVELOPMENT_TEAM = N6W8C2VNME;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = Timeclock/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.tomhut.dev;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kairos.kairostimeclock;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "f488b032-5269-4d2b-b461-7136a8955a0d";
+				PROVISIONING_PROFILE_SPECIFIER = "Kairos Timeclock Enterprise";
 				SWIFT_OBJC_BRIDGING_HEADER = "Timeclock/Timeclock-Bridging-Header.h";
 				SWIFT_VERSION = 2.3;
 			};

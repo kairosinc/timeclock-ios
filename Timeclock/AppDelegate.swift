@@ -6,6 +6,8 @@
 //  Copyright © 2016 Kairos. All rights reserved.
 //
 
+import Fabric
+import Crashlytics
 import UIKit
 
 @UIApplicationMain
@@ -15,6 +17,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        
+        Fabric.with([Crashlytics.self])
         
         guard
             let keysURL = NSBundle.mainBundle().URLForResource("Keys", withExtension: "plist"),

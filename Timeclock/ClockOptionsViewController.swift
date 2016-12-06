@@ -13,6 +13,19 @@ enum ClockOptions: Int {
     case Out = 1
     case BreakStart = 2
     case BreakEnd = 3
+    
+    var stringValue: String {
+        switch self {
+        case .In:
+            return "in"
+        case .Out:
+            return "out"
+        case .BreakStart:
+            return "mealout"
+        case .BreakEnd:
+            return "mealin"
+        }
+    }
 }
 
 protocol ClockOptionsDelegate {
@@ -146,6 +159,60 @@ class ClockOptionsViewController: UIViewController {
         else {
             return
         }
+        
+        let punchDate = NSDate()
+        
+        let utcDateFormatter = NSDateFormatter()
+        utcDateFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
+        utcDateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        utcDateFormatter.timeZone = NSTimeZone(name: "UTC")
+        let timestampUTC = utcDateFormatter.stringFromDate(punchDate)
+        
+        let localDateFormatter = NSDateFormatter()
+        localDateFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
+        localDateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        localDateFormatter.timeZone = NSTimeZone.localTimeZone()
+        let timestampLocal = localDateFormatter.stringFromDate(punchDate)
+        
+        let clockOffset: Int16 = 0 //Investigate
+        
+        let timezoneOffsetDateFormatter = NSDateFormatter()
+        timezoneOffsetDateFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
+        timezoneOffsetDateFormatter.dateFormat = "Z"
+        timezoneOffsetDateFormatter.timeZone = NSTimeZone.localTimeZone()
+        let timezoneOffset = Int16(timezoneOffsetDateFormatter.stringFromDate(punchDate))
+        
+        let timezoneName = NSTimeZone.localTimeZone().abbreviation
+        let timezoneDST = Int(NSTimeZone.localTimeZone().daylightSavingTime)
+        
+        let badgeNumber = employee?.badgeNumber
+        
+        let badgeNumberValid = true
+        
+        let direction = selectedOption.stringValue
+        
+        let online = "1"
+        
+        let facerecTransactionID: String? = nil
+        let facerecImageType: String? = nil
+        let facerecImageData: NSData? = nil
+        
+        DataController.sharedController?.createAndPersistPunch(
+            timestampUTC,
+            timestampLocal: timestampLocal,
+            clockOffset: clockOffset,
+            timezoneOffset: timezoneOffset!,
+            timezoneName: timezoneName!,
+            timezoneDST: Int16(timezoneDST),
+            badgeNumber: badgeNumber!,
+            badgeNumberValid: badgeNumberValid,
+            direction: direction,
+            online: online,
+            facerecTransactionID: facerecTransactionID,
+            facerecImageType: facerecImageType,
+            facerecImageData: facerecImageData
+        )
+        
         
         delegate?.clock(selectedOption)
     }

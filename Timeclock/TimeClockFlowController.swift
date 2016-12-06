@@ -76,6 +76,7 @@ extension TimeClockFlowController: IdleDelegate {
 extension TimeClockFlowController: CaptureDelegate {
     func imageCaptured(image: UIImage, employeeID: String?) {
         print("image captured")
+        configuration?.employeeIDViewController
         if let employeeID = employeeID {
             setUIState(.EmployeeIDVerification(employeeID: employeeID))
         } else {
@@ -92,5 +93,9 @@ extension TimeClockFlowController: EmployeeIDDelegate {
     func idEntered(employee: Employee) {
         self.configuration?.clockOptionsViewController.employee = employee
         setUIState(.DisplayingOptions(employee: employee))
+    }
+    
+    func cancelled() {
+        setUIState(.Idle)
     }
 }

@@ -10,6 +10,7 @@ import UIKit
 
 protocol EmployeeIDDelegate {
     func idEntered(employee: Employee)
+    func cancelled()
 }
 
 class EmployeeIDViewController: UIViewController {

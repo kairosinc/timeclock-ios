@@ -151,7 +151,7 @@ public struct DataController {
         
         //Create & persist new Employee object
         for employeeDictionary in jsonArray {
-            let employee = Employee.fromJSON(employeeDictionary, inContext: context)
+            Employee.fromJSON(employeeDictionary, inContext: context)
         }
         
         persistObjectsInContext(context)
@@ -175,6 +175,42 @@ public struct DataController {
             completion(managedObject: nil, error: nil)
             return
         }
+    }
+    
+    public func createAndPersistPunch(
+        timestampUTC: String,
+        timestampLocal: String,
+        clockOffset: Int16,
+        timezoneOffset: Int16,
+        timezoneName: String,
+        timezoneDST: Int16,
+        badgeNumber: String,
+        badgeNumberValid: Bool,
+        direction: String,
+        online: String,
+        facerecTransactionID: String? = nil,
+        facerecImageType: String? = nil,
+        facerecImageData: NSData? = nil) {
+        
+        let context = contextFrom(.Main)
+        let punch: Punch = context.insertObject()
+        
+        punch.timestampUTC = timestampUTC
+        punch.timestampLocal = timestampLocal
+        punch.clockOffset = clockOffset
+        punch.timezoneOffset = timezoneOffset
+        punch.timezoneName = timezoneName
+        punch.timezoneDST = timezoneDST
+        punch.badgeNumber = badgeNumber
+        punch.badgeNumberValid = badgeNumberValid
+        punch.direction = direction
+        punch.online = online
+        punch.facerecTransactionID = facerecTransactionID
+        punch.facerecImageType = facerecImageType
+        punch.facerecImageData = facerecImageData
+        
+        persistObjectsInContext(context)
+        
     }
 
 }
