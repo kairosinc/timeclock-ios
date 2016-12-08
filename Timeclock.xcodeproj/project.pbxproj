@@ -59,6 +59,7 @@
 		20C8C5A41DE4880C00CE4B0A /* Heimdallr.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 20C8C5841DE487AB00CE4B0A /* Heimdallr.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		20C8C5A81DE48B1600CE4B0A /* HeimdallResourceRequestAuthenticatorForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C8C5A71DE48B1600CE4B0A /* HeimdallResourceRequestAuthenticatorForm.swift */; };
 		20C8C5AA1DE48B4A00CE4B0A /* WFMOAuthHTTPClientNSURLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C8C5A91DE48B4A00CE4B0A /* WFMOAuthHTTPClientNSURLSession.swift */; };
+		20CF25D11DF892DF00B053F6 /* JSONable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20CF25D01DF892DF00B053F6 /* JSONable.swift */; };
 		20DC07191DEDAAD000100726 /* WFMOAuthAccessTokenParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20DC07181DEDAAD000100726 /* WFMOAuthAccessTokenParser.swift */; };
 		20E20BB51DB9367C0017CBA6 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 20E20BB31DB9367C0017CBA6 /* Model.xcdatamodeld */; };
 		20F7B58D1D62FA0000FE1817 /* Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20F7B58C1D62FA0000FE1817 /* Keys.plist */; };
@@ -437,6 +438,7 @@
 		20C8C56D1DE487AB00CE4B0A /* Heimdallr.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Heimdallr.xcodeproj; path = Carthage/Checkouts/Heimdallr.swift/Heimdallr.xcodeproj; sourceTree = "<group>"; };
 		20C8C5A71DE48B1600CE4B0A /* HeimdallResourceRequestAuthenticatorForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeimdallResourceRequestAuthenticatorForm.swift; sourceTree = "<group>"; };
 		20C8C5A91DE48B4A00CE4B0A /* WFMOAuthHTTPClientNSURLSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WFMOAuthHTTPClientNSURLSession.swift; sourceTree = "<group>"; };
+		20CF25D01DF892DF00B053F6 /* JSONable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONable.swift; sourceTree = "<group>"; };
 		20DC07181DEDAAD000100726 /* WFMOAuthAccessTokenParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WFMOAuthAccessTokenParser.swift; sourceTree = "<group>"; };
 		20E20BB41DB9367C0017CBA6 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		20F7B58C1D62FA0000FE1817 /* Keys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Keys.plist; sourceTree = "<group>"; };
@@ -514,6 +516,7 @@
 			isa = PBXGroup;
 			children = (
 				205D6B9B1D64DD0D0018A858 /* TimeClockViewController.swift */,
+				20CF25D01DF892DF00B053F6 /* JSONable.swift */,
 			);
 			name = Protocols;
 			sourceTree = "<group>";
@@ -794,9 +797,9 @@
 				TargetAttributes = {
 					206FA1F51D61AB5F008B1F94 = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = FRVVJ46CY6;
+						DevelopmentTeam = N6W8C2VNME;
 						LastSwiftMigration = 0800;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.DataProtection = {
 								enabled = 0;
@@ -1187,6 +1190,7 @@
 				208B39B01D638C38002EE431 /* TimeClockFlowController.swift in Sources */,
 				20A31A7D1DBB9A8F004C81AC /* ManagedObjectType.swift in Sources */,
 				20A31A781DBB9A8F004C81AC /* CoreDataImporter.swift in Sources */,
+				20CF25D11DF892DF00B053F6 /* JSONable.swift in Sources */,
 				20C5DF341D7D58B600E3C47B /* WFMService.swift in Sources */,
 				20F7B5951D62FD3500FE1817 /* IdleViewController.swift in Sources */,
 			);
@@ -1366,8 +1370,8 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Timeclock/Timeclock.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				DEVELOPMENT_TEAM = FRVVJ46CY6;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = N6W8C2VNME;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1377,8 +1381,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.kairos.kairostimeclock;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "22cdb0b1-7071-4f2a-b220-c7a844b204e8";
-				PROVISIONING_PROFILE_SPECIFIER = "XC Ad Hoc: *";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Timeclock/Timeclock-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 2.3;
@@ -1393,7 +1397,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Timeclock/Timeclock.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = N6W8C2VNME;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1404,8 +1408,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.kairos.kairostimeclock;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "f488b032-5269-4d2b-b461-7136a8955a0d";
-				PROVISIONING_PROFILE_SPECIFIER = "Kairos Timeclock Enterprise";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Timeclock/Timeclock-Bridging-Header.h";
 				SWIFT_VERSION = 2.3;
 			};

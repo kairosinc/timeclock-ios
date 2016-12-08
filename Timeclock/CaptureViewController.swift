@@ -65,7 +65,7 @@ class CaptureViewController: UIViewController {
     }
     
     func capturedImage(image: UIImage, employeeID: String?) {
-        let image = UIImage()
+//        let image = UIImage()
         delegate?.imageCaptured(image, employeeID: employeeID)
     }
 }

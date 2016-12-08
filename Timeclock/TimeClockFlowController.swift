@@ -66,8 +66,14 @@ extension TimeClockFlowController: ClockOptionsDelegate {
 
 extension TimeClockFlowController: IdleDelegate {
     func dismiss() {
-//        setUIState(.DisplayingOptions)
-//        setUIState(.EmployeeIDVerification(employeeID: "10024"))
+//        DataController.sharedController?.fetchEmployee("1110342", contextType: DataController.ContextType.Main, completion: { (managedObject, error) in
+//            guard let managedObject = managedObject as? Employee else { return }
+//            managedObject.firstName = "RAPHA"
+//            self.configuration?.clockOptionsViewController.employee = managedObject
+//            self.setUIState(.DisplayingOptions(employee: managedObject))
+//        })
+
+        
         setUIState(.Capturing)
         configuration?.captureViewController.startCapturing()
     }
@@ -82,6 +88,8 @@ extension TimeClockFlowController: CaptureDelegate {
         } else {
             setUIState(.EmployeeIDEnrolment(image: image))
         }
+        
+        self.configuration?.employeeIDViewController.image = image
     }
     
     func timedOut() {
@@ -90,9 +98,11 @@ extension TimeClockFlowController: CaptureDelegate {
 }
 
 extension TimeClockFlowController: EmployeeIDDelegate {
-    func idEntered(employee: Employee) {
-        self.configuration?.clockOptionsViewController.employee = employee
+    func idEntered(employee: Employee, image: UIImage?) {
         setUIState(.DisplayingOptions(employee: employee))
+        self.configuration?.clockOptionsViewController.employee = employee
+        self.configuration?.clockOptionsViewController.image = image
+
     }
     
     func cancelled() {

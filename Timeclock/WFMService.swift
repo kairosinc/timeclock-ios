@@ -12,6 +12,7 @@ import Moya
 public enum WFMService {
     case Login(email: String, password: String)
     case Employees()
+    case Punches(punches: [Punch])
 }
 
 extension WFMService: TargetType {
@@ -46,12 +47,14 @@ extension WFMService: TargetType {
             return "/users/sessions/"
         case .Employees():
             return "/EmployeeDownload/v1.0/Employees/download"
+        case .Punches(_):
+            return "/upload/v1.0/punches/upload"
         }
     }
     
     public var method: Moya.Method {
         switch self {
-        case .Login, .Employees:
+        case .Login, .Employees, .Punches:
             return .POST
         }
     }
@@ -65,6 +68,16 @@ extension WFMService: TargetType {
             ]
         case .Employees():
             return WFMService.standardParameters()
+            
+        case .Punches(let punches):
+            do {
+                let punchesJSON = try NSJSONSerialization.dataWithJSONObject(punches.jsonArray(), options: [])
+                var params = WFMService.standardParameters()
+                params["punches"] = String(data: punchesJSON, encoding: NSUTF8StringEncoding)!
+                return params
+            } catch {
+                return nil
+            }
         }
     }
     
@@ -74,6 +87,9 @@ extension WFMService: TargetType {
             return stubbedResponse("LoginResponse")
             
         case .Employees():
+            return stubbedResponse("employeesResponse")
+            
+        case .Punches(_):
             return stubbedResponse("employeesResponse")
         }
     }
@@ -101,6 +117,15 @@ private extension WFMService {
         let bundle = NSBundle(forClass: TestClass.self)
         let path = bundle.pathForResource(filename, ofType: "json")
         return NSData(contentsOfFile: path!)
+    }
+}
+
+private extension CollectionType where Generator.Element: JSONable {
+    
+    func jsonArray() -> [JSONType] {
+        return map { (element: JSONable) -> JSONType in
+            return element.jsonValue
+        }
     }
 }
 

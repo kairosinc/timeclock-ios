@@ -190,10 +190,10 @@ public struct DataController {
         online: String,
         facerecTransactionID: String? = nil,
         facerecImageType: String? = nil,
-        facerecImageData: NSData? = nil) {
+        facerecImageData: String? = nil) {
         
         let context = contextFrom(.Main)
-        let punch: Punch = context.insertObject()
+        let punch = Punch.insertNewInContext(context)!
         
         punch.timestampUTC = timestampUTC
         punch.timestampLocal = timestampLocal
@@ -211,6 +211,23 @@ public struct DataController {
         
         persistObjectsInContext(context)
         
+    }
+    
+    public func fetchPunches(
+        contextType: ContextType = .Main,
+        completion: (punches: [Punch]?, error: ErrorType?) -> Void) {
+        
+        let context = contextFrom(contextType)
+        
+        let fetch = NSFetchRequest(entityName: Punch.EntityName)
+        let results = try? context.executeFetchRequest(fetch)
+        if let results = results as? [Punch] {
+            completion(punches: results, error: nil)
+            return
+        } else {
+            completion(punches: nil, error: nil)
+            return
+        }
     }
 
 }

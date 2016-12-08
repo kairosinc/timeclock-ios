@@ -9,7 +9,7 @@
 import UIKit
 
 protocol EmployeeIDDelegate {
-    func idEntered(employee: Employee)
+    func idEntered(employee: Employee, image: UIImage?)
     func cancelled()
 }
 
@@ -18,6 +18,7 @@ class EmployeeIDViewController: UIViewController {
     //MARK: Properties
     var delegate: EmployeeIDDelegate?
     var containerView: UIView?
+    var image: UIImage?
     
     var appState: TimeClockFlowController.AppState? {
         didSet {
@@ -111,7 +112,7 @@ class EmployeeIDViewController: UIViewController {
         guard let employeeID = employeeIDLabel.text else { return }
         DataController.sharedController?.fetchEmployee(employeeID, completion: { (managedObject, error) in
             if let employee = managedObject as? Employee {
-                self.delegate?.idEntered(employee)
+                self.delegate?.idEntered(employee, image: self.image)
             } else {
                 self.showError("Badge Number Not Found")
             }
@@ -119,6 +120,7 @@ class EmployeeIDViewController: UIViewController {
     }
     
     @IBAction func cancelTouchUpInside(sender: AnyObject) {
+        delegate?.cancelled()
     }
     
     //MARK: UIViewController
@@ -129,6 +131,7 @@ class EmployeeIDViewController: UIViewController {
     
     //MARK: Methods
     func configureForAppState(appState: TimeClockFlowController.AppState) {
+        image = nil
         titleLabel.text = "Enter Badge Number"
         employeeIDLabel.text = ""
         errorLabel.hidden = true

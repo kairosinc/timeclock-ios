@@ -9,7 +9,7 @@
         <attribute name="badgeNumberValid" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="clockOffset" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="direction" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="facerecImageData" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="facerecImageData" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="facerecImageType" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="facerecTransactionID" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="online" optional="YES" attributeType="String" syncable="YES"/>

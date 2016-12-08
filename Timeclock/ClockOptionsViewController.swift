@@ -43,6 +43,8 @@ class ClockOptionsViewController: UIViewController {
         }
     }
     
+    var image: UIImage?
+    
     func greetingForTimeOfDay() -> String {
         let date = NSDate()
         
@@ -94,14 +96,14 @@ class ClockOptionsViewController: UIViewController {
         didSet {
             greetingLabel.font = tertiaryFont
             greetingLabel.textColor = UIColor.whiteColor()
-            greetingLabel.text = "Good Evening"
+            greetingLabel.text = ""
         }
     }
     @IBOutlet weak var nameLabel: UILabel! {
         didSet {
             nameLabel.font = primaryFont
             nameLabel.textColor = UIColor.whiteColor()
-            nameLabel.text = "Tom"
+            nameLabel.text = ""
         }
     }
     
@@ -144,7 +146,8 @@ class ClockOptionsViewController: UIViewController {
     
     @IBOutlet weak var webView: UIWebView! {
         didSet {
-            guard let url = NSURL(string: "http://planneddev.timeclockdynamics.com/hrnow/") else { return }
+//            guard let url = NSURL(string: "http://planneddev.timeclockdynamics.com/hrnow/") else { return }
+            guard let url = NSURL(string: "http://rapha.cc") else { return }
             let request = NSURLRequest(URL: url)
             webView.loadRequest(request)
         }
@@ -194,8 +197,19 @@ class ClockOptionsViewController: UIViewController {
         let online = "1"
         
         let facerecTransactionID: String? = nil
-        let facerecImageType: String? = nil
-        let facerecImageData: NSData? = nil
+        
+        let facerecImageType: String?
+        let facerecImageData: String?
+        
+        if let image = image, imageData = UIImageJPEGRepresentation(image, 0.7) {
+            facerecImageType = nil
+            facerecImageData = imageData.base64EncodedStringWithOptions(.Encoding64CharacterLineLength)
+        } else {
+            facerecImageType = nil
+            facerecImageData = nil
+        }
+
+        
         
         DataController.sharedController?.createAndPersistPunch(
             timestampUTC,

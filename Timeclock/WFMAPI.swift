@@ -96,8 +96,8 @@ public struct WFMAPI {
                                                                       method: target.method,
                                                                       parameters: target.parameters)
         
-        return endpoint.endpointByAddingParameters(["access_token": WFMAPI.accessToken])
-        
+//        return endpoint.endpointByAddingParameters(["access_token": WFMAPI.accessToken])
+        return endpoint
     }
     
     private static let requestClosure = { (endpoint: Endpoint<WFMService>, done: MoyaProvider.RequestResultClosure) in
@@ -205,6 +205,23 @@ public struct WFMAPI {
         }
     }
     
+    public static func punches(
+        punches: [Punch],
+        provider: MoyaProvider<WFMService> = WFMAPI.defaultProvider,
+        completion: (error: ErrorType?) -> Void) {
+        
+        WFMAPI.request(provider, target: WFMService.Punches(punches: punches)) { (result) in
+            switch result {
+            case let .Success(response):
+                print(response)
+                completion(error: nil)
+                
+            case let .Failure(error):
+                print(error)
+                completion(error: error)
+            }
+        }
+    }
     
     private static func request(
         provider: MoyaProvider<WFMService>,

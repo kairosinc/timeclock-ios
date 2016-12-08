@@ -43,6 +43,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print(error)
         }
         
+        
+        DataController.sharedController?.fetchPunches(completion: { (punches, error) in
+            guard let punches = punches else { return }
+            WFMAPI.punches(punches, completion: { (error) in
+                print(error)
+            })
+
+        })
+        
+        
+        
+        
         return true
     }
 

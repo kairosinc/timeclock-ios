@@ -13,10 +13,6 @@ import CoreData
 
 extension Punch {
 
-//    @nonobjc public class func fetchRequest() -> NSFetchRequest<Punch> {
-//        return NSFetchRequest<Punch>(entityName: "Punch");
-//    }
-
     @NSManaged public var timestampUTC: String?
     @NSManaged public var timestampLocal: String?
     @NSManaged public var clockOffset: Int16
@@ -29,6 +25,6 @@ extension Punch {
     @NSManaged public var online: String?
     @NSManaged public var facerecTransactionID: String?
     @NSManaged public var facerecImageType: String?
-    @NSManaged public var facerecImageData: NSData?
+    @NSManaged public var facerecImageData: String?
 
 }
