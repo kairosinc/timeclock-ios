@@ -211,6 +211,17 @@ public struct DataController {
         
         persistObjectsInContext(context)
         
+        DataController.sharedController?.fetchPunches(completion: { (punches, error) in
+            guard let punches = punches where !punches.isEmpty else { return }
+            WFMAPI.punches(punches, completion: { (error) in
+                if let _ = error {
+                } else {
+                    DataController.sharedController?.deletePunches(punches, completion: { (error) in })
+                }
+            })
+            
+        })
+        
     }
     
     public func fetchPunches(

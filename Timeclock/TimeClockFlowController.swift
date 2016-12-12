@@ -66,9 +66,9 @@ extension TimeClockFlowController: ClockOptionsDelegate {
 
 extension TimeClockFlowController: IdleDelegate {
     func dismiss() {
+        
 //        DataController.sharedController?.fetchEmployee("1110342", contextType: DataController.ContextType.Main, completion: { (managedObject, error) in
 //            guard let managedObject = managedObject as? Employee else { return }
-//            managedObject.firstName = "RAPHA"
 //            self.configuration?.clockOptionsViewController.employee = managedObject
 //            self.setUIState(.DisplayingOptions(employee: managedObject))
 //        })

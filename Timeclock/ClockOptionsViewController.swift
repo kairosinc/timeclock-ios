@@ -111,6 +111,7 @@ class ClockOptionsViewController: UIViewController {
         didSet {
             for button in clockOptionButtons {
                 button.titleLabel?.font = tertiaryFont
+                button.titleLabel?.adjustsFontSizeToFitWidth = true
             }
         }
     }
@@ -146,8 +147,8 @@ class ClockOptionsViewController: UIViewController {
     
     @IBOutlet weak var webView: UIWebView! {
         didSet {
-//            guard let url = NSURL(string: "http://planneddev.timeclockdynamics.com/hrnow/") else { return }
-            guard let url = NSURL(string: "http://rapha.cc") else { return }
+            guard let url = NSURL(string: "http://planneddev.timeclockdynamics.com/hrnow/") else { return }
+//            guard let url = NSURL(string: "http://rapha.cc") else { return }
             let request = NSURLRequest(URL: url)
             webView.loadRequest(request)
         }
@@ -202,11 +203,11 @@ class ClockOptionsViewController: UIViewController {
         let facerecImageData: String?
         
         if let image = image, imageData = UIImageJPEGRepresentation(image, 0.7) {
-            facerecImageType = nil
+            facerecImageType = "image/jpeg"
             facerecImageData = imageData.base64EncodedStringWithOptions(.Encoding64CharacterLineLength)
         } else {
-            facerecImageType = nil
-            facerecImageData = nil
+            facerecImageType = ""
+            facerecImageData = ""
         }
 
         
@@ -227,6 +228,10 @@ class ClockOptionsViewController: UIViewController {
             facerecImageData: facerecImageData
         )
         
+        
+        if let image = image {
+//            KairosSDK.enrollWithImage(image, subjectId: badgeNumber, galleryName: "employees", success: nil, failure: nil)
+        }
         
         delegate?.clock(selectedOption)
     }

@@ -41,8 +41,8 @@ extension Punch: JSONable {
             "direction": direction!,
             "online": online!,
             "face_transaction_id": "000000",
-            "image_type": "API_TEST",
-            "image_data": "000"
+            "image_type": "image/jpeg",
+            "image_data": facerecImageData ?? ""
         ]
     }
 }

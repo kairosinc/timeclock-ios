@@ -31,7 +31,6 @@ class CaptureViewController: UIViewController {
     
     //MARK: Methods
     func startCapturing() {
-        
         KairosSDK.imageCaptureRecognizeWithThreshold("0.75",
                                                      galleryName: "employees",
                                                      success: { (response:[NSObject : AnyObject]!, image: UIImage!) in

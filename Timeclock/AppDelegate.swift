@@ -45,15 +45,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         
         DataController.sharedController?.fetchPunches(completion: { (punches, error) in
-            guard let punches = punches else { return }
+            guard let punches = punches where !punches.isEmpty else { return }
             WFMAPI.punches(punches, completion: { (error) in
-                print(error)
+                if let _ = error {
+                } else {
+                    DataController.sharedController?.deletePunches(punches, completion: { (error) in })
+                }
             })
-
         })
-        
-        
-        
         
         return true
     }

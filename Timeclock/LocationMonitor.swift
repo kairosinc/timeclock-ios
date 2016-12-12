@@ -21,6 +21,7 @@ class LocationMonitor {
 //        locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
         locationManager.startUpdatingLocation()
+        locationManager.requestWhenInUseAuthorization()
     }
     
 //    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
