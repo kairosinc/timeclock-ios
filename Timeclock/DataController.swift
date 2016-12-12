@@ -229,5 +229,21 @@ public struct DataController {
             return
         }
     }
+    
+    public func deletePunches(
+        punches: [Punch],
+        contextType: ContextType = .Main,
+        completion: (error: ErrorType?) -> Void) {
+        
+        let context = contextFrom(contextType)
+        
+        for punch in punches {
+            context.deleteObject(punch)
+        }
+        
+        let error = self.persistObjectsInContext(context)
+        
+        completion(error: error)
+    }
 
 }
