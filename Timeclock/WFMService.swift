@@ -10,9 +10,9 @@ import Foundation
 import Moya
 
 public enum WFMService {
-    case Login(email: String, password: String)
     case Employees()
     case Punches(punches: [Punch])
+    case Configure()
 }
 
 extension WFMService: TargetType {
@@ -39,33 +39,29 @@ extension WFMService: TargetType {
         ]
     }
     
-    public var baseURL: NSURL { return NSURL(string: "http://planneddev.timeclockdynamics.com:9100")! }
+//    public var baseURL: NSURL { return NSURL(string: "http://planneddev.timeclockdynamics.com:9100")! }
+    public var baseURL: NSURL { return NSURL(string: "")! }
     
     public var path: String {
         switch self {
-        case .Login(_, _):
-            return "/users/sessions/"
         case .Employees():
-            return "/EmployeeDownload/v1.0/Employees/download"
+            return "http://planneddev.timeclockdynamics.com:9100/EmployeeDownload/v1.0/Employees/download"
         case .Punches(_):
-            return "/upload/v1.0/punches/upload"
+            return "http://planneddev.timeclockdynamics.com:9100/upload/v1.0/punches/upload"
+        case .Configure():
+            return "http://planneddev.timeclockdynamics.com:9100/get_config/v1.0/client/get_config"
         }
     }
     
     public var method: Moya.Method {
         switch self {
-        case .Login, .Employees, .Punches:
+        case .Employees, .Punches, .Configure:
             return .POST
         }
     }
     
     public var parameters: [String: AnyObject]? {
         switch self {
-        case .Login(let email, let password):
-            return [
-                "email": email,
-                "password": password
-            ]
         case .Employees():
             return WFMService.standardParameters()
             
@@ -78,18 +74,21 @@ extension WFMService: TargetType {
             } catch {
                 return nil
             }
+            
+        default:
+            return WFMService.standardParameters()
         }
     }
     
     public var sampleData: NSData {
         switch self {
-        case .Login(_ , _):
-            return stubbedResponse("LoginResponse")
-            
         case .Employees():
             return stubbedResponse("employeesResponse")
             
         case .Punches(_):
+            return stubbedResponse("employeesResponse")
+            
+        case .Configure():
             return stubbedResponse("employeesResponse")
         }
     }

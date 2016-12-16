@@ -14,11 +14,6 @@ public class Punch: NSManagedObject, ManagedObjectType {
 
     static let EntityName = "Punch"
     
-//    enum Attributes: String {
-//        case badgeNumber = "badge_number"
-//        case firstName = "first_name"
-//    }
-    
     //MARK: Convenience
     class func insertNewInContext(managedObjectContext: NSManagedObjectContext) -> Punch? {
         let some = NSEntityDescription.insertNewObjectForEntityForName(Punch.EntityName, inManagedObjectContext: managedObjectContext)
@@ -40,9 +35,11 @@ extension Punch: JSONable {
             "badge_number_valid": NSNumber(bool: badgeNumberValid),
             "direction": direction!,
             "online": online!,
-            "face_transaction_id": "000000",
-            "image_type": "image/jpeg",
-            "image_data": facerecImageData ?? ""
+            "facerec_transaction_id": "000000",
+            "facerec": [
+                "image_type": "image/jpeg",
+                "image_data": facerecImageData ?? ""
+            ]
         ]
     }
 }

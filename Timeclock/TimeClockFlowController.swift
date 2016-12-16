@@ -10,11 +10,12 @@ import Foundation
 
 struct TimeClockFlowController {
     
+    var compositeViewController: TimeClockCompositeViewController?
+    
     enum AppState {
         case Idle
         case Capturing
-        case ProcessingImage
-        case DisplayingOptions(employee: Employee)
+        case DisplayingOptions
         case EmployeeIDEnrolment(image: UIImage)
         case EmployeeIDVerification(employeeID: String)
     }
@@ -56,6 +57,23 @@ struct TimeClockFlowController {
             vc.appState = state
         }
     }
+    
+    func setupComplete() {
+        guard let compositeViewController = compositeViewController else { return }
+        if let setupVC = compositeViewController.presentedViewController as? SetupViewController {
+            setupVC.dismissViewControllerAnimated(true, completion: nil)
+        }
+    }
+    
+    func setupFailed() {
+        guard let compositeViewController = compositeViewController else { return }
+
+        let alert = UIAlertController(title: "Setup Failed", message: "Please check your Client ID and internet connection", preferredStyle: .Alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+        compositeViewController.presentViewController(alert, animated: true, completion: nil)
+        let _ = try? Keychain.delete(identifier: "client_id")
+        WFMAPI.heimdallr.clearAccessToken()
+    }
 }
 
 extension TimeClockFlowController: ClockOptionsDelegate {
@@ -66,43 +84,35 @@ extension TimeClockFlowController: ClockOptionsDelegate {
 
 extension TimeClockFlowController: IdleDelegate {
     func dismiss() {
-        
-//        DataController.sharedController?.fetchEmployee("1110342", contextType: DataController.ContextType.Main, completion: { (managedObject, error) in
-//            guard let managedObject = managedObject as? Employee else { return }
-//            self.configuration?.clockOptionsViewController.employee = managedObject
-//            self.setUIState(.DisplayingOptions(employee: managedObject))
-//        })
-
-        
         setUIState(.Capturing)
+        configuration?.captureViewController.punchData = PunchData()
         configuration?.captureViewController.startCapturing()
     }
 }
 
 extension TimeClockFlowController: CaptureDelegate {
-    func imageCaptured(image: UIImage, employeeID: String?) {
-        print("image captured")
+    func imageCaptured(punchData: PunchData?) {
+        
         configuration?.employeeIDViewController
-        if let employeeID = employeeID {
+        if let employeeID = punchData?.subjectID {
             setUIState(.EmployeeIDVerification(employeeID: employeeID))
-        } else {
+        } else if let image = punchData?.image {
             setUIState(.EmployeeIDEnrolment(image: image))
         }
         
-        self.configuration?.employeeIDViewController.image = image
+        self.configuration?.captureViewController.punchData = nil
+        self.configuration?.employeeIDViewController.punchData = punchData
     }
     
     func timedOut() {
-        
     }
 }
 
 extension TimeClockFlowController: EmployeeIDDelegate {
-    func idEntered(employee: Employee, image: UIImage?) {
-        setUIState(.DisplayingOptions(employee: employee))
-        self.configuration?.clockOptionsViewController.employee = employee
-        self.configuration?.clockOptionsViewController.image = image
-
+    func idEntered(punchData: PunchData?) {
+        setUIState(.DisplayingOptions)
+        self.configuration?.employeeIDViewController.punchData = nil
+        self.configuration?.clockOptionsViewController.punchData = punchData
     }
     
     func cancelled() {

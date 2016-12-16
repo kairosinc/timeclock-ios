@@ -26,6 +26,8 @@ class IdleViewController: UIViewController {
         }
     }
     
+    var punchData: PunchData?
+    
     //MARK: IBOutlet
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!

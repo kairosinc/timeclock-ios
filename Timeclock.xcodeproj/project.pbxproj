@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		200F86081E01A54C00050731 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 200F86071E01A54C00050731 /* Settings.bundle */; };
 		2019ED811D61AD9400912018 /* libKairosSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2019ED7E1D61AD8200912018 /* libKairosSDK.a */; };
 		2029C0CF1D68CAD700DB72AF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2029C0CE1D68CAD700DB72AF /* UIKit.framework */; };
 		2029C0D11D68CADD00DB72AF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2029C0D01D68CADD00DB72AF /* Foundation.framework */; };
@@ -16,9 +17,14 @@
 		2029C0D91D68CAF400DB72AF /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2029C0D81D68CAF400DB72AF /* AVFoundation.framework */; };
 		2029C0DB1D68CAFB00DB72AF /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2029C0DA1D68CAFB00DB72AF /* AudioToolbox.framework */; };
 		2033C3101D9BC0A600253F59 /* UIColor+Kairos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2033C30F1D9BC0A600253F59 /* UIColor+Kairos.swift */; };
+		2039A41C1E0408590000900C /* PunchData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2039A41B1E0408590000900C /* PunchData.swift */; };
 		204640EE1D6AE31000F527A8 /* ClockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204640ED1D6AE31000F527A8 /* ClockViewController.swift */; };
 		204C90A71DEEEF3500930678 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 204C90A51DEEEF3500930678 /* Fabric.framework */; };
 		204C90A81DEEEF3500930678 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 204C90A61DEEEF3500930678 /* Crashlytics.framework */; };
+		2054F26E1E0039FC00C747E7 /* Setup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2054F26D1E0039FC00C747E7 /* Setup.storyboard */; };
+		2054F2921E003A1A00C747E7 /* SetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2054F2911E003A1A00C747E7 /* SetupViewController.swift */; };
+		2054F2A21E00438900C747E7 /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2054F2A11E00438900C747E7 /* Keychain.swift */; };
+		2054F2A41E0043C700C747E7 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2054F2A31E0043C700C747E7 /* Security.framework */; };
 		205D6B9C1D64DD0D0018A858 /* TimeClockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205D6B9B1D64DD0D0018A858 /* TimeClockViewController.swift */; };
 		206674331DE0AE62008789E8 /* LocationMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206674321DE0AE62008789E8 /* LocationMonitor.swift */; };
 		2066745E1DE0B9A4008789E8 /* WFMAPIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2066745D1DE0B9A4008789E8 /* WFMAPIError.swift */; };
@@ -59,6 +65,7 @@
 		20C8C5A41DE4880C00CE4B0A /* Heimdallr.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 20C8C5841DE487AB00CE4B0A /* Heimdallr.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		20C8C5A81DE48B1600CE4B0A /* HeimdallResourceRequestAuthenticatorForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C8C5A71DE48B1600CE4B0A /* HeimdallResourceRequestAuthenticatorForm.swift */; };
 		20C8C5AA1DE48B4A00CE4B0A /* WFMOAuthHTTPClientNSURLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C8C5A91DE48B4A00CE4B0A /* WFMOAuthHTTPClientNSURLSession.swift */; };
+		20CE42A11E02B2F90095B474 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20CE42A01E02B2F90095B474 /* Configuration.swift */; };
 		20CF25D11DF892DF00B053F6 /* JSONable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20CF25D01DF892DF00B053F6 /* JSONable.swift */; };
 		20DC07191DEDAAD000100726 /* WFMOAuthAccessTokenParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20DC07181DEDAAD000100726 /* WFMOAuthAccessTokenParser.swift */; };
 		20E20BB51DB9367C0017CBA6 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 20E20BB31DB9367C0017CBA6 /* Model.xcdatamodeld */; };
@@ -384,6 +391,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		200F86071E01A54C00050731 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		2019ED781D61AD8200912018 /* KairosSDK.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = KairosSDK.xcodeproj; path = "Carthage/Checkouts/Kairos-SDK-iOS/KairosSDKSrc/KairosSDK/KairosSDK.xcodeproj"; sourceTree = "<group>"; };
 		2019ED821D61AE2900912018 /* Timeclock-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Timeclock-Bridging-Header.h"; sourceTree = "<group>"; };
 		202686A61DEDEDFE00881B1B /* Timeclock.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Timeclock.entitlements; sourceTree = "<group>"; };
@@ -395,9 +403,14 @@
 		2029C0D81D68CAF400DB72AF /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		2029C0DA1D68CAFB00DB72AF /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		2033C30F1D9BC0A600253F59 /* UIColor+Kairos.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Kairos.swift"; sourceTree = "<group>"; };
+		2039A41B1E0408590000900C /* PunchData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PunchData.swift; sourceTree = "<group>"; };
 		204640ED1D6AE31000F527A8 /* ClockViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClockViewController.swift; sourceTree = "<group>"; };
 		204C90A51DEEEF3500930678 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		204C90A61DEEEF3500930678 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
+		2054F26D1E0039FC00C747E7 /* Setup.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Setup.storyboard; sourceTree = "<group>"; };
+		2054F2911E003A1A00C747E7 /* SetupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetupViewController.swift; sourceTree = "<group>"; };
+		2054F2A11E00438900C747E7 /* Keychain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
+		2054F2A31E0043C700C747E7 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		205D6B9B1D64DD0D0018A858 /* TimeClockViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeClockViewController.swift; sourceTree = "<group>"; };
 		206674321DE0AE62008789E8 /* LocationMonitor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationMonitor.swift; sourceTree = "<group>"; };
 		2066745D1DE0B9A4008789E8 /* WFMAPIError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WFMAPIError.swift; sourceTree = "<group>"; };
@@ -438,6 +451,7 @@
 		20C8C56D1DE487AB00CE4B0A /* Heimdallr.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Heimdallr.xcodeproj; path = Carthage/Checkouts/Heimdallr.swift/Heimdallr.xcodeproj; sourceTree = "<group>"; };
 		20C8C5A71DE48B1600CE4B0A /* HeimdallResourceRequestAuthenticatorForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeimdallResourceRequestAuthenticatorForm.swift; sourceTree = "<group>"; };
 		20C8C5A91DE48B4A00CE4B0A /* WFMOAuthHTTPClientNSURLSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WFMOAuthHTTPClientNSURLSession.swift; sourceTree = "<group>"; };
+		20CE42A01E02B2F90095B474 /* Configuration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		20CF25D01DF892DF00B053F6 /* JSONable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONable.swift; sourceTree = "<group>"; };
 		20DC07181DEDAAD000100726 /* WFMOAuthAccessTokenParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WFMOAuthAccessTokenParser.swift; sourceTree = "<group>"; };
 		20E20BB41DB9367C0017CBA6 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
@@ -453,6 +467,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2054F2A41E0043C700C747E7 /* Security.framework in Frameworks */,
 				20A86F0C1DEECF6B00A58D66 /* CoreData.framework in Frameworks */,
 				204C90A81DEEEF3500930678 /* Crashlytics.framework in Frameworks */,
 				2029C0DB1D68CAFB00DB72AF /* AudioToolbox.framework in Frameworks */,
@@ -527,6 +542,7 @@
 				206FA1FD1D61AB5F008B1F94 /* Main.storyboard */,
 				2088538D1DB0C51F00866807 /* ClockOptions.storyboard */,
 				206D178C1D9BB7CD00DD7499 /* EmployeeID.storyboard */,
+				2054F26D1E0039FC00C747E7 /* Setup.storyboard */,
 			);
 			name = Storyboards;
 			sourceTree = "<group>";
@@ -560,6 +576,7 @@
 		206FA1F81D61AB5F008B1F94 /* Timeclock */ = {
 			isa = PBXGroup;
 			children = (
+				200F86071E01A54C00050731 /* Settings.bundle */,
 				202686A61DEDEDFE00881B1B /* Timeclock.entitlements */,
 				206674321DE0AE62008789E8 /* LocationMonitor.swift */,
 				20C5DF321D7D589B00E3C47B /* API */,
@@ -576,6 +593,7 @@
 				206FA2051D61AB5F008B1F94 /* Info.plist */,
 				2019ED821D61AE2900912018 /* Timeclock-Bridging-Header.h */,
 				20F7B58C1D62FA0000FE1817 /* Keys.plist */,
+				20CE42A01E02B2F90095B474 /* Configuration.swift */,
 			);
 			path = Timeclock;
 			sourceTree = "<group>";
@@ -631,6 +649,7 @@
 		20A86F0A1DEECF6B00A58D66 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2054F2A31E0043C700C747E7 /* Security.framework */,
 				20A86F0B1DEECF6B00A58D66 /* CoreData.framework */,
 			);
 			name = Frameworks;
@@ -693,6 +712,7 @@
 				20C8C5A71DE48B1600CE4B0A /* HeimdallResourceRequestAuthenticatorForm.swift */,
 				20C8C5A91DE48B4A00CE4B0A /* WFMOAuthHTTPClientNSURLSession.swift */,
 				20DC07181DEDAAD000100726 /* WFMOAuthAccessTokenParser.swift */,
+				2054F2A11E00438900C747E7 /* Keychain.swift */,
 			);
 			name = API;
 			sourceTree = "<group>";
@@ -723,6 +743,7 @@
 				20A31A751DBB9A8F004C81AC /* DataController.swift */,
 				20A31A771DBB9A8F004C81AC /* ManagedObjectType.swift */,
 				20E20BB31DB9367C0017CBA6 /* Model.xcdatamodeld */,
+				2039A41B1E0408590000900C /* PunchData.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -737,6 +758,7 @@
 				208012001D7EAA0200DEE7E3 /* EmployeeIDViewController.swift */,
 				20F7B59A1D62FEA600FE1817 /* TimeClockCompositeViewController.swift */,
 				206FA1FB1D61AB5F008B1F94 /* ViewController.swift */,
+				2054F2911E003A1A00C747E7 /* SetupViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -1125,9 +1147,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				200F86081E01A54C00050731 /* Settings.bundle in Resources */,
 				20F7B58D1D62FA0000FE1817 /* Keys.plist in Resources */,
 				206FA2041D61AB5F008B1F94 /* LaunchScreen.storyboard in Resources */,
 				206FA2011D61AB5F008B1F94 /* Assets.xcassets in Resources */,
+				2054F26E1E0039FC00C747E7 /* Setup.storyboard in Resources */,
 				206D178E1D9BB7CD00DD7499 /* EmployeeID.storyboard in Resources */,
 				2088538F1DB0C51F00866807 /* ClockOptions.storyboard in Resources */,
 				206FA1FF1D61AB5F008B1F94 /* Main.storyboard in Resources */,
@@ -1168,12 +1192,16 @@
 				20A31A7A1DBB9A8F004C81AC /* CoreDataStack+InsertObject.swift in Sources */,
 				2033C3101D9BC0A600253F59 /* UIColor+Kairos.swift in Sources */,
 				204640EE1D6AE31000F527A8 /* ClockViewController.swift in Sources */,
+				2054F2921E003A1A00C747E7 /* SetupViewController.swift in Sources */,
 				20A31A9B1DBB9F3A004C81AC /* Employee+CoreDataClass.swift in Sources */,
+				20CE42A11E02B2F90095B474 /* Configuration.swift in Sources */,
+				2039A41C1E0408590000900C /* PunchData.swift in Sources */,
 				208012011D7EAA0200DEE7E3 /* EmployeeIDViewController.swift in Sources */,
 				20C8C5AA1DE48B4A00CE4B0A /* WFMOAuthHTTPClientNSURLSession.swift in Sources */,
 				20C8C5A81DE48B1600CE4B0A /* HeimdallResourceRequestAuthenticatorForm.swift in Sources */,
 				20E20BB51DB9367C0017CBA6 /* Model.xcdatamodeld in Sources */,
 				2066745E1DE0B9A4008789E8 /* WFMAPIError.swift in Sources */,
+				2054F2A21E00438900C747E7 /* Keychain.swift in Sources */,
 				20A79DA31DDC84DD00FE5DBE /* Punch+CoreDataClass.swift in Sources */,
 				20F7B5991D62FD9700FE1817 /* ClockOptionsViewController.swift in Sources */,
 				206FA1FC1D61AB5F008B1F94 /* ViewController.swift in Sources */,
@@ -1371,7 +1399,7 @@
 				CODE_SIGN_ENTITLEMENTS = Timeclock/Timeclock.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = N6W8C2VNME;
+				DEVELOPMENT_TEAM = "";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1398,7 +1426,7 @@
 				CODE_SIGN_ENTITLEMENTS = Timeclock/Timeclock.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = N6W8C2VNME;
+				DEVELOPMENT_TEAM = "";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

@@ -30,6 +30,8 @@ class TimeClockCompositeViewController: UIViewController {
         
         view.backgroundColor = UIColor.kairosDarkGrey()
         
+        flowController.compositeViewController = self
+        
         guard let
             clockOptionsViewController = clockOptionsViewController,
             idleViewController = idleViewController,
@@ -46,6 +48,38 @@ class TimeClockCompositeViewController: UIViewController {
             employeeIDViewController: employeeIDViewController)
         
         flowController.setUIState(.Idle)
+        
+        if let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate {
+            appDelegate.flowController = flowController
+        }
+        
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(true)
+        let defaults = NSUserDefaults.standardUserDefaults()
+        
+        if defaults.boolForKey("logout") {
+            defaults.setBool(false, forKey: "logout")
+            defaults.synchronize()
+            let _ = try? Keychain.delete(identifier: "client_id")
+            WFMAPI.heimdallr.clearAccessToken()
+            showSetup()
+        }
+        
+        guard
+            let _ = WFMAPI.clientID()
+        else {
+            showSetup()
+            return
+        }
+    }
+    
+    func showSetup() {
+        let storyboard = UIStoryboard(name: "Setup", bundle: nil)
+        if let setupVC = storyboard.instantiateInitialViewController() {
+            presentViewController(setupVC, animated: true, completion: nil)
+        }
     }
 
     //MARK: Navigation

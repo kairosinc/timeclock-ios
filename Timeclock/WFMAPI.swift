@@ -18,13 +18,13 @@ public struct WFMAPI {
     //OAuth
     public static let tokenURL = NSURL(string: "http://planneddev.timeclockdynamics.com:9100/sign_in/v1.0/auth/token")!
     
-    private static let oAuthClientID = "767f29cb3a804a839e5d559f0b7c16b4"
+    private static let oAuthClientID = WFMAPI.clientID()
     private static let oAuthClientSecret = "3e691351c44346d589ca626b5c28415c"
     
     private static let oAuthStore = OAuthAccessTokenKeychainStore(service: "com.kairos.timeclock.keychain.oauth")
 
     private static let oAuthclientCredentials = OAuthClientCredentials(
-        id: WFMAPI.oAuthClientID,
+        id: WFMAPI.clientID() ?? "",
         secret: WFMAPI.oAuthClientSecret
     )
     
@@ -88,7 +88,7 @@ public struct WFMAPI {
     private static let accessToken = "tbc"
     
     private static let endpointClosure = { (target: WFMService) -> Endpoint<WFMService> in
-        let url = target.baseURL.URLByAppendingPathComponent(target.path)!.absoluteString
+        let url = NSURL(string: target.path)!.absoluteString
         let endpoint: Endpoint<WFMService> = Endpoint<WFMService>(URL: url!,
                                                                       sampleResponseClosure: {
                                                                         .NetworkResponse(200, target.sampleData)
@@ -100,6 +100,17 @@ public struct WFMAPI {
         return endpoint
     }
     
+    static func clientID() -> String? {
+        guard
+            let clientIDData = try? Keychain.get(identifier: "client_id"),
+            let clientID = NSKeyedUnarchiver.unarchiveObjectWithData(clientIDData) as? String
+            else {
+                return nil
+        }
+        
+        return clientID
+    }
+    
     private static let requestClosure = { (endpoint: Endpoint<WFMService>, done: MoyaProvider.RequestResultClosure) in
         let request = endpoint.urlRequest
         
@@ -109,10 +120,19 @@ public struct WFMAPI {
                 done(.Success(authenticatedRequest))
             case .Failure(let error):
                 print("failure: \(error.localizedDescription)")
+                
+                guard
+                    let clientIDString = WFMAPI.clientID()
+                else {
+                    done(.Failure(Moya.Error.Underlying(error)))
+                    return
+                }
+                
                 heimdallr.requestAccessToken(grantType: "password", parameters: [
                     "username":"ptheo",
                     "password":"ptheo99",
-                    "client_id":"767f29cb3a804a839e5d559f0b7c16b4"
+//                    "client_id":"767f29cb3a804a839e5d559f0b7c16b4"
+                    "client_id": clientIDString
                 ]) { result in
                     switch result {
                     case .Success(let authenticatedRequest):
@@ -134,45 +154,48 @@ public struct WFMAPI {
         }
     }
     
-    //TODO: Replace response with user model once API is in place
-    public static func login(
-        provider: MoyaProvider<WFMService>,
-        email: String,
-        password: String,
-        completion: (user: String?, error: Moya.Error?) -> Void) {
+    public static func configure(
+        clientID: String,
+        provider: MoyaProvider<WFMService> = WFMAPI.defaultProvider,
+        completion: (error: ErrorType?) -> Void) {
         
-        let login = WFMService.Login(
-            email: email,
-            password: password
-        )
+        //Save clientID to keychain
+        let clientIDData = NSKeyedArchiver.archivedDataWithRootObject(clientID)
         
-        provider.request(login) { result in
-            switch result {
-            case let .Success(response):
-                do {
-                    guard let
-                        json = try response.mapJSON() as? JSONType,
-                        _ = json["user"] as? JSONType
-                        else {
-                            //Add parsing error type once model is in place
-                            completion(user: nil, error: nil)
-                            return
-                    }
-                    
-                    //TODO: Replace with User Model once API is in place
-                    let user = "someUser"
-                    completion(user: user, error: nil)
-                    
-                } catch {
-                    //Add parsing error type once model is in place
-                    completion(user: nil, error: nil)
-                }
-                
-            case let .Failure(error):
-                error
-                completion(user: nil, error: error)
+        do {
+            try Keychain.set(identifier: "client_id", data: clientIDData, accessibility: String(kSecAttrAccessibleWhenUnlocked))
+        } catch {
+            completion(error: RaphaAPIError.Unknown())
+            print("could not save to keychain, fail here")
+        }
+        
+        //Clear persistant store
+
+        
+        //Attemp API call
+        WFMAPI.getConfig { (configuration, error) in
+            if let configuration = configuration {
+                configuration.persist()
+                print("success, finish setup!!")
+                completion(error: nil)
+            } else if let error = error {
+                print("could not complete API request, fail here: \(error)")
+                completion(error: error)
+            } else {
+                print("unknown error")
+                completion(error: RaphaAPIError.Unknown())
             }
         }
+        
+//        WFMAPI.employees { (employees, error) in
+//            if let error = error {
+//                print("could not complete API request, fail here: \(error)")
+//                completion(error: error)
+//            } else {
+//                print("success, finish setup!!")
+//                completion(error: nil)
+//            }
+//        }
         
     }
     
@@ -194,7 +217,6 @@ public struct WFMAPI {
                         return
                 }
                 DataController.sharedController!.persistEmployees(employeesDictionary, completion: { (managedObject, error) in
-                    let employees = managedObject as? Employee
                     completion(employees: nil, error: nil)
                 })
                 
@@ -219,6 +241,33 @@ public struct WFMAPI {
             case let .Failure(error):
                 print(error)
                 completion(error: error)
+            }
+        }
+    }
+    
+    private static func getConfig(
+        provider: MoyaProvider<WFMService> = WFMAPI.defaultProvider,
+        completion: (configuration: Configuration?, error: ErrorType?) -> Void) {
+        
+        WFMAPI.request(provider, target: WFMService.Configure()) { (result) in
+            switch result {
+            case let .Success(response):
+                
+                guard let
+                    json = try? response.mapJSON() as? JSONType,
+                    unwrappedJSON = json
+                    else {
+                        completion(configuration: nil, error: nil)
+                        return
+                }
+
+                let configuration = Configuration(json: unwrappedJSON)
+                print(response)
+                completion(configuration: configuration, error: nil)
+                
+            case let .Failure(error):
+                print(error)
+                completion(configuration: nil, error: error)
             }
         }
     }

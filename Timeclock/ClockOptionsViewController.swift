@@ -35,15 +35,13 @@ protocol ClockOptionsDelegate {
 class ClockOptionsViewController: UIViewController {
     
     //MARK: Properties
-    var employee: Employee? {
+    var punchData: PunchData? {
         didSet {
-            guard let employee = employee else { return }
+            guard let employee = punchData?.employee else { return }
             greetingLabel.text = greetingForTimeOfDay()
             nameLabel.text = employee.firstName
         }
     }
-    
-    var image: UIImage?
     
     func greetingForTimeOfDay() -> String {
         let date = NSDate()
@@ -189,7 +187,7 @@ class ClockOptionsViewController: UIViewController {
         let timezoneName = NSTimeZone.localTimeZone().abbreviation
         let timezoneDST = Int(NSTimeZone.localTimeZone().daylightSavingTime)
         
-        let badgeNumber = employee?.badgeNumber
+        let badgeNumber = punchData?.employee?.badgeNumber
         
         let badgeNumberValid = true
         
@@ -202,7 +200,7 @@ class ClockOptionsViewController: UIViewController {
         let facerecImageType: String?
         let facerecImageData: String?
         
-        if let image = image, imageData = UIImageJPEGRepresentation(image, 0.7) {
+        if let image = punchData?.image, imageData = UIImageJPEGRepresentation(image, 0.7) {
             facerecImageType = "image/jpeg"
             facerecImageData = imageData.base64EncodedStringWithOptions(.Encoding64CharacterLineLength)
         } else {
@@ -229,9 +227,9 @@ class ClockOptionsViewController: UIViewController {
         )
         
         
-        if let image = image {
+//        if let image = image {
 //            KairosSDK.enrollWithImage(image, subjectId: badgeNumber, galleryName: "employees", success: nil, failure: nil)
-        }
+//        }
         
         delegate?.clock(selectedOption)
     }

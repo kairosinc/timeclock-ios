@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16B2657" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="sEx-ew-Nqj">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Setup View Controller-->
+        <scene sceneID="cJ2-NQ-aM9">
+            <objects>
+                <viewController id="sEx-ew-Nqj" customClass="SetupViewController" customModule="Timeclock" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="zqX-ke-vgt"/>
+                        <viewControllerLayoutGuide type="bottom" id="9me-64-clu"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Rpe-Zo-FOM">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter Client ID" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZAR-iQ-2cA">
+                                <rect key="frame" x="26" y="313" width="323" height="40"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="OTe-w6-d4Z"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="alphabet" keyboardAppearance="light" returnKeyType="done"/>
+                                <connections>
+                                    <outlet property="delegate" destination="sEx-ew-Nqj" id="4cr-by-t15"/>
+                                </connections>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A15-cO-p1o">
+                                <rect key="frame" x="160.5" y="368" width="53" height="36"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
+                                <state key="normal" title="Setup">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="setupTouchUpInside:" destination="sEx-ew-Nqj" eventType="touchUpInside" id="9BH-cl-UIh"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="A15-cO-p1o" firstAttribute="centerX" secondItem="ZAR-iQ-2cA" secondAttribute="centerX" id="9Rh-Ul-DPI"/>
+                            <constraint firstItem="ZAR-iQ-2cA" firstAttribute="centerY" secondItem="Rpe-Zo-FOM" secondAttribute="centerY" id="FWQ-Zm-IFV"/>
+                            <constraint firstItem="A15-cO-p1o" firstAttribute="top" secondItem="ZAR-iQ-2cA" secondAttribute="bottom" constant="15" id="Ous-JT-XxT"/>
+                            <constraint firstItem="ZAR-iQ-2cA" firstAttribute="leading" secondItem="Rpe-Zo-FOM" secondAttribute="leadingMargin" constant="10" id="dnL-lF-Vc6"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="ZAR-iQ-2cA" secondAttribute="trailing" constant="10" id="oKv-LS-eoq"/>
+                            <constraint firstItem="ZAR-iQ-2cA" firstAttribute="centerX" secondItem="Rpe-Zo-FOM" secondAttribute="centerX" id="qnW-4e-Xml"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="clientIDTextField" destination="ZAR-iQ-2cA" id="ydj-Qh-pmk"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tfY-Kz-FIj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-255" y="-230"/>
+        </scene>
+    </scenes>
+</document>

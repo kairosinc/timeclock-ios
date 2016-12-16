@@ -12,6 +12,7 @@ protocol TimeClockViewController {
     func opacityForAppState(state: TimeClockFlowController.AppState) -> CGFloat
     var containerView: UIView? {get set}
     var appState: TimeClockFlowController.AppState? {get set}
+    var punchData: PunchData? {get set}
 }
 
 extension TimeClockViewController {
