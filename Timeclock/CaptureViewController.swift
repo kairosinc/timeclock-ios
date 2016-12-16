@@ -33,10 +33,21 @@ class CaptureViewController: UIViewController {
     
     //MARK: Methods
     func startCapturing() {
+        
+        /*
+         KairosSDK.imageCaptureEnrollWithSubjectId("0000", galleryName: "employees", success: { (response:[NSObject : AnyObject]!, image: UIImage!) in
+         print("success enroll \(response)")
+         }) { (response:[NSObject : AnyObject]!, image: UIImage!) in
+         print("failed to enrol: \(response)")
+         }
+ */
+
+        
+        
         KairosSDK.imageCaptureRecognizeWithThreshold("0.75",
                                                      galleryName: "employees",
                                                      success: { (response:[NSObject : AnyObject]!, image: UIImage!) in
-//            print("success detect \(response["images"])")
+                                                        
             let imagesResponse = response["images"]! as? NSArray
             print(imagesResponse)
             let firstImagesResponse = imagesResponse?.firstObject
@@ -49,7 +60,6 @@ class CaptureViewController: UIViewController {
             }
                                                         
             
-//            print(trans)
             self.punchData?.image = image
             self.capturedImage(self.punchData)
 
@@ -59,29 +69,9 @@ class CaptureViewController: UIViewController {
                 self.punchData?.image = image
                 self.capturedImage(self.punchData)
         })
-        
-        //1 Capture image and call recognize
-        
-        //2a If recognize is successfull, goto 3
-        //2b If recognize is unsuccessfull, ask for employee ID and then goto 3
-        
-        //3 Show clock options,
-        
-        //4 Create new clock punch with selected option and ID
-//        performSelector(#selector(capturedImage), withObject: nil, afterDelay: 3)
-        
-        /*
-        KairosSDK.imageCaptureEnrollWithSubjectId("10024", galleryName: "employees", success: { (response:[NSObject : AnyObject]!, image: UIImage!) in
-            print("success enroll \(response)")
-            }) { (response:[NSObject : AnyObject]!, image: UIImage!) in
-                print("failed to enrol: \(response)")
-        }
- */
-        
     }
     
     func capturedImage(punchData: PunchData?) {
-//        let image = UIImage()
         delegate?.imageCaptured(self.punchData)
     }
 }

@@ -169,15 +169,18 @@ public struct WFMAPI {
             print("could not save to keychain, fail here")
         }
         
-        //Clear persistant store
-
-        
-        //Attemp API call
         WFMAPI.getConfig { (configuration, error) in
             if let configuration = configuration {
                 configuration.persist()
-                print("success, finish setup!!")
-                completion(error: nil)
+                
+                WFMAPI.employees(completion: { (employees, error) in
+                    if let _ = error {
+                        Configuration.removeFromUserDefaults()
+                    }
+                    print("success, finish setup!!")
+                    completion(error: error)
+                })
+                
             } else if let error = error {
                 print("could not complete API request, fail here: \(error)")
                 completion(error: error)
@@ -186,17 +189,6 @@ public struct WFMAPI {
                 completion(error: RaphaAPIError.Unknown())
             }
         }
-        
-//        WFMAPI.employees { (employees, error) in
-//            if let error = error {
-//                print("could not complete API request, fail here: \(error)")
-//                completion(error: error)
-//            } else {
-//                print("success, finish setup!!")
-//                completion(error: nil)
-//            }
-//        }
-        
     }
     
     public static func employees(

@@ -45,9 +45,13 @@ extension WFMService: TargetType {
     public var path: String {
         switch self {
         case .Employees():
+//            guard let employeeDownloadURL = Configuration.fromUserDefaults()?.employeeDownloadURL else { return "" }
+//            return employeeDownloadURL
             return "http://planneddev.timeclockdynamics.com:9100/EmployeeDownload/v1.0/Employees/download"
         case .Punches(_):
-            return "http://planneddev.timeclockdynamics.com:9100/upload/v1.0/punches/upload"
+            guard let punchUploadURL = Configuration.fromUserDefaults()?.punchUploadURL else { return "" }
+            return punchUploadURL
+//            return "http://planneddev.timeclockdynamics.com:9100/upload/v1.0/punches/upload"
         case .Configure():
             return "http://planneddev.timeclockdynamics.com:9100/get_config/v1.0/client/get_config"
         }

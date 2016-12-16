@@ -12,7 +12,8 @@ class Configuration: NSObject, NSCoding {
     let enable2FA: Bool
     let enableFacialRecognition: Bool
     let punchUploadURL: String
-    let employeeWebURL: String
+    let employeeWebURL: String?
+    let employeeDownloadURL: String
     
     init?(json: JSONType) {
         guard let clientConfig = json["client_config"] as? JSONType else { return nil }
@@ -26,15 +27,22 @@ class Configuration: NSObject, NSCoding {
         guard let punchUploadURL = clientConfig["punch_upload_url"] as? String else { return nil }
         self.punchUploadURL = punchUploadURL
         
-        guard let employeeWebURL = clientConfig["employee_web_url"] as? String else { return nil }
-        self.employeeWebURL = employeeWebURL
+        guard let employeeDownloadURL = clientConfig["employee_download_url"] as? String else { return nil }
+        self.employeeDownloadURL = employeeDownloadURL
+        
+        if let employeeWebURL = clientConfig["employee_web_url"] as? String {
+            self.employeeWebURL = employeeWebURL
+        } else {
+            self.employeeWebURL = nil
+        }
     }
     
-    init(enable2FA: Bool, enableFacialRecognition: Bool, punchUploadURL: String, employeeWebURL: String) {
+    init(enable2FA: Bool, enableFacialRecognition: Bool, punchUploadURL: String, employeeWebURL: String?, employeeDownloadURL: String) {
         self.enable2FA = enable2FA
         self.enableFacialRecognition = enableFacialRecognition
         self.punchUploadURL = punchUploadURL
         self.employeeWebURL = employeeWebURL
+        self.employeeDownloadURL = employeeDownloadURL
     }
     
     //MARK: NSCoding
@@ -43,16 +51,19 @@ class Configuration: NSObject, NSCoding {
             let enable2FA = decoder.decodeObjectForKey("enable2FA") as? Bool,
             let enableFacialRecognition = decoder.decodeObjectForKey("enableFacialRecognition") as? Bool,
             let punchUploadURL = decoder.decodeObjectForKey("punchUploadURL") as? String,
-            let employeeWebURL = decoder.decodeObjectForKey("employeeWebURL") as? String
+            let employeeDownloadURL = decoder.decodeObjectForKey("employeeDownloadURL") as? String
         else {
             return nil
         }
+        
+        let employeeWebURL = decoder.decodeObjectForKey("employeeWebURL") as? String
         
         self.init(
             enable2FA: enable2FA,
             enableFacialRecognition: enableFacialRecognition,
             punchUploadURL: punchUploadURL,
-            employeeWebURL: employeeWebURL
+            employeeWebURL: employeeWebURL,
+            employeeDownloadURL: employeeDownloadURL
         )
     }
     
@@ -60,7 +71,11 @@ class Configuration: NSObject, NSCoding {
         coder.encodeObject(self.enable2FA, forKey: "enable2FA")
         coder.encodeObject(self.enableFacialRecognition, forKey: "enableFacialRecognition")
         coder.encodeObject(self.punchUploadURL, forKey: "punchUploadURL")
-        coder.encodeObject(self.employeeWebURL, forKey: "employeeWebURL")
+        coder.encodeObject(self.employeeDownloadURL, forKey: "employeeDownloadURL")
+        
+        if let employeeWebURL = self.employeeWebURL {
+            coder.encodeObject(employeeWebURL, forKey: "employeeWebURL")
+        }
     }
     
     func persist() {
@@ -81,5 +96,11 @@ class Configuration: NSObject, NSCoding {
         }
 
         return configuration
+    }
+    
+    static func removeFromUserDefaults() {
+        let defaults = NSUserDefaults.standardUserDefaults()
+        defaults.removeObjectForKey("configuration")
+        defaults.synchronize()
     }
 }

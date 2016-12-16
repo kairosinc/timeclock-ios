@@ -30,6 +30,7 @@ enum ClockOptions: Int {
 
 protocol ClockOptionsDelegate {
     func clock(option: ClockOptions)
+    func cancel()
 }
 
 class ClockOptionsViewController: UIViewController {
@@ -40,6 +41,21 @@ class ClockOptionsViewController: UIViewController {
             guard let employee = punchData?.employee else { return }
             greetingLabel.text = greetingForTimeOfDay()
             nameLabel.text = employee.firstName
+            
+            guard
+                let badgeNumber = employee.badgeNumber,
+                let configuration = Configuration.fromUserDefaults(),
+                let baseURL = configuration.employeeWebURL,
+                let deviceID = UIDevice.currentDevice().identifierForVendor,
+                let url = NSURL(string: (baseURL + "/?badge_number=" + badgeNumber + "device_id=" + deviceID.UUIDString))
+            else {
+                webView.hidden = true
+                return
+            }
+            
+            let request = NSURLRequest(URL: url)
+            webView.loadRequest(request)
+            webView.hidden = false
         }
     }
     
@@ -143,17 +159,24 @@ class ClockOptionsViewController: UIViewController {
         }
     }
     
-    @IBOutlet weak var webView: UIWebView! {
+    @IBOutlet weak var webView: UIWebView!
+    
+    @IBOutlet weak var doneButton: UIButton! {
         didSet {
-            guard let url = NSURL(string: "http://planneddev.timeclockdynamics.com/hrnow/") else { return }
-//            guard let url = NSURL(string: "http://rapha.cc") else { return }
-            let request = NSURLRequest(URL: url)
-            webView.loadRequest(request)
+            doneButton.titleLabel?.font = tertiaryFont
+            doneButton.backgroundColor = UIColor.kairosRed()
+            doneButton.setTitleColor(UIColor.whiteColor(), forState: .Normal)
         }
     }
     
     
+    
     //MARK: IBAction
+    @IBAction func doneTouchUpInside(sender: AnyObject) {
+        punchData = nil
+        delegate?.cancel()
+    }
+    
     @IBAction func clockOptionTouchUpInside(sender: AnyObject) {
         guard let
             tag = sender.tag,
