@@ -15,7 +15,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     var flowController: TimeClockFlowController?
-
+    var syncTimer: NSTimer?
+    let syncIntervalMins: Double = 20
+    
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
         Fabric.with([Crashlytics.self])
@@ -37,12 +39,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         KairosSDK.setEnableShutterSound(false)
         KairosSDK.setPreferredCameraType(UInt(KairosCameraFront))
         
-        WFMAPI.employees() { (employees, error) in
-            print("///////")
-            print(employees)
-            print(error)
-        }
         
+        syncTimer = NSTimer.scheduledTimerWithTimeInterval(
+            (syncIntervalMins * 60),
+            target: self,
+            selector: #selector(sync),
+            userInfo: nil,
+            repeats: true)
+        
+        sync()
+        
+        return true
+    }
+    
+    func sync() {
+        WFMAPI.employees() { (employees, error) in }
         
         DataController.sharedController?.fetchPunches(completion: { (punches, error) in
             guard let punches = punches where !punches.isEmpty else { return }
@@ -53,8 +64,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 }
             })
         })
-        
-        return true
     }
 
     func applicationWillResignActive(application: UIApplication) {
