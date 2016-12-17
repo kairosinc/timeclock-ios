@@ -26,5 +26,6 @@ extension Punch {
     @NSManaged public var facerecTransactionID: String?
     @NSManaged public var facerecImageType: String?
     @NSManaged public var facerecImageData: String?
-
+    @NSManaged public var subjectID: String?
+    @NSManaged public var confidence: NSNumber?
 }

@@ -43,29 +43,33 @@ class CaptureViewController: UIViewController {
  */
 
         
-        
+
         KairosSDK.imageCaptureRecognizeWithThreshold("0.75",
                                                      galleryName: "employees",
                                                      success: { (response:[NSObject : AnyObject]!, image: UIImage!) in
                                                         
-            let imagesResponse = response["images"]! as? NSArray
-            print(imagesResponse)
-            let firstImagesResponse = imagesResponse?.firstObject
-            let trans = firstImagesResponse?["transaction"]
-            if let trans = trans as? [NSObject: AnyObject] {
-                let confidence = trans["confidence"] as? Float
-                self.punchData?.confidence = confidence
-                let subject_id = trans["subject_id"] as? String
-                self.punchData?.subjectID = subject_id
-            }
+             if let imagesResponse = response["images"] as? NSArray {
+                print(imagesResponse)
+                let firstImagesResponse = imagesResponse.firstObject
+                let trans = firstImagesResponse?["transaction"]
+                if let trans = trans as? [NSObject: AnyObject] {
+                    let confidence = trans["confidence"] as? Float
+                    self.punchData?.confidence = confidence
+                    let subject_id = trans["subject_id"] as? String
+                    self.punchData?.subjectID = subject_id
+                }
                                                         
             
-            self.punchData?.image = image
-            self.capturedImage(self.punchData)
-
+                self.punchData?.image = image
+                self.capturedImage(self.punchData)
+             } else {
+                
+                self.punchData?.image = image
+                self.capturedImage(self.punchData)
+            }
             
             }, failure: { (response:[NSObject : AnyObject]!, image: UIImage!) in
-                print("failire \(response)")
+                print("failure \(response)")
                 self.punchData?.image = image
                 self.capturedImage(self.punchData)
         })

@@ -38,7 +38,9 @@ extension Punch: JSONable {
             "facerec_transaction_id": "000000",
             "facerec": [
                 "image_type": "image/jpeg",
-                "image_data": facerecImageData ?? ""
+                "image_data": facerecImageData ?? "",
+                "confidence": confidence ?? "",
+                "subject_id": subjectID ?? ""
             ]
         ]
     }

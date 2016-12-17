@@ -190,7 +190,10 @@ public struct DataController {
         online: String,
         facerecTransactionID: String? = nil,
         facerecImageType: String? = nil,
-        facerecImageData: String? = nil) {
+        facerecImageData: String? = nil,
+        subjectID: String? = nil,
+        confidence: NSNumber? = nil
+        ) {
         
         let context = contextFrom(.Main)
         let punch = Punch.insertNewInContext(context)!
@@ -208,6 +211,8 @@ public struct DataController {
         punch.facerecTransactionID = facerecTransactionID
         punch.facerecImageType = facerecImageType
         punch.facerecImageData = facerecImageData
+        punch.subjectID = subjectID
+        punch.confidence = confidence
         
         persistObjectsInContext(context)
         

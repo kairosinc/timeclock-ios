@@ -16,8 +16,8 @@ struct TimeClockFlowController {
         case Idle
         case Capturing
         case DisplayingOptions
-        case EmployeeIDEnrolment(image: UIImage)
-        case EmployeeIDVerification()
+        case EmployeeIDEnrolment
+        case EmployeeIDVerification
     }
     
     var configuration: Configuration? {
@@ -99,7 +99,7 @@ extension TimeClockFlowController: IdleDelegate {
             configuration?.captureViewController.startCapturing()
             setUIState(.Capturing)
         } else {
-            setUIState(.EmployeeIDVerification())
+            setUIState(.EmployeeIDVerification)
         }
     }
 }
@@ -119,18 +119,18 @@ extension TimeClockFlowController: CaptureDelegate {
             
         } else {
             if let _ = punchData?.subjectID {
-                setUIState(.EmployeeIDVerification())
-            } else if let image = punchData?.image {
-                setUIState(.EmployeeIDEnrolment(image: image))
+                setUIState(.EmployeeIDVerification)
+            } else if let _ = punchData?.image {
+                setUIState(.EmployeeIDEnrolment)
             }
             
-            self.configuration?.captureViewController.punchData = nil
             self.configuration?.employeeIDViewController.punchData = punchData
+            self.configuration?.captureViewController.punchData = nil
         }
     }
     
     func timedOut() {
-        setUIState(.EmployeeIDVerification())
+        setUIState(.EmployeeIDVerification)
         self.configuration?.captureViewController.punchData = nil
     }
 }

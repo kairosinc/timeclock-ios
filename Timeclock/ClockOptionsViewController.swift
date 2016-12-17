@@ -246,13 +246,11 @@ class ClockOptionsViewController: UIViewController {
             online: online,
             facerecTransactionID: facerecTransactionID,
             facerecImageType: facerecImageType,
-            facerecImageData: facerecImageData
+            facerecImageData: facerecImageData,
+            subjectID: punchData?.subjectID,
+            confidence: punchData?.confidence
         )
         
-        
-//        if let image = image {
-//            KairosSDK.enrollWithImage(image, subjectId: badgeNumber, galleryName: "employees", success: nil, failure: nil)
-//        }
         
         delegate?.clock(selectedOption)
     }

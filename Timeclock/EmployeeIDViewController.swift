@@ -112,8 +112,17 @@ class EmployeeIDViewController: UIViewController {
         guard let employeeID = employeeIDLabel.text else { return }
         DataController.sharedController?.fetchEmployee(employeeID, completion: { (managedObject, error) in
             if let employee = managedObject as? Employee {
+                if let
+                    appState = self.appState,
+                    punchData = self.punchData,
+                    image = punchData.image
+                    where appState == .EmployeeIDEnrolment {
+                        KairosSDK.enrollWithImage(image, subjectId: employeeID, galleryName: "employees", success: nil, failure: nil)
+                }
+                
                 self.punchData?.employee = employee
                 self.delegate?.idEntered(self.punchData)
+                
             } else {
                 self.showError("Badge Number Not Found")
             }

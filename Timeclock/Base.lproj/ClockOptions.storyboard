@@ -96,7 +96,7 @@
                             </webView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xlw-19-nR5">
                                 <rect key="frame" x="0.0" y="112.5" width="375" height="37"/>
-                                <state key="normal" title="Done"/>
+                                <state key="normal" title="CANCEL"/>
                                 <connections>
                                     <action selector="doneTouchUpInside:" destination="gDy-fM-XMW" eventType="touchUpInside" id="zsU-74-Jhd"/>
                                 </connections>
