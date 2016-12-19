@@ -14,6 +14,8 @@ class Configuration: NSObject, NSCoding {
     let punchUploadURL: String
     let employeeWebURL: String?
     let employeeDownloadURL: String
+    let galleryID: String?
+    let syncInterval: Int?
     
     init?(json: JSONType) {
         guard let clientConfig = json["client_config"] as? JSONType else { return nil }
@@ -35,14 +37,36 @@ class Configuration: NSObject, NSCoding {
         } else {
             self.employeeWebURL = nil
         }
+        
+        if let galleryID = clientConfig["gallery_ID"] as? String {
+            self.galleryID = galleryID
+        } else {
+            self.galleryID = nil
+        }
+        
+        if let syncInterval = clientConfig["sync_interval"] as? Int {
+            self.syncInterval = syncInterval
+        } else {
+            self.syncInterval = nil
+        }
     }
     
-    init(enable2FA: Bool, enableFacialRecognition: Bool, punchUploadURL: String, employeeWebURL: String?, employeeDownloadURL: String) {
+    init(
+        enable2FA: Bool,
+        enableFacialRecognition: Bool,
+        punchUploadURL: String,
+        employeeWebURL: String?,
+        employeeDownloadURL: String,
+        galleryID: String?,
+        syncInterval: Int?) {
+        
         self.enable2FA = enable2FA
         self.enableFacialRecognition = enableFacialRecognition
         self.punchUploadURL = punchUploadURL
         self.employeeWebURL = employeeWebURL
         self.employeeDownloadURL = employeeDownloadURL
+        self.galleryID = galleryID
+        self.syncInterval = syncInterval
     }
     
     //MARK: NSCoding
@@ -57,13 +81,17 @@ class Configuration: NSObject, NSCoding {
         }
         
         let employeeWebURL = decoder.decodeObjectForKey("employeeWebURL") as? String
+        let galleryID = decoder.decodeObjectForKey("galleryID") as? String
+        let syncInterval = decoder.decodeObjectForKey("syncInterval") as? Int
         
         self.init(
             enable2FA: enable2FA,
             enableFacialRecognition: enableFacialRecognition,
             punchUploadURL: punchUploadURL,
             employeeWebURL: employeeWebURL,
-            employeeDownloadURL: employeeDownloadURL
+            employeeDownloadURL: employeeDownloadURL,
+            galleryID: galleryID,
+            syncInterval: syncInterval
         )
     }
     
@@ -75,6 +103,14 @@ class Configuration: NSObject, NSCoding {
         
         if let employeeWebURL = self.employeeWebURL {
             coder.encodeObject(employeeWebURL, forKey: "employeeWebURL")
+        }
+        
+        if let galleryID = self.galleryID {
+            coder.encodeObject(galleryID, forKey: "galleryID")
+        }
+        
+        if let syncInterval = self.syncInterval {
+            coder.encodeObject(syncInterval, forKey: "syncInterval")
         }
     }
     

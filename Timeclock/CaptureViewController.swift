@@ -41,11 +41,19 @@ class CaptureViewController: UIViewController {
          print("failed to enrol: \(response)")
          }
  */
-
+        
+        let galleryName: String
+        if
+            let configuration = Configuration.fromUserDefaults(),
+            let gallery = configuration.galleryID {
+            galleryName = gallery
+        } else {
+            galleryName = "employees"
+        }
         
 
         KairosSDK.imageCaptureRecognizeWithThreshold("0.75",
-                                                     galleryName: "employees",
+                                                     galleryName: galleryName,
                                                      success: { (response:[NSObject : AnyObject]!, image: UIImage!) in
                                                         
              if let imagesResponse = response["images"] as? NSArray {

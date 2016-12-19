@@ -47,7 +47,7 @@ class ClockOptionsViewController: UIViewController {
                 let configuration = Configuration.fromUserDefaults(),
                 let baseURL = configuration.employeeWebURL,
                 let deviceID = UIDevice.currentDevice().identifierForVendor,
-                let url = NSURL(string: (baseURL + "/?badge_number=" + badgeNumber + "device_id=" + deviceID.UUIDString))
+                let url = NSURL(string: (baseURL + "/?badge_number=" + badgeNumber + "&device_id=" + deviceID.UUIDString))
             else {
                 webView.hidden = true
                 return

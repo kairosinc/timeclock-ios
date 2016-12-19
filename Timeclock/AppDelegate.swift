@@ -38,6 +38,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         KairosSDK.setEnableFlash(true)
         KairosSDK.setEnableShutterSound(false)
         KairosSDK.setPreferredCameraType(UInt(KairosCameraFront))
+        KairosSDK.setEnableCropping(false)
         
         
         syncTimer = NSTimer.scheduledTimerWithTimeInterval(
