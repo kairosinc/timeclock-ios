@@ -15,8 +15,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     var flowController: TimeClockFlowController?
-    var syncTimer: NSTimer?
-    let syncIntervalMins: Double = 20
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
@@ -40,32 +38,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         KairosSDK.setPreferredCameraType(UInt(KairosCameraFront))
         KairosSDK.setEnableCropping(false)
         
-        
-        syncTimer = NSTimer.scheduledTimerWithTimeInterval(
-            (syncIntervalMins * 60),
-            target: self,
-            selector: #selector(sync),
-            userInfo: nil,
-            repeats: true)
-        
-        sync()
+        if let
+            config = Configuration.fromUserDefaults(),
+            interval = config.syncInterval {
+            
+            DataController.sharedController?.syncScheduler.syncInterval = interval
+            DataController.sharedController?.syncScheduler.sync()
+        }
         
         return true
     }
-    
-    func sync() {
-        WFMAPI.employees() { (employees, error) in }
-        
-        DataController.sharedController?.fetchPunches(completion: { (punches, error) in
-            guard let punches = punches where !punches.isEmpty else { return }
-            WFMAPI.punches(punches, completion: { (error) in
-                if let _ = error {
-                } else {
-                    DataController.sharedController?.deletePunches(punches, completion: { (error) in })
-                }
-            })
-        })
-    }
+
 
     func applicationWillResignActive(application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

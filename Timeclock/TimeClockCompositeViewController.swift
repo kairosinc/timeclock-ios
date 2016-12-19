@@ -68,7 +68,7 @@ class TimeClockCompositeViewController: UIViewController {
         }
         
         guard
-            let _ = WFMAPI.clientID()
+            let _ = WFMAPI.clientID(), let _ = Configuration.fromUserDefaults()
         else {
             showSetup()
             return

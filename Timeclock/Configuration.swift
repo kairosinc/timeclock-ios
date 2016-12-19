@@ -15,7 +15,7 @@ class Configuration: NSObject, NSCoding {
     let employeeWebURL: String?
     let employeeDownloadURL: String
     let galleryID: String?
-    let syncInterval: Int?
+    let syncInterval: Double?
     
     init?(json: JSONType) {
         guard let clientConfig = json["client_config"] as? JSONType else { return nil }
@@ -38,13 +38,13 @@ class Configuration: NSObject, NSCoding {
             self.employeeWebURL = nil
         }
         
-        if let galleryID = clientConfig["gallery_ID"] as? String {
+        if let galleryID = clientConfig["gallery_id"] as? String {
             self.galleryID = galleryID
         } else {
             self.galleryID = nil
         }
         
-        if let syncInterval = clientConfig["sync_interval"] as? Int {
+        if let syncInterval = clientConfig["sync_interval"] as? Double {
             self.syncInterval = syncInterval
         } else {
             self.syncInterval = nil
@@ -58,7 +58,7 @@ class Configuration: NSObject, NSCoding {
         employeeWebURL: String?,
         employeeDownloadURL: String,
         galleryID: String?,
-        syncInterval: Int?) {
+        syncInterval: Double?) {
         
         self.enable2FA = enable2FA
         self.enableFacialRecognition = enableFacialRecognition
@@ -82,7 +82,7 @@ class Configuration: NSObject, NSCoding {
         
         let employeeWebURL = decoder.decodeObjectForKey("employeeWebURL") as? String
         let galleryID = decoder.decodeObjectForKey("galleryID") as? String
-        let syncInterval = decoder.decodeObjectForKey("syncInterval") as? Int
+        let syncInterval = decoder.decodeObjectForKey("syncInterval") as? Double
         
         self.init(
             enable2FA: enable2FA,

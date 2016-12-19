@@ -111,13 +111,23 @@ class EmployeeIDViewController: UIViewController {
     @IBAction func confirmTouchUpInside(sender: AnyObject) {
         guard let employeeID = employeeIDLabel.text else { return }
         DataController.sharedController?.fetchEmployee(employeeID, completion: { (managedObject, error) in
+            
+            let galleryName: String
+            if
+                let configuration = Configuration.fromUserDefaults(),
+                let gallery = configuration.galleryID {
+                galleryName = gallery
+            } else {
+                galleryName = "employees"
+            }
+            
             if let employee = managedObject as? Employee {
                 if let
                     appState = self.appState,
                     punchData = self.punchData,
                     image = punchData.image
-                    where appState == .EmployeeIDEnrolment {
-                        KairosSDK.enrollWithImage(image, subjectId: employeeID, galleryName: "employees", success: nil, failure: nil)
+                    where appState == .EmployeeIDEnrolment || appState == .EmployeeIDVerification {
+                        KairosSDK.enrollWithImage(image, subjectId: employeeID, galleryName: galleryName, success: nil, failure: nil)
                 }
                 
                 self.punchData?.employee = employee

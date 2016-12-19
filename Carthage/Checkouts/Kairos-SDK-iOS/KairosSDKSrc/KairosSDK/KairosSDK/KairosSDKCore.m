@@ -489,13 +489,13 @@
                                          success:^(id response){
                                              
                                              success(response);
-                                             [self resetState];
+//                                             [self resetState];
                                              
                                          }
                                          failure:^(id response){
                                              
                                              failure(response);
-                                             [self resetState];
+//                                             [self resetState];
                                              
                                          }];
 }

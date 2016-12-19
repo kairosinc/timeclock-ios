@@ -17,6 +17,8 @@ public struct DataController {
     
     static let sharedController = DataController()
     
+    let syncScheduler = SyncScheduler()
+    
     public enum ContextType: Int {
         case Main = 0, Importer
     }
@@ -261,5 +263,4 @@ public struct DataController {
         
         completion(error: error)
     }
-
 }

@@ -70,8 +70,15 @@ struct TimeClockFlowController {
 
         let alert = UIAlertController(title: "Setup Failed", message: "Please check your Client ID and internet connection", preferredStyle: .Alert)
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
-        compositeViewController.presentViewController(alert, animated: true, completion: nil)
+        
+        if let presentedVC = compositeViewController.presentedViewController {
+            presentedVC.presentViewController(alert, animated: true, completion: nil)
+        } else {
+            compositeViewController.presentViewController(alert, animated: true, completion: nil)
+        }
+        
         let _ = try? Keychain.delete(identifier: "client_id")
+        Timeclock.Configuration.removeFromUserDefaults()
         WFMAPI.heimdallr.clearAccessToken()
     }
 }

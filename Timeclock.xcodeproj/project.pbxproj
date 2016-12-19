@@ -16,6 +16,7 @@
 		2029C0D71D68CAEC00DB72AF /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2029C0D61D68CAEC00DB72AF /* CoreGraphics.framework */; };
 		2029C0D91D68CAF400DB72AF /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2029C0D81D68CAF400DB72AF /* AVFoundation.framework */; };
 		2029C0DB1D68CAFB00DB72AF /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2029C0DA1D68CAFB00DB72AF /* AudioToolbox.framework */; };
+		202F837E1E082008008AC04D /* SyncScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 202F837D1E082008008AC04D /* SyncScheduler.swift */; };
 		2033C3101D9BC0A600253F59 /* UIColor+Kairos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2033C30F1D9BC0A600253F59 /* UIColor+Kairos.swift */; };
 		2039A41C1E0408590000900C /* PunchData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2039A41B1E0408590000900C /* PunchData.swift */; };
 		204640EE1D6AE31000F527A8 /* ClockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204640ED1D6AE31000F527A8 /* ClockViewController.swift */; };
@@ -402,6 +403,7 @@
 		2029C0D61D68CAEC00DB72AF /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		2029C0D81D68CAF400DB72AF /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		2029C0DA1D68CAFB00DB72AF /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		202F837D1E082008008AC04D /* SyncScheduler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SyncScheduler.swift; sourceTree = "<group>"; };
 		2033C30F1D9BC0A600253F59 /* UIColor+Kairos.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Kairos.swift"; sourceTree = "<group>"; };
 		2039A41B1E0408590000900C /* PunchData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PunchData.swift; sourceTree = "<group>"; };
 		204640ED1D6AE31000F527A8 /* ClockViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClockViewController.swift; sourceTree = "<group>"; };
@@ -742,6 +744,7 @@
 				20A31A741DBB9A8F004C81AC /* CoreDataStack+InsertObject.swift */,
 				20A31A751DBB9A8F004C81AC /* DataController.swift */,
 				20A31A771DBB9A8F004C81AC /* ManagedObjectType.swift */,
+				202F837D1E082008008AC04D /* SyncScheduler.swift */,
 				20E20BB31DB9367C0017CBA6 /* Model.xcdatamodeld */,
 				2039A41B1E0408590000900C /* PunchData.swift */,
 			);
@@ -1214,6 +1217,7 @@
 				20A31A9C1DBB9F3A004C81AC /* Employee+CoreDataProperties.swift in Sources */,
 				20F7B59B1D62FEA600FE1817 /* TimeClockCompositeViewController.swift in Sources */,
 				206674331DE0AE62008789E8 /* LocationMonitor.swift in Sources */,
+				202F837E1E082008008AC04D /* SyncScheduler.swift in Sources */,
 				20A31A7B1DBB9A8F004C81AC /* DataController.swift in Sources */,
 				208B39B01D638C38002EE431 /* TimeClockFlowController.swift in Sources */,
 				20A31A7D1DBB9A8F004C81AC /* ManagedObjectType.swift in Sources */,

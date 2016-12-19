@@ -172,6 +172,7 @@ public struct WFMAPI {
         WFMAPI.getConfig { (configuration, error) in
             if let configuration = configuration {
                 configuration.persist()
+                DataController.sharedController?.syncScheduler.syncInterval = configuration.syncInterval
                 
                 WFMAPI.employees(completion: { (employees, error) in
                     if let _ = error {
