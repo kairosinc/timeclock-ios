@@ -22,6 +22,8 @@
 		204640EE1D6AE31000F527A8 /* ClockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204640ED1D6AE31000F527A8 /* ClockViewController.swift */; };
 		204C90A71DEEEF3500930678 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 204C90A51DEEEF3500930678 /* Fabric.framework */; };
 		204C90A81DEEEF3500930678 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 204C90A61DEEEF3500930678 /* Crashlytics.framework */; };
+		205423EF1E326A8D00E05151 /* Reachability.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 205423DD1E326A8000E05151 /* Reachability.framework */; };
+		205423F01E326A8D00E05151 /* Reachability.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 205423DD1E326A8000E05151 /* Reachability.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		2054F26E1E0039FC00C747E7 /* Setup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2054F26D1E0039FC00C747E7 /* Setup.storyboard */; };
 		2054F2921E003A1A00C747E7 /* SetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2054F2911E003A1A00C747E7 /* SetupViewController.swift */; };
 		2054F2A21E00438900C747E7 /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2054F2A11E00438900C747E7 /* Keychain.swift */; };
@@ -91,6 +93,55 @@
 			proxyType = 2;
 			remoteGlobalIDString = 07AA7D1E18D22DD000C24A69;
 			remoteInfo = KairosSDKTests;
+		};
+		205423DC1E326A8000E05151 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 205423B81E326A8000E05151 /* Reachability.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = AA7344721BE7678B008AFE69;
+			remoteInfo = Reachability;
+		};
+		205423DE1E326A8000E05151 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 205423B81E326A8000E05151 /* Reachability.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 00C54B111C09CD9C001C3F12;
+			remoteInfo = ReachabilityMac;
+		};
+		205423E01E326A8000E05151 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 205423B81E326A8000E05151 /* Reachability.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 57A45A2A1C197F4800384AE4;
+			remoteInfo = ReachabilityTV;
+		};
+		205423E21E326A8000E05151 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 205423B81E326A8000E05151 /* Reachability.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = AA7344901BE76820008AFE69;
+			remoteInfo = ReachabilitySample;
+		};
+		205423E41E326A8000E05151 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 205423B81E326A8000E05151 /* Reachability.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 00C54B1F1C09CF67001C3F12;
+			remoteInfo = ReachabilityMacSample;
+		};
+		205423E61E326A8000E05151 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 205423B81E326A8000E05151 /* Reachability.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 57A45A011C197BE800384AE4;
+			remoteInfo = ReachabilityAppleTVSample;
+		};
+		205423F11E326A8D00E05151 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 205423B81E326A8000E05151 /* Reachability.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = AA7344711BE7678B008AFE69;
+			remoteInfo = Reachability;
 		};
 		20A31AA61DBDF00B004C81AC /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -383,6 +434,7 @@
 			files = (
 				20C5DF2F1D7D586800E3C47B /* Result.framework in Embed Frameworks */,
 				20C8C5A41DE4880C00CE4B0A /* Heimdallr.framework in Embed Frameworks */,
+				205423F01E326A8D00E05151 /* Reachability.framework in Embed Frameworks */,
 				20C5DF2B1D7D586300E3C47B /* Moya.framework in Embed Frameworks */,
 				20C5DF261D7D585F00E3C47B /* Alamofire.framework in Embed Frameworks */,
 			);
@@ -409,6 +461,7 @@
 		204640ED1D6AE31000F527A8 /* ClockViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClockViewController.swift; sourceTree = "<group>"; };
 		204C90A51DEEEF3500930678 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		204C90A61DEEEF3500930678 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
+		205423B81E326A8000E05151 /* Reachability.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Reachability.xcodeproj; path = Carthage/Checkouts/Reachability.swift/Reachability.xcodeproj; sourceTree = "<group>"; };
 		2054F26D1E0039FC00C747E7 /* Setup.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Setup.storyboard; sourceTree = "<group>"; };
 		2054F2911E003A1A00C747E7 /* SetupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetupViewController.swift; sourceTree = "<group>"; };
 		2054F2A11E00438900C747E7 /* Keychain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
@@ -480,6 +533,7 @@
 				2029C0D71D68CAEC00DB72AF /* CoreGraphics.framework in Frameworks */,
 				204C90A71DEEEF3500930678 /* Fabric.framework in Frameworks */,
 				2029C0D51D68CAE800DB72AF /* CoreMedia.framework in Frameworks */,
+				205423EF1E326A8D00E05151 /* Reachability.framework in Frameworks */,
 				2029C0D31D68CAE200DB72AF /* CoreImage.framework in Frameworks */,
 				20C5DF2A1D7D586300E3C47B /* Moya.framework in Frameworks */,
 				2029C0D11D68CADD00DB72AF /* Foundation.framework in Frameworks */,
@@ -529,6 +583,19 @@
 			name = Style;
 			sourceTree = "<group>";
 		};
+		205423B91E326A8000E05151 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				205423DD1E326A8000E05151 /* Reachability.framework */,
+				205423DF1E326A8000E05151 /* Reachability.framework */,
+				205423E11E326A8000E05151 /* Reachability.framework */,
+				205423E31E326A8000E05151 /* ReachabilitySample.app */,
+				205423E51E326A8000E05151 /* ReachabilityMacSample.app */,
+				205423E71E326A8000E05151 /* ReachabilityAppleTVSample.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		205D6B981D64DCC30018A858 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
@@ -560,6 +627,7 @@
 				2019ED781D61AD8200912018 /* KairosSDK.xcodeproj */,
 				20C5DEE31D7D583F00E3C47B /* Moya.xcodeproj */,
 				20C5DF0A1D7D584B00E3C47B /* Result.xcodeproj */,
+				205423B81E326A8000E05151 /* Reachability.xcodeproj */,
 				204C90A51DEEEF3500930678 /* Fabric.framework */,
 				204C90A61DEEEF3500930678 /* Crashlytics.framework */,
 				20A86F0A1DEECF6B00A58D66 /* Frameworks */,
@@ -786,6 +854,7 @@
 				20C5DF2D1D7D586300E3C47B /* PBXTargetDependency */,
 				20C5DF311D7D586900E3C47B /* PBXTargetDependency */,
 				20C8C5A61DE4880C00CE4B0A /* PBXTargetDependency */,
+				205423F21E326A8D00E05151 /* PBXTargetDependency */,
 			);
 			name = Timeclock;
 			productName = Timeclock;
@@ -871,6 +940,10 @@
 					ProjectRef = 20C5DEE31D7D583F00E3C47B /* Moya.xcodeproj */;
 				},
 				{
+					ProductGroup = 205423B91E326A8000E05151 /* Products */;
+					ProjectRef = 205423B81E326A8000E05151 /* Reachability.xcodeproj */;
+				},
+				{
 					ProductGroup = 20C5DF0B1D7D584B00E3C47B /* Products */;
 					ProjectRef = 20C5DF0A1D7D584B00E3C47B /* Result.xcodeproj */;
 				},
@@ -896,6 +969,48 @@
 			fileType = wrapper.cfbundle;
 			path = KairosSDKTests.xctest;
 			remoteRef = 2019ED7F1D61AD8200912018 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		205423DD1E326A8000E05151 /* Reachability.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Reachability.framework;
+			remoteRef = 205423DC1E326A8000E05151 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		205423DF1E326A8000E05151 /* Reachability.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Reachability.framework;
+			remoteRef = 205423DE1E326A8000E05151 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		205423E11E326A8000E05151 /* Reachability.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Reachability.framework;
+			remoteRef = 205423E01E326A8000E05151 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		205423E31E326A8000E05151 /* ReachabilitySample.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = ReachabilitySample.app;
+			remoteRef = 205423E21E326A8000E05151 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		205423E51E326A8000E05151 /* ReachabilityMacSample.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = ReachabilityMacSample.app;
+			remoteRef = 205423E41E326A8000E05151 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		205423E71E326A8000E05151 /* ReachabilityAppleTVSample.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = ReachabilityAppleTVSample.app;
+			remoteRef = 205423E61E326A8000E05151 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		20C5DED41D7D583500E3C47B /* Alamofire.framework */ = {
@@ -1244,6 +1359,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		205423F21E326A8D00E05151 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Reachability;
+			targetProxy = 205423F11E326A8D00E05151 /* PBXContainerItemProxy */;
+		};
 		20A31AA71DBDF00B004C81AC /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 206FA1F51D61AB5F008B1F94 /* Timeclock */;

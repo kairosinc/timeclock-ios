@@ -8,11 +8,11 @@
 
 import Foundation
 
-public enum RaphaAPIError: ErrorType {
+public enum KairosAPIError: ErrorType {
     case Known(String)
     case Unknown()
     
-    internal static func fromJSONData(data: NSData) -> RaphaAPIError? {
+    internal static func fromJSONData(data: NSData) -> KairosAPIError? {
         if let
             wrappedJSON = try? NSJSONSerialization.JSONObjectWithData(data, options: []) as? JSONType,
             json = wrappedJSON,
@@ -21,9 +21,9 @@ public enum RaphaAPIError: ErrorType {
             errorType = errorDictionary["type"] as? String {
             
             if let userFacingError = userFacingMessageForType(errorType) {
-                return RaphaAPIError.Known(userFacingError)
+                return KairosAPIError.Known(userFacingError)
             } else {
-                return RaphaAPIError.Known(errorType)
+                return KairosAPIError.Known(errorType)
             }
 
         } else {
@@ -31,11 +31,11 @@ public enum RaphaAPIError: ErrorType {
         }
     }
     
-    internal static func fromErrorString(errorString: String) -> RaphaAPIError {
+    internal static func fromErrorString(errorString: String) -> KairosAPIError {
         if let userFacingError = userFacingMessageForType(errorString) {
-            return RaphaAPIError.Known(userFacingError)
+            return KairosAPIError.Known(userFacingError)
         } else {
-            return RaphaAPIError.Known(errorString)
+            return KairosAPIError.Known(errorString)
         }
     }
     
