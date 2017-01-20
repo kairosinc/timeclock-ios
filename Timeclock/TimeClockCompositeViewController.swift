@@ -28,6 +28,10 @@ class TimeClockCompositeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        view.backgroundColor = UIColor.kairosDarkGrey()
+        
+        flowController.compositeViewController = self
+        
         guard let
             clockOptionsViewController = clockOptionsViewController,
             idleViewController = idleViewController,
@@ -44,11 +48,48 @@ class TimeClockCompositeViewController: UIViewController {
             employeeIDViewController: employeeIDViewController)
         
         flowController.setUIState(.Idle)
+        
+        if let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate {
+            appDelegate.flowController = flowController
+        }
+        
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(true)
+        let defaults = NSUserDefaults.standardUserDefaults()
+        
+        if defaults.boolForKey("logout") {
+            defaults.setBool(false, forKey: "logout")
+            defaults.synchronize()
+            let _ = try? Keychain.delete(identifier: "config_client_id")
+            let _ = try? Keychain.delete(identifier: "config_site_id")
+            let _ = try? Keychain.delete(identifier: "config_username")
+            let _ = try? Keychain.delete(identifier: "config_password")
+            WFMAPI.heimdallr.clearAccessToken()
+            showSetup()
+        }
+        
+        guard
+            let _ = WFMAPI.configClientID(), let _ = Configuration.fromUserDefaults()
+        else {
+            showSetup()
+            return
+        }
+    }
+    
+    func showSetup() {
+        let storyboard = UIStoryboard(name: "Setup", bundle: nil)
+        if let setupVC = storyboard.instantiateInitialViewController() {
+            presentViewController(setupVC, animated: true, completion: nil)
+        }
     }
 
     //MARK: Navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         guard let segueIdentifier = segue.identifier else { return }
+        
+        segue.destinationViewController.view.backgroundColor = UIColor.kairosGrey()
         
         switch segueIdentifier {
         case "embedIdleViewController":
@@ -77,6 +118,14 @@ class TimeClockCompositeViewController: UIViewController {
         default:
             break
         }
+    }
+    
+    override func shouldAutorotate() -> Bool {
+        return false
+    }
+    
+    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+        return .Portrait
     }
 
 }

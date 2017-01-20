@@ -10,41 +10,89 @@ import Foundation
 import Moya
 
 public enum WFMService {
-    case Login(email: String, password: String)
+    case Employees()
+    case Punches(punches: [Punch])
+    case Configure()
 }
 
 extension WFMService: TargetType {
     
-    public var baseURL: NSURL { return NSURL(string: "https://kairos.com/api")! }
+    private static func standardParameters() -> JSONType {
+        let deviceID = UIDevice.currentDevice().identifierForVendor?.UUIDString
+        let deviceModel = UIDevice.currentDevice().model
+        let iosVersion = UIDevice.currentDevice().systemVersion
+        let appVersion = NSBundle.mainBundle().infoDictionary?["CFBundleShortVersionString"] as? String
+        let buildNumber = NSBundle.mainBundle().infoDictionary?["CFBundleVersion"] as? String
+        let latitude = LocationMonitor.sharedMonitor.locationManager.location?.coordinate.latitude
+        let longitude = LocationMonitor.sharedMonitor.locationManager.location?.coordinate.longitude
+        let locationAccuracy = LocationMonitor.sharedMonitor.locationManager.location?.horizontalAccuracy
+        let siteID = WFMAPI.configClientID()?.siteID
+        
+        return [
+            "device_id": deviceID ?? "",
+            "device_model": deviceModel,
+            "ios_version": iosVersion,
+            "app_version": appVersion ?? "",
+            "app_build": buildNumber ?? "",
+            "latitude": latitude ?? "",
+            "longitude": longitude ?? "",
+            "location_accuracy": locationAccuracy ?? "",
+            "site_id": siteID ?? ""
+        ]
+    }
+    
+    public var baseURL: NSURL { return NSURL(string: "")! }
     
     public var path: String {
         switch self {
-        case .Login(_, _):
-            return "/users/sessions/"
+        case .Employees():
+            guard let employeeDownloadURL = Configuration.fromUserDefaults()?.employeeDownloadURL else { return "" }
+            return employeeDownloadURL
+        case .Punches(_):
+            guard let configuration = Configuration.fromUserDefaults() else { return "" }
+            return configuration.punchUploadURL
+        case .Configure():
+            return "http://config.timeclockdynamics.com:9100/get_config/v1.0/client/get_config"
         }
     }
     
     public var method: Moya.Method {
         switch self {
-        case .Login:
+        case .Employees, .Punches, .Configure:
             return .POST
         }
     }
     
     public var parameters: [String: AnyObject]? {
         switch self {
-        case .Login(let email, let password):
-            return [
-                "email": email,
-                "password": password
-            ]
+        case .Employees():
+            return WFMService.standardParameters()
+            
+        case .Punches(let punches):
+            do {
+                let punchesJSON = try NSJSONSerialization.dataWithJSONObject(punches.jsonArray(), options: [])
+                var params = WFMService.standardParameters()
+                params["punches"] = String(data: punchesJSON, encoding: NSUTF8StringEncoding)!
+                return params
+            } catch {
+                return nil
+            }
+            
+        default:
+            return WFMService.standardParameters()
         }
     }
     
     public var sampleData: NSData {
         switch self {
-        case .Login(_ , _):
-            return stubbedResponse("LoginResponse")
+        case .Employees():
+            return stubbedResponse("employeesResponse")
+            
+        case .Punches(_):
+            return stubbedResponse("employeesResponse")
+            
+        case .Configure():
+            return stubbedResponse("employeesResponse")
         }
     }
     
@@ -71,6 +119,15 @@ private extension WFMService {
         let bundle = NSBundle(forClass: TestClass.self)
         let path = bundle.pathForResource(filename, ofType: "json")
         return NSData(contentsOfFile: path!)
+    }
+}
+
+private extension CollectionType where Generator.Element: JSONable {
+    
+    func jsonArray() -> [JSONType] {
+        return map { (element: JSONable) -> JSONType in
+            return element.jsonValue
+        }
     }
 }
 

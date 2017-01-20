@@ -10,8 +10,14 @@ import Foundation
 
 struct TimeClockFlowController {
     
+    var compositeViewController: TimeClockCompositeViewController?
+    
     enum AppState {
-        case Idle, Capturing, ProcessingImage, DisplayingOptions, EmployeeIDEnrolment, EmployeeIDVerification
+        case Idle
+        case Capturing
+        case DisplayingOptions
+        case EmployeeIDEnrolment
+        case EmployeeIDVerification
     }
     
     var configuration: Configuration? {
@@ -51,36 +57,120 @@ struct TimeClockFlowController {
             vc.appState = state
         }
     }
+    
+    func setupComplete() {
+        guard let compositeViewController = compositeViewController else { return }
+        if let setupVC = compositeViewController.presentedViewController as? SetupViewController {
+            setupVC.dismissViewControllerAnimated(true, completion: nil)
+        }
+    }
+    
+    func setupFailed() {
+        guard let compositeViewController = compositeViewController else { return }
+
+        let alert = UIAlertController(title: "Setup Failed", message: "Please check your Client ID and internet connection", preferredStyle: .Alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+        
+        if let presentedVC = compositeViewController.presentedViewController {
+            presentedVC.presentViewController(alert, animated: true, completion: nil)
+        } else {
+            compositeViewController.presentViewController(alert, animated: true, completion: nil)
+        }
+        
+        let _ = try? Keychain.delete(identifier: "client_id")
+        Timeclock.Configuration.removeFromUserDefaults()
+        WFMAPI.heimdallr.clearAccessToken()
+    }
 }
 
 extension TimeClockFlowController: ClockOptionsDelegate {
     func clock(option: ClockOptions) {
         setUIState(.Idle)
     }
+    
+    func cancel() {
+        setUIState(.Idle)
+    }
 }
 
 extension TimeClockFlowController: IdleDelegate {
     func dismiss() {
-        setUIState(.DisplayingOptions)
-//        setUIState(.EmployeeIDVerification)
-//        setUIState(.Capturing)
-//        configuration?.captureViewController.startCapturing()
+        guard
+            let config = Timeclock.Configuration.fromUserDefaults()
+        else {
+            return
+        }
+        
+        if config.enableFacialRecognition {
+            configuration?.captureViewController.punchData = PunchData()
+            configuration?.captureViewController.startCapturing()
+            setUIState(.Capturing)
+        } else {
+            configuration?.employeeIDViewController.punchData = PunchData()
+            setUIState(.EmployeeIDVerification)
+        }
     }
 }
 
 extension TimeClockFlowController: CaptureDelegate {
-    func imageCaptured(image: UIImage) {
-        print("image captured")
-        setUIState(.DisplayingOptions)
+    func imageCaptured(punchData: PunchData?) {
+        
+        func employeeIDVerification(punchData: PunchData?) {
+            if let _ = punchData?.subjectID {
+                setUIState(.EmployeeIDVerification)
+            } else if let _ = punchData?.image {
+                setUIState(.EmployeeIDEnrolment)
+            }
+            
+            self.configuration?.employeeIDViewController.punchData = punchData
+            self.configuration?.captureViewController.punchData = nil
+        }
+        
+        
+        if let
+            config = Timeclock.Configuration.fromUserDefaults(),
+            punchData = punchData,
+            subjectID = punchData.subjectID,
+            confidence = punchData.confidence
+        where !config.enable2FA && confidence > 0.75 {
+            
+            DataController.sharedController?.fetchEmployee(subjectID, completion: { (managedObject, error) in
+                
+                if let employee = managedObject as? Employee {
+                    var mutablePunchData = punchData
+                    mutablePunchData.employee = employee
+                    
+                    self.setUIState(.DisplayingOptions)
+                    self.configuration?.captureViewController.punchData = nil
+                    self.configuration?.clockOptionsViewController.punchData = mutablePunchData
+                    
+                } else {
+                    employeeIDVerification(punchData)
+                }
+            })
+            
+
+            
+        } else {
+            employeeIDVerification(punchData)
+        }
     }
     
     func timedOut() {
-        
+        setUIState(.EmployeeIDVerification)
+        self.configuration?.captureViewController.punchData = nil
     }
 }
 
 extension TimeClockFlowController: EmployeeIDDelegate {
-    func idEntered(employeeID: String) {
+    func idEntered(punchData: PunchData?) {
         setUIState(.DisplayingOptions)
+        self.configuration?.employeeIDViewController.punchData = nil
+        self.configuration?.clockOptionsViewController.punchData = punchData
+    }
+    
+    func cancelled() {
+        setUIState(.Idle)
+        self.configuration?.employeeIDViewController.punchData = nil
     }
 }

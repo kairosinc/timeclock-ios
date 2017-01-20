@@ -16,8 +16,6 @@ extension Employee {
 //        return NSFetchRequest<Employee>(entityName: "Employee");
 //    }
 
-    @NSManaged public var employeeID: String?
+    @NSManaged public var badgeNumber: String?
     @NSManaged public var firstName: String?
-    @NSManaged public var lastName: String?
-
 }

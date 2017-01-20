@@ -8,11 +8,46 @@
 
 import Alamofire
 import Foundation
+import Heimdallr
 import Moya
 
 public typealias JSONType = [String : AnyObject]
 
 public struct WFMAPI {
+    
+    //OAuth
+    public static let tokenURL = NSURL(string: "http://config.timeclockdynamics.com:9100/sign_in/v1.0/auth/token")!
+    
+    private static let oAuthClientSecret = "3e691351c44346d589ca626b5c28415c"
+    
+    private static let oAuthStore = OAuthAccessTokenKeychainStore(service: "com.kairos.timeclock.keychain.oauth")
+    private static let configOAuthStore = OAuthAccessTokenKeychainStore(service: "com.kairos.timeclock.keychain.configoauth")
+
+    private static let oAuthclientCredentials = OAuthClientCredentials(
+        id: Configuration.fromUserDefaults()?.clientID ?? "",
+        secret: WFMAPI.oAuthClientSecret
+    )
+    
+    private static let configOAuthclientCredentials = OAuthClientCredentials(
+        id: WFMAPI.configClientID()?.clientID ?? "",
+        secret: WFMAPI.oAuthClientSecret
+    )
+    
+    public static let heimdallr = Heimdallr(
+        tokenURL: tokenURL,
+        accessTokenStore: WFMAPI.oAuthStore,
+        accessTokenParser: WFMOAuthAccessTokenParser(),
+        httpClient: WFMOAuthHTTPClientNSURLSession(oAuthClientCredentials: WFMAPI.oAuthclientCredentials),
+        resourceRequestAuthenticator: HeimdallResourceRequestAuthenticatorForm()
+    )
+    
+    public static let configHeimdallr = Heimdallr(
+        tokenURL: tokenURL,
+        accessTokenStore: WFMAPI.configOAuthStore,
+        accessTokenParser: WFMOAuthAccessTokenParser(),
+        httpClient: WFMOAuthHTTPClientNSURLSession(oAuthClientCredentials: WFMAPI.configOAuthclientCredentials),
+        resourceRequestAuthenticator: HeimdallResourceRequestAuthenticatorForm()
+    )
     
     static func certificates() -> [SecCertificate] {
         var certificates: [SecCertificate] = []
@@ -52,19 +87,20 @@ public struct WFMAPI {
     ]
     
     static let manager = Manager(
-        configuration: NSURLSessionConfiguration.defaultSessionConfiguration(),
-        serverTrustPolicyManager: ServerTrustPolicyManager(policies: policies)
+        configuration: NSURLSessionConfiguration.defaultSessionConfiguration()
+//        serverTrustPolicyManager: ServerTrustPolicyManager(policies: policies)
     )
     
     static let defaultProvider = MoyaProvider<WFMService>(
         endpointClosure: WFMAPI.endpointClosure,
+        requestClosure: WFMAPI.requestClosure,
         manager: manager
     )
     
     private static let accessToken = "tbc"
     
     private static let endpointClosure = { (target: WFMService) -> Endpoint<WFMService> in
-        let url = target.baseURL.URLByAppendingPathComponent(target.path)!.absoluteString
+        let url = NSURL(string: target.path)!.absoluteString
         let endpoint: Endpoint<WFMService> = Endpoint<WFMService>(URL: url!,
                                                                       sampleResponseClosure: {
                                                                         .NetworkResponse(200, target.sampleData)
@@ -72,50 +108,260 @@ public struct WFMAPI {
                                                                       method: target.method,
                                                                       parameters: target.parameters)
         
-        return endpoint.endpointByAddingParameters(["access_token": WFMAPI.accessToken])
-        
+        return endpoint
     }
     
-    //TODO: Replace response with user model once API is in place
-    public static func login(
-        provider: MoyaProvider<WFMService>,
-        email: String,
-        password: String,
-        completion: (user: String?, error: Moya.Error?) -> Void) {
-        
-        let login = WFMService.Login(
-            email: email,
-            password: password
-        )
-        
-        provider.request(login) { result in
-            switch result {
-            case let .Success(response):
-                do {
-                    guard let
-                        json = try response.mapJSON() as? JSONType,
-                        _ = json["user"] as? JSONType
-                        else {
-                            //Add parsing error type once model is in place
-                            completion(user: nil, error: nil)
-                            return
-                    }
-                    
-                    //TODO: Replace with User Model once API is in place
-                    let user = "someUser"
-                    completion(user: user, error: nil)
-                    
-                } catch {
-                    //Add parsing error type once model is in place
-                    completion(user: nil, error: nil)
-                }
-                
-            case let .Failure(error):
-                error
-                completion(user: nil, error: error)
-            }
+    static func configClientID() -> (clientID: String, siteID: String, username: String, password: String)? {
+        guard
+            let clientIDData = try? Keychain.get(identifier: "config_client_id"),
+            let siteIDData = try? Keychain.get(identifier: "config_site_id"),
+            let usernameData = try? Keychain.get(identifier: "config_username"),
+            let passwordData = try? Keychain.get(identifier: "config_password"),
+            let clientID = NSKeyedUnarchiver.unarchiveObjectWithData(clientIDData) as? String,
+            let siteID = NSKeyedUnarchiver.unarchiveObjectWithData(siteIDData) as? String,
+            let username = NSKeyedUnarchiver.unarchiveObjectWithData(usernameData) as? String,
+            let password = NSKeyedUnarchiver.unarchiveObjectWithData(passwordData) as? String
+        else {
+            return nil
         }
         
+        return (clientID, siteID, username, password)
+    }
+    
+    private static let requestClosure = { (endpoint: Endpoint<WFMService>, done: MoyaProvider.RequestResultClosure) in
+        let request = endpoint.urlRequest
+        
+        let heimdallrForRequest: Heimdallr
+        let username: String
+        let password: String
+        let clientIDString: String
+        let siteIDString: String
+        
+        if let url = request.URL?.absoluteString
+        where url == WFMService.Configure().path {
+            heimdallrForRequest = configHeimdallr
+            
+            guard let config = WFMAPI.configClientID() else {
+                return
+            }
+            
+            clientIDString = config.clientID
+            username = config.username
+            password = config.password
+            siteIDString = config.siteID
+
+        } else {
+            heimdallrForRequest = heimdallr
+            
+            guard let
+                savedUsername = Configuration.fromUserDefaults()?.username,
+                savedPassword = Configuration.fromUserDefaults()?.password,
+                savedClientIDString = Configuration.fromUserDefaults()?.clientID
+            else { return }
+            
+            username = savedUsername
+            password = savedPassword
+            clientIDString = savedClientIDString
+            siteIDString = WFMAPI.configClientID()?.siteID ?? ""
+        }
+        
+        heimdallrForRequest.authenticateRequest(request) { result in
+            switch result {
+            case .Success(let authenticatedRequest):
+                done(.Success(authenticatedRequest))
+            case .Failure(let error):
+                print("failure: \(error.localizedDescription)")
+                
+                heimdallrForRequest.requestAccessToken(grantType: "password", parameters: [
+                    "username": username,
+                    "password": password,
+                    "client_id": clientIDString,
+                    "site_id": siteIDString
+                ]) { result in
+                    switch result {
+                    case .Success(let authenticatedRequest):
+                        heimdallr.authenticateRequest(request) { result in
+                            switch result {
+                            case .Success(let authenticatedRequest):
+                                done(.Success(authenticatedRequest))
+                            case .Failure(let error):
+                                print("failure: \(error.localizedDescription)")
+                                done(.Failure(Moya.Error.Underlying(error)))
+                            }
+                        }
+                    case .Failure(let error):
+                        print("failure: \(error.localizedDescription)")
+                        done(.Failure(Moya.Error.Underlying(error)))
+                    }
+                }
+            }
+        }
+    }
+    
+    public static func configure(
+        clientID: String,
+        siteID: String,
+        username: String,
+        password: String,
+        provider: MoyaProvider<WFMService> = WFMAPI.defaultProvider,
+        completion: (error: ErrorType?) -> Void) {
+        
+        //Save clientID to keychain
+        let clientIDData = NSKeyedArchiver.archivedDataWithRootObject(clientID)
+        let siteIDData = NSKeyedArchiver.archivedDataWithRootObject(siteID)
+        let usernameData = NSKeyedArchiver.archivedDataWithRootObject(username)
+        let passwordData = NSKeyedArchiver.archivedDataWithRootObject(password)
+        
+        do {
+            try Keychain.set(identifier: "config_client_id", data: clientIDData, accessibility: String(kSecAttrAccessibleWhenUnlocked))
+            try Keychain.set(identifier: "config_site_id", data: siteIDData, accessibility: String(kSecAttrAccessibleWhenUnlocked))
+            try Keychain.set(identifier: "config_username", data: usernameData, accessibility: String(kSecAttrAccessibleWhenUnlocked))
+            try Keychain.set(identifier: "config_password", data: passwordData, accessibility: String(kSecAttrAccessibleWhenUnlocked))
+        } catch {
+            completion(error: RaphaAPIError.Unknown())
+            print("could not save to keychain, fail here")
+        }
+        
+        WFMAPI.getConfig(siteID: siteID) { (configuration, error) in
+            if let configuration = configuration {
+                configuration.persist()
+                DataController.sharedController?.syncScheduler.syncInterval = configuration.syncInterval
+                
+                WFMAPI.employees(completion: { (employees, error) in
+                    if let _ = error {
+                        Configuration.removeFromUserDefaults()
+                    }
+                    print("success, finish setup!!")
+                    completion(error: error)
+                })
+                
+            } else if let error = error {
+                print("could not complete API request, fail here: \(error)")
+                completion(error: error)
+            } else {
+                print("unknown error")
+                completion(error: RaphaAPIError.Unknown())
+            }
+        }
+    }
+    
+    public static func employees(
+        provider: MoyaProvider<WFMService> = WFMAPI.defaultProvider,
+        completion: (employees: [Employee]?, error: ErrorType?) -> Void) {
+        
+        WFMAPI.request(provider, target: WFMService.Employees()) { (result) in
+            switch result {
+            case let .Success(response):
+                print(response)
+                guard let
+                    json = try? response.mapJSON() as? JSONType,
+                    unwrappedJSON = json,
+                    employeesDictionary = unwrappedJSON["employees"] as? [JSONType]
+                    else {
+                        //Add parsing error type once model is in place
+                        completion(employees: nil, error: nil)
+                        return
+                }
+                DataController.sharedController!.persistEmployees(employeesDictionary, completion: { (managedObject, error) in
+                    completion(employees: nil, error: nil)
+                })
+                
+            case let .Failure(error):
+                print(error)
+                completion(employees: nil, error: error)
+            }
+        }
+    }
+    
+    public static func punches(
+        punches: [Punch],
+        provider: MoyaProvider<WFMService> = WFMAPI.defaultProvider,
+        completion: (error: ErrorType?) -> Void) {
+        
+        WFMAPI.request(provider, target: WFMService.Punches(punches: punches)) { (result) in
+            switch result {
+            case let .Success(response):
+                print(response)
+                completion(error: nil)
+                
+            case let .Failure(error):
+                print(error)
+                completion(error: error)
+            }
+        }
+    }
+    
+    private static func getConfig(
+        provider: MoyaProvider<WFMService> = WFMAPI.defaultProvider,
+        siteID: String,
+        completion: (configuration: Configuration?, error: ErrorType?) -> Void) {
+        
+        WFMAPI.request(provider, target: WFMService.Configure()) { (result) in
+            switch result {
+            case let .Success(response):
+                
+                guard let
+                    json = try? response.mapJSON() as? JSONType,
+                    unwrappedJSON = json
+                    else {
+                        completion(configuration: nil, error: nil)
+                        return
+                }
+
+                let configuration = Configuration(json: unwrappedJSON)
+                print(response)
+                completion(configuration: configuration, error: nil)
+                
+            case let .Failure(error):
+                print(error)
+                completion(configuration: nil, error: error)
+            }
+        }
+    }
+    
+    private static func request(
+        provider: MoyaProvider<WFMService>,
+        target: WFMService,
+        completion: (result: Result<Moya.Response, RaphaAPIError>) -> ()) -> Cancellable {
+        return provider.request(target) { (result) in
+            
+            dispatch_async(dispatch_get_main_queue(), {
+                switch result {
+                case let .Success(response):
+                    //parse out errors
+                    guard response.statusCode >= 200 && response.statusCode <= 299 else {
+                        print(response)
+                        if let serverError = RaphaAPIError.fromJSONData(response.data) {
+                            completion(result: .Failure(serverError))
+                            
+                        } else {
+                            let error = RaphaAPIError.Unknown()
+                            completion(result: .Failure(error))
+                        }
+                        
+                        break
+                    }
+                    completion(result: .Success(response))
+                    
+                case let .Failure(error):
+                    //maybe reformat network errors before forwarding on?
+                    switch error {
+                    case .ImageMapping(_), .JSONMapping(_), .StringMapping(_), .StatusCode(_), .Data(_):
+                        let apiError = RaphaAPIError.Unknown()
+                        completion(result: .Failure(apiError))
+                        
+                    case .Underlying(let nsError):
+                        if let errorMessage = nsError.localizedFailureReason {
+                            let apiError = RaphaAPIError.Known(errorMessage)
+                            completion(result: .Failure(apiError))
+                        } else {
+                            let apiError = RaphaAPIError.Unknown()
+                            completion(result: .Failure(apiError))
+                        }
+                    }
+                }
+            })
+        }
     }
 }
 

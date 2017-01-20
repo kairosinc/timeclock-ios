@@ -1,0 +1,5 @@
+# Core
+github "antitypical/Result" ~> 2.0
+
+# ReactiveCocoa
+github "ReactiveCocoa/ReactiveCocoa" ~> 4.0

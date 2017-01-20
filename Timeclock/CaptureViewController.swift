@@ -9,7 +9,7 @@
 import UIKit
 
 protocol CaptureDelegate {
-    func imageCaptured(image: UIImage)
+    func imageCaptured(punchData: PunchData?)
     func timedOut()
 }
 
@@ -29,46 +29,69 @@ class CaptureViewController: UIViewController {
         }
     }
     
+    var punchData: PunchData?
+    
     //MARK: Methods
     func startCapturing() {
         
+        /*
+         KairosSDK.imageCaptureEnrollWithSubjectId("0000", galleryName: "employees", success: { (response:[NSObject : AnyObject]!, image: UIImage!) in
+         print("success enroll \(response)")
+         }) { (response:[NSObject : AnyObject]!, image: UIImage!) in
+         print("failed to enrol: \(response)")
+         }
+ */
+        
+        let galleryName: String
+        if
+            let configuration = Configuration.fromUserDefaults(),
+            let gallery = configuration.galleryID {
+            galleryName = gallery
+        } else {
+            galleryName = "employees"
+        }
+        
+
         KairosSDK.imageCaptureRecognizeWithThreshold("0.75",
-                                                     galleryName: "employees",
+                                                     galleryName: galleryName,
                                                      success: { (response:[NSObject : AnyObject]!, image: UIImage!) in
-            print("success detect \(response)")
+                                                        
+             if let imagesResponse = response["images"] as? NSArray {
+                print(imagesResponse)
+                let firstImagesResponse = imagesResponse.firstObject
+                let transaction = firstImagesResponse?["transaction"]
+                if let transaction = transaction as? [NSObject: AnyObject] {
+                    let confidence = transaction["confidence"] as? Float
+                    self.punchData?.confidence = confidence
+                    let subject_id = transaction["subject_id"] as? String
+                    self.punchData?.subjectID = subject_id
+                }
+                                                        
+            
+                self.punchData?.image = image
+                self.capturedImage(self.punchData)
+             } else {
+                
+                self.punchData?.image = image
+                self.capturedImage(self.punchData)
+            }
             
             }, failure: { (response:[NSObject : AnyObject]!, image: UIImage!) in
-                print("failire \(response)")
+                print("failure \(response)")
+                self.punchData?.image = image
+                self.capturedImage(self.punchData)
         })
-        
-        //1 Capture image and call recognize
-        
-        //2a If recognize is successfull, goto 3
-        //2b If recognize is unsuccessfull, ask for employee ID and then goto 3
-        
-        //3 Show clock options,
-        
-        //4 Create new clock punch with selected option and ID
-//        performSelector(#selector(capturedImage), withObject: nil, afterDelay: 3)
-        
-//        KairosSDK.imageCaptureEnrollWithSubjectId("001", galleryName: "employees", success: { (response:[NSObject : AnyObject]!, image: UIImage!) in
-//            print("success enroll \(response)")
-//            }) { (response:[NSObject : AnyObject]!, image: UIImage!) in
-//                print("failed to enrol: \(response)")
-//        }
-        
     }
     
-    func capturedImage() {
-        let image = UIImage()
-        delegate?.imageCaptured(image)
+    func capturedImage(punchData: PunchData?) {
+        delegate?.imageCaptured(self.punchData)
     }
 }
 
 extension CaptureViewController: TimeClockViewController {
     func opacityForAppState(state: TimeClockFlowController.AppState) -> CGFloat {
         switch state {
-        case .Idle, .Capturing, .ProcessingImage, .DisplayingOptions:
+        case .Idle, .Capturing, .DisplayingOptions:
             return 1
         default:
             return 0

@@ -9,7 +9,8 @@
 import UIKit
 
 protocol EmployeeIDDelegate {
-    func idEntered(employeeID: String)
+    func idEntered(punchData: PunchData?)
+    func cancelled()
 }
 
 class EmployeeIDViewController: UIViewController {
@@ -17,6 +18,7 @@ class EmployeeIDViewController: UIViewController {
     //MARK: Properties
     var delegate: EmployeeIDDelegate?
     var containerView: UIView?
+    var punchData: PunchData?
     
     var appState: TimeClockFlowController.AppState? {
         didSet {
@@ -107,14 +109,38 @@ class EmployeeIDViewController: UIViewController {
     }
     
     @IBAction func confirmTouchUpInside(sender: AnyObject) {
-        if let employeeID = employeeIDLabel.text where (employeeID == "1001") {
-            delegate?.idEntered(employeeID)
-        } else {
-            showError("Employee ID Not Found")
-        }
+        guard let employeeID = employeeIDLabel.text else { return }
+        DataController.sharedController?.fetchEmployee(employeeID, completion: { (managedObject, error) in
+            
+            let galleryName: String
+            if
+                let configuration = Configuration.fromUserDefaults(),
+                let gallery = configuration.galleryID {
+                galleryName = gallery
+            } else {
+                galleryName = "employees"
+            }
+            
+            if let employee = managedObject as? Employee {
+                if let
+                    appState = self.appState,
+                    punchData = self.punchData,
+                    image = punchData.image
+                    where appState == .EmployeeIDEnrolment {
+                        KairosSDK.enrollWithImage(image, subjectId: employeeID, galleryName: galleryName, success: nil, failure: nil)
+                }
+                
+                self.punchData?.employee = employee
+                self.delegate?.idEntered(self.punchData)
+                
+            } else {
+                self.showError("Badge Number Not Found")
+            }
+        })
     }
     
     @IBAction func cancelTouchUpInside(sender: AnyObject) {
+        delegate?.cancelled()
     }
     
     //MARK: UIViewController
@@ -125,7 +151,7 @@ class EmployeeIDViewController: UIViewController {
     
     //MARK: Methods
     func configureForAppState(appState: TimeClockFlowController.AppState) {
-        titleLabel.text = "Enter Employee ID"
+        titleLabel.text = "Enter Badge Number"
         employeeIDLabel.text = ""
         errorLabel.hidden = true
     }

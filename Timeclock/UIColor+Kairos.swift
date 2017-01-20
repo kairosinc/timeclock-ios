@@ -24,4 +24,8 @@ extension UIColor {
     static func kairosRed() -> UIColor {
         return UIColor(red:0.85, green:0.00, blue:0.35, alpha:1.0)
     }
+    
+    static func kairosBlue() -> UIColor {
+        return UIColor(red:0.07, green:0.46, blue:0.89, alpha:1.0)
+    }
 }

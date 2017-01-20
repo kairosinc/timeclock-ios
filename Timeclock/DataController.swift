@@ -12,9 +12,12 @@ import Foundation
 typealias DataControllerConfiguration = (modelURL: NSURL, stack: CoreDataStack)
 public typealias PersistObjectCompletion = (managedObject: NSManagedObject?, error: ErrorType?) -> Void
 public typealias PersistObjectTuple = (managedObject: NSManagedObject?, error: ErrorType?)
-public typealias CloudKitCompletion = (records: [CKRecord]?, error: NSError?) -> Void
 
 public struct DataController {
+    
+    static let sharedController = DataController()
+    
+    let syncScheduler = SyncScheduler()
     
     public enum ContextType: Int {
         case Main = 0, Importer
@@ -118,6 +121,16 @@ public struct DataController {
         }
     }
     
+    private func persistObjectsInContext(context: NSManagedObjectContext) -> ErrorType? {
+        do {
+            try context.save()
+        } catch {
+            return (error)
+        }
+        
+        return (nil)
+    }
+    
     private func persistObjectSynchronously<A: NSManagedObject where A: ManagedObjectType>(managedObject: A) -> ErrorType? {
         guard let context = managedObject.managedObjectContext else { return (nil) }
         do {
@@ -129,8 +142,8 @@ public struct DataController {
         return (nil)
     }
     
-    //MARK: User
-    public func persistEmployee(jsonDictionary: JSONType, completion: PersistObjectCompletion) {
+    //MARK: Employee
+    public func persistEmployees(jsonArray: [JSONType], completion: PersistObjectCompletion) {
         let context = importer.importContext
         
         //Delete existing User records
@@ -139,11 +152,115 @@ public struct DataController {
         _ = try? context.executeRequest(deleteRequest)
         
         //Create & persist new Employee object
-        let employee = Employee.fromJSON(jsonDictionary, inContext: context)
+        for employeeDictionary in jsonArray {
+            Employee.fromJSON(employeeDictionary, inContext: context)
+        }
         
-        persistObject(employee) { (error) in
-            self.objectFromMainContext(employee.objectID, completion: completion)
+        persistObjectsInContext(context)
+        completion(managedObject: nil, error: nil)
+    }
+    
+    public func fetchEmployee(
+        employeeID: String,
+        contextType: ContextType = .Main,
+        completion: PersistObjectCompletion) {
+        
+        let context = contextFrom(contextType)
+        
+        let fetch = NSFetchRequest(entityName: Employee.EntityName)
+        fetch.predicate = NSPredicate(format: "badgeNumber == %@", employeeID)
+        let results = try? context.executeFetchRequest(fetch)
+        if let results = results, let employee = results.first as? Employee {
+            completion(managedObject: employee, error: nil)
+            return
+        } else {
+            completion(managedObject: nil, error: nil)
+            return
         }
     }
-
+    
+    public func createAndPersistPunch(
+        timestampUTC: String,
+        timestampLocal: String,
+        clockOffset: Int16,
+        timezoneOffset: Int16,
+        timezoneName: String,
+        timezoneDST: Int16,
+        badgeNumber: String,
+        badgeNumberValid: Bool,
+        direction: String,
+        online: String,
+        facerecTransactionID: String? = nil,
+        facerecImageType: String? = nil,
+        facerecImageData: String? = nil,
+        subjectID: String? = nil,
+        confidence: NSNumber? = nil
+        ) {
+        
+        let context = contextFrom(.Main)
+        let punch = Punch.insertNewInContext(context)!
+        
+        punch.timestampUTC = timestampUTC
+        punch.timestampLocal = timestampLocal
+        punch.clockOffset = clockOffset
+        punch.timezoneOffset = timezoneOffset
+        punch.timezoneName = timezoneName
+        punch.timezoneDST = timezoneDST
+        punch.badgeNumber = badgeNumber
+        punch.badgeNumberValid = badgeNumberValid
+        punch.direction = direction
+        punch.online = online
+        punch.facerecTransactionID = facerecTransactionID
+        punch.facerecImageType = facerecImageType
+        punch.facerecImageData = facerecImageData
+        punch.subjectID = subjectID
+        punch.confidence = confidence
+        
+        persistObjectsInContext(context)
+        
+        DataController.sharedController?.fetchPunches(completion: { (punches, error) in
+            guard let punches = punches where !punches.isEmpty else { return }
+            WFMAPI.punches(punches, completion: { (error) in
+                if let _ = error {
+                } else {
+                    DataController.sharedController?.deletePunches(punches, completion: { (error) in })
+                }
+            })
+            
+        })
+        
+    }
+    
+    public func fetchPunches(
+        contextType: ContextType = .Main,
+        completion: (punches: [Punch]?, error: ErrorType?) -> Void) {
+        
+        let context = contextFrom(contextType)
+        
+        let fetch = NSFetchRequest(entityName: Punch.EntityName)
+        let results = try? context.executeFetchRequest(fetch)
+        if let results = results as? [Punch] {
+            completion(punches: results, error: nil)
+            return
+        } else {
+            completion(punches: nil, error: nil)
+            return
+        }
+    }
+    
+    public func deletePunches(
+        punches: [Punch],
+        contextType: ContextType = .Main,
+        completion: (error: ErrorType?) -> Void) {
+        
+        let context = contextFrom(contextType)
+        
+        for punch in punches {
+            context.deleteObject(punch)
+        }
+        
+        let error = self.persistObjectsInContext(context)
+        
+        completion(error: error)
+    }
 }

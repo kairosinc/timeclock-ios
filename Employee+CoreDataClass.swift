@@ -15,9 +15,8 @@ public class Employee: NSManagedObject, ManagedObjectType {
     static let EntityName = "Employee"
     
     enum Attributes: String {
-        case employeeID = "employeeID"
-        case firstName = "firstName"
-        case lastName = "lastName"
+        case badgeNumber = "BADGE_NUMBER"
+        case firstName = "FIRST_NAME"
     }
     
     //MARK: Convenience
@@ -28,9 +27,11 @@ public class Employee: NSManagedObject, ManagedObjectType {
     class func fromJSON(json: JSONType, inContext context: NSManagedObjectContext) -> Employee {
         let employee: Employee = context.insertObject()
         
-        employee.employeeID = json[Employee.Attributes.employeeID.rawValue] as? String
+        if let badgeNumber = json[Employee.Attributes.badgeNumber.rawValue] as? NSNumber {
+            employee.badgeNumber = String(badgeNumber)
+        }
+        
         employee.firstName  = json[Employee.Attributes.firstName.rawValue]  as? String
-        employee.lastName   = json[Employee.Attributes.lastName.rawValue]   as? String
         
         return employee
     }

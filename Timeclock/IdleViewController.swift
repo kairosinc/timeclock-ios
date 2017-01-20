@@ -26,6 +26,8 @@ class IdleViewController: UIViewController {
         }
     }
     
+    var punchData: PunchData?
+    
     //MARK: IBOutlet
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
@@ -60,7 +62,7 @@ class IdleViewController: UIViewController {
         
         let timeFormatter = NSDateFormatter()
         timeFormatter.locale = locale
-        timeFormatter.dateFormat = "H:mm a"
+        timeFormatter.dateFormat = "h:mm a"
         timeLabel.text = timeFormatter.stringFromDate(date)
         
         let dateFormatter = NSDateFormatter()
