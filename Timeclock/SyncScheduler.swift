@@ -6,10 +6,12 @@
 //  Copyright © 2016 Kairos. All rights reserved.
 //
 
+import Reachability
 import UIKit
 
 class SyncScheduler: NSObject {
     var syncTimer: NSTimer?
+    var reachability: Reachability?
     
     var syncInterval: Double? {
         didSet {
@@ -28,6 +30,8 @@ class SyncScheduler: NSObject {
                 selector: #selector(sync),
                 userInfo: nil,
                 repeats: true)
+            
+            setupReachability(hostName: "https://kairos.com")
         }
     }
     
@@ -43,5 +47,22 @@ class SyncScheduler: NSObject {
                 }
             })
         })
+    }
+    
+    func setupReachability(hostName hostName: String?) {
+        
+        do {
+            let reachability = try hostName == nil ? Reachability.reachabilityForInternetConnection() : Reachability(hostname: hostName!)
+            self.reachability = reachability
+        } catch ReachabilityError.FailedToCreateWithAddress(_) {
+            return
+        } catch {}
+        
+        reachability?.whenReachable = { reachability in
+            dispatch_async(dispatch_get_main_queue()) {
+                self.sync()
+            }
+        }
+        
     }
 }

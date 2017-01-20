@@ -344,7 +344,6 @@ public struct WFMAPI {
                     completion(result: .Success(response))
                     
                 case let .Failure(error):
-                    //maybe reformat network errors before forwarding on?
                     switch error {
                     case .ImageMapping(_), .JSONMapping(_), .StringMapping(_), .StatusCode(_), .Data(_):
                         let apiError = KairosAPIError.Unknown()
