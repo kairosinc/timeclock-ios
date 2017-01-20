@@ -218,7 +218,7 @@ public struct WFMAPI {
             try Keychain.set(identifier: "config_username", data: usernameData, accessibility: String(kSecAttrAccessibleWhenUnlocked))
             try Keychain.set(identifier: "config_password", data: passwordData, accessibility: String(kSecAttrAccessibleWhenUnlocked))
         } catch {
-            completion(error: RaphaAPIError.Unknown())
+            completion(error: KairosAPIError.Unknown())
             print("could not save to keychain, fail here")
         }
         
@@ -240,7 +240,7 @@ public struct WFMAPI {
                 completion(error: error)
             } else {
                 print("unknown error")
-                completion(error: RaphaAPIError.Unknown())
+                completion(error: KairosAPIError.Unknown())
             }
         }
     }
@@ -322,7 +322,7 @@ public struct WFMAPI {
     private static func request(
         provider: MoyaProvider<WFMService>,
         target: WFMService,
-        completion: (result: Result<Moya.Response, RaphaAPIError>) -> ()) -> Cancellable {
+        completion: (result: Result<Moya.Response, KairosAPIError>) -> ()) -> Cancellable {
         return provider.request(target) { (result) in
             
             dispatch_async(dispatch_get_main_queue(), {
@@ -331,11 +331,11 @@ public struct WFMAPI {
                     //parse out errors
                     guard response.statusCode >= 200 && response.statusCode <= 299 else {
                         print(response)
-                        if let serverError = RaphaAPIError.fromJSONData(response.data) {
+                        if let serverError = KairosAPIError.fromJSONData(response.data) {
                             completion(result: .Failure(serverError))
                             
                         } else {
-                            let error = RaphaAPIError.Unknown()
+                            let error = KairosAPIError.Unknown()
                             completion(result: .Failure(error))
                         }
                         
@@ -347,15 +347,15 @@ public struct WFMAPI {
                     //maybe reformat network errors before forwarding on?
                     switch error {
                     case .ImageMapping(_), .JSONMapping(_), .StringMapping(_), .StatusCode(_), .Data(_):
-                        let apiError = RaphaAPIError.Unknown()
+                        let apiError = KairosAPIError.Unknown()
                         completion(result: .Failure(apiError))
                         
                     case .Underlying(let nsError):
                         if let errorMessage = nsError.localizedFailureReason {
-                            let apiError = RaphaAPIError.Known(errorMessage)
+                            let apiError = KairosAPIError.Known(errorMessage)
                             completion(result: .Failure(apiError))
                         } else {
-                            let apiError = RaphaAPIError.Unknown()
+                            let apiError = KairosAPIError.Unknown()
                             completion(result: .Failure(apiError))
                         }
                     }
