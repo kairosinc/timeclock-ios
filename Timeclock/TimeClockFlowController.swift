@@ -106,6 +106,7 @@ extension TimeClockFlowController: IdleDelegate {
             configuration?.captureViewController.startCapturing()
             setUIState(.Capturing)
         } else {
+            configuration?.employeeIDViewController.punchData = PunchData()
             setUIState(.EmployeeIDVerification)
         }
     }
@@ -114,17 +115,7 @@ extension TimeClockFlowController: IdleDelegate {
 extension TimeClockFlowController: CaptureDelegate {
     func imageCaptured(punchData: PunchData?) {
         
-        if let
-            config = Timeclock.Configuration.fromUserDefaults(),
-            punchData = punchData,
-            confidence = punchData.confidence
-        where !config.enable2FA && confidence > 0.75 {
-            
-            setUIState(.DisplayingOptions)
-            self.configuration?.captureViewController.punchData = nil
-            self.configuration?.clockOptionsViewController.punchData = punchData
-            
-        } else {
+        func employeeIDVerification(punchData: PunchData?) {
             if let _ = punchData?.subjectID {
                 setUIState(.EmployeeIDVerification)
             } else if let _ = punchData?.image {
@@ -133,6 +124,35 @@ extension TimeClockFlowController: CaptureDelegate {
             
             self.configuration?.employeeIDViewController.punchData = punchData
             self.configuration?.captureViewController.punchData = nil
+        }
+        
+        
+        if let
+            config = Timeclock.Configuration.fromUserDefaults(),
+            punchData = punchData,
+            subjectID = punchData.subjectID,
+            confidence = punchData.confidence
+        where !config.enable2FA && confidence > 0.75 {
+            
+            DataController.sharedController?.fetchEmployee(subjectID, completion: { (managedObject, error) in
+                
+                if let employee = managedObject as? Employee {
+                    var mutablePunchData = punchData
+                    mutablePunchData.employee = employee
+                    
+                    self.setUIState(.DisplayingOptions)
+                    self.configuration?.captureViewController.punchData = nil
+                    self.configuration?.clockOptionsViewController.punchData = mutablePunchData
+                    
+                } else {
+                    employeeIDVerification(punchData)
+                }
+            })
+            
+
+            
+        } else {
+            employeeIDVerification(punchData)
         }
     }
     

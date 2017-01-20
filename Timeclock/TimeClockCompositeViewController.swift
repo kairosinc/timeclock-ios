@@ -62,13 +62,16 @@ class TimeClockCompositeViewController: UIViewController {
         if defaults.boolForKey("logout") {
             defaults.setBool(false, forKey: "logout")
             defaults.synchronize()
-            let _ = try? Keychain.delete(identifier: "client_id")
+            let _ = try? Keychain.delete(identifier: "config_client_id")
+            let _ = try? Keychain.delete(identifier: "config_site_id")
+            let _ = try? Keychain.delete(identifier: "config_username")
+            let _ = try? Keychain.delete(identifier: "config_password")
             WFMAPI.heimdallr.clearAccessToken()
             showSetup()
         }
         
         guard
-            let _ = WFMAPI.clientID(), let _ = Configuration.fromUserDefaults()
+            let _ = WFMAPI.configClientID(), let _ = Configuration.fromUserDefaults()
         else {
             showSetup()
             return

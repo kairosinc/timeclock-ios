@@ -50,16 +50,6 @@ public class WFMOAuthHTTPClientNSURLSession: NSObject, HeimdallrHTTPClient {
             paramsToAdd = ""
         }
         
-        let secret: String
-        if let clientSecret = oAuthClientCredentials.secret {
-            secret = clientSecret
-        } else {
-            secret = ""
-        }
-        
-//        let bodyDataString = String(paramsToAdd).uriDecodedString()!
-//        print("bodyDataString: \(bodyDataString)")
-        
         
         let url = "http://example.com/some?" + paramsToAdd
         let urlComponents = NSURLComponents(string: url)
@@ -67,6 +57,7 @@ public class WFMOAuthHTTPClientNSURLSession: NSObject, HeimdallrHTTPClient {
         let username = queryItems?.filter({$0.name == "username"}).first?.value
         let password = queryItems?.filter({$0.name == "password"}).first?.value
         let clientID = queryItems?.filter({$0.name == "client_id"}).first?.value
+        let siteID = queryItems?.filter({$0.name == "site_id"}).first?.value
         let grantType = queryItems?.filter({$0.name == "grant_type"}).first?.value
         let refreshToken = queryItems?.filter({$0.name == "refresh_token"}).first?.value
         
@@ -84,6 +75,10 @@ public class WFMOAuthHTTPClientNSURLSession: NSObject, HeimdallrHTTPClient {
             paramDict["client_id"] = clientID
         }
         
+        if let siteID = siteID {
+            paramDict["site_id"] = siteID
+        }
+        
         if let grantType = grantType {
             paramDict["grant_type"] = grantType
         }
@@ -92,17 +87,9 @@ public class WFMOAuthHTTPClientNSURLSession: NSObject, HeimdallrHTTPClient {
             paramDict["refresh_token"] = refreshToken
         }
         
-//        let paramDict = [username!.name: username!.value!,
-//                         password!.name: password!.value!,
-//                         clientID!.name: clientID!.value!,
-//                         grantType!.name: grantType!.value!]
-        
         let jsonData = try! NSJSONSerialization.dataWithJSONObject(paramDict, options: [])
         let jsonString = String(data: jsonData, encoding: NSUTF8StringEncoding)
         
-        
-//        let newURLString = request.URLString + "?" + paramsToAdd + "&client_id=\(oAuthClientCredentials.id)&client_secret=\(secret)"
-//        mutableRequest.URL = NSURL(string: newURLString)
         mutableRequest.setHTTPBody(parameters: ["auth": jsonString!])
         let task = urlSession.dataTaskWithRequest(mutableRequest, completionHandler: completion)
         task.resume()

@@ -11,16 +11,31 @@ import UIKit
 class SetupViewController: UIViewController {
 
     @IBOutlet weak var clientIDTextField: UITextField!
+    @IBOutlet weak var usernameTextField: UITextField!
+    @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var siteIDTextField: UITextField!
+    
     
     @IBAction func setupTouchUpInside(sender: AnyObject) {
         setup()
     }
     
     func setup() {
-        guard let clientID = clientIDTextField.text where clientID.characters.count > 0 else { return }
-        WFMAPI.configure(clientID) { (error) in
+        guard
+        let clientID = clientIDTextField.text where clientID.characters.count > 0,
+        let siteID = siteIDTextField.text where siteID.characters.count > 0,
+        let username = usernameTextField.text where username.characters.count > 0,
+        let password = passwordTextField.text where password.characters.count > 0
+        else {
+            let alert = UIAlertController(title: "Setup Failed", message: "Please check your credentials", preferredStyle: .Alert)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+            self.presentViewController(alert, animated: true, completion: nil)
+            return
+        }
+        
+        WFMAPI.configure(clientID, siteID: siteID, username: username, password: password) { (error) in
             if let _ = error {
-               let alert = UIAlertController(title: "Setup Failed", message: "Please check your Client ID and internet connection", preferredStyle: .Alert)
+               let alert = UIAlertController(title: "Setup Failed", message: "Please check your credentials and internet connection", preferredStyle: .Alert)
                 alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
                 self.presentViewController(alert, animated: true, completion: nil)
                 let _ = try? Keychain.delete(identifier: "client_id")
@@ -40,8 +55,18 @@ class SetupViewController: UIViewController {
 
 extension SetupViewController: UITextFieldDelegate {
     func textFieldShouldReturn(textField: UITextField) -> Bool {
-        setup()
         textField.resignFirstResponder()
+
+        switch textField.tag {
+            
+        case 0:
+            usernameTextField.becomeFirstResponder()
+        case 1:
+            passwordTextField.becomeFirstResponder()
+        default:
+            setup()
+        }
+        
         return true
     }
 }

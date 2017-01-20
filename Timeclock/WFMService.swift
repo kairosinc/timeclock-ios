@@ -26,6 +26,7 @@ extension WFMService: TargetType {
         let latitude = LocationMonitor.sharedMonitor.locationManager.location?.coordinate.latitude
         let longitude = LocationMonitor.sharedMonitor.locationManager.location?.coordinate.longitude
         let locationAccuracy = LocationMonitor.sharedMonitor.locationManager.location?.horizontalAccuracy
+        let siteID = WFMAPI.configClientID()?.siteID
         
         return [
             "device_id": deviceID ?? "",
@@ -35,27 +36,23 @@ extension WFMService: TargetType {
             "app_build": buildNumber ?? "",
             "latitude": latitude ?? "",
             "longitude": longitude ?? "",
-            "location_accuracy": locationAccuracy ?? ""
+            "location_accuracy": locationAccuracy ?? "",
+            "site_id": siteID ?? ""
         ]
     }
     
-//    public var baseURL: NSURL { return NSURL(string: "http://planneddev.timeclockdynamics.com:9100")! }
     public var baseURL: NSURL { return NSURL(string: "")! }
     
     public var path: String {
         switch self {
         case .Employees():
-//            guard let employeeDownloadURL = Configuration.fromUserDefaults()?.employeeDownloadURL else { return "" }
-//            return employeeDownloadURL
-            return "http://planneddev.timeclockdynamics.com:9100/EmployeeDownload/v1.0/Employees/download"
+            guard let employeeDownloadURL = Configuration.fromUserDefaults()?.employeeDownloadURL else { return "" }
+            return employeeDownloadURL
         case .Punches(_):
-            guard
-                let configuration = Configuration.fromUserDefaults()
-            else { return "" }
+            guard let configuration = Configuration.fromUserDefaults() else { return "" }
             return configuration.punchUploadURL
-//            return "http://planneddev.timeclockdynamics.com:9100/upload/v1.0/punches/upload"
         case .Configure():
-            return "http://planneddev.timeclockdynamics.com:9100/get_config/v1.0/client/get_config"
+            return "http://config.timeclockdynamics.com:9100/get_config/v1.0/client/get_config"
         }
     }
     

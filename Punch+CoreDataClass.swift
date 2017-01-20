@@ -24,7 +24,8 @@ public class Punch: NSManagedObject, ManagedObjectType {
 
 extension Punch: JSONable {
     var jsonValue: JSONType {
-        return [
+        
+        var dictionary = [
             "timestamp_utc": timestampUTC!,
             "timestamp_local": timestampLocal!,
             "clock_offset": NSNumber(short: clockOffset),
@@ -32,16 +33,22 @@ extension Punch: JSONable {
             "timezone_name": timezoneName!,
             "timezone_dst": NSNumber(short: timezoneDST),
             "badge_number": badgeNumber!,
-            "badge_number_valid": NSNumber(bool: badgeNumberValid),
+            "badge_number_valid": Int(badgeNumberValid),
             "direction": direction!,
-            "online": online!,
-            "facerec_transaction_id": "000000",
-            "facerec": [
-                "image_type": "image/jpeg",
-                "image_data": facerecImageData ?? "",
-                "confidence": confidence ?? "",
-                "subject_id": subjectID ?? ""
-            ]
+            "online": online!
         ]
+        
+        if let facerecImageData = facerecImageData where facerecImageData.characters.count > 0 {
+            dictionary["facerec_transaction_id"] = "000000"
+            
+            dictionary["facerec"] = [
+            "image_type": "image/jpeg",
+            "image_data": facerecImageData,
+            "confidence": confidence ?? "",
+            "subject_id": subjectID ?? ""
+            ]
+        }
+        
+        return dictionary
     }
 }

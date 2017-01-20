@@ -29,18 +29,41 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="z6T-Sb-LAp" userLabel="Punch Stack View">
                                 <rect key="frame" x="0.0" y="481.5" width="375" height="149.5"/>
                                 <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="YXM-uq-pbE" userLabel="Debug Stack View">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BADGE:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="jo2-FQ-aC6" userLabel="BADGE:">
+                                                <rect key="frame" x="0.0" y="0.0" width="124.5" height="49"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="subject_id:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Gu6-ro-4o2">
+                                                <rect key="frame" x="125.5" y="0.0" width="124" height="49"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="confidence:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="kei-UC-fXX">
+                                                <rect key="frame" x="250.5" y="0.0" width="124.5" height="49"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="fje-Av-Zq1">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="74.5"/>
+                                        <rect key="frame" x="0.0" y="50" width="375" height="49.5"/>
                                         <subviews>
                                             <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ld2-7p-NrE">
-                                                <rect key="frame" x="0.0" y="0.0" width="187" height="74.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="187" height="49.5"/>
                                                 <state key="normal" title="BREAK START"/>
                                                 <connections>
                                                     <action selector="clockOptionTouchUpInside:" destination="gDy-fM-XMW" eventType="touchUpInside" id="Q8U-3e-OUe"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hid-hH-yTX">
-                                                <rect key="frame" x="188" y="0.0" width="187" height="74.5"/>
+                                                <rect key="frame" x="188" y="0.0" width="187" height="49.5"/>
                                                 <state key="normal" title="CLOCK IN"/>
                                                 <connections>
                                                     <action selector="clockOptionTouchUpInside:" destination="gDy-fM-XMW" eventType="touchUpInside" id="g8K-dT-Uu2"/>
@@ -49,17 +72,17 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="OwT-GR-bIw">
-                                        <rect key="frame" x="0.0" y="75.5" width="375" height="74"/>
+                                        <rect key="frame" x="0.0" y="100.5" width="375" height="49"/>
                                         <subviews>
                                             <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xTX-zg-ahD">
-                                                <rect key="frame" x="0.0" y="0.5" width="187" height="74"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="187" height="49"/>
                                                 <state key="normal" title="BREAK END"/>
                                                 <connections>
                                                     <action selector="clockOptionTouchUpInside:" destination="gDy-fM-XMW" eventType="touchUpInside" id="Uuh-H1-k5H"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y05-24-GbG">
-                                                <rect key="frame" x="188" y="0.5" width="187" height="74"/>
+                                                <rect key="frame" x="188" y="0.0" width="187" height="49"/>
                                                 <state key="normal" title="CLOCK OUT"/>
                                                 <connections>
                                                     <action selector="clockOptionTouchUpInside:" destination="gDy-fM-XMW" eventType="touchUpInside" id="4zI-em-Ukv"/>
@@ -134,6 +157,9 @@
                     <connections>
                         <outlet property="breakEndButton" destination="xTX-zg-ahD" id="rJG-R6-16z"/>
                         <outlet property="breakStartButton" destination="ld2-7p-NrE" id="NnW-1q-03S"/>
+                        <outlet property="debugBadgeLabel" destination="jo2-FQ-aC6" id="4q1-rP-Yql"/>
+                        <outlet property="debugConfidenceLabel" destination="kei-UC-fXX" id="Yj2-F9-FCQ"/>
+                        <outlet property="debugSubjectIDLabel" destination="Gu6-ro-4o2" id="PDC-f8-gIT"/>
                         <outlet property="doneButton" destination="xlw-19-nR5" id="XMY-9R-dwx"/>
                         <outlet property="greetingLabel" destination="b8R-2U-RFG" id="gUF-IZ-z4b"/>
                         <outlet property="inButton" destination="Hid-hH-yTX" id="eJP-VN-fSN"/>

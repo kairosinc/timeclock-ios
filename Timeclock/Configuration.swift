@@ -16,9 +16,13 @@ class Configuration: NSObject, NSCoding {
     let employeeDownloadURL: String
     let galleryID: String?
     let syncInterval: Double?
+    let password: String
+    let username: String
+    let clientID: String
     
     init?(json: JSONType) {
         guard let clientConfig = json["client_config"] as? JSONType else { return nil }
+        guard let auth = clientConfig["auth"] as? JSONType else { return nil }
         
         guard let enable2FA = clientConfig["enable_2fa"] as? NSNumber else { return nil }
         self.enable2FA = enable2FA.boolValue
@@ -31,6 +35,15 @@ class Configuration: NSObject, NSCoding {
         
         guard let employeeDownloadURL = clientConfig["employee_download_url"] as? String else { return nil }
         self.employeeDownloadURL = employeeDownloadURL
+        
+        guard let password = auth["password"] as? String else { return nil }
+        self.password = password
+        
+        guard let username = auth["username"] as? String else { return nil }
+        self.username = username
+        
+        guard let clientID = auth["clientid"] as? String else { return nil }
+        self.clientID = clientID
         
         if let employeeWebURL = clientConfig["employee_web_url"] as? String {
             self.employeeWebURL = employeeWebURL
@@ -58,7 +71,10 @@ class Configuration: NSObject, NSCoding {
         employeeWebURL: String?,
         employeeDownloadURL: String,
         galleryID: String?,
-        syncInterval: Double?) {
+        syncInterval: Double?,
+        password: String,
+        username: String,
+        clientID: String) {
         
         self.enable2FA = enable2FA
         self.enableFacialRecognition = enableFacialRecognition
@@ -67,6 +83,9 @@ class Configuration: NSObject, NSCoding {
         self.employeeDownloadURL = employeeDownloadURL
         self.galleryID = galleryID
         self.syncInterval = syncInterval
+        self.password = password
+        self.username = username
+        self.clientID = clientID
     }
     
     //MARK: NSCoding
@@ -75,7 +94,11 @@ class Configuration: NSObject, NSCoding {
             let enable2FA = decoder.decodeObjectForKey("enable2FA") as? Bool,
             let enableFacialRecognition = decoder.decodeObjectForKey("enableFacialRecognition") as? Bool,
             let punchUploadURL = decoder.decodeObjectForKey("punchUploadURL") as? String,
-            let employeeDownloadURL = decoder.decodeObjectForKey("employeeDownloadURL") as? String
+            let employeeDownloadURL = decoder.decodeObjectForKey("employeeDownloadURL") as? String,
+            let password = decoder.decodeObjectForKey("password") as? String,
+            let username = decoder.decodeObjectForKey("username") as? String,
+            let clientID = decoder.decodeObjectForKey("clientID") as? String
+            
         else {
             return nil
         }
@@ -91,7 +114,10 @@ class Configuration: NSObject, NSCoding {
             employeeWebURL: employeeWebURL,
             employeeDownloadURL: employeeDownloadURL,
             galleryID: galleryID,
-            syncInterval: syncInterval
+            syncInterval: syncInterval,
+            password: password,
+            username: username,
+            clientID: clientID
         )
     }
     
@@ -100,6 +126,9 @@ class Configuration: NSObject, NSCoding {
         coder.encodeObject(self.enableFacialRecognition, forKey: "enableFacialRecognition")
         coder.encodeObject(self.punchUploadURL, forKey: "punchUploadURL")
         coder.encodeObject(self.employeeDownloadURL, forKey: "employeeDownloadURL")
+        coder.encodeObject(self.password, forKey: "password")
+        coder.encodeObject(self.username, forKey: "username")
+        coder.encodeObject(self.clientID, forKey: "clientID")
         
         if let employeeWebURL = self.employeeWebURL {
             coder.encodeObject(employeeWebURL, forKey: "employeeWebURL")

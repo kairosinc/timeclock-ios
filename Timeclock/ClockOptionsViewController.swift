@@ -56,6 +56,20 @@ class ClockOptionsViewController: UIViewController {
             let request = NSURLRequest(URL: url)
             webView.loadRequest(request)
             webView.hidden = false
+            
+            //Debug
+            debugBadgeLabel.text = "badge_number:" + badgeNumber
+            if let subjectID = punchData?.subjectID {
+                debugSubjectIDLabel.text = "subject_id:" + subjectID
+            } else {
+                debugSubjectIDLabel.text = "subject_id:"
+            }
+            
+            if let confidence = punchData?.confidence {
+                debugConfidenceLabel.text = "confidence:" + String(confidence)
+            } else {
+                debugConfidenceLabel.text = "confidence:"
+            }
         }
     }
     
@@ -169,6 +183,9 @@ class ClockOptionsViewController: UIViewController {
         }
     }
     
+    @IBOutlet weak var debugBadgeLabel: UILabel!
+    @IBOutlet weak var debugSubjectIDLabel: UILabel!
+    @IBOutlet weak var debugConfidenceLabel: UILabel!
     
     
     //MARK: IBAction

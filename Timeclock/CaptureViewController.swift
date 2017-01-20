@@ -59,11 +59,11 @@ class CaptureViewController: UIViewController {
              if let imagesResponse = response["images"] as? NSArray {
                 print(imagesResponse)
                 let firstImagesResponse = imagesResponse.firstObject
-                let trans = firstImagesResponse?["transaction"]
-                if let trans = trans as? [NSObject: AnyObject] {
-                    let confidence = trans["confidence"] as? Float
+                let transaction = firstImagesResponse?["transaction"]
+                if let transaction = transaction as? [NSObject: AnyObject] {
+                    let confidence = transaction["confidence"] as? Float
                     self.punchData?.confidence = confidence
-                    let subject_id = trans["subject_id"] as? String
+                    let subject_id = transaction["subject_id"] as? String
                     self.punchData?.subjectID = subject_id
                 }
                                                         

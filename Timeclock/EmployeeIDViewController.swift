@@ -126,7 +126,7 @@ class EmployeeIDViewController: UIViewController {
                     appState = self.appState,
                     punchData = self.punchData,
                     image = punchData.image
-                    where appState == .EmployeeIDEnrolment || appState == .EmployeeIDVerification {
+                    where appState == .EmployeeIDEnrolment {
                         KairosSDK.enrollWithImage(image, subjectId: employeeID, galleryName: galleryName, success: nil, failure: nil)
                 }
                 

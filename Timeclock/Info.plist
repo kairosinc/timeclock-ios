@@ -30,7 +30,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>129</string>
+	<string>146</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
@@ -53,7 +53,7 @@
 		<true/>
 		<key>NSExceptionDomains</key>
 		<dict>
-			<key>planneddev.timeclockdynamics.com</key>
+			<key>config.timeclockdynamics.com</key>
 			<dict>
 				<key>NSIncludesSubdomains</key>
 				<true/>
