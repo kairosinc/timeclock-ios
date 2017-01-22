@@ -56,7 +56,9 @@ class SyncScheduler: NSObject {
             self.reachability = reachability
         } catch ReachabilityError.FailedToCreateWithAddress(_) {
             return
-        } catch {}
+        } catch {
+            return
+        }
         
         reachability?.whenReachable = { reachability in
             dispatch_async(dispatch_get_main_queue()) {
