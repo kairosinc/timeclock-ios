@@ -28,7 +28,8 @@ class Configuration: NSObject, NSCoding {
         self.enable2FA = enable2FA.boolValue
         
         guard let enableFacialRecognition = clientConfig["enable_facial_recognition"] as? NSNumber else { return nil }
-        self.enableFacialRecognition = enableFacialRecognition.boolValue
+//        self.enableFacialRecognition = enableFacialRecognition.boolValue
+        self.enableFacialRecognition = false
         
         guard let punchUploadURL = clientConfig["punch_upload_url"] as? String else { return nil }
         self.punchUploadURL = punchUploadURL

@@ -233,7 +233,13 @@ class ClockOptionsViewController: UIViewController {
         
         let direction = selectedOption.stringValue
         
-        let online = "1"
+        
+        let online: String
+        if let onlineBool = DataController.sharedController?.syncScheduler.reachability?.isReachable() {
+            online = String(onlineBool)
+        } else {
+            online = "true"
+        }
         
         let facerecTransactionID: String? = nil
         
