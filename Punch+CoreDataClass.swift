@@ -29,7 +29,7 @@ extension Punch: JSONable {
             "timestamp_utc": timestampUTC!,
             "timestamp_local": timestampLocal!,
             "clock_offset": NSNumber(short: clockOffset),
-            "timezone_offset": NSNumber(short: timezoneOffset),
+            "timezone_offset": NSNumber(short: timezoneOffset).integerValue,
             "timezone_name": timezoneName!,
             "timezone_dst": NSNumber(short: timezoneDST),
             "badge_number": badgeNumber!,

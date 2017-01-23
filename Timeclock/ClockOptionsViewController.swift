@@ -218,11 +218,9 @@ class ClockOptionsViewController: UIViewController {
         
         let clockOffset: Int16 = 0 //Investigate
         
-        let timezoneOffsetDateFormatter = NSDateFormatter()
-        timezoneOffsetDateFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
-        timezoneOffsetDateFormatter.dateFormat = "Z"
-        timezoneOffsetDateFormatter.timeZone = NSTimeZone.localTimeZone()
-        let timezoneOffset = Int16(timezoneOffsetDateFormatter.stringFromDate(punchDate))
+        let currentTimeZone = NSTimeZone.localTimeZone()
+        let timeZoneOffsetSeconds = currentTimeZone.secondsFromGMTForDate(punchDate)
+        let timezoneOffset = (timeZoneOffsetSeconds / 60) / 60
         
         let timezoneName = NSTimeZone.localTimeZone().abbreviation
         let timezoneDST = Int(NSTimeZone.localTimeZone().daylightSavingTime)
@@ -260,7 +258,7 @@ class ClockOptionsViewController: UIViewController {
             timestampUTC,
             timestampLocal: timestampLocal,
             clockOffset: clockOffset,
-            timezoneOffset: timezoneOffset!,
+            timezoneOffset: Int16(timezoneOffset),
             timezoneName: timezoneName!,
             timezoneDST: Int16(timezoneDST),
             badgeNumber: badgeNumber!,
