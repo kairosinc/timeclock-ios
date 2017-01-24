@@ -13,7 +13,7 @@ struct MixpanelService: AnalyticsService {
     
     static private var mixpanel: MixpanelInstance?
     
-    static var apiToken: String = ""
+    static var apiToken: String = "d927bb999cd47d9b19dcc3ed156964eb"
     static var uploadInterval: Double = 60
     
     static func initialize(launchOptions: [NSObject : AnyObject]?) {
