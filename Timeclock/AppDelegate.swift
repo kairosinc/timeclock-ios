@@ -29,6 +29,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 assertionFailure()
                 return false
         }
+        
+        //Initializa Analytics
+        Analytics.initializeServices(launchOptions)
 
 
         //Initialize the Kairos SDK
