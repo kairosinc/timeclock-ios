@@ -2,3 +2,4 @@ github "kairosinc/Kairos-SDK-iOS" "master"
 github "Moya/Moya" ~> 7.0.3
 github "trivago/Heimdallr.swift" ~> 3.2
 github "ashleymills/Reachability.swift" ~> 2.4
+github "mixpanel/mixpanel-swift" ~> 1.0.1

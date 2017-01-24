@@ -39,6 +39,12 @@
 		206FA2041D61AB5F008B1F94 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 206FA2021D61AB5F008B1F94 /* LaunchScreen.storyboard */; };
 		208012011D7EAA0200DEE7E3 /* EmployeeIDViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 208012001D7EAA0200DEE7E3 /* EmployeeIDViewController.swift */; };
 		2088538F1DB0C51F00866807 /* ClockOptions.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2088538D1DB0C51F00866807 /* ClockOptions.storyboard */; };
+		208A1F001E374935009D55F5 /* AnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 208A1EFC1E374935009D55F5 /* AnalyticsService.swift */; };
+		208A1F011E374935009D55F5 /* AnalyticsEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 208A1EFD1E374935009D55F5 /* AnalyticsEvent.swift */; };
+		208A1F021E374935009D55F5 /* MixpanelService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 208A1EFE1E374935009D55F5 /* MixpanelService.swift */; };
+		208A1F031E374935009D55F5 /* Analytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 208A1EFF1E374935009D55F5 /* Analytics.swift */; };
+		208A1F0A1E374993009D55F5 /* Mixpanel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 208A1F091E374988009D55F5 /* Mixpanel.framework */; };
+		208A1F0B1E374993009D55F5 /* Mixpanel.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 208A1F091E374988009D55F5 /* Mixpanel.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		208B39B01D638C38002EE431 /* TimeClockFlowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 208B39AF1D638C38002EE431 /* TimeClockFlowController.swift */; };
 		20A31A781DBB9A8F004C81AC /* CoreDataImporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A31A721DBB9A8F004C81AC /* CoreDataImporter.swift */; };
 		20A31A791DBB9A8F004C81AC /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A31A731DBB9A8F004C81AC /* CoreDataStack.swift */; };
@@ -142,6 +148,20 @@
 			proxyType = 1;
 			remoteGlobalIDString = AA7344711BE7678B008AFE69;
 			remoteInfo = Reachability;
+		};
+		208A1F081E374988009D55F5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 208A1F041E374988009D55F5 /* Mixpanel.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = E115947D1CFF1491007F8B4F;
+			remoteInfo = Mixpanel;
+		};
+		208A1F0C1E374993009D55F5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 208A1F041E374988009D55F5 /* Mixpanel.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = E115947C1CFF1491007F8B4F;
+			remoteInfo = Mixpanel;
 		};
 		20A31AA61DBDF00B004C81AC /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -436,6 +456,7 @@
 				20C8C5A41DE4880C00CE4B0A /* Heimdallr.framework in Embed Frameworks */,
 				205423F01E326A8D00E05151 /* Reachability.framework in Embed Frameworks */,
 				20C5DF2B1D7D586300E3C47B /* Moya.framework in Embed Frameworks */,
+				208A1F0B1E374993009D55F5 /* Mixpanel.framework in Embed Frameworks */,
 				20C5DF261D7D585F00E3C47B /* Alamofire.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -479,6 +500,11 @@
 		206FA2051D61AB5F008B1F94 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		208012001D7EAA0200DEE7E3 /* EmployeeIDViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmployeeIDViewController.swift; sourceTree = "<group>"; };
 		2088538E1DB0C51F00866807 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/ClockOptions.storyboard; sourceTree = "<group>"; };
+		208A1EFC1E374935009D55F5 /* AnalyticsService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnalyticsService.swift; sourceTree = "<group>"; };
+		208A1EFD1E374935009D55F5 /* AnalyticsEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnalyticsEvent.swift; sourceTree = "<group>"; };
+		208A1EFE1E374935009D55F5 /* MixpanelService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MixpanelService.swift; sourceTree = "<group>"; };
+		208A1EFF1E374935009D55F5 /* Analytics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Analytics.swift; sourceTree = "<group>"; };
+		208A1F041E374988009D55F5 /* Mixpanel.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Mixpanel.xcodeproj; path = "Carthage/Checkouts/mixpanel-swift/Mixpanel.xcodeproj"; sourceTree = "<group>"; };
 		208B39AF1D638C38002EE431 /* TimeClockFlowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeClockFlowController.swift; sourceTree = "<group>"; };
 		20A31A721DBB9A8F004C81AC /* CoreDataImporter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataImporter.swift; sourceTree = "<group>"; };
 		20A31A731DBB9A8F004C81AC /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
@@ -532,6 +558,7 @@
 				2029C0D91D68CAF400DB72AF /* AVFoundation.framework in Frameworks */,
 				2029C0D71D68CAEC00DB72AF /* CoreGraphics.framework in Frameworks */,
 				204C90A71DEEEF3500930678 /* Fabric.framework in Frameworks */,
+				208A1F0A1E374993009D55F5 /* Mixpanel.framework in Frameworks */,
 				2029C0D51D68CAE800DB72AF /* CoreMedia.framework in Frameworks */,
 				205423EF1E326A8D00E05151 /* Reachability.framework in Frameworks */,
 				2029C0D31D68CAE200DB72AF /* CoreImage.framework in Frameworks */,
@@ -628,6 +655,7 @@
 				20C5DEE31D7D583F00E3C47B /* Moya.xcodeproj */,
 				20C5DF0A1D7D584B00E3C47B /* Result.xcodeproj */,
 				205423B81E326A8000E05151 /* Reachability.xcodeproj */,
+				208A1F041E374988009D55F5 /* Mixpanel.xcodeproj */,
 				204C90A51DEEEF3500930678 /* Fabric.framework */,
 				204C90A61DEEEF3500930678 /* Crashlytics.framework */,
 				20A86F0A1DEECF6B00A58D66 /* Frameworks */,
@@ -646,6 +674,7 @@
 		206FA1F81D61AB5F008B1F94 /* Timeclock */ = {
 			isa = PBXGroup;
 			children = (
+				208A1ED41E374928009D55F5 /* Analytics */,
 				200F86071E01A54C00050731 /* Settings.bundle */,
 				202686A61DEDEDFE00881B1B /* Timeclock.entitlements */,
 				206674321DE0AE62008789E8 /* LocationMonitor.swift */,
@@ -666,6 +695,25 @@
 				20CE42A01E02B2F90095B474 /* Configuration.swift */,
 			);
 			path = Timeclock;
+			sourceTree = "<group>";
+		};
+		208A1ED41E374928009D55F5 /* Analytics */ = {
+			isa = PBXGroup;
+			children = (
+				208A1EFC1E374935009D55F5 /* AnalyticsService.swift */,
+				208A1EFD1E374935009D55F5 /* AnalyticsEvent.swift */,
+				208A1EFE1E374935009D55F5 /* MixpanelService.swift */,
+				208A1EFF1E374935009D55F5 /* Analytics.swift */,
+			);
+			name = Analytics;
+			sourceTree = "<group>";
+		};
+		208A1F051E374988009D55F5 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				208A1F091E374988009D55F5 /* Mixpanel.framework */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		208B39B31D638C3B002EE431 /* Flow Controllers */ = {
@@ -855,6 +903,7 @@
 				20C5DF311D7D586900E3C47B /* PBXTargetDependency */,
 				20C8C5A61DE4880C00CE4B0A /* PBXTargetDependency */,
 				205423F21E326A8D00E05151 /* PBXTargetDependency */,
+				208A1F0D1E374993009D55F5 /* PBXTargetDependency */,
 			);
 			name = Timeclock;
 			productName = Timeclock;
@@ -935,6 +984,10 @@
 					ProjectRef = 2019ED781D61AD8200912018 /* KairosSDK.xcodeproj */;
 				},
 				{
+					ProductGroup = 208A1F051E374988009D55F5 /* Products */;
+					ProjectRef = 208A1F041E374988009D55F5 /* Mixpanel.xcodeproj */;
+				},
+				{
 					ProductGroup = 20C5DEE41D7D583F00E3C47B /* Products */;
 					ProjectRef = 20C5DEE31D7D583F00E3C47B /* Moya.xcodeproj */;
 				},
@@ -1010,6 +1063,13 @@
 			fileType = wrapper.application;
 			path = ReachabilityAppleTVSample.app;
 			remoteRef = 205423E61E326A8000E05151 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		208A1F091E374988009D55F5 /* Mixpanel.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Mixpanel.framework;
+			remoteRef = 208A1F081E374988009D55F5 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		20C5DED41D7D583500E3C47B /* Alamofire.framework */ = {
@@ -1311,9 +1371,11 @@
 				204640EE1D6AE31000F527A8 /* ClockViewController.swift in Sources */,
 				2054F2921E003A1A00C747E7 /* SetupViewController.swift in Sources */,
 				20A31A9B1DBB9F3A004C81AC /* Employee+CoreDataClass.swift in Sources */,
+				208A1F031E374935009D55F5 /* Analytics.swift in Sources */,
 				20CE42A11E02B2F90095B474 /* Configuration.swift in Sources */,
 				2039A41C1E0408590000900C /* PunchData.swift in Sources */,
 				208012011D7EAA0200DEE7E3 /* EmployeeIDViewController.swift in Sources */,
+				208A1F011E374935009D55F5 /* AnalyticsEvent.swift in Sources */,
 				20C8C5AA1DE48B4A00CE4B0A /* WFMOAuthHTTPClientNSURLSession.swift in Sources */,
 				20C8C5A81DE48B1600CE4B0A /* HeimdallResourceRequestAuthenticatorForm.swift in Sources */,
 				20E20BB51DB9367C0017CBA6 /* Model.xcdatamodeld in Sources */,
@@ -1331,6 +1393,7 @@
 				20A31A9C1DBB9F3A004C81AC /* Employee+CoreDataProperties.swift in Sources */,
 				20F7B59B1D62FEA600FE1817 /* TimeClockCompositeViewController.swift in Sources */,
 				206674331DE0AE62008789E8 /* LocationMonitor.swift in Sources */,
+				208A1F001E374935009D55F5 /* AnalyticsService.swift in Sources */,
 				202F837E1E082008008AC04D /* SyncScheduler.swift in Sources */,
 				20A31A7B1DBB9A8F004C81AC /* DataController.swift in Sources */,
 				208B39B01D638C38002EE431 /* TimeClockFlowController.swift in Sources */,
@@ -1338,6 +1401,7 @@
 				20A31A781DBB9A8F004C81AC /* CoreDataImporter.swift in Sources */,
 				20CF25D11DF892DF00B053F6 /* JSONable.swift in Sources */,
 				20C5DF341D7D58B600E3C47B /* WFMService.swift in Sources */,
+				208A1F021E374935009D55F5 /* MixpanelService.swift in Sources */,
 				20F7B5951D62FD3500FE1817 /* IdleViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1362,6 +1426,11 @@
 			isa = PBXTargetDependency;
 			name = Reachability;
 			targetProxy = 205423F11E326A8D00E05151 /* PBXContainerItemProxy */;
+		};
+		208A1F0D1E374993009D55F5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Mixpanel;
+			targetProxy = 208A1F0C1E374993009D55F5 /* PBXContainerItemProxy */;
 		};
 		20A31AA71DBDF00B004C81AC /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
