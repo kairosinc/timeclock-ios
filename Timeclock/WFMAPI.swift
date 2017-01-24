@@ -319,6 +319,25 @@ public struct WFMAPI {
         }
     }
     
+    private static func logError(response: Moya.Response?) {
+        
+        
+        var properties: AnalyticsProperties = [:]
+        if let response = response {
+            properties["statusCode"] = response.statusCode
+            properties["description"] = response.description
+            
+            if let nsResponse = response.response, let url = nsResponse.URL {
+                properties["url"] = url
+            }
+        }
+        
+        let event = AnalyticsEvent(name: "apiError", properties: properties)
+        
+        Analytics.trackEvent(event)
+
+    }
+    
     private static func request(
         provider: MoyaProvider<WFMService>,
         target: WFMService,
@@ -336,6 +355,7 @@ public struct WFMAPI {
                             
                         } else {
                             let error = KairosAPIError.Unknown()
+                            WFMAPI.logError(response)
                             completion(result: .Failure(error))
                         }
                         
@@ -344,6 +364,7 @@ public struct WFMAPI {
                     completion(result: .Success(response))
                     
                 case let .Failure(error):
+                    WFMAPI.logError(error.response)
                     switch error {
                     case .ImageMapping(_), .JSONMapping(_), .StringMapping(_), .StatusCode(_), .Data(_):
                         let apiError = KairosAPIError.Unknown()
