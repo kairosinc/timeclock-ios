@@ -170,7 +170,8 @@ public struct WFMAPI {
             case .Success(let authenticatedRequest):
                 done(.Success(authenticatedRequest))
             case .Failure(let error):
-                print("failure: \(error.localizedDescription)")
+                print("authenticateRequest failure: \(error.localizedDescription)")
+                print("requesting access token due to authenticateRequest failure")
                 
                 heimdallrForRequest.requestAccessToken(grantType: "password", parameters: [
                     "username": username,
@@ -180,17 +181,18 @@ public struct WFMAPI {
                 ]) { result in
                     switch result {
                     case .Success(let authenticatedRequest):
-                        heimdallr.authenticateRequest(request) { result in
+                        heimdallrForRequest.authenticateRequest(request) { result in
                             switch result {
                             case .Success(let authenticatedRequest):
+                                print("requestAccessToken success")
                                 done(.Success(authenticatedRequest))
                             case .Failure(let error):
-                                print("failure: \(error.localizedDescription)")
+                                print("requestAccessToken failure A: \(error.localizedDescription)")
                                 done(.Failure(Moya.Error.Underlying(error)))
                             }
                         }
                     case .Failure(let error):
-                        print("failure: \(error.localizedDescription)")
+                        print("requestAccessToken failure B: \(error.localizedDescription)")
                         done(.Failure(Moya.Error.Underlying(error)))
                     }
                 }
