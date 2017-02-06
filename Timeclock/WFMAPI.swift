@@ -33,14 +33,6 @@ public struct WFMAPI {
         secret: WFMAPI.oAuthClientSecret
     )
     
-//    public static let heimdallr = Heimdallr(
-//        tokenURL: tokenURL,
-//        accessTokenStore: WFMAPI.oAuthStore,
-//        accessTokenParser: WFMOAuthAccessTokenParser(),
-//        httpClient: WFMOAuthHTTPClientNSURLSession(oAuthClientCredentials: WFMAPI.oAuthclientCredentials),
-//        resourceRequestAuthenticator: HeimdallResourceRequestAuthenticatorForm()
-//    )
-    
     public static let configHeimdallr = Heimdallr(
         tokenURL: tokenURL,
         accessTokenStore: WFMAPI.configOAuthStore,
@@ -92,18 +84,8 @@ public struct WFMAPI {
         return certificates
     }
     
-    
-    static let policies: [String: ServerTrustPolicy] = [
-        "kairos.com": .PinCertificates(
-            certificates: WFMAPI.certificates(),
-            validateCertificateChain: true,
-            validateHost: true
-        )
-    ]
-    
     static let manager = Manager(
         configuration: NSURLSessionConfiguration.defaultSessionConfiguration()
-//        serverTrustPolicyManager: ServerTrustPolicyManager(policies: policies)
     )
     
     static let defaultProvider = MoyaProvider<WFMService>(
@@ -276,7 +258,6 @@ public struct WFMAPI {
                     unwrappedJSON = json,
                     employeesDictionary = unwrappedJSON["employees"] as? [JSONType]
                     else {
-                        //Add parsing error type once model is in place
                         completion(employees: nil, error: nil)
                         return
                 }
