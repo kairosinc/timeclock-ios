@@ -66,7 +66,7 @@ class TimeClockCompositeViewController: UIViewController {
             let _ = try? Keychain.delete(identifier: "config_site_id")
             let _ = try? Keychain.delete(identifier: "config_username")
             let _ = try? Keychain.delete(identifier: "config_password")
-            WFMAPI.heimdallr.clearAccessToken()
+            WFMAPI.heimdallr()?.clearAccessToken()
             showSetup()
         }
         

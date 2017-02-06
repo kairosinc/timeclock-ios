@@ -37,15 +37,31 @@ class SyncScheduler: NSObject {
     
     func sync() {
         WFMAPI.employees() { (employees, error) in }
-        
+        seriallyUploadPunches()
+    }
+    
+    func seriallyUploadPunches() {
         DataController.sharedController?.fetchPunches(completion: { (punches, error) in
             guard let punches = punches where !punches.isEmpty else { return }
-            WFMAPI.punches(punches, completion: { (error) in
-                if let _ = error {
-                } else {
-                    DataController.sharedController?.deletePunches(punches, completion: { (error) in })
-                }
-            })
+            let startIndex = punches.startIndex
+            
+            self.uploadPunch(punches, currentIndex: startIndex)
+        })
+    }
+    
+    func uploadPunch(punches: [Punch], currentIndex: Int) {
+        WFMAPI.punches([punches[currentIndex]], completion: { (error) in
+            if let _ = error {
+            } else {
+                let punchToRemove = punches[currentIndex]
+                DataController.sharedController?.deletePunches([punchToRemove], completion: { (error) in })
+            }
+            
+            let newIndex = currentIndex + 1
+            if newIndex < punches.endIndex {
+                self.uploadPunch(punches, currentIndex: newIndex)
+            }
+
         })
     }
     

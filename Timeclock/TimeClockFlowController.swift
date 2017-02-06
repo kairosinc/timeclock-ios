@@ -79,7 +79,7 @@ struct TimeClockFlowController {
         
         let _ = try? Keychain.delete(identifier: "client_id")
         Timeclock.Configuration.removeFromUserDefaults()
-        WFMAPI.heimdallr.clearAccessToken()
+        WFMAPI.heimdallr()?.clearAccessToken()
     }
 }
 

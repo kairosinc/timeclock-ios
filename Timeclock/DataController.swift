@@ -218,26 +218,19 @@ public struct DataController {
         
         persistObjectsInContext(context)
         
-        DataController.sharedController?.fetchPunches(completion: { (punches, error) in
-            guard let punches = punches where !punches.isEmpty else { return }
-            WFMAPI.punches(punches, completion: { (error) in
-                if let _ = error {
-                } else {
-                    DataController.sharedController?.deletePunches(punches, completion: { (error) in })
-                }
-            })
-            
-        })
+        DataController.sharedController?.syncScheduler.seriallyUploadPunches()
         
     }
     
     public func fetchPunches(
+        limit: Int = 99,
         contextType: ContextType = .Main,
         completion: (punches: [Punch]?, error: ErrorType?) -> Void) {
         
         let context = contextFrom(contextType)
         
         let fetch = NSFetchRequest(entityName: Punch.EntityName)
+        fetch.fetchLimit = limit
         let results = try? context.executeFetchRequest(fetch)
         if let results = results as? [Punch] {
             completion(punches: results, error: nil)
