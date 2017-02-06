@@ -34,14 +34,6 @@ class CaptureViewController: UIViewController {
     //MARK: Methods
     func startCapturing() {
         
-        /*
-         KairosSDK.imageCaptureEnrollWithSubjectId("0000", galleryName: "employees", success: { (response:[NSObject : AnyObject]!, image: UIImage!) in
-         print("success enroll \(response)")
-         }) { (response:[NSObject : AnyObject]!, image: UIImage!) in
-         print("failed to enrol: \(response)")
-         }
- */
-        
         let galleryName: String
         if
             let configuration = Configuration.fromUserDefaults(),
