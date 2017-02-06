@@ -33,13 +33,13 @@ public struct WFMAPI {
         secret: WFMAPI.oAuthClientSecret
     )
     
-    public static let heimdallr = Heimdallr(
-        tokenURL: tokenURL,
-        accessTokenStore: WFMAPI.oAuthStore,
-        accessTokenParser: WFMOAuthAccessTokenParser(),
-        httpClient: WFMOAuthHTTPClientNSURLSession(oAuthClientCredentials: WFMAPI.oAuthclientCredentials),
-        resourceRequestAuthenticator: HeimdallResourceRequestAuthenticatorForm()
-    )
+//    public static let heimdallr = Heimdallr(
+//        tokenURL: tokenURL,
+//        accessTokenStore: WFMAPI.oAuthStore,
+//        accessTokenParser: WFMOAuthAccessTokenParser(),
+//        httpClient: WFMOAuthHTTPClientNSURLSession(oAuthClientCredentials: WFMAPI.oAuthclientCredentials),
+//        resourceRequestAuthenticator: HeimdallResourceRequestAuthenticatorForm()
+//    )
     
     public static let configHeimdallr = Heimdallr(
         tokenURL: tokenURL,
@@ -48,6 +48,21 @@ public struct WFMAPI {
         httpClient: WFMOAuthHTTPClientNSURLSession(oAuthClientCredentials: WFMAPI.configOAuthclientCredentials),
         resourceRequestAuthenticator: HeimdallResourceRequestAuthenticatorForm()
     )
+    
+    private static func authURL() -> String {
+        return Configuration.fromUserDefaults()?.authURL ?? ""
+    }
+    
+    public static func heimdallr() -> Heimdallr? {
+        guard let url = NSURL(string: WFMAPI.authURL()) else { return nil }
+        
+        return Heimdallr(
+            tokenURL: url,
+            accessTokenStore: WFMAPI.oAuthStore,
+            accessTokenParser: WFMOAuthAccessTokenParser(),
+            httpClient: WFMOAuthHTTPClientNSURLSession(oAuthClientCredentials: WFMAPI.oAuthclientCredentials),
+            resourceRequestAuthenticator: HeimdallResourceRequestAuthenticatorForm())
+    }
     
     static func certificates() -> [SecCertificate] {
         var certificates: [SecCertificate] = []
@@ -131,7 +146,7 @@ public struct WFMAPI {
     private static let requestClosure = { (endpoint: Endpoint<WFMService>, done: MoyaProvider.RequestResultClosure) in
         let request = endpoint.urlRequest
         
-        let heimdallrForRequest: Heimdallr
+        let heimdallrForRequest: Heimdallr?
         let username: String
         let password: String
         let clientIDString: String
@@ -151,12 +166,13 @@ public struct WFMAPI {
             siteIDString = config.siteID
 
         } else {
-            heimdallrForRequest = heimdallr
+            heimdallrForRequest = WFMAPI.heimdallr()
             
             guard let
                 savedUsername = Configuration.fromUserDefaults()?.username,
                 savedPassword = Configuration.fromUserDefaults()?.password,
-                savedClientIDString = Configuration.fromUserDefaults()?.clientID
+                savedClientIDString = Configuration.fromUserDefaults()?.clientID,
+                savedAuthURL = Configuration.fromUserDefaults()?.authURL
             else { return }
             
             username = savedUsername
@@ -165,7 +181,7 @@ public struct WFMAPI {
             siteIDString = WFMAPI.configClientID()?.siteID ?? ""
         }
         
-        heimdallrForRequest.authenticateRequest(request) { result in
+        heimdallrForRequest?.authenticateRequest(request) { result in
             switch result {
             case .Success(let authenticatedRequest):
                 done(.Success(authenticatedRequest))
@@ -173,7 +189,7 @@ public struct WFMAPI {
                 print("authenticateRequest failure: \(error.localizedDescription)")
                 print("requesting access token due to authenticateRequest failure")
                 
-                heimdallrForRequest.requestAccessToken(grantType: "password", parameters: [
+                heimdallrForRequest?.requestAccessToken(grantType: "password", parameters: [
                     "username": username,
                     "password": password,
                     "client_id": clientIDString,
@@ -181,7 +197,7 @@ public struct WFMAPI {
                 ]) { result in
                     switch result {
                     case .Success(let authenticatedRequest):
-                        heimdallrForRequest.authenticateRequest(request) { result in
+                        heimdallrForRequest?.authenticateRequest(request) { result in
                             switch result {
                             case .Success(let authenticatedRequest):
                                 print("requestAccessToken success")

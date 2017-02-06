@@ -39,7 +39,7 @@ class SetupViewController: UIViewController {
                 alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
                 self.presentViewController(alert, animated: true, completion: nil)
                 let _ = try? Keychain.delete(identifier: "client_id")
-                WFMAPI.heimdallr.clearAccessToken()
+                WFMAPI.heimdallr()?.clearAccessToken()
             } else {
                 self.dismissViewControllerAnimated(true, completion: nil)
             }

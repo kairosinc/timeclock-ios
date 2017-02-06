@@ -14,6 +14,7 @@ class Configuration: NSObject, NSCoding {
     let punchUploadURL: String
     let employeeWebURL: String?
     let employeeDownloadURL: String
+    let authURL: String
     let galleryID: String?
     let syncInterval: Double?
     let password: String
@@ -35,6 +36,9 @@ class Configuration: NSObject, NSCoding {
         
         guard let employeeDownloadURL = clientConfig["employee_download_url"] as? String else { return nil }
         self.employeeDownloadURL = employeeDownloadURL
+        
+        guard let authURL = clientConfig["auth_url"] as? String else { return nil }
+        self.authURL = authURL
         
         guard let password = auth["password"] as? String else { return nil }
         self.password = password
@@ -70,6 +74,7 @@ class Configuration: NSObject, NSCoding {
         punchUploadURL: String,
         employeeWebURL: String?,
         employeeDownloadURL: String,
+        authURL: String,
         galleryID: String?,
         syncInterval: Double?,
         password: String,
@@ -81,6 +86,7 @@ class Configuration: NSObject, NSCoding {
         self.punchUploadURL = punchUploadURL
         self.employeeWebURL = employeeWebURL
         self.employeeDownloadURL = employeeDownloadURL
+        self.authURL = authURL
         self.galleryID = galleryID
         self.syncInterval = syncInterval
         self.password = password
@@ -95,6 +101,7 @@ class Configuration: NSObject, NSCoding {
             let enableFacialRecognition = decoder.decodeObjectForKey("enableFacialRecognition") as? Bool,
             let punchUploadURL = decoder.decodeObjectForKey("punchUploadURL") as? String,
             let employeeDownloadURL = decoder.decodeObjectForKey("employeeDownloadURL") as? String,
+            let authURL = decoder.decodeObjectForKey("authURL") as? String,
             let password = decoder.decodeObjectForKey("password") as? String,
             let username = decoder.decodeObjectForKey("username") as? String,
             let clientID = decoder.decodeObjectForKey("clientID") as? String
@@ -113,6 +120,7 @@ class Configuration: NSObject, NSCoding {
             punchUploadURL: punchUploadURL,
             employeeWebURL: employeeWebURL,
             employeeDownloadURL: employeeDownloadURL,
+            authURL: authURL,
             galleryID: galleryID,
             syncInterval: syncInterval,
             password: password,
@@ -126,6 +134,7 @@ class Configuration: NSObject, NSCoding {
         coder.encodeObject(self.enableFacialRecognition, forKey: "enableFacialRecognition")
         coder.encodeObject(self.punchUploadURL, forKey: "punchUploadURL")
         coder.encodeObject(self.employeeDownloadURL, forKey: "employeeDownloadURL")
+        coder.encodeObject(self.authURL, forKey: "authURL")
         coder.encodeObject(self.password, forKey: "password")
         coder.encodeObject(self.username, forKey: "username")
         coder.encodeObject(self.clientID, forKey: "clientID")
