@@ -338,11 +338,6 @@
 				CLASSPREFIX = KR;
 				LastUpgradeCheck = 0610;
 				ORGANIZATIONNAME = Kairos;
-				TargetAttributes = {
-					07AA7D0D18D22DD000C24A69 = {
-						LastSwiftMigration = 0800;
-					};
-				};
 			};
 			buildConfigurationList = 07AA7D0918D22DD000C24A69 /* Build configuration list for PBXProject "KairosSDK" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -524,7 +519,6 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 2.3;
 			};
 			name = Debug;
 		};
@@ -537,7 +531,6 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 2.3;
 			};
 			name = Release;
 		};

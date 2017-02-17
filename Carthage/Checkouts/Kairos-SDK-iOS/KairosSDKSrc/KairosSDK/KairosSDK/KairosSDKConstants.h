@@ -14,6 +14,6 @@
 
 
 // network
-#define kKairosSDKAPIEndpointHost @"https://api.kairos.com/"
+#define kKairosSDKAPIEndpointHost @"http://api.kairos.com/"
 //#define kKairosSDKAPIEndpointHost @"http://api-dev.kairos.com/"
 #endif

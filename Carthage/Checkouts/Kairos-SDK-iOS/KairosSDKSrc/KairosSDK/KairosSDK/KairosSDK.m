@@ -118,15 +118,12 @@ NSString * const KairosDidCaptureImageNotification           = @"com.kairos.sdk.
                                       subjectId:subjectId
                                     galleryName:galleryName
                                         success:^(NSDictionary *response) {
-                                            if (success) {
-                                                success(response);
-                                            }
+                                            
+                                            success(response);
                                             
                                         } failure:^(NSDictionary * response) {
                                             
-                                            if(failure) {
-                                                failure(response);
-                                            }
+                                            failure(response);
                                             
                                         }];
 }
