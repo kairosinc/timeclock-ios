@@ -14,6 +14,7 @@ class SetupViewController: UIViewController {
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var siteIDTextField: UITextField!
+    @IBOutlet weak var companyTextField: UITextField!
     
     
     @IBAction func setupTouchUpInside(sender: AnyObject) {
@@ -25,7 +26,8 @@ class SetupViewController: UIViewController {
         let clientID = clientIDTextField.text where clientID.characters.count > 0,
         let siteID = siteIDTextField.text where siteID.characters.count > 0,
         let username = usernameTextField.text where username.characters.count > 0,
-        let password = passwordTextField.text where password.characters.count > 0
+        let password = passwordTextField.text where password.characters.count > 0,
+        let company = companyTextField.text where company.characters.count > 0
         else {
             let alert = UIAlertController(title: "Setup Failed", message: "Please check your credentials", preferredStyle: .Alert)
             alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
@@ -33,7 +35,7 @@ class SetupViewController: UIViewController {
             return
         }
         
-        WFMAPI.configure(clientID, siteID: siteID, username: username, password: password) { (error) in
+        WFMAPI.configure(clientID, siteID: siteID, username: username, password: password, company: company) { (error) in
             if let _ = error {
                let alert = UIAlertController(title: "Setup Failed", message: "Please check your credentials and internet connection", preferredStyle: .Alert)
                 alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
@@ -60,9 +62,13 @@ extension SetupViewController: UITextFieldDelegate {
         switch textField.tag {
             
         case 0:
-            usernameTextField.becomeFirstResponder()
+            siteIDTextField.becomeFirstResponder()
         case 1:
+            usernameTextField.becomeFirstResponder()
+        case 2:
             passwordTextField.becomeFirstResponder()
+        case 3:
+            companyTextField.becomeFirstResponder()
         default:
             setup()
         }

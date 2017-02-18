@@ -86,10 +86,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             clientID = queryItems.filter({$0.name == "clientid"}).first?.value,
             siteID = queryItems.filter({$0.name == "siteid"}).first?.value,
             username =  queryItems.filter({$0.name == "username"}).first?.value,
-            password = queryItems.filter({$0.name == "password"}).first?.value
+            password = queryItems.filter({$0.name == "password"}).first?.value,
+            company = queryItems.filter({$0.name == "company"}).first?.value
         else { return false }
         
-        WFMAPI.configure(clientID, siteID: siteID, username: username, password: password) { (error) in
+        WFMAPI.configure(clientID, siteID: siteID, username: username, password: password, company: company) { (error) in
             if let error = error {
                 self.flowController?.setupFailed()
                 print(error)

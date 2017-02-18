@@ -20,6 +20,7 @@ class Configuration: NSObject, NSCoding {
     let password: String
     let username: String
     let clientID: String
+    let company: String?
     
     init?(json: JSONType) {
         guard let clientConfig = json["client_config"] as? JSONType else { return nil }
@@ -66,6 +67,12 @@ class Configuration: NSObject, NSCoding {
         } else {
             self.syncInterval = nil
         }
+        
+        if let company = auth["company"] as? String {
+            self.company = company
+        } else {
+            self.company = nil
+        }
     }
     
     init(
@@ -79,7 +86,8 @@ class Configuration: NSObject, NSCoding {
         syncInterval: Double?,
         password: String,
         username: String,
-        clientID: String) {
+        clientID: String,
+        company: String?) {
         
         self.enable2FA = enable2FA
         self.enableFacialRecognition = enableFacialRecognition
@@ -92,6 +100,7 @@ class Configuration: NSObject, NSCoding {
         self.password = password
         self.username = username
         self.clientID = clientID
+        self.company = company
     }
     
     //MARK: NSCoding
@@ -105,7 +114,6 @@ class Configuration: NSObject, NSCoding {
             let password = decoder.decodeObjectForKey("password") as? String,
             let username = decoder.decodeObjectForKey("username") as? String,
             let clientID = decoder.decodeObjectForKey("clientID") as? String
-            
         else {
             return nil
         }
@@ -113,6 +121,7 @@ class Configuration: NSObject, NSCoding {
         let employeeWebURL = decoder.decodeObjectForKey("employeeWebURL") as? String
         let galleryID = decoder.decodeObjectForKey("galleryID") as? String
         let syncInterval = decoder.decodeObjectForKey("syncInterval") as? Double
+        let company = decoder.decodeObjectForKey("company") as? String
         
         self.init(
             enable2FA: enable2FA,
@@ -125,7 +134,8 @@ class Configuration: NSObject, NSCoding {
             syncInterval: syncInterval,
             password: password,
             username: username,
-            clientID: clientID
+            clientID: clientID,
+            company: company
         )
     }
     
@@ -149,6 +159,10 @@ class Configuration: NSObject, NSCoding {
         
         if let syncInterval = self.syncInterval {
             coder.encodeObject(syncInterval, forKey: "syncInterval")
+        }
+        
+        if let company = self.company {
+            coder.encodeObject(company, forKey: "company")
         }
     }
     
