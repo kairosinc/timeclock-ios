@@ -27,6 +27,7 @@ extension WFMService: TargetType {
         let longitude = LocationMonitor.sharedMonitor.locationManager.location?.coordinate.longitude
         let locationAccuracy = LocationMonitor.sharedMonitor.locationManager.location?.horizontalAccuracy
         let siteID = WFMAPI.configClientID()?.siteID
+        let company = WFMAPI.configClientID()?.company
         
         return [
             "device_id": deviceID ?? "",
@@ -37,7 +38,8 @@ extension WFMService: TargetType {
             "latitude": latitude ?? "",
             "longitude": longitude ?? "",
             "location_accuracy": locationAccuracy ?? "",
-            "site_id": siteID ?? ""
+            "site_id": siteID ?? "",
+            "company": company ?? "",
         ]
     }
     

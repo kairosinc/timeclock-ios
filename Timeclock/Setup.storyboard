@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="sEx-ew-Nqj">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="sEx-ew-Nqj">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -23,7 +23,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="BYG-iU-PqE">
-                                <rect key="frame" x="16" y="40" width="343" height="200"/>
+                                <rect key="frame" x="16" y="40" width="343" height="240"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter Client ID" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZAR-iQ-2cA">
                                         <rect key="frame" x="0.0" y="0.0" width="343" height="40"/>
@@ -37,7 +37,7 @@
                                             <outlet property="delegate" destination="sEx-ew-Nqj" id="4cr-by-t15"/>
                                         </connections>
                                     </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter Site ID" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="C79-3s-bks" userLabel="SiteID Text Field">
+                                    <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter Site ID" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="C79-3s-bks" userLabel="SiteID Text Field">
                                         <rect key="frame" x="0.0" y="45" width="343" height="40"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -49,7 +49,7 @@
                                             <outlet property="delegate" destination="sEx-ew-Nqj" id="qyB-Cx-G5J"/>
                                         </connections>
                                     </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter Username" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vBh-wg-4pL" userLabel="Username Text Field">
+                                    <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter Username" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vBh-wg-4pL" userLabel="Username Text Field">
                                         <rect key="frame" x="0.0" y="90" width="343" height="40"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -61,7 +61,7 @@
                                             <outlet property="delegate" destination="sEx-ew-Nqj" id="GSm-db-FA3"/>
                                         </connections>
                                     </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter Password" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hsf-qN-XXv" userLabel="Password Text Field">
+                                    <textField opaque="NO" clipsSubviews="YES" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter Password" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hsf-qN-XXv" userLabel="Password Text Field">
                                         <rect key="frame" x="0.0" y="135" width="343" height="40"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -73,8 +73,20 @@
                                             <outlet property="delegate" destination="sEx-ew-Nqj" id="qQL-Er-D7W"/>
                                         </connections>
                                     </textField>
+                                    <textField opaque="NO" clipsSubviews="YES" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter Company" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Qg0-tV-PTd" userLabel="Company">
+                                        <rect key="frame" x="0.0" y="180" width="343" height="40"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="VFl-jv-ER3"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="alphabet" keyboardAppearance="light" returnKeyType="done"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="sEx-ew-Nqj" id="zYF-72-UcW"/>
+                                        </connections>
+                                    </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A15-cO-p1o">
-                                        <rect key="frame" x="0.0" y="180" width="343" height="20"/>
+                                        <rect key="frame" x="0.0" y="225" width="343" height="15"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
                                         <state key="normal" title="Setup">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -85,7 +97,7 @@
                                     </button>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="200" id="dfS-b2-H2B"/>
+                                    <constraint firstAttribute="height" constant="240" id="dfS-b2-H2B"/>
                                 </constraints>
                             </stackView>
                         </subviews>
@@ -98,6 +110,7 @@
                     </view>
                     <connections>
                         <outlet property="clientIDTextField" destination="ZAR-iQ-2cA" id="ydj-Qh-pmk"/>
+                        <outlet property="companyTextField" destination="Qg0-tV-PTd" id="Td7-4R-EMF"/>
                         <outlet property="passwordTextField" destination="hsf-qN-XXv" id="Aps-f9-AVQ"/>
                         <outlet property="siteIDTextField" destination="C79-3s-bks" id="Td2-8V-opx"/>
                         <outlet property="usernameTextField" destination="vBh-wg-4pL" id="r5z-fb-vYg"/>
