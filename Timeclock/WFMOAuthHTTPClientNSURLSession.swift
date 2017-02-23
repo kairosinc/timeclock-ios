@@ -58,6 +58,7 @@ public class WFMOAuthHTTPClientNSURLSession: NSObject, HeimdallrHTTPClient {
         let password = queryItems?.filter({$0.name == "password"}).first?.value
         let clientID = queryItems?.filter({$0.name == "client_id"}).first?.value
         let siteID = queryItems?.filter({$0.name == "site_id"}).first?.value
+        let company = queryItems?.filter({$0.name == "company"}).first?.value
         let grantType = queryItems?.filter({$0.name == "grant_type"}).first?.value
         let refreshToken = queryItems?.filter({$0.name == "refresh_token"}).first?.value
         
@@ -77,6 +78,10 @@ public class WFMOAuthHTTPClientNSURLSession: NSObject, HeimdallrHTTPClient {
         
         if let siteID = siteID {
             paramDict["site_id"] = siteID
+        }
+        
+        if let company = company {
+            paramDict["company"] = company
         }
         
         if let grantType = grantType {

@@ -108,21 +108,23 @@ public struct WFMAPI {
         return endpoint
     }
     
-    static func configClientID() -> (clientID: String, siteID: String, username: String, password: String)? {
+    static func configClientID() -> (clientID: String, siteID: String, username: String, password: String, company: String)? {
         guard
             let clientIDData = try? Keychain.get(identifier: "config_client_id"),
             let siteIDData = try? Keychain.get(identifier: "config_site_id"),
             let usernameData = try? Keychain.get(identifier: "config_username"),
             let passwordData = try? Keychain.get(identifier: "config_password"),
+            let companyData = try? Keychain.get(identifier: "config_company"),
             let clientID = NSKeyedUnarchiver.unarchiveObjectWithData(clientIDData) as? String,
             let siteID = NSKeyedUnarchiver.unarchiveObjectWithData(siteIDData) as? String,
             let username = NSKeyedUnarchiver.unarchiveObjectWithData(usernameData) as? String,
-            let password = NSKeyedUnarchiver.unarchiveObjectWithData(passwordData) as? String
+            let password = NSKeyedUnarchiver.unarchiveObjectWithData(passwordData) as? String,
+            let company = NSKeyedUnarchiver.unarchiveObjectWithData(companyData) as? String
         else {
             return nil
         }
         
-        return (clientID, siteID, username, password)
+        return (clientID, siteID, username, password, company)
     }
     
     private static let requestClosure = { (endpoint: Endpoint<WFMService>, done: MoyaProvider.RequestResultClosure) in
@@ -133,6 +135,7 @@ public struct WFMAPI {
         let password: String
         let clientIDString: String
         let siteIDString: String
+        let companyString: String
         
         if let url = request.URL?.absoluteString
         where url == WFMService.Configure().path {
@@ -146,6 +149,7 @@ public struct WFMAPI {
             username = config.username
             password = config.password
             siteIDString = config.siteID
+            companyString = config.company
 
         } else {
             heimdallrForRequest = WFMAPI.heimdallr()
@@ -161,6 +165,7 @@ public struct WFMAPI {
             password = savedPassword
             clientIDString = savedClientIDString
             siteIDString = WFMAPI.configClientID()?.siteID ?? ""
+            companyString = Configuration.fromUserDefaults()?.company ?? ""
         }
         
         heimdallrForRequest?.authenticateRequest(request) { result in
@@ -175,7 +180,8 @@ public struct WFMAPI {
                     "username": username,
                     "password": password,
                     "client_id": clientIDString,
-                    "site_id": siteIDString
+                    "site_id": siteIDString,
+                    "company": companyString
                 ]) { result in
                     switch result {
                     case .Success(let authenticatedRequest):
@@ -203,6 +209,7 @@ public struct WFMAPI {
         siteID: String,
         username: String,
         password: String,
+        company: String,
         provider: MoyaProvider<WFMService> = WFMAPI.defaultProvider,
         completion: (error: ErrorType?) -> Void) {
         
@@ -211,12 +218,14 @@ public struct WFMAPI {
         let siteIDData = NSKeyedArchiver.archivedDataWithRootObject(siteID)
         let usernameData = NSKeyedArchiver.archivedDataWithRootObject(username)
         let passwordData = NSKeyedArchiver.archivedDataWithRootObject(password)
+        let companyData = NSKeyedArchiver.archivedDataWithRootObject(company)
         
         do {
             try Keychain.set(identifier: "config_client_id", data: clientIDData, accessibility: String(kSecAttrAccessibleWhenUnlocked))
             try Keychain.set(identifier: "config_site_id", data: siteIDData, accessibility: String(kSecAttrAccessibleWhenUnlocked))
             try Keychain.set(identifier: "config_username", data: usernameData, accessibility: String(kSecAttrAccessibleWhenUnlocked))
             try Keychain.set(identifier: "config_password", data: passwordData, accessibility: String(kSecAttrAccessibleWhenUnlocked))
+            try Keychain.set(identifier: "config_company", data: companyData, accessibility: String(kSecAttrAccessibleWhenUnlocked))
         } catch {
             completion(error: KairosAPIError.Unknown())
             print("could not save to keychain, fail here")
