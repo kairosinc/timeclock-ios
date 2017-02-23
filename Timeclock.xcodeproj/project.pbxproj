@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		200F86081E01A54C00050731 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 200F86071E01A54C00050731 /* Settings.bundle */; };
-		2019ED811D61AD9400912018 /* libKairosSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2019ED7E1D61AD8200912018 /* libKairosSDK.a */; };
 		2029C0CF1D68CAD700DB72AF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2029C0CE1D68CAD700DB72AF /* UIKit.framework */; };
 		2029C0D11D68CADD00DB72AF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2029C0D01D68CADD00DB72AF /* Foundation.framework */; };
 		2029C0D31D68CAE200DB72AF /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2029C0D21D68CAE200DB72AF /* CoreImage.framework */; };
@@ -83,23 +82,10 @@
 		20F7B5971D62FD5800FE1817 /* CaptureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20F7B5961D62FD5800FE1817 /* CaptureViewController.swift */; };
 		20F7B5991D62FD9700FE1817 /* ClockOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20F7B5981D62FD9700FE1817 /* ClockOptionsViewController.swift */; };
 		20F7B59B1D62FEA600FE1817 /* TimeClockCompositeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20F7B59A1D62FEA600FE1817 /* TimeClockCompositeViewController.swift */; };
+		20FBF3281E5F4DC1001DE5E4 /* libKairosSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 20FBF3251E5F4DB3001DE5E4 /* libKairosSDK.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		2019ED7D1D61AD8200912018 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 2019ED781D61AD8200912018 /* KairosSDK.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 07AA7D0E18D22DD000C24A69;
-			remoteInfo = KairosSDK;
-		};
-		2019ED7F1D61AD8200912018 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 2019ED781D61AD8200912018 /* KairosSDK.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 07AA7D1E18D22DD000C24A69;
-			remoteInfo = KairosSDKTests;
-		};
 		205423DC1E326A8000E05151 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 205423B81E326A8000E05151 /* Reachability.xcodeproj */;
@@ -443,6 +429,20 @@
 			remoteGlobalIDString = DC545DC11A89F0F10051A575;
 			remoteInfo = "Heimdallr-iOS";
 		};
+		20FBF3241E5F4DB3001DE5E4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 20FBF31F1E5F4DB3001DE5E4 /* KairosSDK.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 07AA7D0E18D22DD000C24A69;
+			remoteInfo = KairosSDK;
+		};
+		20FBF3261E5F4DB3001DE5E4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 20FBF31F1E5F4DB3001DE5E4 /* KairosSDK.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 07AA7D1E18D22DD000C24A69;
+			remoteInfo = KairosSDKTests;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -466,7 +466,6 @@
 
 /* Begin PBXFileReference section */
 		200F86071E01A54C00050731 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
-		2019ED781D61AD8200912018 /* KairosSDK.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = KairosSDK.xcodeproj; path = "Carthage/Checkouts/Kairos-SDK-iOS/KairosSDKSrc/KairosSDK/KairosSDK.xcodeproj"; sourceTree = "<group>"; };
 		2019ED821D61AE2900912018 /* Timeclock-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Timeclock-Bridging-Header.h"; sourceTree = "<group>"; };
 		202686A61DEDEDFE00881B1B /* Timeclock.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Timeclock.entitlements; sourceTree = "<group>"; };
 		2029C0CE1D68CAD700DB72AF /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -541,6 +540,7 @@
 		20F7B5961D62FD5800FE1817 /* CaptureViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaptureViewController.swift; sourceTree = "<group>"; };
 		20F7B5981D62FD9700FE1817 /* ClockOptionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClockOptionsViewController.swift; sourceTree = "<group>"; };
 		20F7B59A1D62FEA600FE1817 /* TimeClockCompositeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeClockCompositeViewController.swift; sourceTree = "<group>"; };
+		20FBF31F1E5F4DB3001DE5E4 /* KairosSDK.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = KairosSDK.xcodeproj; path = "Kairos-SDK-iOS/KairosSDKSrc/KairosSDK/KairosSDK.xcodeproj"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -548,6 +548,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				20FBF3281E5F4DC1001DE5E4 /* libKairosSDK.a in Frameworks */,
 				2054F2A41E0043C700C747E7 /* Security.framework in Frameworks */,
 				20A86F0C1DEECF6B00A58D66 /* CoreData.framework in Frameworks */,
 				204C90A81DEEEF3500930678 /* Crashlytics.framework in Frameworks */,
@@ -565,7 +566,6 @@
 				20C5DF2A1D7D586300E3C47B /* Moya.framework in Frameworks */,
 				2029C0D11D68CADD00DB72AF /* Foundation.framework in Frameworks */,
 				2029C0CF1D68CAD700DB72AF /* UIKit.framework in Frameworks */,
-				2019ED811D61AD9400912018 /* libKairosSDK.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -579,15 +579,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2019ED791D61AD8200912018 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				2019ED7E1D61AD8200912018 /* libKairosSDK.a */,
-				2019ED801D61AD8200912018 /* KairosSDKTests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		2029C0DC1D68CB0100DB72AF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -651,11 +642,11 @@
 				206FA1F71D61AB5F008B1F94 /* Products */,
 				20C5DEC81D7D583500E3C47B /* Alamofire.xcodeproj */,
 				20C8C56D1DE487AB00CE4B0A /* Heimdallr.xcodeproj */,
-				2019ED781D61AD8200912018 /* KairosSDK.xcodeproj */,
 				20C5DEE31D7D583F00E3C47B /* Moya.xcodeproj */,
 				20C5DF0A1D7D584B00E3C47B /* Result.xcodeproj */,
 				205423B81E326A8000E05151 /* Reachability.xcodeproj */,
 				208A1F041E374988009D55F5 /* Mixpanel.xcodeproj */,
+				20FBF31F1E5F4DB3001DE5E4 /* KairosSDK.xcodeproj */,
 				204C90A51DEEEF3500930678 /* Fabric.framework */,
 				204C90A61DEEEF3500930678 /* Crashlytics.framework */,
 				20A86F0A1DEECF6B00A58D66 /* Frameworks */,
@@ -882,6 +873,15 @@
 			name = "View Controllers";
 			sourceTree = "<group>";
 		};
+		20FBF3201E5F4DB3001DE5E4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				20FBF3251E5F4DB3001DE5E4 /* libKairosSDK.a */,
+				20FBF3271E5F4DB3001DE5E4 /* KairosSDKTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -942,7 +942,7 @@
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = N6W8C2VNME;
 						LastSwiftMigration = 0800;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.DataProtection = {
 								enabled = 0;
@@ -981,8 +981,8 @@
 					ProjectRef = 20C8C56D1DE487AB00CE4B0A /* Heimdallr.xcodeproj */;
 				},
 				{
-					ProductGroup = 2019ED791D61AD8200912018 /* Products */;
-					ProjectRef = 2019ED781D61AD8200912018 /* KairosSDK.xcodeproj */;
+					ProductGroup = 20FBF3201E5F4DB3001DE5E4 /* Products */;
+					ProjectRef = 20FBF31F1E5F4DB3001DE5E4 /* KairosSDK.xcodeproj */;
 				},
 				{
 					ProductGroup = 208A1F051E374988009D55F5 /* Products */;
@@ -1010,20 +1010,6 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		2019ED7E1D61AD8200912018 /* libKairosSDK.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libKairosSDK.a;
-			remoteRef = 2019ED7D1D61AD8200912018 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		2019ED801D61AD8200912018 /* KairosSDKTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = KairosSDKTests.xctest;
-			remoteRef = 2019ED7F1D61AD8200912018 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		205423DD1E326A8000E05151 /* Reachability.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -1318,6 +1304,20 @@
 			remoteRef = 20C8C58D1DE487AB00CE4B0A /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		20FBF3251E5F4DB3001DE5E4 /* libKairosSDK.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libKairosSDK.a;
+			remoteRef = 20FBF3241E5F4DB3001DE5E4 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		20FBF3271E5F4DB3001DE5E4 /* KairosSDKTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = KairosSDKTests.xctest;
+			remoteRef = 20FBF3261E5F4DB3001DE5E4 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -1591,8 +1591,8 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Timeclock/Timeclock.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				DEVELOPMENT_TEAM = N6W8C2VNME;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1602,8 +1602,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.kairos.kairostimeclock;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "f488b032-5269-4d2b-b461-7136a8955a0d";
-				PROVISIONING_PROFILE_SPECIFIER = "Kairos Timeclock Enterprise";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Timeclock/Timeclock-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 2.3;
@@ -1618,8 +1618,8 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Timeclock/Timeclock.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				DEVELOPMENT_TEAM = N6W8C2VNME;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1629,8 +1629,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.kairos.kairostimeclock;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "f488b032-5269-4d2b-b461-7136a8955a0d";
-				PROVISIONING_PROFILE_SPECIFIER = "Kairos Timeclock Enterprise";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Timeclock/Timeclock-Bridging-Header.h";
 				SWIFT_VERSION = 2.3;
 			};
