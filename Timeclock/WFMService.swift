@@ -10,19 +10,34 @@ import Foundation
 import Moya
 
 public enum WFMService {
-    case Employees()
-    case Punches(punches: [Punch])
-    case Configure()
+    case employees()
+    case punches(punches: [Punch])
+    case configure()
 }
 
 extension WFMService: TargetType {
+
+    public var parameterEncoding: ParameterEncoding {
+        switch self {
+        default:
+            return URLEncoding.default
+        }
+    }
     
-    private static func standardParameters() -> JSONType {
-        let deviceID = UIDevice.currentDevice().identifierForVendor?.UUIDString
-        let deviceModel = UIDevice.currentDevice().model
-        let iosVersion = UIDevice.currentDevice().systemVersion
-        let appVersion = NSBundle.mainBundle().infoDictionary?["CFBundleShortVersionString"] as? String
-        let buildNumber = NSBundle.mainBundle().infoDictionary?["CFBundleVersion"] as? String
+    public var task: Task {
+        switch self {
+        default:
+            return .request
+        }
+    }
+
+    
+    fileprivate static func standardParameters() -> JSONType {
+        let deviceID = UIDevice.current.identifierForVendor?.uuidString
+        let deviceModel = UIDevice.current.model
+        let iosVersion = UIDevice.current.systemVersion
+        let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
+        let buildNumber = Bundle.main.infoDictionary?["CFBundleVersion"] as? String
         let latitude = LocationMonitor.sharedMonitor.locationManager.location?.coordinate.latitude
         let longitude = LocationMonitor.sharedMonitor.locationManager.location?.coordinate.longitude
         let locationAccuracy = LocationMonitor.sharedMonitor.locationManager.location?.horizontalAccuracy
@@ -43,38 +58,39 @@ extension WFMService: TargetType {
         ]
     }
     
-    public var baseURL: NSURL { return NSURL(string: "")! }
+    
+    public var baseURL: URL { return URL(string: "http://kairos.com")! }
     
     public var path: String {
         switch self {
-        case .Employees():
-            guard let employeeDownloadURL = Configuration.fromUserDefaults()?.employeeDownloadURL else { return "" }
+        case .employees():
+            guard let employeeDownloadURL = Configuration.fromUserDefaults()?.employeeDownloadURL else { return "/" }
             return employeeDownloadURL
-        case .Punches(_):
-            guard let configuration = Configuration.fromUserDefaults() else { return "" }
+        case .punches(_):
+            guard let configuration = Configuration.fromUserDefaults() else { return "/" }
             return configuration.punchUploadURL
-        case .Configure():
+        case .configure():
             return "http://config.timeclockdynamics.com:9100/get_config/v1.0/client/get_config"
         }
     }
     
     public var method: Moya.Method {
         switch self {
-        case .Employees, .Punches, .Configure:
-            return .POST
+        case .employees, .punches, .configure:
+            return .post
         }
     }
     
-    public var parameters: [String: AnyObject]? {
+    public var parameters: [String : Any]? {
         switch self {
-        case .Employees():
+        case .employees():
             return WFMService.standardParameters()
             
-        case .Punches(let punches):
+        case .punches(let punches):
             do {
-                let punchesJSON = try NSJSONSerialization.dataWithJSONObject(punches.jsonArray(), options: [])
+                let punchesJSON = try JSONSerialization.data(withJSONObject: punches.jsonArray(), options: [])
                 var params = WFMService.standardParameters()
-                params["punches"] = String(data: punchesJSON, encoding: NSUTF8StringEncoding)!
+                params["punches"] = String(data: punchesJSON, encoding: String.Encoding.utf8)!
                 return params
             } catch {
                 return nil
@@ -85,15 +101,15 @@ extension WFMService: TargetType {
         }
     }
     
-    public var sampleData: NSData {
+    public var sampleData: Data {
         switch self {
-        case .Employees():
+        case .employees():
             return stubbedResponse("employeesResponse")
             
-        case .Punches(_):
+        case .punches(_):
             return stubbedResponse("employeesResponse")
             
-        case .Configure():
+        case .configure():
             return stubbedResponse("employeesResponse")
         }
     }
@@ -106,25 +122,25 @@ extension WFMService: TargetType {
 // MARK: - Helpers
 private extension String {
     var URLEscapedString: String {
-        return self.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLHostAllowedCharacterSet())!
+        return self.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlHostAllowed)!
     }
-    var UTF8EncodedData: NSData {
-        return self.dataUsingEncoding(NSUTF8StringEncoding)!
+    var UTF8EncodedData: Data {
+        return self.data(using: String.Encoding.utf8)!
     }
 }
 
 private extension WFMService {
     // MARK: - Provider support
-    func stubbedResponse(filename: String) -> NSData! {
+    func stubbedResponse(_ filename: String) -> Data! {
         @objc class TestClass: NSObject { }
         
-        let bundle = NSBundle(forClass: TestClass.self)
-        let path = bundle.pathForResource(filename, ofType: "json")
-        return NSData(contentsOfFile: path!)
+        let bundle = Bundle(for: TestClass.self)
+        let path = bundle.path(forResource: filename, ofType: "json")
+        return (try? Data(contentsOf: URL(fileURLWithPath: path!)))
     }
 }
 
-private extension CollectionType where Generator.Element: JSONable {
+private extension Collection where Iterator.Element: JSONable {
     
     func jsonArray() -> [JSONType] {
         return map { (element: JSONable) -> JSONType in

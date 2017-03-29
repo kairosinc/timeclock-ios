@@ -11,12 +11,12 @@ import Mixpanel
 
 struct MixpanelService: AnalyticsService {
     
-    static private var mixpanel: MixpanelInstance?
+    static fileprivate var mixpanel: MixpanelInstance?
     
     static var apiToken: String = "d927bb999cd47d9b19dcc3ed156964eb"
     static var uploadInterval: Double = 60
     
-    static func initialize(launchOptions: [NSObject : AnyObject]?) {
+    static func initialize(_ launchOptions: [UIApplicationLaunchOptionsKey: Any]?) {
         
         if let launchOptions = launchOptions {
             Mixpanel.initialize(token: MixpanelService.apiToken, launchOptions: launchOptions)
@@ -26,7 +26,7 @@ struct MixpanelService: AnalyticsService {
         }
         
         MixpanelService.mixpanel = Mixpanel.mainInstance()
-
+        
         
         if let mixpanel = MixpanelService.mixpanel {
             mixpanel.flushInterval = uploadInterval
@@ -34,12 +34,12 @@ struct MixpanelService: AnalyticsService {
         }
     }
     
-    static func trackPushNotifiction(userInfo: [NSObject : AnyObject]) {
+    static func trackPushNotifiction(_ userInfo: [AnyHashable: Any]) {
         guard let mixpanel = MixpanelService.mixpanel else { return }
         mixpanel.trackPushNotification(userInfo)
     }
     
-    static func trackEvent(event: AnalyticsEvent) {
+    static func trackEvent(_ event: AnalyticsEvent) {
         guard let mixpanel = MixpanelService.mixpanel else { return }
         
         if let properties = event.properties {
@@ -49,24 +49,24 @@ struct MixpanelService: AnalyticsService {
         }
     }
     
-    static func registerUserProperties(properties: AnalyticsProperties) {
+    static func registerUserProperties(_ properties: AnalyticsProperties) {
         guard let mixpanel = MixpanelService.mixpanel else { return }
         mixpanel.people.set(properties: properties)
     }
     
-    static func registerPushToken(pushToken: NSData) {
+    static func registerPushToken(_ pushToken: Data) {
         guard let mixpanel = MixpanelService.mixpanel else { return }
         mixpanel.people.addPushDeviceToken(pushToken)
     }
     
-    static func aliasUser(alias: String) {
+    static func aliasUser(_ alias: String) {
         guard let mixpanel = MixpanelService.mixpanel else { return }
         mixpanel.createAlias(alias, distinctId: mixpanel.distinctId)
         mixpanel.identify(distinctId: mixpanel.distinctId)
         MixpanelService.registerUserProperties(["$email": alias])
     }
     
-    static func identifyUser(id: String) {
+    static func identifyUser(_ id: String) {
         guard let mixpanel = MixpanelService.mixpanel else { return }
         mixpanel.identify(distinctId: id)
         MixpanelService.registerUserProperties(["$email": id])
@@ -88,3 +88,4 @@ struct MixpanelService: AnalyticsService {
         mixpanel.reset()
     }
 }
+

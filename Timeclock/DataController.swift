@@ -9,9 +9,9 @@ import CloudKit
 import CoreData
 import Foundation
 
-typealias DataControllerConfiguration = (modelURL: NSURL, stack: CoreDataStack)
-public typealias PersistObjectCompletion = (managedObject: NSManagedObject?, error: ErrorType?) -> Void
-public typealias PersistObjectTuple = (managedObject: NSManagedObject?, error: ErrorType?)
+typealias DataControllerConfiguration = (modelURL: URL, stack: CoreDataStack)
+public typealias PersistObjectCompletion = (_ managedObject: NSManagedObject?, _ error: Error?) -> Void
+public typealias PersistObjectTuple = (managedObject: NSManagedObject?, error: Error?)
 
 public struct DataController {
     
@@ -20,46 +20,46 @@ public struct DataController {
     let syncScheduler = SyncScheduler()
     
     public enum ContextType: Int {
-        case Main = 0, Importer
+        case main = 0, importer
     }
     
-    static let modelURL = NSBundle(forClass: AppDelegate().dynamicType).URLForResource(CoreDataStack.StoreName, withExtension: "momd")
+    static let modelURL = Bundle(for: type(of: AppDelegate())).url(forResource: CoreDataStack.StoreName, withExtension: "momd")
 
-    static func storeURL() -> NSURL? {
+    static func storeURL() -> URL? {
         
-        guard let cachePath = NSSearchPathForDirectoriesInDomains(.CachesDirectory, .UserDomainMask, true).first else {
+        guard let cachePath = NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true).first else {
             return nil
         }
         
-        let cacheURL = NSURL(fileURLWithPath: cachePath)
+        let cacheURL = URL(fileURLWithPath: cachePath)
         
-        let kairosURL = cacheURL.URLByAppendingPathComponent("\(CoreDataStack.StoreName).store")
+        let kairosURL = cacheURL.appendingPathComponent("\(CoreDataStack.StoreName).store")
         
-        let fileManager = NSFileManager()
+        let fileManager = FileManager()
         do {
-            try fileManager.createDirectoryAtURL(kairosURL!, withIntermediateDirectories: true, attributes: nil)
+            try fileManager.createDirectory(at: kairosURL, withIntermediateDirectories: true, attributes: nil)
         } catch {
             do {
-                try fileManager.removeItemAtURL(kairosURL!)
-                try fileManager.createDirectoryAtURL(kairosURL!, withIntermediateDirectories: true, attributes: nil)
+                try fileManager.removeItem(at: kairosURL)
+                try fileManager.createDirectory(at: kairosURL, withIntermediateDirectories: true, attributes: nil)
             } catch {
                 return nil
             }
         }
         
         //TODO: Replace with real sessionID once we have a backend
-        return kairosURL!.URLByAppendingPathComponent("testsessionid")
+        return kairosURL.appendingPathComponent("testsessionid")
     }
     
-    private let stack: CoreDataStack
-    private let importer: CoreDataImporter
+    fileprivate let stack: CoreDataStack
+    fileprivate let importer: CoreDataImporter
     init?(configuration: DataControllerConfiguration? = nil) {
         
         if let configuration = configuration {
             stack = configuration.stack
             
-        } else if let modelURL = DataController.modelURL, storeURL = DataController.storeURL() {
-            stack = CoreDataStack(store: .SQL(storeURL: storeURL), modelURL: modelURL)!
+        } else if let modelURL = DataController.modelURL, let storeURL = DataController.storeURL() {
+            stack = CoreDataStack(store: .sql(storeURL: storeURL), modelURL: modelURL)!
             
         } else {
             return nil
@@ -68,12 +68,12 @@ public struct DataController {
         importer = CoreDataImporter(managedObjectContext: stack.managedObjectContext)
     }
     
-    private func contextFrom(type: ContextType) -> NSManagedObjectContext {
+    fileprivate func contextFrom(_ type: ContextType) -> NSManagedObjectContext {
         let context: NSManagedObjectContext
         switch type {
-        case .Main:
+        case .main:
             context = stack.managedObjectContext
-        case .Importer:
+        case .importer:
             context = importer.importContext
         }
         
@@ -81,47 +81,47 @@ public struct DataController {
     }
     
     //MARK: Fetch Objects
-    public func managedObjectIDFromURI(uri: NSURL) -> NSManagedObjectID? {
+    public func managedObjectIDFromURI(_ uri: URL) -> NSManagedObjectID? {
         let managedObjectContext = stack.managedObjectContext
-        let managedObjectID = managedObjectContext.persistentStoreCoordinator?.managedObjectIDForURIRepresentation(uri)
+        let managedObjectID = managedObjectContext.persistentStoreCoordinator?.managedObjectID(forURIRepresentation: uri)
         return managedObjectID
     }
     
-    public func objectFromMainContext(objectID: NSManagedObjectID, completion: PersistObjectCompletion) {
+    public func objectFromMainContext(_ objectID: NSManagedObjectID, completion: @escaping PersistObjectCompletion) {
         let managedObjectContext = stack.managedObjectContext
-        managedObjectContext.performBlock { 
+        managedObjectContext.perform { 
             do {
-                let object = try managedObjectContext.existingObjectWithID(objectID)
-                completion(managedObject: object, error: nil)
+                let object = try managedObjectContext.existingObject(with: objectID)
+                completion(object, nil)
             } catch {
-                completion(managedObject: nil, error: error)
+                completion(nil, error)
             }
         }
     }
     
-    public func objectFromMainContextSynchronously(objectID: NSManagedObjectID) -> PersistObjectTuple {
+    public func objectFromMainContextSynchronously(_ objectID: NSManagedObjectID) -> PersistObjectTuple {
         let managedObjectContext = stack.managedObjectContext
         do {
-            let object = try? managedObjectContext.existingObjectWithID(objectID)
+            let object = try? managedObjectContext.existingObject(with: objectID)
             return (object, nil)
         }
     }
     
-    private func persistObject<A: NSManagedObject where A: ManagedObjectType>(managedObject: A, completion: (error: ErrorType?) -> Void) {
+    fileprivate func persistObject<A: NSManagedObject>(_ managedObject: A, completion: @escaping (_ error: Error?) -> Void) where A: ManagedObjectType {
         guard let context = managedObject.managedObjectContext else { return }
         
-        context.performBlock { 
+        context.perform { 
             do {
                 try context.save()
-                completion(error: nil)
+                completion(nil)
             } catch {
                 print("Save error: ", error)
-                completion(error: error)
+                completion(error)
             }
         }
     }
     
-    private func persistObjectsInContext(context: NSManagedObjectContext) -> ErrorType? {
+    fileprivate func persistObjectsInContext(_ context: NSManagedObjectContext) -> Error? {
         do {
             try context.save()
         } catch {
@@ -131,7 +131,7 @@ public struct DataController {
         return (nil)
     }
     
-    private func persistObjectSynchronously<A: NSManagedObject where A: ManagedObjectType>(managedObject: A) -> ErrorType? {
+    fileprivate func persistObjectSynchronously<A: NSManagedObject where A: ManagedObjectType>(_ managedObject: A) -> Error? {
         guard let context = managedObject.managedObjectContext else { return (nil) }
         do {
             try context.save()
@@ -143,44 +143,44 @@ public struct DataController {
     }
     
     //MARK: Employee
-    public func persistEmployees(jsonArray: [JSONType], completion: PersistObjectCompletion) {
+    public func persistEmployees(_ jsonArray: [JSONType], completion: PersistObjectCompletion) {
         let context = importer.importContext
         
         //Delete existing User records
-        let fetchRequest = NSFetchRequest(entityName: Employee.EntityName)
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: Employee.EntityName)
         let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
-        _ = try? context.executeRequest(deleteRequest)
+        _ = try? context.execute(deleteRequest)
         
         //Create & persist new Employee object
         for employeeDictionary in jsonArray {
-            Employee.fromJSON(employeeDictionary, inContext: context)
+            _ = Employee.fromJSON(employeeDictionary, inContext: context)
         }
         
-        persistObjectsInContext(context)
-        completion(managedObject: nil, error: nil)
+        _ = persistObjectsInContext(context)
+        completion(nil, nil)
     }
     
     public func fetchEmployee(
-        employeeID: String,
-        contextType: ContextType = .Main,
+        _ employeeID: String,
+        contextType: ContextType = .main,
         completion: PersistObjectCompletion) {
         
         let context = contextFrom(contextType)
         
-        let fetch = NSFetchRequest(entityName: Employee.EntityName)
+        let fetch = NSFetchRequest<NSFetchRequestResult>(entityName: Employee.EntityName)
         fetch.predicate = NSPredicate(format: "badgeNumber == %@", employeeID)
-        let results = try? context.executeFetchRequest(fetch)
+        let results = try? context.fetch(fetch)
         if let results = results, let employee = results.first as? Employee {
-            completion(managedObject: employee, error: nil)
+            completion(employee, nil)
             return
         } else {
-            completion(managedObject: nil, error: nil)
+            completion(nil, nil)
             return
         }
     }
     
     public func createAndPersistPunch(
-        timestampUTC: String,
+        _ timestampUTC: String,
         timestampLocal: String,
         clockOffset: Int16,
         timezoneOffset: Int16,
@@ -197,7 +197,7 @@ public struct DataController {
         confidence: NSNumber? = nil
         ) {
         
-        let context = contextFrom(.Main)
+        let context = contextFrom(.main)
         let punch = Punch.insertNewInContext(context)!
         
         punch.timestampUTC = timestampUTC
@@ -223,37 +223,37 @@ public struct DataController {
     }
     
     public func fetchPunches(
-        limit: Int = 99,
-        contextType: ContextType = .Main,
-        completion: (punches: [Punch]?, error: ErrorType?) -> Void) {
+        _ limit: Int = 99,
+        contextType: ContextType = .main,
+        completion: (_ punches: [Punch]?, _ error: Error?) -> Void) {
         
         let context = contextFrom(contextType)
         
-        let fetch = NSFetchRequest(entityName: Punch.EntityName)
+        let fetch = NSFetchRequest<NSFetchRequestResult>(entityName: Punch.EntityName)
         fetch.fetchLimit = limit
-        let results = try? context.executeFetchRequest(fetch)
+        let results = try? context.fetch(fetch)
         if let results = results as? [Punch] {
-            completion(punches: results, error: nil)
+            completion(results, nil)
             return
         } else {
-            completion(punches: nil, error: nil)
+            completion(nil, nil)
             return
         }
     }
     
     public func deletePunches(
-        punches: [Punch],
-        contextType: ContextType = .Main,
-        completion: (error: ErrorType?) -> Void) {
+        _ punches: [Punch],
+        contextType: ContextType = .main,
+        completion: (_ error: Error?) -> Void) {
         
         let context = contextFrom(contextType)
         
         for punch in punches {
-            context.deleteObject(punch)
+            context.delete(punch)
         }
         
         let error = self.persistObjectsInContext(context)
         
-        completion(error: error)
+        completion(error)
     }
 }

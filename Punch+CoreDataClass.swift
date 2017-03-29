@@ -10,13 +10,13 @@
 import Foundation
 import CoreData
 
-public class Punch: NSManagedObject, ManagedObjectType {
+open class Punch: NSManagedObject, ManagedObjectType {
 
     static let EntityName = "Punch"
     
     //MARK: Convenience
-    class func insertNewInContext(managedObjectContext: NSManagedObjectContext) -> Punch? {
-        let some = NSEntityDescription.insertNewObjectForEntityForName(Punch.EntityName, inManagedObjectContext: managedObjectContext)
+    class func insertNewInContext(_ managedObjectContext: NSManagedObjectContext) -> Punch? {
+        let some = NSEntityDescription.insertNewObject(forEntityName: Punch.EntityName, into: managedObjectContext)
         return some as? Punch
     }
     
@@ -25,28 +25,30 @@ public class Punch: NSManagedObject, ManagedObjectType {
 extension Punch: JSONable {
     var jsonValue: JSONType {
         
-        var dictionary = [
+        var dictionary: JSONType = [
             "timestamp_utc": timestampUTC!,
             "timestamp_local": timestampLocal!,
-            "clock_offset": NSNumber(short: clockOffset),
-            "timezone_offset": NSNumber(short: timezoneOffset).integerValue,
+            "clock_offset": NSNumber(value: clockOffset as Int16),
+            "timezone_offset": NSNumber(value: timezoneOffset as Int16).intValue,
             "timezone_name": timezoneName!,
-            "timezone_dst": NSNumber(short: timezoneDST),
+            "timezone_dst": NSNumber(value: timezoneDST as Int16),
             "badge_number": badgeNumber!,
-            "badge_number_valid": Int(badgeNumberValid),
+            "badge_number_valid": badgeNumberValid.intValue(),
             "direction": direction!,
             "online": online!
         ]
         
-        if let facerecImageData = facerecImageData where facerecImageData.characters.count > 0 {
+        if let facerecImageData = facerecImageData, facerecImageData.characters.count > 0 {
             dictionary["facerec_transaction_id"] = "000000"
             
-            dictionary["facerec"] = [
-            "image_type": "image/jpeg",
-            "image_data": facerecImageData,
-            "confidence": confidence ?? "",
-            "subject_id": subjectID ?? ""
+            let faceRecDict: [String: Any] = [
+                "image_type": "image/jpeg",
+                "image_data": facerecImageData,
+                "confidence": confidence ?? "",
+                "subject_id": subjectID ?? ""
             ]
+            
+            dictionary["facerec"] = faceRecDict
         }
         
         return dictionary

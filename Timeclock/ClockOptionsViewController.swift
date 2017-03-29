@@ -9,27 +9,27 @@
 import UIKit
 
 enum ClockOptions: Int {
-    case In = 0
-    case Out = 1
-    case BreakStart = 2
-    case BreakEnd = 3
+    case `in` = 0
+    case out = 1
+    case breakStart = 2
+    case breakEnd = 3
     
     var stringValue: String {
         switch self {
-        case .In:
+        case .in:
             return "in"
-        case .Out:
+        case .out:
             return "out"
-        case .BreakStart:
+        case .breakStart:
             return "mealout"
-        case .BreakEnd:
+        case .breakEnd:
             return "mealin"
         }
     }
 }
 
 protocol ClockOptionsDelegate {
-    func clock(option: ClockOptions)
+    func clock(_ option: ClockOptions)
     func cancel()
 }
 
@@ -46,16 +46,16 @@ class ClockOptionsViewController: UIViewController {
                 let badgeNumber = employee.badgeNumber,
                 let configuration = Configuration.fromUserDefaults(),
                 let baseURL = configuration.employeeWebURL,
-                let deviceID = UIDevice.currentDevice().identifierForVendor,
-                let url = NSURL(string: (baseURL + "/?badge_number=" + badgeNumber + "&device_id=" + deviceID.UUIDString))
+                let deviceID = UIDevice.current.identifierForVendor,
+                let url = URL(string: (baseURL + "/?badge_number=" + badgeNumber + "&device_id=" + deviceID.uuidString))
             else {
-                webView.hidden = true
+                webView.isHidden = true
                 return
             }
             
-            let request = NSURLRequest(URL: url)
+            let request = URLRequest(url: url)
             webView.loadRequest(request)
-            webView.hidden = false
+            webView.isHidden = false
             
             //Debug
             debugBadgeLabel.text = "badge_number:" + badgeNumber
@@ -74,11 +74,11 @@ class ClockOptionsViewController: UIViewController {
     }
     
     func greetingForTimeOfDay() -> String {
-        let date = NSDate()
+        let date = Date()
         
-        let dateFormatter = NSDateFormatter()
+        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "HH"
-        let hourString = dateFormatter.stringFromDate(date)
+        let hourString = dateFormatter.string(from: date)
         guard let hourInt = Int(hourString) else { return "Hello" }
         
         if hourInt < 12 {
@@ -102,15 +102,15 @@ class ClockOptionsViewController: UIViewController {
     }
     
     let primaryFont: UIFont = {
-        return UIFont.boldSystemFontOfSize(70)
+        return UIFont.boldSystemFont(ofSize: 70)
     }()
     
     let secondaryFont: UIFont = {
-        return UIFont.boldSystemFontOfSize(40)
+        return UIFont.boldSystemFont(ofSize: 40)
     }()
     
     let tertiaryFont: UIFont = {
-        return UIFont.boldSystemFontOfSize(34)
+        return UIFont.boldSystemFont(ofSize: 34)
     }()
     
     //MARK: IBOutlet
@@ -123,14 +123,14 @@ class ClockOptionsViewController: UIViewController {
     @IBOutlet weak var greetingLabel: UILabel! {
         didSet {
             greetingLabel.font = tertiaryFont
-            greetingLabel.textColor = UIColor.whiteColor()
+            greetingLabel.textColor = UIColor.white
             greetingLabel.text = ""
         }
     }
     @IBOutlet weak var nameLabel: UILabel! {
         didSet {
             nameLabel.font = primaryFont
-            nameLabel.textColor = UIColor.whiteColor()
+            nameLabel.textColor = UIColor.white
             nameLabel.text = ""
         }
     }
@@ -147,29 +147,29 @@ class ClockOptionsViewController: UIViewController {
     @IBOutlet var inButton: UIButton! {
         didSet {
             inButton.backgroundColor = UIColor.kairosGreen()
-            inButton.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+            inButton.setTitleColor(UIColor.white, for: UIControlState())
         }
     }
     
     @IBOutlet var outButton: UIButton! {
         didSet {
             outButton.backgroundColor = UIColor.kairosBlue()
-            outButton.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+            outButton.setTitleColor(UIColor.white, for: UIControlState())
 
         }
     }
     
     @IBOutlet var breakStartButton: UIButton! {
         didSet {
-            breakStartButton.backgroundColor = UIColor.whiteColor()
-            breakStartButton.setTitleColor(UIColor.kairosGreen(), forState: .Normal)
+            breakStartButton.backgroundColor = UIColor.white
+            breakStartButton.setTitleColor(UIColor.kairosGreen(), for: UIControlState())
         }
     }
     
     @IBOutlet var breakEndButton: UIButton! {
         didSet {
-            breakEndButton.backgroundColor = UIColor.whiteColor()
-            breakEndButton.setTitleColor(UIColor.kairosBlue(), forState: .Normal)
+            breakEndButton.backgroundColor = UIColor.white
+            breakEndButton.setTitleColor(UIColor.kairosBlue(), for: UIControlState())
         }
     }
     
@@ -179,7 +179,7 @@ class ClockOptionsViewController: UIViewController {
         didSet {
             doneButton.titleLabel?.font = tertiaryFont
             doneButton.backgroundColor = UIColor.kairosRed()
-            doneButton.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+            doneButton.setTitleColor(UIColor.white, for: UIControlState())
         }
     }
     
@@ -189,41 +189,41 @@ class ClockOptionsViewController: UIViewController {
     
     
     //MARK: IBAction
-    @IBAction func doneTouchUpInside(sender: AnyObject) {
+    @IBAction func doneTouchUpInside(_ sender: AnyObject) {
         punchData = nil
         delegate?.cancel()
     }
     
-    @IBAction func clockOptionTouchUpInside(sender: AnyObject) {
-        guard let
-            tag = sender.tag,
-            selectedOption = ClockOptions(rawValue: tag)
+    @IBAction func clockOptionTouchUpInside(_ sender: AnyObject) {
+        guard
+            let tag = sender.tag,
+            let selectedOption = ClockOptions(rawValue: tag)
         else {
             return
         }
         
-        let punchDate = NSDate()
+        let punchDate = Date()
         
-        let utcDateFormatter = NSDateFormatter()
-        utcDateFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
+        let utcDateFormatter = DateFormatter()
+        utcDateFormatter.locale = Locale(identifier: "en_US_POSIX")
         utcDateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        utcDateFormatter.timeZone = NSTimeZone(name: "UTC")
-        let timestampUTC = utcDateFormatter.stringFromDate(punchDate)
+        utcDateFormatter.timeZone = TimeZone(identifier: "UTC")
+        let timestampUTC = utcDateFormatter.string(from: punchDate)
         
-        let localDateFormatter = NSDateFormatter()
-        localDateFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
+        let localDateFormatter = DateFormatter()
+        localDateFormatter.locale = Locale(identifier: "en_US_POSIX")
         localDateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        localDateFormatter.timeZone = NSTimeZone.localTimeZone()
-        let timestampLocal = localDateFormatter.stringFromDate(punchDate)
+        localDateFormatter.timeZone = TimeZone.autoupdatingCurrent
+        let timestampLocal = localDateFormatter.string(from: punchDate)
         
         let clockOffset: Int16 = 0 //Investigate
         
-        let currentTimeZone = NSTimeZone.localTimeZone()
-        let timeZoneOffsetSeconds = currentTimeZone.secondsFromGMTForDate(punchDate)
+        let currentTimeZone = TimeZone.autoupdatingCurrent
+        let timeZoneOffsetSeconds = currentTimeZone.secondsFromGMT(for: punchDate)
         let timezoneOffset = (timeZoneOffsetSeconds / 60) / 60
         
-        let timezoneName = NSTimeZone.localTimeZone().abbreviation
-        let timezoneDST = Int(NSTimeZone.localTimeZone().daylightSavingTime)
+        let timezoneName = NSTimeZone.local.abbreviation()
+        let timezoneDST = NSTimeZone.local.isDaylightSavingTime().intValue()
         
         let badgeNumber = punchData?.employee?.badgeNumber
         
@@ -233,7 +233,7 @@ class ClockOptionsViewController: UIViewController {
         
         
         let online: String
-        if let onlineBool = DataController.sharedController?.syncScheduler.reachability?.isReachable() {
+        if let onlineBool = DataController.sharedController?.syncScheduler.reachability?.isReachable {
             online = String(onlineBool)
         } else {
             online = "true"
@@ -244,15 +244,20 @@ class ClockOptionsViewController: UIViewController {
         let facerecImageType: String?
         let facerecImageData: String?
         
-        if let image = punchData?.image, imageData = UIImageJPEGRepresentation(image, 0.7) {
+        if let image = punchData?.image, let imageData = UIImageJPEGRepresentation(image, 0.7) {
             facerecImageType = "image/jpeg"
-            facerecImageData = imageData.base64EncodedStringWithOptions(.Encoding64CharacterLineLength)
+            facerecImageData = imageData.base64EncodedString(options: .lineLength64Characters)
         } else {
             facerecImageType = ""
             facerecImageData = ""
         }
 
-        
+        let confidenceNSNumber: NSNumber?
+        if let confidence = punchData?.confidence {
+            confidenceNSNumber = NSNumber(value: confidence)
+        } else {
+            confidenceNSNumber = nil
+        }
         
         DataController.sharedController?.createAndPersistPunch(
             timestampUTC,
@@ -269,7 +274,7 @@ class ClockOptionsViewController: UIViewController {
             facerecImageType: facerecImageType,
             facerecImageData: facerecImageData,
             subjectID: punchData?.subjectID,
-            confidence: punchData?.confidence
+            confidence: confidenceNSNumber
         )
         
         
@@ -283,12 +288,25 @@ class ClockOptionsViewController: UIViewController {
 }
 
 extension ClockOptionsViewController: TimeClockViewController {
-    func opacityForAppState(state: TimeClockFlowController.AppState) -> CGFloat {
+    func opacityForAppState(_ state: TimeClockFlowController.AppState) -> CGFloat {
         switch state {
-        case .DisplayingOptions:
+        case .displayingOptions:
             return 1
         default:
             return 0
         }
     }
+}
+
+extension Bool: IntValue {
+    func intValue() -> Int {
+        if self {
+            return 1
+        }
+        return 0
+    }
+}
+
+protocol IntValue {
+    func intValue() -> Int
 }

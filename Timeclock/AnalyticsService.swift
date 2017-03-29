@@ -11,14 +11,14 @@ import Foundation
 protocol AnalyticsService {
     static var apiToken: String { get }
     static var uploadInterval: Double { get set }
-    static func trackEvent(event: AnalyticsEvent)
-    static func registerUserProperties(properties: AnalyticsProperties)
-    static func registerPushToken(pushToken: NSData)
+    static func trackEvent(_ event: AnalyticsEvent)
+    static func registerUserProperties(_ properties: AnalyticsProperties)
+    static func registerPushToken(_ pushToken: Data)
     static func pauseUpload()
     static func resumeUpload()
-    static func aliasUser(alias: String)
-    static func identifyUser(id: String)
-    static func initialize(launchOptions: [NSObject : AnyObject]?)
-    static func trackPushNotifiction(userInfo: [NSObject : AnyObject])
+    static func aliasUser(_ alias: String)
+    static func identifyUser(_ id: String)
+    static func initialize(_ launchOptions: [UIApplicationLaunchOptionsKey: Any]?)
+    static func trackPushNotifiction(_ userInfo: [AnyHashable: Any])
     static func resetUserIdentifier()
 }

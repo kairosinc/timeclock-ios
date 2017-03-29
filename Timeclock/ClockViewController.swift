@@ -11,7 +11,7 @@ import UIKit
 class ClockViewController: UIViewController {
 
     //MARK: Properties
-    var timeLabelTimer: NSTimer?
+    var timeLabelTimer: Timer?
     
     //MARK: IBOutlet
     @IBOutlet weak var timeLabel: UILabel!
@@ -22,7 +22,7 @@ class ClockViewController: UIViewController {
         
         view.backgroundColor = UIColor.kairosDarkGrey()
         
-        timeLabelTimer = NSTimer.scheduledTimerWithTimeInterval(0.1,
+        timeLabelTimer = Timer.scheduledTimer(timeInterval: 0.1,
                                                                 target: self,
                                                                 selector: #selector(updateTimeLabel),
                                                                 userInfo: nil,
@@ -31,12 +31,12 @@ class ClockViewController: UIViewController {
     
     //MARK: Methods
     func updateTimeLabel() {
-        let locale = NSLocale(localeIdentifier: "en_US_POSIX")
-        let date = NSDate()
+        let locale = Locale(identifier: "en_US_POSIX")
+        let date = Date()
         
-        let timeFormatter = NSDateFormatter()
+        let timeFormatter = DateFormatter()
         timeFormatter.locale = locale
         timeFormatter.dateFormat = "h:mm a"
-        timeLabel.text = timeFormatter.stringFromDate(date)
+        timeLabel.text = timeFormatter.string(from: date)
     }
 }

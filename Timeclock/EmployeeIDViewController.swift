@@ -9,7 +9,7 @@
 import UIKit
 
 protocol EmployeeIDDelegate {
-    func idEntered(punchData: PunchData?)
+    func idEntered(_ punchData: PunchData?)
     func cancelled()
 }
 
@@ -29,31 +29,31 @@ class EmployeeIDViewController: UIViewController {
     }
     
     let primaryFont: UIFont = {
-        return UIFont.boldSystemFontOfSize(44)
+        return UIFont.boldSystemFont(ofSize: 44)
     }()
     
     let secondaryFont: UIFont = {
-        return UIFont.boldSystemFontOfSize(30)
+        return UIFont.boldSystemFont(ofSize: 30)
     }()
     
     //MARK: IBOutlet
     @IBOutlet weak var errorLabel: UILabel! {
         didSet {
-            errorLabel.textColor = UIColor.whiteColor()
+            errorLabel.textColor = UIColor.white
             errorLabel.font = secondaryFont
         }
     }
     
     @IBOutlet weak var titleLabel: UILabel! {
         didSet {
-            titleLabel.textColor = UIColor.whiteColor()
+            titleLabel.textColor = UIColor.white
             titleLabel.font = primaryFont
         }
     }
     
     @IBOutlet weak var employeeIDLabel: UILabel! {
         didSet {
-            employeeIDLabel.backgroundColor = UIColor.whiteColor()
+            employeeIDLabel.backgroundColor = UIColor.white
             employeeIDLabel.textColor = UIColor.kairosDarkGrey()
             employeeIDLabel.font = primaryFont
         }
@@ -62,7 +62,7 @@ class EmployeeIDViewController: UIViewController {
     @IBOutlet weak var confirmButton: UIButton! {
         didSet {
             confirmButton.backgroundColor = UIColor.kairosGreen()
-            confirmButton.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+            confirmButton.setTitleColor(UIColor.white, for: UIControlState())
             confirmButton.titleLabel?.font = primaryFont
         }
     }
@@ -77,7 +77,7 @@ class EmployeeIDViewController: UIViewController {
         didSet {
             for button in numPadButtons {
                 button.backgroundColor = UIColor.kairosGrey()
-                button.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+                button.setTitleColor(UIColor.white, for: UIControlState())
                 
                 if button.tag >= 0 {
                     button.titleLabel?.font = primaryFont
@@ -88,7 +88,7 @@ class EmployeeIDViewController: UIViewController {
         }
     }
     
-    @IBAction func backspaceLongPress(sender: AnyObject) {
+    @IBAction func backspaceLongPress(_ sender: AnyObject) {
         employeeIDLabel.text = ""
         dismissError()
     }
@@ -97,18 +97,18 @@ class EmployeeIDViewController: UIViewController {
     @IBOutlet weak var cancelButton: UIButton!
     
     //MARK: IBAction
-    @IBAction func numPadTouchUpInside(sender: AnyObject) {
+    @IBAction func numPadTouchUpInside(_ sender: AnyObject) {
         guard let tag = sender.tag else { return }
         numberEntered(tag)
         dismissError()
     }
     
-    @IBAction func backspaceTouchUpInside(sender: AnyObject) {
+    @IBAction func backspaceTouchUpInside(_ sender: AnyObject) {
         removeLastCharacter()
         dismissError()
     }
     
-    @IBAction func confirmTouchUpInside(sender: AnyObject) {
+    @IBAction func confirmTouchUpInside(_ sender: AnyObject) {
         guard let employeeID = employeeIDLabel.text else { return }
         DataController.sharedController?.fetchEmployee(employeeID, completion: { (managedObject, error) in
             
@@ -122,12 +122,12 @@ class EmployeeIDViewController: UIViewController {
             }
             
             if let employee = managedObject as? Employee {
-                if let
-                    appState = self.appState,
-                    punchData = self.punchData,
-                    image = punchData.image
-                    where appState == .EmployeeIDEnrolment {
-                        KairosSDK.enrollWithImage(image, subjectId: employeeID, galleryName: galleryName, success: nil, failure: nil)
+                if
+                    let appState = self.appState,
+                    let punchData = self.punchData,
+                    let image = punchData.image,
+                    appState == .employeeIDEnrolment {
+                        KairosSDK.enroll(with: image, subjectId: employeeID, galleryName: galleryName, success: nil, failure: nil)
                 }
                 
                 self.punchData?.employee = employee
@@ -139,7 +139,7 @@ class EmployeeIDViewController: UIViewController {
         })
     }
     
-    @IBAction func cancelTouchUpInside(sender: AnyObject) {
+    @IBAction func cancelTouchUpInside(_ sender: AnyObject) {
         delegate?.cancelled()
     }
     
@@ -150,13 +150,13 @@ class EmployeeIDViewController: UIViewController {
     }
     
     //MARK: Methods
-    func configureForAppState(appState: TimeClockFlowController.AppState) {
+    func configureForAppState(_ appState: TimeClockFlowController.AppState) {
         titleLabel.text = "Enter Badge Number"
         employeeIDLabel.text = ""
-        errorLabel.hidden = true
+        errorLabel.isHidden = true
     }
     
-    func numberEntered(number: Int) {
+    func numberEntered(_ number: Int) {
         let existingText: String
         if let existingUnwrappedValue = employeeIDLabel.text {
             existingText = existingUnwrappedValue
@@ -173,29 +173,29 @@ class EmployeeIDViewController: UIViewController {
         employeeIDLabel.text = String(newValue)
     }
     
-    func showError(message: String) {
+    func showError(_ message: String) {
         errorLabel.text = message
         
-        UIView.animateWithDuration(0.3) {
+        UIView.animate(withDuration: 0.3, animations: {
             self.topMessageBackgroundView.backgroundColor = UIColor.kairosRed()
-            self.errorLabel.hidden = false
-        }
+            self.errorLabel.isHidden = false
+        }) 
     }
     
     func dismissError() {
-        guard !errorLabel.hidden else { return }
+        guard !errorLabel.isHidden else { return }
         
-        UIView.animateWithDuration(0.3) {
+        UIView.animate(withDuration: 0.3, animations: {
             self.topMessageBackgroundView.backgroundColor = UIColor.kairosGrey()
-            self.errorLabel.hidden = true
-        }
+            self.errorLabel.isHidden = true
+        }) 
     }
 }
 
 extension EmployeeIDViewController: TimeClockViewController {
-    func opacityForAppState(state: TimeClockFlowController.AppState) -> CGFloat {
+    func opacityForAppState(_ state: TimeClockFlowController.AppState) -> CGFloat {
         switch state {
-        case .EmployeeIDVerification, .EmployeeIDEnrolment:
+        case .employeeIDVerification, .employeeIDEnrolment:
             return 1
         default:
             return 0

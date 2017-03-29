@@ -8,22 +8,22 @@
 
 import Foundation
 
-public enum KairosAPIError: ErrorType {
-    case Known(String)
-    case Unknown()
+public enum KairosAPIError: Error {
+    case known(String)
+    case unknown()
     
-    internal static func fromJSONData(data: NSData) -> KairosAPIError? {
-        if let
-            wrappedJSON = try? NSJSONSerialization.JSONObjectWithData(data, options: []) as? JSONType,
-            json = wrappedJSON,
-            errorsArray = json["errors"] as? [AnyObject],
-            errorDictionary = errorsArray.first as? JSONType,
-            errorType = errorDictionary["type"] as? String {
+    internal static func fromJSONData(_ data: Data) -> KairosAPIError? {
+        if
+            let wrappedJSON = try? JSONSerialization.jsonObject(with: data, options: []) as? JSONType,
+            let json = wrappedJSON,
+            let errorsArray = json["errors"] as? [AnyObject],
+            let errorDictionary = errorsArray.first as? JSONType,
+            let errorType = errorDictionary["type"] as? String {
             
             if let userFacingError = userFacingMessageForType(errorType) {
-                return KairosAPIError.Known(userFacingError)
+                return KairosAPIError.known(userFacingError)
             } else {
-                return KairosAPIError.Known(errorType)
+                return KairosAPIError.known(errorType)
             }
 
         } else {
@@ -31,19 +31,19 @@ public enum KairosAPIError: ErrorType {
         }
     }
     
-    internal static func fromErrorString(errorString: String) -> KairosAPIError {
+    internal static func fromErrorString(_ errorString: String) -> KairosAPIError {
         if let userFacingError = userFacingMessageForType(errorString) {
-            return KairosAPIError.Known(userFacingError)
+            return KairosAPIError.known(userFacingError)
         } else {
-            return KairosAPIError.Known(errorString)
+            return KairosAPIError.known(errorString)
         }
     }
     
-    private static func userFacingMessageForType(errorType: String) -> String? {
+    fileprivate static func userFacingMessageForType(_ errorType: String) -> String? {
         return userFacingErrors[errorType]
     }
     
-    private static let userFacingErrors: [String: String] = {
+    fileprivate static let userFacingErrors: [String: String] = {
         return [
             "DuplicateUidError" : "A user with this email address already exists.",
             "Could not authorize grant" : "Incorrect email or password."

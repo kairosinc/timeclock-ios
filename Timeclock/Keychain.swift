@@ -9,8 +9,8 @@
 import Foundation
 import Security
 
-enum KeychainError: ErrorType {
-    case Status(OSStatus)
+enum KeychainError: Error {
+    case status(OSStatus)
 }
 
 private typealias KeychainQuery = [String:AnyObject]
@@ -22,19 +22,18 @@ struct Keychain {
     /// :param: identifier The name for the data to retreive.
     ///
     /// :returns: The data or throws an error
-    static func get(identifier identifier: String) throws -> NSData {
+    static func get(identifier: String) throws -> Data {
         
         var query = keychainQuery(identifier: identifier)
-        query[String(kSecReturnData)] = true
-        query[String(kSecMatchLimit)] = String(kSecMatchLimitOne)
+        query[String(kSecReturnData)] = true as AnyObject?
+        query[String(kSecMatchLimit)] = kSecMatchLimitOne
         
-        var result: NSData?
-        let status = withUnsafeMutablePointer(&result) {
-            SecItemCopyMatching(query, UnsafeMutablePointer($0))
-        }
+        var result: AnyObject?
         
-        guard let data = result else {
-            throw KeychainError.Status(status)
+        let status = SecItemCopyMatching(query as CFDictionary, &result)
+        
+        guard let unwrappedResult = result, let data = unwrappedResult as? Data else {
+            throw KeychainError.status(status)
         }
         
         return data
@@ -45,38 +44,39 @@ struct Keychain {
     /// :param: identifier The name for the data to store.
     /// :param: data The data to store.
     /// :param: accessibility The kSecAttrAccessible value to use, by default this is kSecAttrAccessibleWhenUnlocked.
-    static func set(identifier identifier: String, data: NSData, accessibility: String = String(kSecAttrAccessibleWhenUnlocked)) throws {
+    static func set(identifier: String, data: Data, accessibility: String = String(kSecAttrAccessibleWhenUnlocked)) throws {
         
         var query = keychainQuery(identifier: identifier)
-        SecItemDelete(query)
+        SecItemDelete(query as CFDictionary)
         
-        query[String(kSecValueData)] = data
-        query[String(kSecAttrAccessible)] = accessibility
+        query[String(kSecValueData)] = data as AnyObject?
+        query[String(kSecAttrAccessible)] = accessibility as AnyObject?
         
-        let status = SecItemAdd(query, nil)
+        let status = SecItemAdd(query as CFDictionary, nil)
         guard status == errSecSuccess else {
-            throw KeychainError.Status(status)
+            throw KeychainError.status(status)
         }
     }
     
     /// Deletes data stored in the keychain.
     ///
     /// :param: identifier The name for the data to remove.
-    static func delete(identifier identifier: String) throws {
+    static func delete(identifier: String) throws {
         let query = keychainQuery(identifier: identifier)
-        let status = SecItemDelete(query)
+        let status = SecItemDelete(query as CFDictionary)
         guard status == errSecSuccess else {
-            throw KeychainError.Status(status)
+            throw KeychainError.status(status)
         }
     }
     
-    private static func keychainQuery(identifier identifier: String) -> KeychainQuery {
+    private static func keychainQuery(identifier: String) -> KeychainQuery {
         return [
-            String(kSecClass) : String(kSecClassGenericPassword),
-            String(kSecAttrAccount) : identifier,
-            String(kSecAttrService) : "com.kairos.timeclock",
-            String(kSecAttrSynchronizable) : true
+            kSecClass as String : kSecClassGenericPassword,
+            kSecAttrAccount as String : identifier as AnyObject,
+            kSecAttrService as String : "cc.rapha.rides" as AnyObject,
+            kSecAttrSynchronizable as String : true as AnyObject
         ]
     }
 }
+
 

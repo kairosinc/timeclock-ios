@@ -32,11 +32,11 @@ class TimeClockCompositeViewController: UIViewController {
         
         flowController.compositeViewController = self
         
-        guard let
-            clockOptionsViewController = clockOptionsViewController,
-            idleViewController = idleViewController,
-            captureViewController = captureViewController,
-            employeeIDViewController = employeeIDViewController
+        guard
+            let clockOptionsViewController = clockOptionsViewController,
+            let idleViewController = idleViewController,
+            let captureViewController = captureViewController,
+            let employeeIDViewController = employeeIDViewController
         else {
             return
         }
@@ -47,20 +47,20 @@ class TimeClockCompositeViewController: UIViewController {
             captureViewController: captureViewController,
             employeeIDViewController: employeeIDViewController)
         
-        flowController.setUIState(.Idle)
+        flowController.setUIState(.idle)
         
-        if let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate {
+        if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
             appDelegate.flowController = flowController
         }
         
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
-        let defaults = NSUserDefaults.standardUserDefaults()
+        let defaults = UserDefaults.standard
         
-        if defaults.boolForKey("logout") {
-            defaults.setBool(false, forKey: "logout")
+        if defaults.bool(forKey: "logout") {
+            defaults.set(false, forKey: "logout")
             defaults.synchronize()
             let _ = try? Keychain.delete(identifier: "config_client_id")
             let _ = try? Keychain.delete(identifier: "config_site_id")
@@ -82,36 +82,36 @@ class TimeClockCompositeViewController: UIViewController {
     func showSetup() {
         let storyboard = UIStoryboard(name: "Setup", bundle: nil)
         if let setupVC = storyboard.instantiateInitialViewController() {
-            presentViewController(setupVC, animated: true, completion: nil)
+            present(setupVC, animated: true, completion: nil)
         }
     }
 
     //MARK: Navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let segueIdentifier = segue.identifier else { return }
         
-        segue.destinationViewController.view.backgroundColor = UIColor.kairosGrey()
+        segue.destination.view.backgroundColor = UIColor.kairosGrey()
         
         switch segueIdentifier {
         case "embedIdleViewController":
-            guard let destination = segue.destinationViewController as? IdleViewController else { break }
+            guard let destination = segue.destination as? IdleViewController else { break }
             idleViewController = destination
             idleViewController?.containerView = idleView
             break
         case "embedCaptureViewController":
-            guard let destination = segue.destinationViewController as? CaptureViewController else { break }
+            guard let destination = segue.destination as? CaptureViewController else { break }
             captureViewController = destination
             captureViewController?.containerView = captureView
             break
             
         case "embedClockOptionsViewController":
-            guard let destination = segue.destinationViewController as? ClockOptionsViewController else { break }
+            guard let destination = segue.destination as? ClockOptionsViewController else { break }
             clockOptionsViewController = destination
             clockOptionsViewController?.containerView = clockOptionsView
             break
             
         case "embedEmployeeIDViewController":
-            guard let destination = segue.destinationViewController as? EmployeeIDViewController else { break }
+            guard let destination = segue.destination as? EmployeeIDViewController else { break }
             employeeIDViewController = destination
             employeeIDViewController?.containerView = employeeIDView
             break
@@ -121,12 +121,12 @@ class TimeClockCompositeViewController: UIViewController {
         }
     }
     
-    override func shouldAutorotate() -> Bool {
+    override var shouldAutorotate : Bool {
         return false
     }
     
-    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-        return .Portrait
+    override var supportedInterfaceOrientations : UIInterfaceOrientationMask {
+        return .portrait
     }
 
 }

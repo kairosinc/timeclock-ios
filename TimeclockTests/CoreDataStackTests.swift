@@ -13,13 +13,13 @@ import XCTest
 class CoreDataStackTests: XCTestCase {
     
     func testBinaryStoreURL() {
-        let URL = NSURL(string: "http://example.com")!
+        let URL = Foundation.URL(string: "http://example.com")!
         let store = CoreDataStack.Store.Binary(storeURL: URL)
         XCTAssertEqual(store.URL, URL)
     }
     
     func testBinaryStoreType() {
-        let store = CoreDataStack.Store.Binary(storeURL: NSURL())
+        let store = CoreDataStack.Store.Binary(storeURL: URL())
         XCTAssertEqual(store.type, NSBinaryStoreType)
     }
     
@@ -34,13 +34,13 @@ class CoreDataStackTests: XCTestCase {
     }
     
     func testSQLStoreURL() {
-        let URL = NSURL(string: "http://example.com")!
+        let URL = Foundation.URL(string: "http://example.com")!
         let store = CoreDataStack.Store.SQL(storeURL: URL)
         XCTAssertEqual(store.URL, URL)
     }
     
     func testSQLStoreType() {
-        let store = CoreDataStack.Store.SQL(storeURL: NSURL())
+        let store = CoreDataStack.Store.SQL(storeURL: URL())
         XCTAssertEqual(store.type, NSSQLiteStoreType)
     }
     
@@ -53,21 +53,21 @@ class CoreDataStackTests: XCTestCase {
     
     func testIncorrectModelURL() {
         let store = CoreDataStack.Store.Memory
-        let URL = NSURL(string: "http://example.com")!
+        let URL = Foundation.URL(string: "http://example.com")!
         let stack = CoreDataStack(store: store, modelURL: URL)
         XCTAssertNil(stack?.managedObjectContext)
     }
     
     func testDifferentModel() {
-        let URL = NSURL.fileURLWithPath((NSTemporaryDirectory() as NSString).stringByAppendingPathComponent(NSUUID().UUIDString))
-        let fileManager = NSFileManager()
+        let URL = URL(fileURLWithPath: (NSTemporaryDirectory() as NSString).appendingPathComponent(UUID().uuidString))
+        let fileManager = FileManager()
         let store = CoreDataStack.Store.SQL(storeURL: URL)
         _ = CoreDataStack(store: store, modelURL: DataController.modelURL!)
-        XCTAssertTrue(fileManager.fileExistsAtPath(URL.path!))
+        XCTAssertTrue(fileManager.fileExists(atPath: URL.path!))
         
-        let testModelURL = NSBundle(forClass: self.dynamicType).URLForResource("Test", withExtension: "momd")!
+        let testModelURL = Bundle(for: self.dynamicType).url(forResource: "Test", withExtension: "momd")!
         let stack = CoreDataStack(store: store, modelURL: testModelURL)
-        XCTAssertTrue(fileManager.fileExistsAtPath(URL.path!))
+        XCTAssertTrue(fileManager.fileExists(atPath: URL.path!))
         let model = stack?.managedObjectContext.persistentStoreCoordinator?.managedObjectModel
         XCTAssertEqual(model?.entities.count, 1)
         XCTAssertEqual(model?.entities.first?.name, "TestEntity")
