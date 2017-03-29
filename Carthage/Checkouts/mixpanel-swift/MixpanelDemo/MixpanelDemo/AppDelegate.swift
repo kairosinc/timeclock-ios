@@ -14,51 +14,60 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-    func application(application: UIApplication,
-                     didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-
+    func application(_ application: UIApplication,
+                     didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
         var ADD_YOUR_MIXPANEL_TOKEN_BELOW_🛠🛠🛠🛠🛠🛠: String
-        Mixpanel.initialize(token: "YOUR_MIXPANEL_TOKEN")
+        Mixpanel.initialize(token: "MIXPANEL_TOKEN")
         Mixpanel.mainInstance().loggingEnabled = true
         Mixpanel.mainInstance().flushInterval = 5
-        let settings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
-        UIApplication.sharedApplication().registerUserNotificationSettings(settings)
-        UIApplication.sharedApplication().registerForRemoteNotifications()
+        let allTweaks: [TweakClusterType] = [MixpanelTweaks.floatTweak,
+                                             MixpanelTweaks.intTweak,
+                                             MixpanelTweaks.boolTweak,
+                                             MixpanelTweaks.stringTweak]
+        MixpanelTweaks.setTweaks(tweaks: allTweaks)
+
+        let settings = UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
+        UIApplication.shared.registerUserNotificationSettings(settings)
+        UIApplication.shared.registerForRemoteNotifications()
 
         Mixpanel.mainInstance().identify(
             distinctId: Mixpanel.mainInstance().distinctId)
         Mixpanel.mainInstance().people.set(properties: ["$name": "Max Panelle"])
-
         return true
     }
 
-    func applicationDidBecomeActive(application: UIApplication) {
+    func applicationDidBecomeActive(_ application: UIApplication) {
         Mixpanel.mainInstance().time(event: "session length")
     }
 
-    func applicationWillTerminate(application: UIApplication) {
+    func applicationWillTerminate(_ application: UIApplication) {
         Mixpanel.mainInstance().track(event: "session length")
     }
 
-    func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         debugPrint("did register for remote notification with token")
         Mixpanel.mainInstance().people.addPushDeviceToken(deviceToken)
     }
 
-
-    func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
         debugPrint(error)
     }
 
-    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any]) {
         debugPrint("did receive remote notificaiton")
-        if let message = userInfo["aps"]?["alert"] as? String {
-            let alert = UIAlertController(title: "", message: message, preferredStyle: .Alert)
-            alert.addAction(UIAlertAction(title: "Okay", style: .Default, handler: nil))
-            window?.rootViewController?.presentViewController(alert, animated: true, completion: nil)
+        if let message = (userInfo["aps"] as? [String: Any])?["alert"] as? String {
+            let alert = UIAlertController(title: "", message: message, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
+            window?.rootViewController?.present(alert, animated: true, completion: nil)
         }
-
         Mixpanel.mainInstance().trackPushNotification(userInfo)
     }
 
+}
+
+extension MixpanelTweaks {
+    public static let floatTweak = Tweak<CGFloat>(tweakName: "floatTweak", defaultValue: 20.5, min: 0, max: 30.1)
+    public static let intTweak = Tweak<Int>(tweakName: "intTweak", defaultValue: 10, min: 0)
+    public static let boolTweak = Tweak(tweakName: "boolTweak", defaultValue: true)
+    public static let stringTweak = Tweak(tweakName: "stringTweak", defaultValue: "hello")
 }

@@ -28,6 +28,7 @@ class MixpanelBaseTests: XCTestCase, MixpanelDelegate {
         mixpanel.reset()
         waitForSerialQueue()
         LSNocilla.sharedInstance().clearStubs()
+        stubDecide()
         NSLog("finished test setup")
     }
 
@@ -39,13 +40,25 @@ class MixpanelBaseTests: XCTestCase, MixpanelDelegate {
         mixpanel = nil
     }
 
-    func mixpanelWillFlush(mixpanel: MixpanelInstance) -> Bool {
+    func mixpanelWillFlush(_ mixpanel: MixpanelInstance) -> Bool {
         return mixpanelWillFlush
     }
 
     func waitForSerialQueue() {
-        dispatch_sync(mixpanel.serialQueue) {
+        mixpanel.serialQueue.sync() {
             return
+        }
+    }
+
+    func waitForAsyncTasks() {
+        var hasCompletedTask = false
+        DispatchQueue.main.async {
+            hasCompletedTask = true
+        }
+
+        let loopUntil = Date(timeIntervalSinceNow: 10)
+        while !hasCompletedTask && loopUntil.timeIntervalSinceNow > 0 {
+            RunLoop.current.run(mode: RunLoopMode.defaultRunLoopMode, before: loopUntil)
         }
     }
 
@@ -54,7 +67,7 @@ class MixpanelBaseTests: XCTestCase, MixpanelDelegate {
         waitForSerialQueue()
     }
 
-    func assertDefaultPeopleProperties(properties: Properties) {
+    func assertDefaultPeopleProperties(_ properties: InternalProperties) {
         XCTAssertNotNil(properties["$ios_device_model"], "missing $ios_device_model property")
         XCTAssertNotNil(properties["$ios_lib_version"], "missing $ios_lib_version property")
         XCTAssertNotNil(properties["$ios_version"], "missing $ios_version property")
@@ -63,9 +76,9 @@ class MixpanelBaseTests: XCTestCase, MixpanelDelegate {
     }
 
     func allPropertyTypes() -> Properties {
-        let dateFormatter = NSDateFormatter()
+        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss zzz"
-        let date = dateFormatter.dateFromString("2012-09-28 19:14:36 PDT")
+        let date = dateFormatter.date(from: "2012-09-28 19:14:36 PDT")
         let nested = ["p1": ["p2": ["p3": ["bottom"]]]]
         return ["string": "yello",
                 "number": 3,
@@ -74,8 +87,16 @@ class MixpanelBaseTests: XCTestCase, MixpanelDelegate {
                 "array": ["1"],
                 "null": NSNull(),
                 "nested": nested,
-                "url": NSURL(string: "https://mixpanel.com/")!,
+                "url": URL(string: "https://mixpanel.com/")!,
                 "float": 1.3]
+    }
+
+    func topViewController() -> UIViewController {
+        var rootViewController = UIApplication.shared.keyWindow?.rootViewController
+        while rootViewController?.presentedViewController != nil {
+            rootViewController = rootViewController?.presentedViewController
+        }
+        return rootViewController!
     }
 
 }

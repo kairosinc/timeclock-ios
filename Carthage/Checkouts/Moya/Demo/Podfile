@@ -5,15 +5,11 @@ use_frameworks!
 # Our Libraries
 def libraries
   pod 'Moya', :path => "../"
-  pod 'Moya/ReactiveCocoa', :path => "../"
+  pod 'Moya/ReactiveSwift', :path => "../"
   pod 'Moya/RxSwift', :path => "../"
-end
-
-# Test Libraries
-def test_pods
-  pod 'Quick'
-  pod 'Nimble'
-  pod 'OHHTTPStubs'
+  pod 'Alamofire'
+  pod 'RxSwift'
+  pod 'ReactiveSwift'
 end
 
 target 'Demo' do
@@ -21,31 +17,7 @@ target 'Demo' do
   libraries
 end
 
-target 'MoyaTests-iOS' do
-    platform :ios, '8.0'
-    libraries
-    test_pods
-end
-
-target 'MoyaTests-tvOS' do
-    platform :tvos, '9.0'
-    libraries
-    test_pods
-end
-
-target 'MoyaTests-Mac' do
-    platform :osx, '10.9'
-    libraries
-    test_pods
-end
-
-# Hack to fix testability until cocoapods gets an update
-post_install do |installer|
-  installer.pods_project.targets.each do |target|
-    target.build_configurations.each do |config|
-      if config.name == 'Debug'
-        config.build_settings['ENABLE_TESTABILITY'] = 'YES'
-      end
-    end
-  end
+target 'DemoMultiTarget' do
+  platform :ios, '8.0'
+  libraries
 end

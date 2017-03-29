@@ -28,17 +28,17 @@ class TrackingViewController: UIViewController, UITableViewDelegate, UITableView
         tableView.dataSource = self
     }
 
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = self.tableView.dequeueReusableCellWithIdentifier("cell")! as UITableViewCell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = self.tableView.dequeueReusableCell(withIdentifier: "cell")! as UITableViewCell
         cell.textLabel?.text = tableViewItems[indexPath.item]
-        cell.textLabel?.textColor = UIColor(red: 0.200000003, green: 0.200000003, blue: 0.200000003, alpha: 1)
+        cell.textLabel?.textColor = #colorLiteral(red: 0.200000003, green: 0.200000003, blue: 0.200000003, alpha: 1)
         return cell
     }
 
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
 
-        let actionStr = tableViewItems[indexPath.item]
+        let actionStr = self.tableViewItems[indexPath.item]
         var descStr = ""
 
         switch indexPath.item {
@@ -54,8 +54,7 @@ class TrackingViewController: UIViewController, UITableViewDelegate, UITableView
         case 2:
             let ev = "Timed Event"
             Mixpanel.mainInstance().time(event: ev)
-            let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(5 * Double(NSEC_PER_SEC)))
-            dispatch_after(delayTime, dispatch_get_main_queue()) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
                 Mixpanel.mainInstance().track(event: ev)
             }
             descStr = "Timed Event: \"\(ev)\""
@@ -69,13 +68,13 @@ class TrackingViewController: UIViewController, UITableViewDelegate, UITableView
             Mixpanel.mainInstance().clearSuperProperties()
             descStr = "Cleared Super Properties"
         case 6:
-            let p = ["Super Property 1": 1,
+            let p: Properties = ["Super Property 1": 1,
                      "Super Property 2": "p2",
-                     "Super Property 3": NSDate(),
+                     "Super Property 3": Date(),
                      "Super Property 4": ["a":"b"],
-                     "Super Property 5": [3, "a", NSDate()],
+                     "Super Property 5": [3, "a", Date()],
                      "Super Property 6":
-                        NSURL(string: "https://mixpanel.com")!,
+                        URL(string: "https://mixpanel.com")!,
                      "Super Property 7": NSNull()]
             Mixpanel.mainInstance().registerSuperProperties(p)
             descStr = "Properties: \(p)"
@@ -95,16 +94,15 @@ class TrackingViewController: UIViewController, UITableViewDelegate, UITableView
             break
         }
 
-        let vc = self.storyboard!.instantiateViewControllerWithIdentifier("ActionCompleteViewController") as! ActionCompleteViewController
+        let vc = storyboard!.instantiateViewController(withIdentifier: "ActionCompleteViewController") as! ActionCompleteViewController
         vc.actionStr = actionStr
         vc.descStr = descStr
-        vc.modalTransitionStyle = UIModalTransitionStyle.CrossDissolve
-        vc.modalPresentationStyle = UIModalPresentationStyle.OverFullScreen
-        self.presentViewController(vc, animated: true, completion: nil)
+        vc.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+        vc.modalPresentationStyle = UIModalPresentationStyle.overFullScreen
+        present(vc, animated: true, completion: nil)
     }
 
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return tableViewItems.count
     }
-
 }

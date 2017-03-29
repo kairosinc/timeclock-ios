@@ -15,20 +15,24 @@ let kTestToken = "abc123"
 let kDefaultServerString = "https://api.mixpanel.com"
 let kDefaultServerTrackString = "https://api.mixpanel.com/track/"
 let kDefaultServerEngageString = "https://api.mixpanel.com/engage/"
+let kDefaultServerDecideString = "^https://api.mixpanel.com/decide(.*?)".regex
 
-func stubEngage() -> LSStubRequestDSL {
-    return stubRequest("POST", kDefaultServerEngageString).withHeader("Accept-Encoding", "gzip")!
+@discardableResult func stubEngage() -> LSStubRequestDSL {
+    return stubRequest("POST", kDefaultServerEngageString as LSMatcheable!).withHeader("Accept-Encoding", "gzip")!
 }
 
-func stubTrack() -> LSStubRequestDSL {
-    return stubRequest("POST", kDefaultServerTrackString).withHeader("Accept-Encoding", "gzip")!
+@discardableResult func stubTrack() -> LSStubRequestDSL {
+    return stubRequest("POST", kDefaultServerTrackString as LSMatcheable!).withHeader("Accept-Encoding", "gzip")!
 }
 
+@discardableResult func stubDecide() -> LSStubRequestDSL {
+    return stubRequest("GET", kDefaultServerDecideString()).withHeader("Accept-Encoding", "gzip")!
+}
 
 extension XCTestCase {
 
-    func XCTExpectAssert(expectedMessage: String, file: StaticString = #file, line: UInt = #line, block: () -> ()) {
-        let exp = expectationWithDescription(expectedMessage)
+    func XCTExpectAssert(_ expectedMessage: String, file: StaticString = #file, line: UInt = #line, block: () -> ()) {
+        let exp = expectation(description: expectedMessage)
 
         Assertions.assertClosure = {
             (condition, message, file, line) in
@@ -39,7 +43,7 @@ extension XCTestCase {
 
         // Call code.
         block()
-        waitForExpectationsWithTimeout(0.5, handler: nil)
+        waitForExpectations(timeout: 0.5, handler: nil)
         Assertions.assertClosure = Assertions.swiftAssertClosure
     }
 
