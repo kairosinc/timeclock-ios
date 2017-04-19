@@ -7,8 +7,9 @@
 //
 
 import Foundation
+import Mixpanel
 
-typealias AnalyticsProperties = [String: AnyObject]
+typealias AnalyticsProperties = [String: MixpanelType]
 
 struct AnalyticsEvent {
     let name: String

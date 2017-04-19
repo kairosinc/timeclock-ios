@@ -16,7 +16,7 @@ class IdleViewController: UIViewController {
     
     //MARK: Properties
     var delegate: IdleDelegate?
-    var dateTimeLabelTimer: NSTimer?
+    var dateTimeLabelTimer: Timer?
     var containerView: UIView?
     
     var appState: TimeClockFlowController.AppState? {
@@ -38,7 +38,7 @@ class IdleViewController: UIViewController {
     }
     
     //MARK: IBAction
-    @IBAction func tapGestureRecognizerAction(sender: AnyObject) {
+    @IBAction func tapGestureRecognizerAction(_ sender: AnyObject) {
         delegate?.dismiss()
     }
     
@@ -47,7 +47,7 @@ class IdleViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = UIColor.kairosGrey()
         
-        dateTimeLabelTimer = NSTimer.scheduledTimerWithTimeInterval(0.1,
+        dateTimeLabelTimer = Timer.scheduledTimer(timeInterval: 0.1,
                                                                     target: self,
                                                                     selector: #selector(updateDateTimeLabels),
                                                                     userInfo: nil,
@@ -57,25 +57,25 @@ class IdleViewController: UIViewController {
     
     //MARK: Methods
     func updateDateTimeLabels() {
-        let locale = NSLocale(localeIdentifier: "en_US_POSIX")
-        let date = NSDate()
+        let locale = Locale(identifier: "en_US_POSIX")
+        let date = Date()
         
-        let timeFormatter = NSDateFormatter()
+        let timeFormatter = DateFormatter()
         timeFormatter.locale = locale
         timeFormatter.dateFormat = "h:mm a"
-        timeLabel.text = timeFormatter.stringFromDate(date)
+        timeLabel.text = timeFormatter.string(from: date)
         
-        let dateFormatter = NSDateFormatter()
+        let dateFormatter = DateFormatter()
         dateFormatter.locale = locale
         dateFormatter.dateFormat = "EEEE, MMMM d"
-        dateLabel.text = dateFormatter.stringFromDate(date)
+        dateLabel.text = dateFormatter.string(from: date)
     }
 }
 
 extension IdleViewController: TimeClockViewController {
-    func opacityForAppState(state: TimeClockFlowController.AppState) -> CGFloat {
+    func opacityForAppState(_ state: TimeClockFlowController.AppState) -> CGFloat {
         switch state {
-        case .Idle:
+        case .idle:
             return 1
         default:
             return 0

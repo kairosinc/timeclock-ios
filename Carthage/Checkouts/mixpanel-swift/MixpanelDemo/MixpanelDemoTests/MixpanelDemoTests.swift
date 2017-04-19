@@ -27,7 +27,7 @@ class MixpanelDemoTests: MixpanelBaseTests {
 
         // Failure count should be 3
         let waitTime =
-            mixpanel.flushInstance.flushRequest.networkRequestsAllowedAfterTime - NSDate().timeIntervalSince1970
+            mixpanel.flushInstance.flushRequest.networkRequestsAllowedAfterTime - Date().timeIntervalSince1970
         print("Delta wait time is \(waitTime)")
         XCTAssert(waitTime >= 110, "Network backoff time is less than 2 minutes.")
         XCTAssert(mixpanel.flushInstance.flushRequest.networkConsecutiveFailures == 2,
@@ -49,7 +49,7 @@ class MixpanelDemoTests: MixpanelBaseTests {
 
         // Failure count should be 3
         let waitTime =
-            mixpanel.flushInstance.flushRequest.networkRequestsAllowedAfterTime - NSDate().timeIntervalSince1970
+            mixpanel.flushInstance.flushRequest.networkRequestsAllowedAfterTime - Date().timeIntervalSince1970
         print("Delta wait time is \(waitTime)")
         XCTAssert(fabs(60 - waitTime) < 5, "Mixpanel did not respect 'Retry-After' HTTP header")
         XCTAssert(mixpanel.flushInstance.flushRequest.networkConsecutiveFailures == 0,
@@ -69,7 +69,7 @@ class MixpanelDemoTests: MixpanelBaseTests {
                       "events should have been flushed")
 
         for i in 0..<60 {
-            mixpanel.track(event: "evemt \(i)")
+            mixpanel.track(event: "event \(i)")
         }
 
         flushAndWaitForSerialQueue()
@@ -140,9 +140,9 @@ class MixpanelDemoTests: MixpanelBaseTests {
             mixpanel.track(event: "event", properties: ["i": 5000 + i])
         }
         waitForSerialQueue()
-        var e: Properties = mixpanel.eventsQueue.last!
+        var e: InternalProperties = mixpanel.eventsQueue.last!
         XCTAssertTrue(mixpanel.eventsQueue.count == 5000)
-        XCTAssertEqual(e["properties"]?["i"], 5004)
+        XCTAssertEqual((e["properties"] as? InternalProperties)?["i"] as? Int, 5004)
     }
 
     func testIdentify() {
@@ -159,7 +159,7 @@ class MixpanelDemoTests: MixpanelBaseTests {
             waitForSerialQueue()
             XCTAssertTrue(mixpanel.eventsQueue.count == 1,
                           "events should be sent right away with default distinct id")
-            XCTAssertEqual(mixpanel.eventsQueue.last?["properties"]?["distinct_id"],
+            XCTAssertEqual((mixpanel.eventsQueue.last?["properties"] as? InternalProperties)?["distinct_id"] as? String,
                            mixpanel.defaultDistinctId(),
                            "events should use default distinct id if none set")
             mixpanel.people.set(property: "p1", to: "a")
@@ -185,7 +185,7 @@ class MixpanelDemoTests: MixpanelBaseTests {
                            kTestToken, "incorrect project token in people record")
             XCTAssertEqual(mixpanel.people.peopleQueue.last?["$distinct_id"] as? String,
                            distinctId, "distinct id not set properly on unidentified people record")
-            var p: Properties = mixpanel.people.peopleQueue.last?["$set"] as! Properties
+            var p: InternalProperties = mixpanel.people.peopleQueue.last?["$set"] as! InternalProperties
             XCTAssertEqual(p["p1"] as? String, "a", "custom people property not queued")
             assertDefaultPeopleProperties(p)
             mixpanel.people.set(property: "p1", to: "a")
@@ -196,7 +196,7 @@ class MixpanelDemoTests: MixpanelBaseTests {
                           "once identify: is called, records should go straight to main queue")
             mixpanel.track(event: "e2")
             waitForSerialQueue()
-            let newDistinctId = mixpanel.eventsQueue.last?["properties"]?["distinct_id"]
+            let newDistinctId = (mixpanel.eventsQueue.last?["properties"] as? InternalProperties)?["distinct_id"] as? String
             XCTAssertEqual(newDistinctId, distinctId,
                            "events should use new distinct id after identify:")
             mixpanel.reset()
@@ -206,9 +206,9 @@ class MixpanelDemoTests: MixpanelBaseTests {
     func testTrackWithDefaultProperties() {
         mixpanel.track(event: "Something Happened")
         waitForSerialQueue()
-        var e: Properties = mixpanel.eventsQueue.last!
+        var e: InternalProperties = mixpanel.eventsQueue.last!
         XCTAssertEqual(e["event"] as? String, "Something Happened", "incorrect event name")
-        var p: Properties = e["properties"] as! Properties
+        var p: InternalProperties = e["properties"] as! InternalProperties
         XCTAssertNotNil(p["$app_build_number"], "$app_build_number not set")
         XCTAssertNotNil(p["$app_version_string"], "$app_version_string not set")
         XCTAssertNotNil(p["$lib_version"], "$lib_version not set")
@@ -225,18 +225,18 @@ class MixpanelDemoTests: MixpanelBaseTests {
     }
 
     func testTrackWithCustomProperties() {
-        let now = NSDate()
+        let now = Date()
         let p: Properties = ["string": "yello",
                              "number": 3,
                              "date": now,
-                             "$app_version_string": "override"]
+                             "$app_version": "override"]
         mixpanel.track(event: "Something Happened", properties: p)
         waitForSerialQueue()
-        var props: Properties = mixpanel.eventsQueue.last?["properties"] as! Properties
+        var props: InternalProperties = mixpanel.eventsQueue.last?["properties"] as! InternalProperties
         XCTAssertEqual(props["string"] as? String, "yello")
         XCTAssertEqual(props["number"] as? Int, 3)
-        XCTAssertEqual(props["date"] as? NSDate, now)
-        XCTAssertEqual(props["$app_version_string"] as? String, "override",
+        XCTAssertEqual(props["date"] as? Date, now)
+        XCTAssertEqual(props["$app_version"] as? String, "override",
                        "reserved property override failed")
     }
 
@@ -244,14 +244,14 @@ class MixpanelDemoTests: MixpanelBaseTests {
         let p: Properties = ["token": "t1", "distinct_id": "d1"]
         mixpanel.track(event: "e1", properties: p)
         waitForSerialQueue()
-        let trackToken = mixpanel.eventsQueue.last?["properties"]?["token"]!
-        let trackDistinctId = mixpanel.eventsQueue.last?["properties"]?["distinct_id"]!
+        let trackToken = (mixpanel.eventsQueue.last?["properties"] as? InternalProperties)?["token"] as? String
+        let trackDistinctId = (mixpanel.eventsQueue.last?["properties"] as? InternalProperties)?["distinct_id"] as? String
         XCTAssertEqual(trackToken, "t1", "user-defined distinct id not used in track.")
         XCTAssertEqual(trackDistinctId, "d1", "user-defined distinct id not used in track.")
     }
 
     func testRegisterSuperProperties() {
-        var p: Properties = ["p1": "a", "p2": 3, "p3": NSDate()]
+        var p: Properties = ["p1": "a", "p2": 3, "p3": Date()]
         mixpanel.registerSuperProperties(p)
         waitForSerialQueue()
         XCTAssertEqual(NSDictionary(dictionary: mixpanel.currentSuperProperties()),
@@ -294,22 +294,22 @@ class MixpanelDemoTests: MixpanelBaseTests {
     }
 
     func testInvalidPropertiesTrack() {
-        let p: Properties = ["data": NSData()]
+        let p: Properties = ["data": [Data()]]
         XCTExpectAssert("property type should not be allowed") {
-            self.mixpanel.track(event: "e1", properties: p)
+            mixpanel.track(event: "e1", properties: p)
         }
     }
 
     func testInvalidSuperProperties() {
-        let p: Properties = ["data": NSData()]
+        let p: Properties = ["data": [Data()]]
         XCTExpectAssert("property type should not be allowed") {
-            self.mixpanel.registerSuperProperties(p)
+            mixpanel.registerSuperProperties(p)
         }
         XCTExpectAssert("property type should not be allowed") {
-            self.mixpanel.registerSuperPropertiesOnce(p)
+            mixpanel.registerSuperPropertiesOnce(p)
         }
         XCTExpectAssert("property type should not be allowed") {
-            self.mixpanel.registerSuperPropertiesOnce(p, defaultValue: "v")
+            mixpanel.registerSuperPropertiesOnce(p, defaultValue: "v")
         }
     }
 
@@ -326,15 +326,15 @@ class MixpanelDemoTests: MixpanelBaseTests {
     }
 
     func testTrackLaunchOptions() {
-        let launchOptions: Properties = [UIApplicationLaunchOptionsRemoteNotificationKey: ["mp":
+        let launchOptions: [UIApplicationLaunchOptionsKey: Any] = [UIApplicationLaunchOptionsKey.remoteNotification: ["mp":
             ["m": "the_message_id", "c": "the_campaign_id"]]]
         mixpanel = Mixpanel.initialize(token: kTestToken,
                                        launchOptions: launchOptions,
                                        flushInterval: 60)
         waitForSerialQueue()
-        var e: Properties = mixpanel.eventsQueue.last!
+        var e: InternalProperties = mixpanel.eventsQueue.last!
         XCTAssertEqual(e["event"] as? String, "$app_open", "incorrect event name")
-        var p: Properties = e["properties"] as! Properties
+        var p: InternalProperties = e["properties"] as! InternalProperties
         XCTAssertEqual(p["campaign_id"] as? String, "the_campaign_id", "campaign_id not equal")
         XCTAssertEqual(p["message_id"] as? String, "the_message_id", "message_id not equal")
         XCTAssertEqual(p["message_type"] as? String, "push", "type does not equal inapp")
@@ -343,9 +343,9 @@ class MixpanelDemoTests: MixpanelBaseTests {
     func testTrackPushNotification() {
         mixpanel.trackPushNotification(["mp": ["m": "the_message_id", "c": "the_campaign_id"]])
         waitForSerialQueue()
-        var e: Properties = mixpanel.eventsQueue.last!
+        var e: InternalProperties = mixpanel.eventsQueue.last!
         XCTAssertEqual(e["event"] as? String, "$campaign_received", "incorrect event name")
-        var p: Properties = e["properties"] as! Properties
+        var p: InternalProperties = e["properties"] as! InternalProperties
         XCTAssertEqual(p["campaign_id"] as? String, "the_campaign_id", "campaign_id not equal")
         XCTAssertEqual(p["message_id"] as? String, "the_message_id", "message_id not equal")
         XCTAssertEqual(p["message_type"] as? String, "push", "type does not equal inapp")
@@ -435,15 +435,15 @@ class MixpanelDemoTests: MixpanelBaseTests {
         XCTAssertTrue(mixpanel.people.peopleQueue.count == 1, "pending people queue archive failed")
         XCTAssertEqual(mixpanel.timedEvents["e2"] as? Double, 5.0,
                        "timedEvents archive failed")
-        let fileManager = NSFileManager.defaultManager()
-        XCTAssertTrue(fileManager.fileExistsAtPath(
-            Persistence.filePathWithType(.Events, token: kTestToken)!),
+        let fileManager = FileManager.default
+        XCTAssertTrue(fileManager.fileExists(
+            atPath: Persistence.filePathWithType(.events, token: kTestToken)!),
                       "events archive file not removed")
-        XCTAssertTrue(fileManager.fileExistsAtPath(
-            Persistence.filePathWithType(.People, token: kTestToken)!),
+        XCTAssertTrue(fileManager.fileExists(
+            atPath: Persistence.filePathWithType(.people, token: kTestToken)!),
                       "people archive file not removed")
-        XCTAssertTrue(fileManager.fileExistsAtPath(
-            Persistence.filePathWithType(.Properties, token: kTestToken)!),
+        XCTAssertTrue(fileManager.fileExists(
+            atPath: Persistence.filePathWithType(.properties, token: kTestToken)!),
                       "properties archive file not removed")
         mixpanel = Mixpanel.initialize(token: kTestToken, launchOptions: nil, flushInterval: 60)
         XCTAssertEqual(mixpanel.distinctId, "d1", "expecting d1 as distinct id as initialised")
@@ -456,19 +456,29 @@ class MixpanelDemoTests: MixpanelBaseTests {
         XCTAssertNotNil(mixpanel.people.peopleQueue, "default people queue from no file is nil")
         XCTAssertTrue(mixpanel.people.peopleQueue.count == 1, "default people queue expecting 1 item")
         XCTAssertTrue(mixpanel.timedEvents.count == 1, "timedEvents expecting 1 item")
-
-        Persistence.archiveToFile(.Events, object: "garbage", token: kTestToken)
-        Persistence.archiveToFile(.People, object: "garbage", token: kTestToken)
-        Persistence.archiveToFile(.Properties, object: "garbage", token: kTestToken)
-
-        XCTAssertTrue(fileManager.fileExistsAtPath(
-            Persistence.filePathWithType(.Events, token: kTestToken)!),
+        // corrupt file
+        let garbage = "garbage".data(using: String.Encoding.utf8)!
+        do {
+            try garbage.write(to: URL(
+                fileURLWithPath: Persistence.filePathWithType(.events, token: kTestToken)!),
+                              options: [])
+            try garbage.write(to: URL(
+                fileURLWithPath: Persistence.filePathWithType(.people, token: kTestToken)!),
+                              options: [])
+            try garbage.write(to: URL(
+                fileURLWithPath: Persistence.filePathWithType(.properties, token: kTestToken)!),
+                              options: [])
+        } catch {
+            print("couldn't write data")
+        }
+        XCTAssertTrue(fileManager.fileExists(
+            atPath: Persistence.filePathWithType(.events, token: kTestToken)!),
                       "events archive file not removed")
-        XCTAssertTrue(fileManager.fileExistsAtPath(
-            Persistence.filePathWithType(.People, token: kTestToken)!),
+        XCTAssertTrue(fileManager.fileExists(
+            atPath: Persistence.filePathWithType(.people, token: kTestToken)!),
                       "people archive file not removed")
-        XCTAssertTrue(fileManager.fileExistsAtPath(
-            Persistence.filePathWithType(.Properties, token: kTestToken)!),
+        XCTAssertTrue(fileManager.fileExists(
+            atPath: Persistence.filePathWithType(.properties, token: kTestToken)!),
                       "properties archive file not removed")
         mixpanel = Mixpanel.initialize(token: kTestToken, launchOptions: nil, flushInterval: 60)
         waitForSerialQueue()
@@ -503,24 +513,24 @@ class MixpanelDemoTests: MixpanelBaseTests {
     func testEventTiming() {
         mixpanel.track(event: "Something Happened")
         waitForSerialQueue()
-        var e: Properties = mixpanel.eventsQueue.last!
-        var p = e["properties"] as! Properties
+        var e: InternalProperties = mixpanel.eventsQueue.last!
+        var p = e["properties"] as! InternalProperties
         XCTAssertNil(p["$duration"], "New events should not be timed.")
         mixpanel.time(event: "400 Meters")
         mixpanel.track(event: "500 Meters")
         waitForSerialQueue()
         e = mixpanel.eventsQueue.last!
-        p = e["properties"] as! Properties
+        p = e["properties"] as! InternalProperties
         XCTAssertNil(p["$duration"], "The exact same event name is required for timing.")
         mixpanel.track(event: "400 Meters")
         waitForSerialQueue()
         e = mixpanel.eventsQueue.last!
-        p = e["properties"] as! Properties
+        p = e["properties"] as! InternalProperties
         XCTAssertNotNil(p["$duration"], "This event should be timed.")
         mixpanel.track(event: "400 Meters")
         waitForSerialQueue()
         e = mixpanel.eventsQueue.last!
-        p = e["properties"] as! Properties
+        p = e["properties"] as! InternalProperties
         XCTAssertNil(p["$duration"],
                      "Tracking the same event should require a second call to timeEvent.")
     }
@@ -541,31 +551,5 @@ class MixpanelDemoTests: MixpanelBaseTests {
 
     func testTelephonyInfoInitialized() {
         XCTAssertNotNil(AutomaticProperties.telephonyInfo, "telephonyInfo wasn't initialized")
-    }
-
-    func testNestedUnsupportedTypes() {
-        stubTrack()
-        stubEngage()
-        let p = ["property": ["p": [NSData()]]]
-        mixpanel.track(event: "test", properties: p)
-        mixpanel.identify(distinctId: "1234")
-        mixpanel.people.set(properties: p)
-        flushAndWaitForSerialQueue()
-    }
-
-    func testUnexpectedBeahviours() {
-        stubEngage()
-        mixpanel.identify(distinctId: "1234")
-        mixpanel.people.set(properties: ["p1": "string type"])
-        flushAndWaitForSerialQueue()
-
-        mixpanel.people.increment(property: "p1", by: 2.3)
-        flushAndWaitForSerialQueue()
-
-        mixpanel.people.union(properties: ["p1": ["unioned item"]])
-        flushAndWaitForSerialQueue()
-
-        mixpanel.people.append(properties: ["p1": "appended item"])
-        flushAndWaitForSerialQueue()
     }
 }

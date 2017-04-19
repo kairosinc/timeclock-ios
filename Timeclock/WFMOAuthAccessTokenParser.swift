@@ -9,9 +9,9 @@
 import Foundation
 import Heimdallr
 
-public class WFMOAuthAccessTokenParser: NSObject, OAuthAccessTokenParser {
+open class WFMOAuthAccessTokenParser: NSObject, OAuthAccessTokenParser {
     
-    public func parse(data: NSData) throws -> OAuthAccessToken {
+    open func parse(data: Data) throws -> OAuthAccessToken {
         
         guard let token = OAuthAccessToken.decodeWFMResponse(data: data) else {
             throw NSError(domain: HeimdallrErrorDomain, code: HeimdallrErrorInvalidData, userInfo: nil)
@@ -23,29 +23,29 @@ public class WFMOAuthAccessTokenParser: NSObject, OAuthAccessTokenParser {
 }
 
 extension OAuthAccessToken {
-    public class func decodeWFMResponse(json: [String: AnyObject]) -> OAuthAccessToken? {
-        func toNSDate(timeIntervalSinceNow: NSTimeInterval?) -> NSDate? {
+    public class func decodeWFMResponse(_ json: [String: AnyObject]) -> OAuthAccessToken? {
+        func toNSDate(_ timeIntervalSinceNow: TimeInterval?) -> Date? {
             return timeIntervalSinceNow.map { timeIntervalSinceNow in
-                return NSDate(timeIntervalSinceNow: timeIntervalSinceNow)
+                return Date(timeIntervalSinceNow: timeIntervalSinceNow)
             }
         }
         
         guard let accessToken = json["access_token"] as? String,
-            tokenType = json["token_type"] as? String else {
+            let tokenType = json["token_type"] as? String else {
                 return nil
         }
         
-        let expiresAt = (json["expires_in"] as? NSTimeInterval).flatMap(toNSDate)
+        let expiresAt = (json["expires_in"] as? TimeInterval).flatMap(toNSDate)
         let refreshToken = json["refresh_token"] as? String
         
         return OAuthAccessToken(accessToken: accessToken, tokenType: tokenType,
                                 expiresAt: expiresAt, refreshToken: refreshToken)
     }
     
-    public class func decodeWFMResponse(data data: NSData) -> OAuthAccessToken? {
-        guard let json = try? NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions(rawValue: 0)),
-            jsonDictionary = json as? [String: AnyObject],
-            authDictionary = jsonDictionary["auth"] as? [String: AnyObject]
+    public class func decodeWFMResponse(data: Data) -> OAuthAccessToken? {
+        guard let json = try? JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions(rawValue: 0)),
+            let jsonDictionary = json as? [String: AnyObject],
+            let authDictionary = jsonDictionary["auth"] as? [String: AnyObject]
         else {
             return nil
         }

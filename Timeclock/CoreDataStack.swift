@@ -19,39 +19,39 @@ struct CoreDataStack {
     
     enum Store {
         
-        case Memory
-        case SQL(storeURL: NSURL)
-        case Binary(storeURL: NSURL)
+        case memory
+        case sql(storeURL: Foundation.URL)
+        case binary(storeURL: Foundation.URL)
         
         var type: String {
             switch self {
-            case .Memory:   return NSInMemoryStoreType
-            case .SQL:      return NSSQLiteStoreType
-            case .Binary:   return NSBinaryStoreType
+            case .memory:   return NSInMemoryStoreType
+            case .sql:      return NSSQLiteStoreType
+            case .binary:   return NSBinaryStoreType
             }
         }
         
-        var URL: NSURL? {
+        var URL: Foundation.URL? {
             switch self {
-            case .Memory: return nil
-            case .SQL(let URL): return URL
-            case .Binary(let URL): return URL
+            case .memory: return nil
+            case .sql(let URL): return URL
+            case .binary(let URL): return URL
             }
         }
     }
     
     let store: CoreDataStack.Store
-    let modelURL: NSURL
+    let modelURL: URL
     
-    private let persistentStoreCoordinator: NSPersistentStoreCoordinator
-    private let managedObjectModel: NSManagedObjectModel
+    fileprivate let persistentStoreCoordinator: NSPersistentStoreCoordinator
+    fileprivate let managedObjectModel: NSManagedObjectModel
     let managedObjectContext: NSManagedObjectContext
     
-    init?(store: CoreDataStack.Store, modelURL: NSURL) {
+    init?(store: CoreDataStack.Store, modelURL: URL) {
         self.store = store
         self.modelURL = modelURL
         
-        guard let model = NSManagedObjectModel(contentsOfURL: modelURL) else {
+        guard let model = NSManagedObjectModel(contentsOf: modelURL) else {
             return nil
         }
         
@@ -59,7 +59,7 @@ struct CoreDataStack {
         persistentStoreCoordinator = NSPersistentStoreCoordinator(managedObjectModel: managedObjectModel)
         
         do {
-            try persistentStoreCoordinator.addPersistentStoreWithType(store.type, configuration: nil, URL: store.URL, options: CoreDataStack.options)
+            try persistentStoreCoordinator.addPersistentStore(ofType: store.type, configurationName: nil, at: store.URL, options: CoreDataStack.options)
         } catch _ {
             
             // If we have no store URL, then the persistent store is a memory type and the failure above is out of our hands.
@@ -69,15 +69,15 @@ struct CoreDataStack {
             
             // Try to remove the existing store from disk and re-add a store to the coordinator
             do {
-                let fileManager = NSFileManager()
-                try fileManager.removeItemAtURL(storeURL)
-                try persistentStoreCoordinator.addPersistentStoreWithType(store.type, configuration: nil, URL: store.URL, options: CoreDataStack.options)
+                let fileManager = FileManager()
+                try fileManager.removeItem(at: storeURL)
+                try persistentStoreCoordinator.addPersistentStore(ofType: store.type, configurationName: nil, at: store.URL, options: CoreDataStack.options)
             } catch _ {
                 return nil
             }
         }
         
-        managedObjectContext = NSManagedObjectContext(concurrencyType: .MainQueueConcurrencyType)
+        managedObjectContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
         managedObjectContext.persistentStoreCoordinator = persistentStoreCoordinator
     }
 }

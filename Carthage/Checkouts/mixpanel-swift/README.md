@@ -4,6 +4,8 @@
 
 
 [![Build Status](https://travis-ci.org/mixpanel/mixpanel-swift.svg)](https://travis-ci.org/mixpanel/mixpanel-swift)
+[![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/mixpanel/mixpanel-swift.svg)](http://isitmaintained.com/project/mixpanel/mixpanel-swift "Average time to resolve an issue")
+[![Percentage of issues still open](http://isitmaintained.com/badge/open/mixpanel/mixpanel-swift.svg)](http://isitmaintained.com/project/mixpanel/mixpanel-swift "Percentage of issues still open")
 [![CocoaPods Compatible](http://img.shields.io/cocoapods/v/Mixpanel-swift.svg)](https://mixpanel.com)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg)](https://github.com/Carthage/Carthage)
 [![Apache License](http://img.shields.io/cocoapods/l/Mixpanel-swift.svg)](https://mixpanel.com)
@@ -19,20 +21,22 @@ If you are using Objective-C, we recommend using our **[Objective-C Library](htt
 
 ## Current supported features
 
-| Feature      | Swift 2.3     | [Swift 3](https://github.com/mixpanel/mixpanel-swift/tree/swift3) |
+**Our master branch and our 2.x releases are now in Swift 3. If you wish to use our Swift 2.3 implementation, please point to our v1.0.1 release.**
+
+| Feature      | Swift 3 | [Swift 2.3](https://github.com/mixpanel/mixpanel-swift/tree/swift2.3) |
 | -------      | ------------- | -------------                                                            |
 | Tracking API |       ✔       |       ✔       |
 | People API   |       ✔       |       ✔       |
 | [Documentation](https://mixpanel.github.io/mixpanel-swift)|       ✔       |        ✔       |
-| tvOS Support |               |       ✔       |
-| In-app Notifications |               |       ✔       |
-| Codeless Tracking |               |              |
-
-If you'd like to use Codeless Tracking (with the visual editor) please use our **[Objective-C Library](https://github.com/mixpanel/mixpanel-iphone)**.
-
+| tvOS Support |       ✔        |              |
+| In-app Notifications |       ✔        |              |
+| Codeless Tracking |       ✔        |              |
+| A/B Testing |       ✔        |              |
 # Installation
 
 ## CocoaPods
+
+**Our current release only supports CocoaPods version 1.1.0+**
 
 Mixpanel supports `CocoaPods` for easy installation.
 To Install, see our **[swift integration guide »](https://mixpanel.com/help/reference/swift)**

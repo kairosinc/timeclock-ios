@@ -12,7 +12,7 @@ import Heimdallr
 /// A `HeimdallResourceRequestAuthenticator` which uses the Form Field `Authorization`
 /// parameters to authorize a request.
 @objc
-public class HeimdallResourceRequestAuthenticatorForm: NSObject, HeimdallResourceRequestAuthenticator {
+open class HeimdallResourceRequestAuthenticatorForm: NSObject, HeimdallResourceRequestAuthenticator {
     
     public override init() {
     }
@@ -25,10 +25,10 @@ public class HeimdallResourceRequestAuthenticatorForm: NSObject, HeimdallResourc
     ///     authenticating the request.
     ///
     /// - returns: The authenticated request.
-    public func authenticateResourceRequest(request: NSURLRequest, accessToken: OAuthAccessToken) -> NSURLRequest {
-        let mutableRequest = request.mutableCopy() as! NSMutableURLRequest
-        mutableRequest.setHTTPAuthorization(.AccessTokenAuthentication(accessToken))
-        return mutableRequest
+    open func authenticateResourceRequest(_ request: URLRequest, accessToken: OAuthAccessToken) -> URLRequest {
+        var mRequest = request
+        mRequest.setHTTPAuthorization(.accessTokenAuthentication(accessToken))
+        return mRequest
     }
     
 }

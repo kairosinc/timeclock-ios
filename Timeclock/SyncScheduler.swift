@@ -10,7 +10,7 @@ import Reachability
 import UIKit
 
 class SyncScheduler: NSObject {
-    var syncTimer: NSTimer?
+    var syncTimer: Timer?
     var reachability: Reachability?
     
     var syncInterval: Double? {
@@ -24,8 +24,8 @@ class SyncScheduler: NSObject {
                 syncTimer.invalidate()
             }
             
-            syncTimer = NSTimer.scheduledTimerWithTimeInterval(
-                syncInterval,
+            syncTimer = Timer.scheduledTimer(
+                timeInterval: syncInterval,
                 target: self,
                 selector: #selector(sync),
                 userInfo: nil,
@@ -36,21 +36,21 @@ class SyncScheduler: NSObject {
     }
     
     func sync() {
-        WFMAPI.employees() { (employees, error) in }
+        _ = WFMAPI.employees() { (employees, error) in }
         seriallyUploadPunches()
     }
     
     func seriallyUploadPunches() {
         DataController.sharedController?.fetchPunches(completion: { (punches, error) in
-            guard let punches = punches where !punches.isEmpty else { return }
+            guard let punches = punches, !punches.isEmpty else { return }
             let startIndex = punches.startIndex
             
             self.uploadPunch(punches, currentIndex: startIndex)
         })
     }
     
-    func uploadPunch(punches: [Punch], currentIndex: Int) {
-        WFMAPI.punches([punches[currentIndex]], completion: { (error) in
+    func uploadPunch(_ punches: [Punch], currentIndex: Int) {
+        _ = WFMAPI.punches([punches[currentIndex]], completion: { (error) in
             if let _ = error {
             } else {
                 let punchToRemove = punches[currentIndex]
@@ -65,19 +65,11 @@ class SyncScheduler: NSObject {
         })
     }
     
-    func setupReachability(hostName hostName: String?) {
-        
-        do {
-            let reachability = try hostName == nil ? Reachability.reachabilityForInternetConnection() : Reachability(hostname: hostName!)
-            self.reachability = reachability
-        } catch ReachabilityError.FailedToCreateWithAddress(_) {
-            return
-        } catch {
-            return
-        }
+    func setupReachability(hostName: String?) {
+        self.reachability = Reachability(hostname: hostName!)
         
         reachability?.whenReachable = { reachability in
-            dispatch_async(dispatch_get_main_queue()) {
+            DispatchQueue.main.async {
                 self.sync()
             }
         }

@@ -11,8 +11,8 @@ import Moya
 
 /// An HTTP client that uses NSURLSession.
 @objc
-public class WFMOAuthHTTPClientNSURLSession: NSObject, HeimdallrHTTPClient {
-    let urlSession: NSURLSession
+open class WFMOAuthHTTPClientNSURLSession: NSObject, HeimdallrHTTPClient {
+    let urlSession: URLSession
     let oAuthClientCredentials: OAuthClientCredentials
     /// Initializes a new client.
     ///
@@ -24,7 +24,7 @@ public class WFMOAuthHTTPClientNSURLSession: NSObject, HeimdallrHTTPClient {
     /// - returns: A new client using the given `NSURLSession`.
     public init(
         provider: MoyaProvider<WFMService> = WFMAPI.defaultProvider,
-        urlSession: NSURLSession = NSURLSession(configuration: NSURLSessionConfiguration.defaultSessionConfiguration()),
+        urlSession: URLSession = URLSession(configuration: URLSessionConfiguration.default),
         oAuthClientCredentials: OAuthClientCredentials) {
         
         self.urlSession = urlSession
@@ -35,16 +35,15 @@ public class WFMOAuthHTTPClientNSURLSession: NSObject, HeimdallrHTTPClient {
     ///
     /// - parameter request: The request to be sent.
     /// - parameter completion: A callback to invoke when the request completed.
-    public func sendRequest(
-        request: NSURLRequest,
-        completion: (data: NSData?, response: NSURLResponse?, error: NSError?) -> ()) {
+    public func sendRequest(_ request: URLRequest, completion: @escaping (Data?, URLResponse?, Swift.Error?) -> ()) {
         
-        let mutableRequest = request.mutableCopy() as! NSMutableURLRequest
-        
+        var mutableRequest = request
+
         let paramsToAdd: String
-        if let
-            bodyData = request.HTTPBody,
-            params = parametersFromBody(bodyData) {
+        if
+            let bodyData = request.httpBody,
+            let params = parametersFromBody(bodyData) {
+            
             paramsToAdd = params
         } else {
             paramsToAdd = ""
@@ -52,7 +51,7 @@ public class WFMOAuthHTTPClientNSURLSession: NSObject, HeimdallrHTTPClient {
         
         
         let url = "http://example.com/some?" + paramsToAdd
-        let urlComponents = NSURLComponents(string: url)
+        let urlComponents = URLComponents(string: url)
         let queryItems = urlComponents?.queryItems
         let username = queryItems?.filter({$0.name == "username"}).first?.value
         let password = queryItems?.filter({$0.name == "password"}).first?.value
@@ -92,19 +91,19 @@ public class WFMOAuthHTTPClientNSURLSession: NSObject, HeimdallrHTTPClient {
             paramDict["refresh_token"] = refreshToken
         }
         
-        let jsonData = try! NSJSONSerialization.dataWithJSONObject(paramDict, options: [])
-        let jsonString = String(data: jsonData, encoding: NSUTF8StringEncoding)
+        let jsonData = try! JSONSerialization.data(withJSONObject: paramDict, options: [])
+        let jsonString = String(data: jsonData, encoding: String.Encoding.utf8)
         
-        mutableRequest.setHTTPBody(parameters: ["auth": jsonString!])
-        let task = urlSession.dataTaskWithRequest(mutableRequest, completionHandler: completion)
+        mutableRequest.setHTTPBody(parameters: ["auth": jsonString! as AnyObject])
+        let task = urlSession.dataTask(with: mutableRequest, completionHandler: completion)
         task.resume()
     }
     
     /// Pulls the authentication parameters from the header
     ///
     /// - parameter body: The reqest body.
-    private func parametersFromBody(body: NSData) -> String? {
-        let parameters = String(data: body, encoding: NSUTF8StringEncoding)
+    fileprivate func parametersFromBody(_ body: Data) -> String? {
+        let parameters = String(data: body, encoding: String.Encoding.utf8)
         return parameters
     }
     

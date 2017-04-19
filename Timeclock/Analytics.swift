@@ -10,32 +10,32 @@ import Foundation
 
 struct Analytics {
     
-    static func initializeServices(launchOptions: [NSObject: AnyObject]?) {
+    static func initializeServices(_ launchOptions: [UIApplicationLaunchOptionsKey: Any]?) {
         for service in Analytics.services {
             service.initialize(launchOptions)
-            if NSProcessInfo.processInfo().lowPowerModeEnabled {
+            if ProcessInfo.processInfo.isLowPowerModeEnabled {
                 service.pauseUpload()
             }
         }
         
-        NSNotificationCenter.defaultCenter().addObserverForName(
-            NSProcessInfoPowerStateDidChangeNotification,
+        NotificationCenter.default.addObserver(
+            forName: NSNotification.Name.NSProcessInfoPowerStateDidChange,
             object: nil,
             queue: nil,
-            usingBlock: { _ in
+            using: { _ in
                 Analytics.updateLowPowerState()
         })
     }
     
-    private static func updateLowPowerState() {
-        if NSProcessInfo.processInfo().lowPowerModeEnabled {
+    fileprivate static func updateLowPowerState() {
+        if ProcessInfo.processInfo.isLowPowerModeEnabled {
             for service in Analytics.services {
                 service.pauseUpload()
             }
         }
     }
     
-    static func trackPushNotifiction(userInfo: [NSObject : AnyObject]) {
+    static func trackPushNotifiction(_ userInfo: [AnyHashable: Any]) {
         for service in Analytics.services {
             service.trackPushNotifiction(userInfo)
         }
@@ -43,37 +43,37 @@ struct Analytics {
     
     static let services = [MixpanelService.self]
     
-    static func registerUserProperties(properties: AnalyticsProperties) {
+    static func registerUserProperties(_ properties: AnalyticsProperties) {
         for service in services {
             service.registerUserProperties(properties)
         }
     }
     
-    static func registerPushToken(pushToken: NSData) {
+    static func registerPushToken(_ pushToken: Data) {
         for service in Analytics.services {
             service.registerPushToken(pushToken)
         }
     }
     
-    static func aliasUser(alias: String) {
+    static func aliasUser(_ alias: String) {
         for service in Analytics.services {
             service.aliasUser(alias)
         }
     }
     
-    static func identifyUser(id: String) {
+    static func identifyUser(_ id: String) {
         for service in Analytics.services {
             service.identifyUser(id)
         }
     }
     
-    static func trackEvent(event: AnalyticsEvent) {
+    static func trackEvent(_ event: AnalyticsEvent) {
         for service in Analytics.services {
             service.trackEvent(event)
         }
     }
     
-    static func trackScreenView(name: String, properties: AnalyticsProperties?) {
+    static func trackScreenView(_ name: String, properties: AnalyticsProperties?) {
         let eventName = "Screen Viewed: \(name)"
         let event = AnalyticsEvent(name: eventName, properties: properties)
         

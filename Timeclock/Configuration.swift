@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Configuration: NSObject, NSCoding {
+final class Configuration: NSObject, NSCoding {
     let enable2FA: Bool
     let enableFacialRecognition: Bool
     let punchUploadURL: String
@@ -104,24 +104,25 @@ class Configuration: NSObject, NSCoding {
     }
     
     //MARK: NSCoding
-    required convenience init?(coder decoder: NSCoder) {
+    convenience init?(coder aDecoder: NSCoder) {
+        let enable2FA = aDecoder.decodeBool(forKey: "enable2FA")
+        let enableFacialRecognition = aDecoder.decodeBool(forKey: "enableFacialRecognition")
+        
         guard
-            let enable2FA = decoder.decodeObjectForKey("enable2FA") as? Bool,
-            let enableFacialRecognition = decoder.decodeObjectForKey("enableFacialRecognition") as? Bool,
-            let punchUploadURL = decoder.decodeObjectForKey("punchUploadURL") as? String,
-            let employeeDownloadURL = decoder.decodeObjectForKey("employeeDownloadURL") as? String,
-            let authURL = decoder.decodeObjectForKey("authURL") as? String,
-            let password = decoder.decodeObjectForKey("password") as? String,
-            let username = decoder.decodeObjectForKey("username") as? String,
-            let clientID = decoder.decodeObjectForKey("clientID") as? String
+            let punchUploadURL = aDecoder.decodeObject(forKey: "punchUploadURL") as? String,
+            let employeeDownloadURL = aDecoder.decodeObject(forKey: "employeeDownloadURL") as? String,
+            let authURL = aDecoder.decodeObject(forKey: "authURL") as? String,
+            let password = aDecoder.decodeObject(forKey: "password") as? String,
+            let username = aDecoder.decodeObject(forKey: "username") as? String,
+            let clientID = aDecoder.decodeObject(forKey: "clientID") as? String
         else {
             return nil
         }
         
-        let employeeWebURL = decoder.decodeObjectForKey("employeeWebURL") as? String
-        let galleryID = decoder.decodeObjectForKey("galleryID") as? String
-        let syncInterval = decoder.decodeObjectForKey("syncInterval") as? Double
-        let company = decoder.decodeObjectForKey("company") as? String
+        let employeeWebURL = aDecoder.decodeObject(forKey: "employeeWebURL") as? String
+        let galleryID = aDecoder.decodeObject(forKey: "galleryID") as? String
+        let syncInterval = aDecoder.decodeDouble(forKey: "syncInterval")
+        let company = aDecoder.decodeObject(forKey: "company") as? String
         
         self.init(
             enable2FA: enable2FA,
@@ -139,56 +140,61 @@ class Configuration: NSObject, NSCoding {
         )
     }
     
-    func encodeWithCoder(coder: NSCoder) {
-        coder.encodeObject(self.enable2FA, forKey: "enable2FA")
-        coder.encodeObject(self.enableFacialRecognition, forKey: "enableFacialRecognition")
-        coder.encodeObject(self.punchUploadURL, forKey: "punchUploadURL")
-        coder.encodeObject(self.employeeDownloadURL, forKey: "employeeDownloadURL")
-        coder.encodeObject(self.authURL, forKey: "authURL")
-        coder.encodeObject(self.password, forKey: "password")
-        coder.encodeObject(self.username, forKey: "username")
-        coder.encodeObject(self.clientID, forKey: "clientID")
+    func encode(with aCoder: NSCoder) {
+        aCoder.encode(self.enable2FA, forKey: "enable2FA")
+        aCoder.encode(self.enableFacialRecognition, forKey: "enableFacialRecognition")
+        aCoder.encode(self.enableFacialRecognition, forKey: "enableFacialRecognition")
+        aCoder.encode(self.punchUploadURL, forKey: "punchUploadURL")
+        aCoder.encode(self.employeeDownloadURL, forKey: "employeeDownloadURL")
+        aCoder.encode(self.authURL, forKey: "authURL")
+        aCoder.encode(self.password, forKey: "password")
+        aCoder.encode(self.username, forKey: "username")
+        aCoder.encode(self.clientID, forKey: "clientID")
         
         if let employeeWebURL = self.employeeWebURL {
-            coder.encodeObject(employeeWebURL, forKey: "employeeWebURL")
+            aCoder.encode(employeeWebURL, forKey: "employeeWebURL")
         }
         
         if let galleryID = self.galleryID {
-            coder.encodeObject(galleryID, forKey: "galleryID")
+            aCoder.encode(galleryID, forKey: "galleryID")
         }
         
         if let syncInterval = self.syncInterval {
-            coder.encodeObject(syncInterval, forKey: "syncInterval")
+            aCoder.encode(syncInterval, forKey: "syncInterval")
         }
         
         if let company = self.company {
-            coder.encodeObject(company, forKey: "company")
+            aCoder.encode(company, forKey: "company")
         }
     }
     
     func persist() {
-        let defaults = NSUserDefaults.standardUserDefaults()
-        let data = NSKeyedArchiver.archivedDataWithRootObject(self)
-        defaults.setObject(data, forKey: "configuration")
+        let defaults = UserDefaults.standard
+        let data = NSKeyedArchiver.archivedData(withRootObject: self)
+        defaults.set(data, forKey: "configuration")
         defaults.synchronize()
     }
     
     static func fromUserDefaults() -> Configuration? {
-        let defaults = NSUserDefaults.standardUserDefaults()
+        let defaults = UserDefaults.standard
         
         guard
-            let data = defaults.objectForKey("configuration") as? NSData,
-            let configuration = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? Configuration
+            let data = defaults.data(forKey: "configuration"),
+            let obj = NSKeyedUnarchiver.unarchiveObject(with: data)
         else {
             return nil
         }
 
-        return configuration
+        if let configuration = obj as? Configuration {
+            return configuration
+        } else {
+            return nil
+        }
     }
     
     static func removeFromUserDefaults() {
-        let defaults = NSUserDefaults.standardUserDefaults()
-        defaults.removeObjectForKey("configuration")
+        let defaults = UserDefaults.standard
+        defaults.removeObject(forKey: "configuration")
         defaults.synchronize()
     }
 }

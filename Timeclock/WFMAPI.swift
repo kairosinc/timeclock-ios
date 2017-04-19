@@ -10,25 +10,26 @@ import Alamofire
 import Foundation
 import Heimdallr
 import Moya
+import enum Result.Result
 
-public typealias JSONType = [String : AnyObject]
+public typealias JSONType = [String : Any]
 
 public struct WFMAPI {
     
     //OAuth
-    public static let tokenURL = NSURL(string: "http://config.timeclockdynamics.com:9100/sign_in/v1.0/auth/token")!
+    public static let tokenURL = URL(string: "http://config.timeclockdynamics.com:9100/sign_in/v1.0/auth/token")!
     
-    private static let oAuthClientSecret = "3e691351c44346d589ca626b5c28415c"
+    fileprivate static let oAuthClientSecret = "3e691351c44346d589ca626b5c28415c"
     
-    private static let oAuthStore = OAuthAccessTokenKeychainStore(service: "com.kairos.timeclock.keychain.oauth")
-    private static let configOAuthStore = OAuthAccessTokenKeychainStore(service: "com.kairos.timeclock.keychain.configoauth")
+    fileprivate static let oAuthStore = OAuthAccessTokenKeychainStore(service: "com.kairos.timeclock.keychain.oauth")
+    fileprivate static let configOAuthStore = OAuthAccessTokenKeychainStore(service: "com.kairos.timeclock.keychain.configoauth")
 
-    private static let oAuthclientCredentials = OAuthClientCredentials(
+    fileprivate static let oAuthclientCredentials = OAuthClientCredentials(
         id: Configuration.fromUserDefaults()?.clientID ?? "",
         secret: WFMAPI.oAuthClientSecret
     )
     
-    private static let configOAuthclientCredentials = OAuthClientCredentials(
+    fileprivate static let configOAuthclientCredentials = OAuthClientCredentials(
         id: WFMAPI.configClientID()?.clientID ?? "",
         secret: WFMAPI.oAuthClientSecret
     )
@@ -41,12 +42,12 @@ public struct WFMAPI {
         resourceRequestAuthenticator: HeimdallResourceRequestAuthenticatorForm()
     )
     
-    private static func authURL() -> String {
+    fileprivate static func authURL() -> String {
         return Configuration.fromUserDefaults()?.authURL ?? ""
     }
     
     public static func heimdallr() -> Heimdallr? {
-        guard let url = NSURL(string: WFMAPI.authURL()) else { return nil }
+        guard let url = URL(string: WFMAPI.authURL()) else { return nil }
         
         return Heimdallr(
             tokenURL: url,
@@ -56,36 +57,8 @@ public struct WFMAPI {
             resourceRequestAuthenticator: HeimdallResourceRequestAuthenticatorForm())
     }
     
-    static func certificates() -> [SecCertificate] {
-        var certificates: [SecCertificate] = []
-        
-        @objc class TestClass: NSObject { }
-        let bundle = NSBundle(forClass: TestClass.self)
-        
-        let environmentIntermediateCertificateName = "TBC"
-        
-        let paths = [
-            bundle.pathForResource(environmentIntermediateCertificateName, ofType: "cer")
-        ]
-        
-        
-        certificates = paths
-            .filter({$0 != nil})
-            .map({$0 as String!})
-            .map { (path: String) -> NSData? in
-                return NSData(contentsOfFile: path)
-            }
-            .filter({$0 != nil})
-            .map({$0 as NSData!})
-            .map { (certificateData: NSData) -> SecCertificate in
-                return SecCertificateCreateWithData(nil, certificateData)!
-        }
-        
-        return certificates
-    }
-    
     static let manager = Manager(
-        configuration: NSURLSessionConfiguration.defaultSessionConfiguration()
+        configuration: URLSessionConfiguration.default
     )
     
     static let defaultProvider = MoyaProvider<WFMService>(
@@ -94,13 +67,13 @@ public struct WFMAPI {
         manager: manager
     )
     
-    private static let accessToken = "tbc"
+    fileprivate static let accessToken = "tbc"
     
-    private static let endpointClosure = { (target: WFMService) -> Endpoint<WFMService> in
-        let url = NSURL(string: target.path)!.absoluteString
-        let endpoint: Endpoint<WFMService> = Endpoint<WFMService>(URL: url!,
+    fileprivate static let endpointClosure = { (target: WFMService) -> Endpoint<WFMService> in
+        let url = URL(string: target.path)!.absoluteString
+        let endpoint: Endpoint<WFMService> = Endpoint<WFMService>(url: url,
                                                                       sampleResponseClosure: {
-                                                                        .NetworkResponse(200, target.sampleData)
+                                                                        .networkResponse(200, target.sampleData)
                                                                         },
                                                                       method: target.method,
                                                                       parameters: target.parameters)
@@ -115,11 +88,11 @@ public struct WFMAPI {
             let usernameData = try? Keychain.get(identifier: "config_username"),
             let passwordData = try? Keychain.get(identifier: "config_password"),
             let companyData = try? Keychain.get(identifier: "config_company"),
-            let clientID = NSKeyedUnarchiver.unarchiveObjectWithData(clientIDData) as? String,
-            let siteID = NSKeyedUnarchiver.unarchiveObjectWithData(siteIDData) as? String,
-            let username = NSKeyedUnarchiver.unarchiveObjectWithData(usernameData) as? String,
-            let password = NSKeyedUnarchiver.unarchiveObjectWithData(passwordData) as? String,
-            let company = NSKeyedUnarchiver.unarchiveObjectWithData(companyData) as? String
+            let clientID = NSKeyedUnarchiver.unarchiveObject(with: clientIDData) as? String,
+            let siteID = NSKeyedUnarchiver.unarchiveObject(with: siteIDData) as? String,
+            let username = NSKeyedUnarchiver.unarchiveObject(with: usernameData) as? String,
+            let password = NSKeyedUnarchiver.unarchiveObject(with: passwordData) as? String,
+            let company = NSKeyedUnarchiver.unarchiveObject(with: companyData) as? String
         else {
             return nil
         }
@@ -127,8 +100,8 @@ public struct WFMAPI {
         return (clientID, siteID, username, password, company)
     }
     
-    private static let requestClosure = { (endpoint: Endpoint<WFMService>, done: MoyaProvider.RequestResultClosure) in
-        let request = endpoint.urlRequest
+    fileprivate static let requestClosure = { (endpoint: Endpoint<WFMService>, done: @escaping MoyaProvider.RequestResultClosure) in
+        guard var request = endpoint.urlRequest else { return }
         
         let heimdallrForRequest: Heimdallr?
         let username: String
@@ -137,8 +110,10 @@ public struct WFMAPI {
         let siteIDString: String
         let companyString: String
         
-        if let url = request.URL?.absoluteString
-        where url == WFMService.Configure().path {
+        
+        if
+            let url = request.url?.absoluteString,
+            url == WFMService.configure().path {
             heimdallrForRequest = configHeimdallr
             
             guard let config = WFMAPI.configClientID() else {
@@ -154,11 +129,11 @@ public struct WFMAPI {
         } else {
             heimdallrForRequest = WFMAPI.heimdallr()
             
-            guard let
-                savedUsername = Configuration.fromUserDefaults()?.username,
-                savedPassword = Configuration.fromUserDefaults()?.password,
-                savedClientIDString = Configuration.fromUserDefaults()?.clientID,
-                savedAuthURL = Configuration.fromUserDefaults()?.authURL
+            guard
+                let savedUsername = Configuration.fromUserDefaults()?.username,
+                let savedPassword = Configuration.fromUserDefaults()?.password,
+                let savedClientIDString = Configuration.fromUserDefaults()?.clientID,
+                let savedAuthURL = Configuration.fromUserDefaults()?.authURL
             else { return }
             
             username = savedUsername
@@ -170,9 +145,9 @@ public struct WFMAPI {
         
         heimdallrForRequest?.authenticateRequest(request) { result in
             switch result {
-            case .Success(let authenticatedRequest):
-                done(.Success(authenticatedRequest))
-            case .Failure(let error):
+            case .success(let authenticatedRequest):
+                done(.success(authenticatedRequest))
+            case .failure(let error):
                 print("authenticateRequest failure: \(error.localizedDescription)")
                 print("requesting access token due to authenticateRequest failure")
                 
@@ -184,20 +159,20 @@ public struct WFMAPI {
                     "company": companyString
                 ]) { result in
                     switch result {
-                    case .Success(let authenticatedRequest):
+                    case .success(let authenticatedRequest):
                         heimdallrForRequest?.authenticateRequest(request) { result in
                             switch result {
-                            case .Success(let authenticatedRequest):
+                            case .success(let authenticatedRequest):
                                 print("requestAccessToken success")
-                                done(.Success(authenticatedRequest))
-                            case .Failure(let error):
+                                done(.success(authenticatedRequest))
+                            case .failure(let error):
                                 print("requestAccessToken failure A: \(error.localizedDescription)")
-                                done(.Failure(Moya.Error.Underlying(error)))
+                                done(.failure(MoyaError.underlying(error)))
                             }
                         }
-                    case .Failure(let error):
+                    case .failure(let error):
                         print("requestAccessToken failure B: \(error.localizedDescription)")
-                        done(.Failure(Moya.Error.Underlying(error)))
+                        done(.failure(MoyaError.underlying(error)))
                     }
                 }
             }
@@ -205,20 +180,20 @@ public struct WFMAPI {
     }
     
     public static func configure(
-        clientID: String,
+        _ clientID: String,
         siteID: String,
         username: String,
         password: String,
         company: String,
         provider: MoyaProvider<WFMService> = WFMAPI.defaultProvider,
-        completion: (error: ErrorType?) -> Void) {
+        configureCompletion: @escaping (_ error: KairosAPIError?) -> Void) -> Cancellable {
         
         //Save clientID to keychain
-        let clientIDData = NSKeyedArchiver.archivedDataWithRootObject(clientID)
-        let siteIDData = NSKeyedArchiver.archivedDataWithRootObject(siteID)
-        let usernameData = NSKeyedArchiver.archivedDataWithRootObject(username)
-        let passwordData = NSKeyedArchiver.archivedDataWithRootObject(password)
-        let companyData = NSKeyedArchiver.archivedDataWithRootObject(company)
+        let clientIDData = NSKeyedArchiver.archivedData(withRootObject: clientID)
+        let siteIDData = NSKeyedArchiver.archivedData(withRootObject: siteID)
+        let usernameData = NSKeyedArchiver.archivedData(withRootObject: username)
+        let passwordData = NSKeyedArchiver.archivedData(withRootObject: password)
+        let companyData = NSKeyedArchiver.archivedData(withRootObject: company)
         
         do {
             try Keychain.set(identifier: "config_client_id", data: clientIDData, accessibility: String(kSecAttrAccessibleWhenUnlocked))
@@ -227,107 +202,99 @@ public struct WFMAPI {
             try Keychain.set(identifier: "config_password", data: passwordData, accessibility: String(kSecAttrAccessibleWhenUnlocked))
             try Keychain.set(identifier: "config_company", data: companyData, accessibility: String(kSecAttrAccessibleWhenUnlocked))
         } catch {
-            completion(error: KairosAPIError.Unknown())
+            configureCompletion(KairosAPIError.unknown())
             print("could not save to keychain, fail here")
         }
         
-        WFMAPI.getConfig(siteID: siteID) { (configuration, error) in
+        return WFMAPI.getConfig(siteID: siteID) { (configuration, error) in
             if let configuration = configuration {
                 configuration.persist()
                 DataController.sharedController?.syncScheduler.syncInterval = configuration.syncInterval
-                
-                WFMAPI.employees(completion: { (employees, error) in
-                    if let _ = error {
-                        Configuration.removeFromUserDefaults()
-                    }
-                    print("success, finish setup!!")
-                    completion(error: error)
-                })
-                
+                configureCompletion(nil)
             } else if let error = error {
                 print("could not complete API request, fail here: \(error)")
-                completion(error: error)
+                configureCompletion(error)
             } else {
                 print("unknown error")
-                completion(error: KairosAPIError.Unknown())
+                configureCompletion(KairosAPIError.unknown())
             }
         }
     }
     
     public static func employees(
         provider: MoyaProvider<WFMService> = WFMAPI.defaultProvider,
-        completion: (employees: [Employee]?, error: ErrorType?) -> Void) {
+        completion: @escaping (_ employees: [Employee]?, _ error: KairosAPIError?) -> Void) {
         
-        WFMAPI.request(provider, target: WFMService.Employees()) { (result) in
+        WFMAPI.request(provider, target: WFMService.employees()) { (result) in
             switch result {
-            case let .Success(response):
+            case let .success(response):
                 print(response)
-                guard let
-                    json = try? response.mapJSON() as? JSONType,
-                    unwrappedJSON = json,
-                    employeesDictionary = unwrappedJSON["employees"] as? [JSONType]
-                    else {
-                        completion(employees: nil, error: nil)
-                        return
+                guard
+                    let json = try? response.mapJSON() as? JSONType,
+                    let unwrappedJSON = json,
+                    let employeesDictionary = unwrappedJSON["employees"] as? [JSONType]
+                else {
+                    completion(nil, nil)
+                    return
                 }
                 DataController.sharedController!.persistEmployees(employeesDictionary, completion: { (managedObject, error) in
-                    completion(employees: nil, error: nil)
+                    completion(nil, nil)
                 })
                 
-            case let .Failure(error):
+            case let .failure(error):
                 print(error)
-                completion(employees: nil, error: error)
+                completion(nil, error)
             }
         }
     }
     
     public static func punches(
-        punches: [Punch],
+        _ punches: [Punch],
         provider: MoyaProvider<WFMService> = WFMAPI.defaultProvider,
-        completion: (error: ErrorType?) -> Void) {
+        completion: @escaping (_ error: KairosAPIError?) -> Void) -> Cancellable {
         
-        WFMAPI.request(provider, target: WFMService.Punches(punches: punches)) { (result) in
+        return WFMAPI.request(provider, target: WFMService.punches(punches: punches)) { (result) in
             switch result {
-            case let .Success(response):
+            case let .success(response):
                 print(response)
-                completion(error: nil)
+                completion(nil)
                 
-            case let .Failure(error):
+            case let .failure(error):
                 print(error)
-                completion(error: error)
+                completion(error)
             }
         }
     }
     
-    private static func getConfig(
-        provider: MoyaProvider<WFMService> = WFMAPI.defaultProvider,
+    fileprivate static func getConfig(
+        _ provider: MoyaProvider<WFMService> = WFMAPI.defaultProvider,
         siteID: String,
-        completion: (configuration: Configuration?, error: ErrorType?) -> Void) {
+        completion: @escaping (_ configuration: Configuration?, _ error: KairosAPIError?) -> Void) -> Cancellable {
         
-        WFMAPI.request(provider, target: WFMService.Configure()) { (result) in
+        return WFMAPI.request(provider, target: WFMService.configure()) { (result) in
             switch result {
-            case let .Success(response):
+            case let .success(response):
                 
-                guard let
-                    json = try? response.mapJSON() as? JSONType,
-                    unwrappedJSON = json
+                guard
+                    let json = try? response.mapJSON() as? JSONType,
+                    let unwrappedJSON = json
                     else {
-                        completion(configuration: nil, error: nil)
-                        return
+                    completion(nil, nil)
+                    return
                 }
 
                 let configuration = Configuration(json: unwrappedJSON)
                 print(response)
-                completion(configuration: configuration, error: nil)
+                completion(configuration, nil)
                 
-            case let .Failure(error):
+            case let .failure(error):
                 print(error)
-                completion(configuration: nil, error: error)
+                completion(nil, error)
             }
         }
     }
     
-    private static func logError(response: Moya.Response?) {
+    fileprivate static func logError(_ response: Moya.Response?) {
         
         
         var properties: AnalyticsProperties = [:]
@@ -335,7 +302,7 @@ public struct WFMAPI {
             properties["statusCode"] = response.statusCode
             properties["description"] = response.description
             
-            if let nsResponse = response.response, let url = nsResponse.URL {
+            if let nsResponse = response.response, let url = nsResponse.url {
                 properties["url"] = url
             }
         }
@@ -346,49 +313,45 @@ public struct WFMAPI {
 
     }
     
-    private static func request(
-        provider: MoyaProvider<WFMService>,
+    fileprivate static func request(
+        _ provider: MoyaProvider<WFMService>,
         target: WFMService,
-        completion: (result: Result<Moya.Response, KairosAPIError>) -> ()) -> Cancellable {
+        completion: @escaping (_ result: Result<Moya.Response, KairosAPIError>) -> ()) -> Cancellable {
         return provider.request(target) { (result) in
             
-            dispatch_async(dispatch_get_main_queue(), {
+            DispatchQueue.main.async {
                 switch result {
-                case let .Success(response):
+                case let .success(response):
                     //parse out errors
                     guard response.statusCode >= 200 && response.statusCode <= 299 else {
                         print(response)
                         if let serverError = KairosAPIError.fromJSONData(response.data) {
-                            completion(result: .Failure(serverError))
+                            completion(.failure(serverError))
                             
                         } else {
-                            let error = KairosAPIError.Unknown()
+                            let error = KairosAPIError.unknown()
                             WFMAPI.logError(response)
-                            completion(result: .Failure(error))
+                            completion(.failure(error))
                         }
                         
                         break
                     }
-                    completion(result: .Success(response))
+                    completion(.success(response))
                     
-                case let .Failure(error):
+                case let .failure(error):
                     WFMAPI.logError(error.response)
                     switch error {
-                    case .ImageMapping(_), .JSONMapping(_), .StringMapping(_), .StatusCode(_), .Data(_):
-                        let apiError = KairosAPIError.Unknown()
-                        completion(result: .Failure(apiError))
+                    case .imageMapping(_), .jsonMapping(_), .stringMapping(_), .statusCode(_), .requestMapping(_):
+                        let apiError = KairosAPIError.unknown()
+                        completion(.failure(apiError))
                         
-                    case .Underlying(let nsError):
-                        if let errorMessage = nsError.localizedFailureReason {
-                            let apiError = KairosAPIError.Known(errorMessage)
-                            completion(result: .Failure(apiError))
-                        } else {
-                            let apiError = KairosAPIError.Unknown()
-                            completion(result: .Failure(apiError))
-                        }
+                    case .underlying(let swiftError):
+                        let errorMessage = swiftError.localizedDescription
+                        let apiError = KairosAPIError.known(errorMessage)
+                        completion(.failure(apiError))
                     }
                 }
-            })
+            }
         }
     }
 }

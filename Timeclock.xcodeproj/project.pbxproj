@@ -86,6 +86,48 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		204DBF811E8BCCF1006CCD01 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 208A1F041E374988009D55F5 /* Mixpanel.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = E12782B31D4AB4B30025FB05;
+			remoteInfo = Mixpanel_tvOS;
+		};
+		204DBF831E8BCCF1006CCD01 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 208A1F041E374988009D55F5 /* Mixpanel.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = E1F15F921E5F847200391AE3;
+			remoteInfo = MixpanelAppex;
+		};
+		204DBF851E8BCCF1006CCD01 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 208A1F041E374988009D55F5 /* Mixpanel.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = E1F15FC91E64A10700391AE3;
+			remoteInfo = Mixpanel_macOS;
+		};
+		204DBF951E8BCCF1006CCD01 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 20C5DEE31D7D583F00E3C47B /* Moya.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 463CF2831E1A05D200824884;
+			remoteInfo = "MoyaTests-iOS";
+		};
+		204DBF971E8BCCF1006CCD01 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 20C5DEE31D7D583F00E3C47B /* Moya.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 463CF2741E1A05C300824884;
+			remoteInfo = "MoyaTests-tvOS";
+		};
+		204DBF991E8BCCF1006CCD01 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 20C5DEE31D7D583F00E3C47B /* Moya.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 463CF2921E1A05E100824884;
+			remoteInfo = "MoyaTests-macOS";
+		};
 		205423DC1E326A8000E05151 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 205423B81E326A8000E05151 /* Reachability.xcodeproj */;
@@ -337,13 +379,6 @@
 			proxyType = 2;
 			remoteGlobalIDString = D03579A31B2B788F005D26AE;
 			remoteInfo = "Result-watchOS";
-		};
-		20C5DF231D7D584C00E3C47B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 20C5DF0A1D7D584B00E3C47B /* Result.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = D03579B01B2B78A1005D26AE;
-			remoteInfo = "Result-watchOSTests";
 		};
 		20C5DF271D7D585F00E3C47B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -703,6 +738,9 @@
 			isa = PBXGroup;
 			children = (
 				208A1F091E374988009D55F5 /* Mixpanel.framework */,
+				204DBF821E8BCCF1006CCD01 /* Mixpanel.framework */,
+				204DBF841E8BCCF1006CCD01 /* MixpanelAppex.framework */,
+				204DBF861E8BCCF1006CCD01 /* Mixpanel.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -770,7 +808,7 @@
 				20C5DED41D7D583500E3C47B /* Alamofire.framework */,
 				20C5DED61D7D583500E3C47B /* Alamofire iOS Tests.xctest */,
 				20C5DED81D7D583500E3C47B /* Alamofire.framework */,
-				20C5DEDA1D7D583500E3C47B /* Alamofire OSX Tests.xctest */,
+				20C5DEDA1D7D583500E3C47B /* Alamofire macOS Tests.xctest */,
 				20C5DEDC1D7D583500E3C47B /* Alamofire.framework */,
 				20C5DEDE1D7D583500E3C47B /* Alamofire tvOS Tests.xctest */,
 				20C5DEE01D7D583500E3C47B /* Alamofire.framework */,
@@ -793,6 +831,9 @@
 				20C5DF051D7D583F00E3C47B /* Moya.framework */,
 				20C5DF071D7D583F00E3C47B /* ReactiveMoya.framework */,
 				20C5DF091D7D583F00E3C47B /* RxMoya.framework */,
+				204DBF961E8BCCF1006CCD01 /* MoyaTests-iOS.xctest */,
+				204DBF981E8BCCF1006CCD01 /* MoyaTests-tvOS.xctest */,
+				204DBF9A1E8BCCF1006CCD01 /* MoyaTests-macOS.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -807,7 +848,6 @@
 				20C5DF1E1D7D584C00E3C47B /* Result.framework */,
 				20C5DF201D7D584C00E3C47B /* Result-tvOSTests.xctest */,
 				20C5DF221D7D584C00E3C47B /* Result.framework */,
-				20C5DF241D7D584C00E3C47B /* Result-watchOSTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -940,9 +980,9 @@
 				TargetAttributes = {
 					206FA1F51D61AB5F008B1F94 = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = N6W8C2VNME;
-						LastSwiftMigration = 0800;
-						ProvisioningStyle = Manual;
+						DevelopmentTeam = 5E4B2UDVLG;
+						LastSwiftMigration = 0830;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.DataProtection = {
 								enabled = 0;
@@ -955,6 +995,7 @@
 					20A31AA01DBDF00A004C81AC = {
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = FRVVJ46CY6;
+						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 206FA1F51D61AB5F008B1F94;
 					};
@@ -1010,6 +1051,48 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		204DBF821E8BCCF1006CCD01 /* Mixpanel.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Mixpanel.framework;
+			remoteRef = 204DBF811E8BCCF1006CCD01 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		204DBF841E8BCCF1006CCD01 /* MixpanelAppex.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = MixpanelAppex.framework;
+			remoteRef = 204DBF831E8BCCF1006CCD01 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		204DBF861E8BCCF1006CCD01 /* Mixpanel.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Mixpanel.framework;
+			remoteRef = 204DBF851E8BCCF1006CCD01 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		204DBF961E8BCCF1006CCD01 /* MoyaTests-iOS.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "MoyaTests-iOS.xctest";
+			remoteRef = 204DBF951E8BCCF1006CCD01 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		204DBF981E8BCCF1006CCD01 /* MoyaTests-tvOS.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "MoyaTests-tvOS.xctest";
+			remoteRef = 204DBF971E8BCCF1006CCD01 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		204DBF9A1E8BCCF1006CCD01 /* MoyaTests-macOS.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "MoyaTests-macOS.xctest";
+			remoteRef = 204DBF991E8BCCF1006CCD01 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		205423DD1E326A8000E05151 /* Reachability.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -1080,10 +1163,10 @@
 			remoteRef = 20C5DED71D7D583500E3C47B /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		20C5DEDA1D7D583500E3C47B /* Alamofire OSX Tests.xctest */ = {
+		20C5DEDA1D7D583500E3C47B /* Alamofire macOS Tests.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
-			path = "Alamofire OSX Tests.xctest";
+			path = "Alamofire macOS Tests.xctest";
 			remoteRef = 20C5DED91D7D583500E3C47B /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
@@ -1239,13 +1322,6 @@
 			fileType = wrapper.framework;
 			path = Result.framework;
 			remoteRef = 20C5DF211D7D584C00E3C47B /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		20C5DF241D7D584C00E3C47B /* Result-watchOSTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = "Result-watchOSTests.xctest";
-			remoteRef = 20C5DF231D7D584C00E3C47B /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		20C8C5801DE487AB00CE4B0A /* Heimdallr.framework */ = {
@@ -1592,7 +1668,7 @@
 				CODE_SIGN_ENTITLEMENTS = Timeclock/Timeclock.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 5E4B2UDVLG;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1600,13 +1676,13 @@
 				);
 				INFOPLIST_FILE = Timeclock/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.kairos.kairostimeclock;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tomhut.test001;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Timeclock/Timeclock-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -1618,8 +1694,8 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Timeclock/Timeclock.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				DEVELOPMENT_TEAM = N6W8C2VNME;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 5E4B2UDVLG;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1627,12 +1703,12 @@
 				);
 				INFOPLIST_FILE = Timeclock/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.kairos.kairostimeclock;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tomhut.test001;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "f488b032-5269-4d2b-b461-7136a8955a0d";
-				PROVISIONING_PROFILE_SPECIFIER = "Kairos Timeclock Enterprise";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Timeclock/Timeclock-Bridging-Header.h";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -1649,7 +1725,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.kairos.TimeclockTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Timeclock.app/Timeclock";
 			};
 			name = Debug;
@@ -1667,7 +1743,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.kairos.TimeclockTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Timeclock.app/Timeclock";
 			};
 			name = Release;

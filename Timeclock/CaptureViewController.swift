@@ -9,7 +9,7 @@
 import UIKit
 
 protocol CaptureDelegate {
-    func imageCaptured(punchData: PunchData?)
+    func imageCaptured(_ punchData: PunchData?)
     func timedOut()
 }
 
@@ -44,15 +44,15 @@ class CaptureViewController: UIViewController {
         }
         
 
-        KairosSDK.imageCaptureRecognizeWithThreshold("0.75",
+        KairosSDK.imageCaptureRecognize(withThreshold: "0.75",
                                                      galleryName: galleryName,
-                                                     success: { (response:[NSObject : AnyObject]!, image: UIImage!) in
+                                                     success: { (response:[AnyHashable: Any]!, image: UIImage!) in
                                                         
              if let imagesResponse = response["images"] as? NSArray {
                 print(imagesResponse)
-                let firstImagesResponse = imagesResponse.firstObject
+                let firstImagesResponse = imagesResponse.firstObject as? NSDictionary
                 let transaction = firstImagesResponse?["transaction"]
-                if let transaction = transaction as? [NSObject: AnyObject] {
+                if let transaction = transaction as? [AnyHashable: Any] {
                     let confidence = transaction["confidence"] as? Float
                     self.punchData?.confidence = confidence
                     let subject_id = transaction["subject_id"] as? String
@@ -68,22 +68,22 @@ class CaptureViewController: UIViewController {
                 self.capturedImage(self.punchData)
             }
             
-            }, failure: { (response:[NSObject : AnyObject]!, image: UIImage!) in
+            }, failure: { (response:[AnyHashable: Any]!, image: UIImage!) in
                 print("failure \(response)")
                 self.punchData?.image = image
                 self.capturedImage(self.punchData)
         })
     }
     
-    func capturedImage(punchData: PunchData?) {
+    func capturedImage(_ punchData: PunchData?) {
         delegate?.imageCaptured(self.punchData)
     }
 }
 
 extension CaptureViewController: TimeClockViewController {
-    func opacityForAppState(state: TimeClockFlowController.AppState) -> CGFloat {
+    func opacityForAppState(_ state: TimeClockFlowController.AppState) -> CGFloat {
         switch state {
-        case .Idle, .Capturing, .DisplayingOptions:
+        case .idle, .capturing, .displayingOptions:
             return 1
         default:
             return 0

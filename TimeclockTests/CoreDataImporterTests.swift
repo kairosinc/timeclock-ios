@@ -24,7 +24,7 @@ class CoreDataImporterTests: XCTestCase {
         let importer = CoreDataImporter(managedObjectContext: stack.managedObjectContext)
         let importContext = importer.importContext
         
-        let expectation = expectationWithDescription("Importer")
+        let expectation = self.expectation(withDescription: "Importer")
         
         importContext.performBlock {
             
@@ -62,7 +62,7 @@ class CoreDataImporterTests: XCTestCase {
             }
         }
         
-        waitForExpectationsWithTimeout(30, handler: nil)
+        waitForExpectations(withTimeout: 30, handler: nil)
     }
 }
 

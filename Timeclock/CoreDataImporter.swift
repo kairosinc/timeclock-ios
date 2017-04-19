@@ -11,22 +11,22 @@ import Foundation
 class CoreDataImporter {
     let mainContext: NSManagedObjectContext
     let importContext: NSManagedObjectContext
-    private let notificationCenter = NSNotificationCenter.defaultCenter()
+    fileprivate let notificationCenter = NotificationCenter.default
     
     init(managedObjectContext: NSManagedObjectContext) {
         mainContext = managedObjectContext
-        importContext = NSManagedObjectContext(concurrencyType: .PrivateQueueConcurrencyType)
+        importContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
         importContext.persistentStoreCoordinator = mainContext.persistentStoreCoordinator
         
         
-        notificationCenter.addObserver(self, selector: #selector(importContextDidSaveNotification), name: NSManagedObjectContextDidSaveNotification, object: importContext)
+        notificationCenter.addObserver(self, selector: #selector(importContextDidSaveNotification), name: NSNotification.Name.NSManagedObjectContextDidSave, object: importContext)
     }
     
     deinit {
-        notificationCenter.removeObserver(self, name: NSManagedObjectContextDidSaveNotification, object: importContext)
+        notificationCenter.removeObserver(self, name: NSNotification.Name.NSManagedObjectContextDidSave, object: importContext)
     }
     
-    @objc func importContextDidSaveNotification(notification: NSNotification) {
-        mainContext.mergeChangesFromContextDidSaveNotification(notification)
+    @objc func importContextDidSaveNotification(_ notification: Notification) {
+        mainContext.mergeChanges(fromContextDidSave: notification)
     }
 }

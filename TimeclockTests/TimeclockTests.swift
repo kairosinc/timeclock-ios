@@ -9,6 +9,6 @@
 import XCTest
 
 class TimeclockTests: XCTestCase {
-    static let modelURL = NSBundle(forClass: TimeclockTests.self).URLForResource("Test", withExtension: "momd")!
+    static let modelURL = Bundle(for: TimeclockTests.self).url(forResource: "Test", withExtension: "momd")!
 
 }
